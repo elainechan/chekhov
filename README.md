@@ -1,4 +1,4 @@
-# Tasket
+# Chekhov
 
 A task manager that uses a constraint solving algorithm to distribute a list of tasks to workers to ensure everything is done and everyone is accountable for their responsibilities.
 
