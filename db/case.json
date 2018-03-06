@@ -1,0 +1,9 @@
+{
+	"id": "ABC-789",
+	"client_id": "1234",
+	"manager": "Steve Bannon",
+	"workers": ["John Lennon", "Joan Baez", "Chris Martin"],
+	"active": true,
+	"time_logged": 0,
+	"task_ids": ["A1234", "B2343", "SFA55"]
+}
