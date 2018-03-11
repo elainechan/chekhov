@@ -100,14 +100,19 @@ A = "4A1" => 16
 B = "" => 14
 ```
 
-## Weighted Tasks Problem
+## Prioritized Tasks Problem
+[Source](https://www.coursera.org/learn/algorithms-greedy/lecture/Jo6gK/a-greedy-algorithm)
 - Each task consists of several subtasks
 - Each subtask must be done in order
 - Two workers, Alice and Bob:
 	- Each subtask must be done by the worker it is assigned to
 	- Each worker has five 60-minute time slots
 	- Each worker has 5 billable hours daily
-- Tasks with the largest weight has the highest priority
+- Treatment of weights and lengths:
+	- Tasks with the larger weights have higher priority
+	- Tasks with the shortest length have higher priority
+	- ratio == w / l
+	- difference = w - l
 
 ```
 task1 = ["2A1", "3B2", "4A1", "1B3"]
