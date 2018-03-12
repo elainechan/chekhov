@@ -9,8 +9,7 @@ See [`solve.py`](https://github.com/elainechan/chekhov/blob/master/solve.py)
 - Each subtask must be done in order
 - Two workers, Alice and Bob:
 	- Each subtask must be done by the worker it is assigned to
-
-- Example task list: 
+- Example task list:
 ```
 task1 = ["A1", "B2", "A1", "B3"]
 task2 = ["B2, "A2", "B4", "A3"]
@@ -112,8 +111,7 @@ B = "" => 14
 	- Tasks with the larger weights have higher priority
 	- Tasks with the shortest length have higher priority
 	- ratio == w / l
-	- difference = w - l
-
+	- difference == w - l
 ```
 task1 = ["2A1", "3B2", "4A1", "1B3"]
 task2 = ["1B2, "3A2", "2B4", "1A3"]
@@ -124,3 +122,7 @@ task4 = ["2A4", "4B1", "1A1", "3B1"]
 	- `2` is the weight
 	- `A` stands for "assigned to Alice"
 	- `1` means the task takes 1 hour to complete. 
+## NEEDS:
+- definition of a solution
+- how do u know when it's correct - higher priority tasks are finished within a certain time?
+- when do u know when it's the best solution - earliest finish time of everything
