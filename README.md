@@ -107,11 +107,23 @@ B = "" => 14
 	- Each subtask must be done by the worker it is assigned to
 	- Each worker has five 60-minute time slots
 	- Each worker has 5 billable hours daily
+- Urgency
 - Treatment of weights and lengths:
-	- Tasks with the larger weights have higher priority
-	- Tasks with the shortest length have higher priority
-	- ratio == w / l
+	- Tasks with higher urgency have higher priority
+	- Tasks with lower order have higher priority
+	- ratio == w
 	- difference == w - l
+- Order matters
+- Task ID expresses:
+	- Urgency
+	- Order
+	- Length
+	- Worker
+
+### Goals
+- Shortest time required?
+- Leasted wasted by workers?
+
 ```
 task1 = ["2A1", "3B2", "4A1", "1B3"]
 task2 = ["1B2, "3A2", "2B4", "1A3"]
