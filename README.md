@@ -42,7 +42,7 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] If no buffer hours
 		- [ ] Alert manager
 
-### Data Structure
+### Data Structures
 - [ ] **Task** _object_
 	- ID: _string_
 	- Urgency: _integer_
