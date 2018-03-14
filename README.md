@@ -1,14 +1,44 @@
 # Chekhov
 
-A task manager that uses a constraint solving algorithm to distribute a list of tasks to workers.
+When given a list of tasks, automatically build a schedule.
 
-## Tasks Problem
-See [`solve.py`](https://github.com/elainechan/chekhov/blob/master/solve.py)
+## Constraints
+[Source](https://www.coursera.org/learn/algorithms-greedy/lecture/Jo6gK/a-greedy-algorithm)
+- Each case consists of several tasks
+- Tasks must be assigned in order (representing urgency)
+- Each task must be assigned to a slot before its deadline
+- Five workers: Alice, Bob, Carol, Dave, Emily
+	- Each task must be done by the worker it is assigned to
+	- Each worker has 5 billable hours daily
+	- Each worker has 3 buffer hours daily (for catching up with unfinished work)
+- Treatment of urgency and order:
+	- Tasks with higher urgency have higher priority
+	- Some tasks can only commence when certain other tasks are finished
+- All tasks must be completed before respective deadlines
+	- No task can be left unassigned for 48 hours
+	- All tasks must be addressed (assigned at least once) every 48 hours 
+- In the event an urgent task is not completed:
+	- Push to front of queue
 
+### Definition of a Solution 
+- Sufficient: 
+	- Everything gets assigned
+	- Every task is scheduled before its deadline
+- Optimal:
+	- Earliest estimated completion
+	- Least amount of time wasted by workers waiting for completion of upstream task
+
+### Implementation
+- Task ID
+	- Urgency: integer
+	- Length: integer
+	- Worker: string
+	- Order (optional): integer
+- Queue
+
+## Manual Solution
 - Each task consists of several subtasks
 - Each subtask must be done in order
-- Two workers, Alice and Bob:
-	- Each subtask must be done by the worker it is assigned to
 - Example task list:
 ```
 task1 = ["A1", "B2", "A1", "B3"]
@@ -23,8 +53,6 @@ Where in `task1` `A1`, `A` stands for "assigned to Alice" and `1` means the task
 Alice: 1A1 4A4
 Bob: 3B1 1B2 2B1
 ```
-
-- Let's solve manually.
 
 First round:
 ```
@@ -98,43 +126,3 @@ task4 = ["A1"]
 A = "4A1" => 16
 B = "" => 14
 ```
-
-## Prioritized Tasks Problem
-[Source](https://www.coursera.org/learn/algorithms-greedy/lecture/Jo6gK/a-greedy-algorithm)
-- Each task consists of several subtasks
-- Each subtask must be done in order
-- Two workers, Alice and Bob:
-	- Each subtask must be done by the worker it is assigned to
-	- Each worker has five 60-minute time slots
-	- Each worker has 5 billable hours daily
-- Urgency
-- Treatment of weights and lengths:
-	- Tasks with higher urgency have higher priority
-	- Tasks with lower order have higher priority
-	- ratio == w
-	- difference == w - l
-- Order matters
-- Task ID expresses:
-	- Urgency
-	- Order
-	- Length
-	- Worker
-
-### Goals
-- Shortest time required?
-- Leasted wasted by workers?
-
-```
-task1 = ["2A1", "3B2", "4A1", "1B3"]
-task2 = ["1B2, "3A2", "2B4", "1A3"]
-task3 = ["2B1", "2A3", "4B1", "1A1"]
-task4 = ["2A4", "4B1", "1A1", "3B1"]
-```
-- Where in `task1` `2A1`:
-	- `2` is the weight
-	- `A` stands for "assigned to Alice"
-	- `1` means the task takes 1 hour to complete. 
-## NEEDS:
-- definition of a solution
-- how do u know when it's correct - higher priority tasks are finished within a certain time?
-- when do u know when it's the best solution - earliest finish time of everything
