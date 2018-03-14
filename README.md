@@ -13,7 +13,7 @@ When given a list of tasks, automatically build a schedule.
 - [ ] Some tasks can only commence when certain other tasks are finished (upstream, downstream)
 - [ ] No task can be left unscheduled for 48 hours
 - [ ] Five workers: Alice, Bob, Carol, Dave, Emily
-	- [ ] Each task must be done by the worker it is assigned to
+	- [ ] Each task must be scheduled to the worker it is assigned to
 	- [ ] Each worker has 5 billable hours daily
 	- [ ] (Each worker has 3 buffer hours daily for catching up with unfinished work)
 - [ ] In the event an urgent task is not completed:
