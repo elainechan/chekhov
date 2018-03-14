@@ -57,7 +57,7 @@ When given a list of tasks, automatically build a schedule.
 	- ID: _string_
 	- Task IDs: _array_
 	- Case IDs: _array_
-	- Group IDs: _array_
+	- Group IDs (optional): _array_
 	- Billable hours: _integer_
 	- Buffer hours: _integer_
 - [ ] **Group** _object_
