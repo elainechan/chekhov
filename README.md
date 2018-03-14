@@ -2,6 +2,9 @@
 
 When given a list of tasks, automatically build a schedule.
 
+## Data Schema
+![Data schema image](https://github.com/elainechan/chekhov/blob/master/schema.png)
+
 ## Constraints
 [Source](https://www.coursera.org/learn/algorithms-greedy/lecture/Jo6gK/a-greedy-algorithm)
 - [ ] Each case consists of several tasks
