@@ -63,7 +63,7 @@ When given a list of tasks, automatically build a schedule.
 	- ID: _string_
 	- Task IDs: _array_ 
 - [ ] **Queue**
-- ![Queue image]()
+- ![Queue image](https://github.com/elainechan/chekhov/blob/master/queue.png)
 
 ## Simplified Manual Attempt
 - Each task consists of several subtasks
