@@ -2,18 +2,17 @@
 
 When given a list of tasks, automatically build a schedule.
 
-
 ## Constraints
 [Source](https://www.coursera.org/learn/algorithms-greedy/lecture/Jo6gK/a-greedy-algorithm)
 - [ ] Each case consists of several tasks
 - [ ] Each task must be scheduled before its deadline
-- [ ] Each task must be scheduled in order of urgency
+- [ ] Each task must be scheduled in order of [priority](https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method)
 - [ ] Some tasks can only commence when certain other tasks are finished (upstream, downstream)
 - [ ] No task can be left unscheduled for 48 hours
 - [ ] Five workers: Alice, Bob, Carol, Dave, Emily
 	- [ ] Each task must be scheduled to the worker it is assigned to
 	- [ ] Each worker has 5 billable hours daily
-	- [ ] (Each worker has 3 buffer hours daily for catching up with unfinished work)
+	- [ ] Each worker has 3 buffer hours daily
 - [ ] In the event an urgent task is not completed:
 	- [ ] Push to front of queue
 
@@ -26,8 +25,8 @@ When given a list of tasks, automatically build a schedule.
 
 ## Algorithm
 - [ ] Look at Task
-	- [ ] Pick the highest urgency number
-	- [ ] If multiple tasks with highest urgency number
+	- [ ] Pick the highest priority level
+	- [ ] If multiple tasks with highest priority level
 		- [ ] Pick the longest idle time
 		- [ ] If multiple tasks with longest idle time
 			- [ ] Pick the shortest task
@@ -41,10 +40,10 @@ When given a list of tasks, automatically build a schedule.
 		- [ ] Alert manager
 
 ## Data Schema
-![Data schema image](https://github.com/elainechan/chekhov/blob/master/schema.png)
+![Data schema image](https://github.com/elainechan/chekhov/blob/master/schema1.png)
 - [ ] **Task** _object_
 	- ID: _string_
-	- Urgency: _integer_
+	- Priority: _enum_ _integer_ (1 to 4)
 	- Length: _integer_
 	- Worker ID: _string_
 	- Case ID: _string_
@@ -54,7 +53,7 @@ When given a list of tasks, automatically build a schedule.
 	- Downstream task ID (optional): _string_
 - [ ] **User** _object_
 	- ID: _string_
-	- Role: _enum_
+	- Role: _enum_ (worker, manager)
 	- Task IDs: _array_
 	- Case IDs: _array_
 	- Group IDs (optional): _array_
@@ -64,6 +63,7 @@ When given a list of tasks, automatically build a schedule.
 	- ID: _string_
 	- Task IDs: _array_ 
 - [ ] **Queue**
+- ![Queue image]()
 
 ## Simplified Manual Attempt
 - Each task consists of several subtasks
