@@ -2,8 +2,6 @@
 
 When given a list of tasks, automatically build a schedule.
 
-## Data Schema
-![Data schema image](https://github.com/elainechan/chekhov/blob/master/schema.png)
 
 ## Constraints
 [Source](https://www.coursera.org/learn/algorithms-greedy/lecture/Jo6gK/a-greedy-algorithm)
@@ -42,7 +40,8 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] If no buffer hours
 		- [ ] Alert manager
 
-### Data Structures
+## Data Schema
+![Data schema image](https://github.com/elainechan/chekhov/blob/master/schema.png)
 - [ ] **Task** _object_
 	- ID: _string_
 	- Urgency: _integer_
@@ -53,8 +52,9 @@ When given a list of tasks, automatically build a schedule.
 	- Order (optional): _integer_
 	- Upstream task ID (optional): _string_
 	- Downstream task ID (optional): _string_
-- [ ] **Worker** _object_
+- [ ] **User** _object_
 	- ID: _string_
+	- Role: _enum_
 	- Task IDs: _array_
 	- Case IDs: _array_
 	- Group IDs (optional): _array_
