@@ -8,8 +8,8 @@ When given a list of tasks, automatically build a schedule.
 ## Constraints
 [Source](https://www.coursera.org/learn/algorithms-greedy/lecture/Jo6gK/a-greedy-algorithm)
 - [ ] Each case consists of several tasks
-- [ ] Each task must be scheduled in order of urgency
 - [ ] Each task must be scheduled before its deadline
+- [ ] Each task must be scheduled in order of urgency
 - [ ] Some tasks can only commence when certain other tasks are finished (upstream, downstream)
 - [ ] No task can be left unscheduled for 48 hours
 - [ ] Five workers: Alice, Bob, Carol, Dave, Emily
