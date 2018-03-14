@@ -10,41 +10,62 @@ When given a list of tasks, automatically build a schedule.
 - [ ] Each case consists of several tasks
 - [ ] Each task must be scheduled in order of urgency
 - [ ] Each task must be scheduled before its deadline
-- Some tasks can only commence when certain other tasks are finished
-- No task can be left unscheduled for 48 hours
-- Five workers: Alice, Bob, Carol, Dave, Emily
-	- Each task must be done by the worker it is assigned to
-	- Each worker has 5 billable hours daily
-	- (Each worker has 3 buffer hours daily for catching up with unfinished work)
-- In the event an urgent task is not completed:
-	- Push to front of queue
+- [ ] Some tasks can only commence when certain other tasks are finished (upstream, downstream)
+- [ ] No task can be left unscheduled for 48 hours
+- [ ] Five workers: Alice, Bob, Carol, Dave, Emily
+	- [ ] Each task must be done by the worker it is assigned to
+	- [ ] Each worker has 5 billable hours daily
+	- [ ] (Each worker has 3 buffer hours daily for catching up with unfinished work)
+- [ ] In the event an urgent task is not completed:
+	- [ ] Push to front of queue
 
-### Definition of a Solution 
+## Definition of a Solution 
 - Sufficient: 
-	- Everything gets assigned
-	- Every task is scheduled before its deadline
+	- [ ] Every task gets scheduled before its deadline
 - Optimal:
-	- Earliest estimated completion
-	- Least time wasted by workers waiting for completion of upstream task
+	- [ ] Earliest estimated completion
+	- [ ] Least time wasted by workers waiting for completion of upstream task
 
 ## Algorithm
-- Looking at Task
-	- [ ] Pick the highest urgency
-	- [ ] Pick the longest idle time
+- [ ] Look at Task
+	- [ ] Pick the highest urgency number
+	- [ ] If multiple tasks with highest urgency number
+		- [ ] Pick the longest idle time
+		- [ ] If multiple tasks with longest idle time
+			- [ ] Pick the shortest task
 
-- Looking at Worker schedule
-	- [ ] Check if any open billable hours
-	- [ ] If no billable hours, schedule to buffer hours
+- [ ] Look at Worker schedule
+	- [ ] Check if billable hours
+		- [ ] If billable hours, schedule task to billable hours
+	- [ ] If no billable hours, check if buffer hours
+		- [ ] If buffer hours, schedule task to buffer hours
+	- [ ] If no buffer hours
+		- [ ] Alert manager
 
-### Implementation
-- Task ID
-	- Urgency: integer
-	- Length: integer
-	- Worker: string
-	- Order (optional): integer
-- (Queue)
+### Data Structure
+- [ ] **Task** _object_
+	- ID: _string_
+	- Urgency: _integer_
+	- Length: _integer_
+	- Worker ID: _string_
+	- Case ID: _string_
+	- Group ID (optional): _string_
+	- Order (optional): _integer_
+	- Upstream task ID (optional): _string_
+	- Downstream task ID (optional): _string_
+- [ ] **Worker** _object_
+	- ID: _string_
+	- Task IDs: _array_
+	- Case IDs: _array_
+	- Group IDs: _array_
+	- Billable hours: _integer_
+	- Buffer hours: _integer_
+- [ ] **Group** _object_
+	- ID: _string_
+	- Task IDs: _array_ 
+- [ ] **Queue**
 
-## Manual Solution
+## Simplified Manual Attempt
 - Each task consists of several subtasks
 - Each subtask must be done in order
 - Example task list:
