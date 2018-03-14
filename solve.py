@@ -8,6 +8,6 @@ TASKLIST = [
 def solve(tasks, alice, bob):
 	
 """
-1. pick every possible task and recurse
-2. if there are none, wait an hour
+1. Sort based on deadline
+2. Determine what to work on next
 """

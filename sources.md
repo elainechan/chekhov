@@ -5,6 +5,8 @@
 ## Authentication and Security
 - [User account best practices](https://cloudplatform.googleblog.com/2018/01/12-best-practices-for-user-account.html)
 - [Salted Password Hashing - Doing it Right](https://crackstation.net/hashing-security.htm)
+## Notifications
+- [node-sendmail](https://github.com/guileen/node-sendmail)
 
 ## References on Constraint Programming (CP)
 ### Introduction

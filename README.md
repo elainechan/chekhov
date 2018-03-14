@@ -4,19 +4,15 @@ When given a list of tasks, automatically build a schedule.
 
 ## Constraints
 [Source](https://www.coursera.org/learn/algorithms-greedy/lecture/Jo6gK/a-greedy-algorithm)
-- Each case consists of several tasks
-- Tasks must be assigned in order (representing urgency)
-- Each task must be assigned to a slot before its deadline
+- [ ] Each case consists of several tasks
+- [ ] Each task must be scheduled in order of urgency
+- [ ] Each task must be scheduled before its deadline
+- Some tasks can only commence when certain other tasks are finished
+- No task can be left unscheduled for 48 hours
 - Five workers: Alice, Bob, Carol, Dave, Emily
 	- Each task must be done by the worker it is assigned to
 	- Each worker has 5 billable hours daily
-	- Each worker has 3 buffer hours daily (for catching up with unfinished work)
-- Treatment of urgency and order:
-	- Tasks with higher urgency have higher priority
-	- Some tasks can only commence when certain other tasks are finished
-- All tasks must be completed before respective deadlines
-	- No task can be left unassigned for 48 hours
-	- All tasks must be addressed (assigned at least once) every 48 hours 
+	- (Each worker has 3 buffer hours daily for catching up with unfinished work)
 - In the event an urgent task is not completed:
 	- Push to front of queue
 
@@ -26,7 +22,16 @@ When given a list of tasks, automatically build a schedule.
 	- Every task is scheduled before its deadline
 - Optimal:
 	- Earliest estimated completion
-	- Least amount of time wasted by workers waiting for completion of upstream task
+	- Least time wasted by workers waiting for completion of upstream task
+
+## Algorithm
+- Looking at Task
+	- [ ] Pick the highest urgency
+	- [ ] Pick the longest idle time
+
+- Looking at Worker schedule
+	- [ ] Check if any open billable hours
+	- [ ] If no billable hours, schedule to buffer hours
 
 ### Implementation
 - Task ID
@@ -34,7 +39,7 @@ When given a list of tasks, automatically build a schedule.
 	- Length: integer
 	- Worker: string
 	- Order (optional): integer
-- Queue
+- (Queue)
 
 ## Manual Solution
 - Each task consists of several subtasks
