@@ -11,8 +11,8 @@ When given a list of tasks, automatically build a schedule.
 - [ ] No task can be left unscheduled for 48 hours
 - [ ] Five workers: Alice, Bob, Carol, Dave, Emily
 	- [ ] Each task must be scheduled to the worker it is assigned to
-	- [ ] Each worker has 5 billable hours daily
-	- [ ] Each worker has 3 buffer hours daily	
+	- [ ] Each worker has 5 billable hours daily (300 minutes)
+	- [ ] Each worker has 3 buffer hours daily (180 minutes)
 - [ ] In the event an urgent task is not completed:
 	- [ ] Push to front of queue
 
@@ -24,17 +24,27 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Least time wasted by workers waiting for completion of upstream task
 
 ## Algorithm
-- [ ] Look at Task in this order:
-	- [ ] Pick the longest idle time
-	- [ ] Pick the highest priority level
-	- [ ] Pick the shortest task
-- [ ] Look at Worker schedule
+- [ ] Inspect Task list in this order:
+	- [x] Search for tasks that belong in groups
+	- [ ] Search for earliest group order
+	- [ ] Pick the earliest group order
+		- [x] Search for the longest idle time
+		- [x] Pick the longest idle time
+			- [x] Search for strongest priority
+			- [x] Pick the strongest priority level
+				- [ ] Search for the shortest length
+				- [ ] Pick the shortest task
+
+- [ ] Inspect Worker schedule
 	- [ ] Check if billable hours
 		- [ ] If billable hours, schedule task to billable hours
 	- [ ] If no billable hours, check if buffer hours
 		- [ ] If buffer hours, schedule task to buffer hours
 	- [ ] If no buffer hours
+		- [ ] 
 		- [ ] Alert manager
+
+- [ ] schedule === put something in a list
 
 ## Data Schema
 ![Data schema image](https://github.com/elainechan/chekhov/blob/master/assets/schema1.png)
@@ -42,7 +52,7 @@ When given a list of tasks, automatically build a schedule.
 	- [x] ID: _string_
 	- [x] Deadline: _date_
 	- [x] Priority: _enum_ _integer_ (1 to 4, related to[ ]  Deadline)
-	- [x] Length: _integer_
+	- [x] Length: _integer_ (minutes)
 	- [x] Last touched: _date_
 	- [x] Idle: _integer_ (current time minus last touched)
 	- [x] User ID: _string_
@@ -63,10 +73,10 @@ When given a list of tasks, automatically build a schedule.
 	- ID: _string_
 	- Task IDs: _array_
 	- Worker IDs: _array_
-- [ ] **Queue**
+- [ ] **TaskList**
 	- array of Task objects
 
-![Queue image](https://github.com/elainechan/chekhov/blob/master/assets/queue.png)
+![TaskList image](https://github.com/elainechan/chekhov/blob/master/assets/queue.png)
 
 ## Simplified Manual Attempt
 - Each task consists of several subtasks

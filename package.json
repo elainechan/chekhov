@@ -4,7 +4,7 @@
   "description": "1. User (manager) uploads a document with 1 case - tasks already assigned to workers - deadlines - time required to complete each task 2. Users receives updated calendar entries populated with tasks 3. Users receives email notification 4. Users should be able to check off tasks 5. End of day users should receive timesheet with hours logged and fees",
   "main": "billing.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --exit"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +14,8 @@
     "mongoose": "^5.0.4"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.4",
     "nodemon": "^1.14.12"
   }
 }
