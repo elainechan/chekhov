@@ -13,7 +13,22 @@ const CaseSchema = mongoose.Schema({
 	updateId: String
 });
 
-const TaskSchema = mongoose.Schema({});
+const TaskSchema = mongoose.Schema({
+	id: String,
+	name: String,
+	description: String,
+	userId: String,
+	caseId: String,
+	deadline: Date,
+	priority: Number,
+	length: Number,
+	lastTouched: Date,
+	idle: Number,
+	groupId: String,
+	groupOrder: Number,
+	upstreamTaskId: String,
+	downstreamTaskId: String
+});
 const ClientSchema = mongoose.Schema({});
 const GroupSchema = mongoose.Schema({});
 const UserSchema = mongoose.Schema({});
