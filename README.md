@@ -26,8 +26,9 @@ When given a list of tasks, automatically build a schedule.
 - [ ] Search Task list by:
 	- Group
 		- [x] Search for tasks that belong in groups
-		- [ ] Search for earliest group order
-		- [ ] Pick the earliest group order
+		- [x] Sort grouped tasks according to group name and group order 
+		- [x] Search for earliest group order
+		- [x] Pick the earliest group order
 	- Idle
 		- [x] Search for the longest idle time
 		- [x] Pick the longest idle time
