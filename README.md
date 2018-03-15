@@ -3,7 +3,6 @@
 When given a list of tasks, automatically build a schedule.
 
 ## Constraints
-[Source](https://www.coursera.org/learn/algorithms-greedy/lecture/Jo6gK/a-greedy-algorithm)
 - [ ] Each case consists of several tasks
 - [ ] Each task must be scheduled before its deadline
 - [ ] Each task must be scheduled in order of [priority](https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method)
@@ -24,31 +23,34 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Least time wasted by workers waiting for completion of upstream task
 
 ## Algorithm
-- [ ] Inspect Task list in this order:
-	- [x] Search for tasks that belong in groups
-	- [ ] Search for earliest group order
-	- [ ] Pick the earliest group order
+- [ ] Search Task list by:
+	- Group
+		- [x] Search for tasks that belong in groups
+		- [ ] Search for earliest group order
+		- [ ] Pick the earliest group order
+	- Idle
 		- [x] Search for the longest idle time
 		- [x] Pick the longest idle time
-			- [x] Search for strongest priority
-			- [x] Pick the strongest priority level
-				- [ ] Search for the shortest length
-				- [ ] Pick the shortest task
+	- Priority
+		- [x] Search for strongest priority
+		- [x] Pick the strongest priority level
+	- Length
+		- [ ] Search for the shortest length
+		- [ ] Pick the shortest task
 
-- [ ] Inspect Worker schedule
+- [ ] Search Worker schedule
 	- [ ] Check if billable hours
 		- [ ] If billable hours, schedule task to billable hours
 	- [ ] If no billable hours, check if buffer hours
 		- [ ] If buffer hours, schedule task to buffer hours
 	- [ ] If no buffer hours
-		- [ ] 
 		- [ ] Alert manager
 
 - [ ] schedule === put something in a list
 
 ## Data Schema
 ![Data schema image](https://github.com/elainechan/chekhov/blob/master/assets/schema1.png)
-- [ ] **Task** _object_
+- [x] **Task** _object_
 	- [x] ID: _string_
 	- [x] Deadline: _date_
 	- [x] Priority: _enum_ _integer_ (1 to 4, related to[ ]  Deadline)
@@ -62,17 +64,17 @@ When given a list of tasks, automatically build a schedule.
 	- [x] Upstream task ID (optional): _string_
 	- [x] Downstream task ID (optional): _string_
 - [ ] **User** _object_
-	- ID: _string_
-	- Role: _enum_ (worker, manager)
-	- Task IDs: _array_
-	- Case IDs: _array_
-	- Group IDs (optional): _array_
-	- Billable hours: _integer_
-	- Buffer hours: _integer_
+	- [ ] ID: _string_
+	- [ ] Role: _enum_ (worker, manager)
+	- [ ] Task IDs: _array_
+	- [ ] Case IDs: _array_
+	- [ ] Group IDs (optional): _array_
+	- [ ] Billable hours: _integer_
+	- [ ] Buffer hours: _integer_
 - [ ] **Group** _object_
-	- ID: _string_
-	- Task IDs: _array_
-	- Worker IDs: _array_
+	- [ ] ID: _string_
+	- [ ] Task IDs: _array_
+	- [ ] Worker IDs: _array_
 - [ ] **TaskList**
 	- array of Task objects
 
