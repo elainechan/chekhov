@@ -12,7 +12,7 @@ When given a list of tasks, automatically build a schedule.
 - [ ] Five workers: Alice, Bob, Carol, Dave, Emily
 	- [ ] Each task must be scheduled to the worker it is assigned to
 	- [ ] Each worker has 5 billable hours daily
-	- [ ] Each worker has 3 buffer hours daily
+	- [ ] Each worker has 3 buffer hours daily	
 - [ ] In the event an urgent task is not completed:
 	- [ ] Push to front of queue
 
@@ -24,13 +24,10 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Least time wasted by workers waiting for completion of upstream task
 
 ## Algorithm
-- [ ] Look at Task
+- [ ] Look at Task in this order:
+	- [ ] Pick the longest idle time
 	- [ ] Pick the highest priority level
-	- [ ] If multiple tasks with highest priority level
-		- [ ] Pick the longest idle time
-		- [ ] If multiple tasks with longest idle time
-			- [ ] Pick the shortest task
-
+	- [ ] Pick the shortest task
 - [ ] Look at Worker schedule
 	- [ ] Check if billable hours
 		- [ ] If billable hours, schedule task to billable hours
@@ -40,17 +37,20 @@ When given a list of tasks, automatically build a schedule.
 		- [ ] Alert manager
 
 ## Data Schema
-![Data schema image](https://github.com/elainechan/chekhov/blob/master/schema1.png)
+![Data schema image](https://github.com/elainechan/chekhov/blob/master/assets/schema1.png)
 - [ ] **Task** _object_
-	- ID: _string_
-	- Priority: _enum_ _integer_ (1 to 4)
-	- Length: _integer_
-	- Worker ID: _string_
-	- Case ID: _string_
-	- Group ID (optional): _string_
-	- Order (optional): _integer_
-	- Upstream task ID (optional): _string_
-	- Downstream task ID (optional): _string_
+	- [x] ID: _string_
+	- [x] Deadline: _date_
+	- [x] Priority: _enum_ _integer_ (1 to 4, related to[ ]  Deadline)
+	- [x] Length: _integer_
+	- [x] Last touched: _date_
+	- [x] Idle: _integer_ (current time minus last touched)
+	- [x] User ID: _string_
+	- [x] Case ID: _string_
+	- [x] Group ID (optional): _string_
+	- [x] Group order (optional): _integer_
+	- [x] Upstream task ID (optional): _string_
+	- [x] Downstream task ID (optional): _string_
 - [ ] **User** _object_
 	- ID: _string_
 	- Role: _enum_ (worker, manager)
@@ -61,9 +61,12 @@ When given a list of tasks, automatically build a schedule.
 	- Buffer hours: _integer_
 - [ ] **Group** _object_
 	- ID: _string_
-	- Task IDs: _array_ 
+	- Task IDs: _array_
+	- Worker IDs: _array_
 - [ ] **Queue**
-- ![Queue image](https://github.com/elainechan/chekhov/blob/master/queue.png)
+	- array of Task objects
+
+![Queue image](https://github.com/elainechan/chekhov/blob/master/assets/queue.png)
 
 ## Simplified Manual Attempt
 - Each task consists of several subtasks
