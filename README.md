@@ -2,11 +2,7 @@
 
 When given a list of tasks, automatically build a schedule.
 
-## Inputs
-- CSV
-- JSON
-
-## Outputs
+## Inputs/Outputs
 - CSV
 - JSON
 
@@ -21,11 +17,14 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Each worker has 5 billable hours daily (300 minutes)
 	- [ ] Each worker has 3 buffer hours daily (180 minutes)
 
-## State
-- [ ] In the event an urgent task is not completed:
-	- [ ] Push to front of queue
-- [ ] 
+## Nice to have
+- [ ] Priority should fluctuate proportional to idle time
+- [ ] Schedule should refresh daily during off hours
 
+## What if
+- [ ] A task is not completed in scheduled time
+- [ ] Worker is out sick
+- [ ] Tasks are added/eliminated
 
 ## Definition of a Solution 
 - Sufficient: 
@@ -35,6 +34,7 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Least time wasted by workers waiting for completion of upstream task
 
 ## Algorithm
+### Search
 - [x] Search Task list by several criteria:
 	- Group
 		- [x] Search for tasks that belong in groups
@@ -50,7 +50,13 @@ When given a list of tasks, automatically build a schedule.
 	- Length
 		- [x] Search for the shortest length
 		- [x] Pick the shortest task
+### Pick
+- [x] Pick by earliest Group order
+	- [ ] Pick by Idle time
+		- [ ] Pick by Priority level
+			- [ ] Pick by Length
 
+### Populate
 - [ ] Search Worker schedule
 	- [ ] Check if billable hours
 		- [ ] If billable hours, schedule task to billable hours
