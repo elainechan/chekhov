@@ -3,7 +3,6 @@
 - create an input array
 - sort to your satisfaction
 
-
 most common queries
 data structures
 Data model
