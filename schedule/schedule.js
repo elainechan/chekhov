@@ -6,7 +6,7 @@ const {
 
 // GIPL order
 function scheduleByGroupOrder(taskList, agenda) {
-findTasksByEarliestGroupOrder(taskList).map(task => {
+	findTasksByEarliestGroupOrder(taskList).map(task => {
 		agenda.push(task);
 		_.remove(taskList, item => item === task);
 	});
@@ -15,6 +15,7 @@ findTasksByEarliestGroupOrder(taskList).map(task => {
 	collection.push(agenda);
 	return collection;
 }
+function scheduleByIdle(taskList, agenda) {
+	
+}
 module.exports = { scheduleByGroupOrder };
-
-
