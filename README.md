@@ -2,6 +2,14 @@
 
 When given a list of tasks, automatically build a schedule.
 
+## Inputs
+- CSV
+- JSON
+
+## Outputs
+- CSV
+- JSON
+
 ## Constraints
 - [ ] Each case consists of several tasks
 - [ ] Each task must be scheduled before its deadline
@@ -12,8 +20,12 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Each task must be scheduled to the worker it is assigned to
 	- [ ] Each worker has 5 billable hours daily (300 minutes)
 	- [ ] Each worker has 3 buffer hours daily (180 minutes)
+
+## State
 - [ ] In the event an urgent task is not completed:
 	- [ ] Push to front of queue
+- [ ] 
+
 
 ## Definition of a Solution 
 - Sufficient: 
@@ -23,7 +35,7 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Least time wasted by workers waiting for completion of upstream task
 
 ## Algorithm
-- [ ] Search Task list by:
+- [x] Search Task list by several criteria:
 	- Group
 		- [x] Search for tasks that belong in groups
 		- [x] Sort grouped tasks according to group name and group order 
@@ -36,8 +48,8 @@ When given a list of tasks, automatically build a schedule.
 		- [x] Search for strongest priority
 		- [x] Pick the strongest priority level
 	- Length
-		- [ ] Search for the shortest length
-		- [ ] Pick the shortest task
+		- [x] Search for the shortest length
+		- [x] Pick the shortest task
 
 - [ ] Search Worker schedule
 	- [ ] Check if billable hours
