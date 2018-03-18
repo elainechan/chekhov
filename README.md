@@ -34,7 +34,7 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Least time wasted by workers waiting for completion of upstream task
 
 ## Algorithm
-### Search
+### Search Tasks
 - [x] Search Task list by several criteria:
 	- Group
 		- [x] Search for tasks that belong in groups
@@ -55,8 +55,7 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Pick by Idle time
 		- [ ] Pick by Priority level
 			- [ ] Pick by Length
-
-### Populate
+### Populate Agenda
 - [ ] Search Worker schedule
 	- [ ] Check if billable hours
 		- [ ] If billable hours, schedule task to billable hours
@@ -65,10 +64,8 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] If no buffer hours
 		- [ ] Alert manager
 
-- [ ] schedule === put something in a list
-
 ## Data Schema
-![Data schema image](https://github.com/elainechan/chekhov/blob/master/assets/schema1.png)
+![Data schema image](https://github.com/elainechan/chekhov/blob/master/assets/schema2.png)
 - [x] **Task** _object_
 	- [x] ID: _string_
 	- [x] Deadline: _date_
