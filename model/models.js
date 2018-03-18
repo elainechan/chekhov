@@ -30,42 +30,40 @@ const TaskSchema = mongoose.Schema({
 	downstreamTaskId: String
 });
 const ClientSchema = mongoose.Schema({
-
+	id: String,
+	name: String,
+	address: String,
+	caseIds: Array
 });
-const GroupSchema = mongoose.Schema({});
-const UserSchema = mongoose.Schema({});
-const UpdateSchema = mongoose.Schema({});
-const RecordSchema = mongoose.Schema({});
-
-db.Case.insertOne({
-	name: "Valen v. Conner",
-	dateOpened: "2018-01-20T16:00:00Z",
-	dateClosed: ""
-})
-{
-	clientId: "",
-	workerUserIds: [],
-	managerUserId: "",
-	groupIds: [],
-	taskIds: [],
-	updateId: ""
-}
-/*
-3 Cases
-2 tasks for each
-*/
-{
-	name: "Drafting",
-	description: "Writing a letter",
+const GroupSchema = mongoose.Schema({
+	id: String,
+	taskIds: Array,
+	clientId: String,
+	caseId: String,
+	workerUserIds: Array,
+	managerUserId: String
+});
+const UserSchema = mongoose.Schema({
+	id: String,
+	role: String,
+	billable: Number,
+	buffer: Number,
+	taskIds: Array,
+	caseIds: Array,
+	clientIds: Array,
+	groupIds: Array
+});
+const UpdateSchema = mongoose.Schema({
+	id: String,
+	date: Date,
+	content: String,
+	userId: String
+});
+const RecordSchema = mongoose.Schema({
+	id: String,
+	date: Date,
+	hours: Number,
+	taskId: String,
 	userId: String,
-	caseId: "5aac10849a2d87c386031aaa",
-	deadline: "2017-12-12T16:00:00Z",
-	priority: 3,
-	length: 60,
-	lastTouched: "2017-10-12T16:00:00Z",
-	idle: ,
-	groupId: String,
-	groupOrder: Number,
-	upstreamTaskId: String,
-	downstreamTaskId: String
-}
+	caseId: String
+});

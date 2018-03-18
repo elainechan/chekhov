@@ -1,6 +1,10 @@
-## Inspiration
+## Existing Solutions
+- [Lotus Agenda](https://en.wikipedia.org/wiki/Lotus_Agenda)
+- [Chandler](https://en.wikipedia.org/wiki/Chandler_software))
 - [OptaPlanner](https://www.optaplanner.org/)
 - [Taskjuggler](http://taskjuggler.org/)
+- [Bunkat Schedule.js](https://bunkat.github.io/schedule/index.html)
+- [Bunkat Later.js](http://bunkat.github.io/later/)
 
 ## Authentication and Security
 - [User account best practices](https://cloudplatform.googleblog.com/2018/01/12-best-practices-for-user-account.html)
