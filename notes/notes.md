@@ -18,8 +18,8 @@
 	- outputs worker task completion performance
 
 ## Wireframe
-1. get a few db collection entries populated so they can get listed on the dashboard
-2. dashboard for the interface
+1. Get a few db collection entries populated so they can get listed on the dashboard
+2. Dashboard for the interface
 	- [ ] list of a case's tasks
 	- [ ] list of a user's tasks
 	- [ ] creating a new case or task
