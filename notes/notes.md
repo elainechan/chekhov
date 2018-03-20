@@ -20,14 +20,15 @@
 ## Wireframe
 1. Get a few db collection entries populated so they can get listed on the dashboard
 2. Dashboard for the interface
+	- [x] list of cases
+	- [x] list of tasks
 	- [ ] list of a case's tasks
 	- [ ] list of a user's tasks
 	- [ ] creating a new case or task
 3. imagine that someone going to the index is 'logged in'
 4. get some tasks/subtasks into the DB and get them displaying
 5. form/upload input
-
-- once wireframing is done, we can work on a page that 'gets' tasks and displays the info
+6. a page that 'gets' tasks and displays the info
 
 - Tasks:
 	- briefs - 3 hrs
@@ -102,7 +103,6 @@ Daily sheet
 
 ## TODO
 - [ ] **Add procfile before upload to Heroku**
-
 - console.log out the uploaded files contents
 - add a single pre-baked line to the DB
 - 4-5 records manually inserted

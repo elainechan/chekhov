@@ -88,3 +88,8 @@ db.user.insertMany(
 		}
 	]
 )
+db.task.updateMany( {}, { $set: { case_id: "5aadd62ec56c1b93ba56bc3c" }, } )
+
+{ "_id" : ObjectId("5aadd62ec56c1b93ba56bc3c"), "name" : "Valen v. Conner", "dateOpened" : "2018-01-20T16:00:00Z", "dateClosed" : "" }
+{ "_id" : ObjectId("5aadd62ec56c1b93ba56bc3d"), "name" : "Jones v. Williams", "dateOpened" : "2017-11-17T10:00:00Z", "dateClosed" : "" }
+{ "_id" : ObjectId("5aadd62ec56c1b93ba56bc3e"), "name" : "Lehman v. Kahn", "dateOpened" : "2017-05-24T09:00:00Z", "dateClosed" : "" }
