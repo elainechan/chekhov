@@ -5,7 +5,15 @@ const bodyParser = require('body-parser')
 
 const app = express();
 app.use(bodyParser.json());
-app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/index.html')))
+// app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/index.html')));
+app.get('/tasks', (req, res) => {
+  Tasks
+    .find().then(data => res.json(data))
+    .catch(err => { //this is just us handling an error
+      console.error(err);
+      res.status(500).json({ error: 'Unable to complete request.' });
+    });
+  })
 app.post('/upload', (req, res) =>{
 	console.log(req.body);
 	/*
@@ -26,7 +34,7 @@ db.once('open', function() {
 */
 mongoose.Promise = global.Promise;
 const { PORT, DATABASE_URL } = require('./config');
-const { Restaurant } = require('./models');
+const { Restaurant } = require('./model/models');
 
 let server;
 function runServer(databaseUrl, port=PORT) {
