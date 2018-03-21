@@ -1,15 +1,15 @@
+'use strict';
 /*
 drop-down menu containing id nums
 */
 /*
 table containing all cases
-
 */
-// find all cases
-//var cases = db.case.find();
+/*
 var CASES = [{ "name" : "Valen v. Conner", "dateOpened" : "2018-01-20T16:00:00Z", "dateClosed" : "" },
 { "name" : "Jones v. Williams", "dateOpened" : "2017-11-17T10:00:00Z", "dateClosed" : "" },
 { "name" : "Lehman v. Kahn", "dateOpened" : "2017-05-24T09:00:00Z", "dateClosed" : "" }];
+*/
 
 /* List approach
 // create a `li` for each case
@@ -22,7 +22,26 @@ cases.forEach((item, i) => {
 */
 /* Table approach
 */
-function createCaseTable() {
+var CASES;
+function getCaseData() {
+	httpRequest = new XMLHttpRequest();
+	httpRequest.open('GET', `${PORT}/cases/`);
+	httpRequest.onreadystatechange = () => {
+		let status = httpRequest.getResponseHeader('HTTP/1.1');
+		console.log(status);
+		console.log(httpRequest.status);
+		if (httpRequest.status === 200) {
+			console.log('Successfully GET tasks.');
+			CASES = httpRequest.responseText;
+			console.log(CASES[0]);
+		} else {
+			console.log('Unable to GET data.');
+		}
+	};
+	httpRequest.send();
+}
+
+function createCaseTable(data) {
 	// creates table
 	var table = document.createElement('table');
 	table.setAttribute('id', 'case-table');
@@ -35,7 +54,7 @@ function createCaseTable() {
 	for (const prop in CASES[0]) { // populates header with values
 		let header = document.createElement('th');
 		header.setAttribute('scope', 'col')
-		header.innerHTML = prop;
+		header.textContent = prop;
 		headerRow.appendChild(header);
 	}
 	table.appendChild(headerRow);
@@ -45,10 +64,13 @@ function createCaseTable() {
 		caseRow.setAttribute('class', 'case-row')
 		Object.entries(item).forEach((entry, i) => { // populates each cell with data
 			let cell = document.createElement('td');
-			cell.innerHTML = entry[1];
+			cell.textContent = entry[1];
 			caseRow.appendChild(cell); // appends each cell to row
 		});
 		document.getElementById('case-table').appendChild(caseRow); // appends each row to table
 	});
 }
-window.onload = createCaseTable();
+window.onload = getCaseData(); // calling REST returns an object/JSON
+window.onload = createCaseTable(CASES);
+// get status code
+// curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"

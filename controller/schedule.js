@@ -10,10 +10,10 @@ function scheduleByGroupOrder(taskList, agenda) {
 		agenda.push(task);
 		_.remove(taskList, item => item === task);
 	});
-	let collection = [];
-	collection.push(taskList); 
-	collection.push(agenda);
-	return collection;
+	let basket = [];
+	basket.push(taskList); 
+	basket.push(agenda);
+	return basket;
 }
 function scheduleByIdle(taskList, agenda) {
 	

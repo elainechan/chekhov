@@ -1,3 +1,5 @@
+#!/bin/bash
+# Shell script for inserting dummy data.
 db.createCollection("case")
 db.case.insertMany(
 	[
