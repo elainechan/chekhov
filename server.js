@@ -1,19 +1,31 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const { DATABASE_URL, PORT } = require('./config');
 const path = require('path');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const { CaseSchema, TaskSchema } = require('./model/models');
 
 const app = express();
 app.use(bodyParser.json());
-// app.get('/', (req, res) => res.sendFile(path.join(__dirname+'/index.html')));
-app.get('/tasks', (req, res) => {
-  Tasks
-    .find().then(data => res.json(data))
-    .catch(err => { //this is just us handling an error
-      console.error(err);
-      res.status(500).json({ error: 'Unable to complete request.' });
-    });
-  })
+
+var task = mongoose.model('task', TaskSchema, 'task'); // (collection, schema)
+app.get('/task', (req, res) => {
+  task.find().exec((err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.send(data);
+  });
+});
+var cases = mongoose.model('case', CaseSchema, 'case')
+app.get('/cases', (req, res) => {
+  cases.find().exec((err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.send(data);
+  });
+});
 app.post('/upload', (req, res) =>{
 	console.log(req.body);
 	/*
@@ -23,18 +35,6 @@ app.post('/upload', (req, res) =>{
 	*/
 	res.redirect('/');
 });
-/*
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
-mongoose.connect('mongodb://127.0.0.1:27017');
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-	console.log('MongoDB connected!');
-});
-*/
-mongoose.Promise = global.Promise;
-const { PORT, DATABASE_URL } = require('./config');
-const { Restaurant } = require('./model/models');
 
 let server;
 function runServer(databaseUrl, port=PORT) {
@@ -47,7 +47,7 @@ function runServer(databaseUrl, port=PORT) {
         console.log(`Your app is listening on port ${port}`);
         resolve();
       }) 
-      .on('error', err => { // safety measure: make db available to server reconnect, make sure no busy signal
+      .on('error', err => { // make db available to server reconnect, make sure no busy signal
         mongoose.disconnect();
         reject(err);
       });
@@ -55,7 +55,7 @@ function runServer(databaseUrl, port=PORT) {
   });
 }
 // If module is distributed, this prevents external sources from accessing my database
-if (require.main === module) { // safety measure: separation of db concerns if planning to distribute module
+if (require.main === module) { // separation of db concerns if planning to distribute module
   console.log('Called directly');
   runServer(DATABASE_URL).catch(err => console.error(err));
 } else {

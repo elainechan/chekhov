@@ -67,3 +67,4 @@ const RecordSchema = mongoose.Schema({
 	userId: String,
 	caseId: String
 });
+module.exports = { CaseSchema, TaskSchema };
