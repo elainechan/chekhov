@@ -21,7 +21,7 @@ function reqListener () {
   request.setRequestHeader("Access-Control-Allow-Origin", "*");
   request.send();
 */
-/*
+
 var TASKS;
 function listener() {
 	console.log(this.responseText);
@@ -67,7 +67,7 @@ function createTaskTable() {
 }
 window.onload = getTaskData();
 window.onload = createTaskTable();
-*/
+
 // Node version
 const http = require('http');
 
