@@ -17,4 +17,10 @@ const CaseSchema = mongoose.Schema({
 	updateId: String
 });
 
+CaseSchema.virtual('/case-tasks', {
+	ref: 'Task',
+	localField: '_id',
+	foreignField: 'case'
+});
+
 module.exports = mongoose.model('Case', CaseSchema, 'case');

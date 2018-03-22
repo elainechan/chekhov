@@ -6,10 +6,6 @@ const TaskSchema = mongoose.Schema({
 	name: String,
 	description: String,
 	userId: String,
-	case: { 
-		type: mongoose.Schema.Types.ObjectId, ref: 'Case', 
-		required: true 
-	},
 	deadline: Date,
 	priority: Number,
 	length: Number,
