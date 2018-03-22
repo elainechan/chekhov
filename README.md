@@ -94,8 +94,6 @@ When given a list of tasks, automatically build a schedule.
 - [ ] **TaskList**
 	- array of Task objects
 
-![TaskList image](https://github.com/elainechan/chekhov/blob/master/assets/queue.png)
-
 ## Simplified Manual Attempt
 - Each task consists of several subtasks
 - Each subtask must be done in order
