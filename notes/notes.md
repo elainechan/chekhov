@@ -22,7 +22,7 @@
 2. Users should be able to:
 	- [x] GET list of cases
 	- [x] GET list of tasks
-	- [ ] POST a new case
+	- [x] POST a new case
 	- [ ] POST a new task
 	- [ ] GET list of users
 	- [ ] GET list of a case's tasks

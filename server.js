@@ -9,6 +9,7 @@ const Task = require('./model/task.model');
 const app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 const jsonParser = bodyParser.json();
 app.use(express.static('public'));
 
@@ -39,7 +40,6 @@ app.get('/cases/:id', (req, res) => {
 });
 
 app.post('/cases', jsonParser, (req, res) => {
-  // ensure `name` and `budget` are in request body
   const requiredFields = ['name'];
   requiredFields.map((field) => {
     if (!(field in req.body)) {
@@ -48,8 +48,26 @@ app.post('/cases', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   });
-  const item = Case.create(req.body.name);
-  res.status(201).json(item);
+  Case.create({ name: req.body.name }, (err, data) => {
+    if (err) return handleError(err);
+    res.status(201).json(data);
+    console.log(data);
+  });
+});
+app.post('/tasks', jsonParser, (req, res) => {
+  const requiredFields = ['name'];
+  requiredFields.map((field) => {
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  });
+  Task.create({ name: req.body.name }, (err, data) => {
+    if (err) return handleError(err);
+    res.status(201).json(data);
+    console.log(data);
+  });
 });
 
 app.post('/upload', (req, res) =>{
