@@ -2,19 +2,35 @@
 const mongoose = require('mongoose');
 
 const TaskSchema = mongoose.Schema({
-	_id: mongoose.Schema.Types.ObjectId,
+	id: String,
 	name: String,
 	description: String,
-	userId: String,
 	deadline: Date,
 	priority: Number,
 	length: Number,
 	lastTouched: Date,
 	idle: Number,
-	groupId: String,
+	userId: { 
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	},
+	caseId: { 
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Case'
+	},
+	groupId: { 
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Group'
+	},
 	groupOrder: Number,
-	upstreamTaskId: String,
-	downstreamTaskId: String
+	upstreamTaskId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Task'
+	},
+	downstreamTaskId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Task'
+	}
 });
 
 module.exports = mongoose.model('Task', TaskSchema, 'task'); // what's the third 'task' doing?????

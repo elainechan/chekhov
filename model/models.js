@@ -2,14 +2,18 @@
 const mongoose = require('mongoose');
 
 const CaseSchema = mongoose.Schema({
-	id: String,
+	_id: mongoose.Schema.Types.ObjectId,
 	clientId: String,
 	dateOpened: Date,
 	dateClosed: Date,
 	workerUserIds: Array,
 	managerUserId: String,
 	groupIds: Array,
-	taskIds: Array,
+	tasks:[{ 
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Task',
+		required: true
+	}],
 	updateId: String
 });
 
@@ -18,7 +22,10 @@ const TaskSchema = mongoose.Schema({
 	name: String,
 	description: String,
 	userId: String,
-	caseId: String,
+	caseId: { 
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Case'
+	},
 	deadline: Date,
 	priority: Number,
 	length: Number,

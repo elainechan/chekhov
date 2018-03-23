@@ -9,6 +9,8 @@ const Task = require('./model/task.model');
 const app = express();
 
 app.use(bodyParser.json());
+const jsonParser = bodyParser.json();
+app.use(express.static('public'));
 
 app.get('/tasks', (req, res) => {
   Task.find().exec((err, data) => {
@@ -27,6 +29,29 @@ app.get('/cases', (req, res) => {
     return res.send(data);
   });
 });
+app.get('/cases/:id', (req, res) => {
+  Case.findById(req.params.id).exec((err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.send(data);
+  });
+});
+
+app.post('/new-case', jsonParser, (req, res) => {
+  // ensure `name` and `budget` are in request body
+  const requiredFields = ['name'];
+  requiredFields.map((field) => {
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  });
+  const item = Case.create(req.body.name);
+  res.status(201).json(item);
+});
+
 app.post('/upload', (req, res) =>{
 	console.log(req.body);
 	/*

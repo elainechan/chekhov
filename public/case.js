@@ -22,23 +22,8 @@ cases.forEach((item, i) => {
 */
 /* Table approach
 */
-var CASES;
-function getCaseData() {
-	httpRequest = new XMLHttpRequest();
-	httpRequest.open('GET', `${PORT}/cases/`);
-	httpRequest.onreadystatechange = () => {
-		let status = httpRequest.getResponseHeader('HTTP/1.1');
-		console.log(status);
-		console.log(httpRequest.status);
-		if (httpRequest.status === 200) {
-			console.log('Successfully GET tasks.');
-			CASES = httpRequest.responseText;
-			console.log(CASES[0]);
-		} else {
-			console.log('Unable to GET data.');
-		}
-	};
-	httpRequest.send();
+function getCaseData(callback) {
+	$.getJSON(`http://localhost:8080/case/`, callback);
 }
 
 function createCaseTable(data) {
@@ -70,7 +55,6 @@ function createCaseTable(data) {
 		document.getElementById('case-table').appendChild(caseRow); // appends each row to table
 	});
 }
-window.onload = getCaseData(); // calling REST returns an object/JSON
-window.onload = createCaseTable(CASES);
+window.onload = getCaseData(createCaseTable); // calling REST returns an object/JSON
 // get status code
 // curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"
