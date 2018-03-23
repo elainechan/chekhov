@@ -22,13 +22,17 @@
 2. Users should be able to:
 	- [x] GET list of cases
 	- [x] GET list of tasks
+	- [ ] clients
+	- [ ] users
 	- [x] POST a new case
-	- [ ] POST a new task
+	- [x] POST a new task
 	- [ ] GET list of users
 	- [ ] GET list of a case's tasks
 	- [ ] GET list of a user's tasks
 	- [ ] search for and get an individual task
 	- [ ] search for and get an individual case
+	- [ ] UPDATE task
+	- [ ] 
 4. [x] get some tasks/subtasks into the DB and get them displaying
 5. [x] a page that 'gets' tasks and displays the info
 6. form input

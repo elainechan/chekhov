@@ -48,7 +48,11 @@ app.post('/cases', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   });
-  Case.create({ name: req.body.name }, (err, data) => {
+  Case.create({
+    name: req.body.name,
+    dateCreated: new Date(),
+    dateOpened: new Date()
+  }, (err, data) => {
     if (err) return handleError(err);
     res.status(201).json(data);
     console.log(data);
@@ -63,7 +67,12 @@ app.post('/tasks', jsonParser, (req, res) => {
       return res.status(400).send(message);
     }
   });
-  Task.create({ name: req.body.name }, (err, data) => {
+  Task.create({ 
+    name: req.body.name,
+    description: req.body.description,
+    dateCreated: new Date(),
+    caseId: req.body.caseId
+  }, (err, data) => {
     if (err) return handleError(err);
     res.status(201).json(data);
     console.log(data);

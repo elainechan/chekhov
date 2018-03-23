@@ -20,8 +20,7 @@ const CaseSchema = mongoose.Schema({
 	tasks: [{ 
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Task'
-	}],
-	updateId: String
+	}]
 });
 
 module.exports = mongoose.model('Case', CaseSchema, 'case');
