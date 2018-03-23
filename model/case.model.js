@@ -2,7 +2,6 @@
 const mongoose = require('mongoose');
 
 const CaseSchema = mongoose.Schema({
-	_id: mongoose.Schema.Types.ObjectId,
 	name: String,
 	dateOpened: Date,
 	dateClosed: Date,
