@@ -19,17 +19,27 @@
 
 ## Wireframe
 1. Get a few db collection entries populated so they can get listed on the dashboard
-2. Dashboard for the interface
-	- [x] list of cases
-	- [x] list of tasks
-	- [ ] list of a case's tasks
-	- [ ] list of a user's tasks
-	- [ ] creating a new case or task
-3. imagine that someone going to the index is 'logged in'
-4. get some tasks/subtasks into the DB and get them displaying
-5. form/upload input
-6. a page that 'gets' tasks and displays the info
+2. Users should be able to:
+	- [x] GET list of cases
+	- [x] GET list of tasks
+	- [ ] POST a new case
+	- [ ] POST a new task
+	- [ ] GET list of users
+	- [ ] GET list of a case's tasks
+	- [ ] GET list of a user's tasks
+	- [ ] search for and get an individual task
+	- [ ] search for and get an individual case
+4. [x] get some tasks/subtasks into the DB and get them displaying
+5. [x] a page that 'gets' tasks and displays the info
+6. form input
+	- [form](https://www.w3schools.com/html/html_forms.asp)
+	- `Task.create` or `Case.create`
+	- `mongoose.model()`
+	- [ ] POST new case successfully
+	- [ ] POST new task successfully
 
+### Next
+1. imagine that someone going to the index is 'logged in'
 - Tasks:
 	- briefs - 3 hrs
 	- research - 2 hrs
