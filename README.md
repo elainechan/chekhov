@@ -9,8 +9,8 @@ When given a list of tasks, automatically build a schedule.
 ## Constraints
 - [ ] Each case consists of several tasks
 - [ ] Each task must be scheduled before its deadline
-- [ ] Each task must be scheduled in order of [priority](https://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method)
-- [ ] Some tasks can only commence when certain other tasks are finished (upstream, downstream)
+- [ ] Each task must be scheduled in order of priority
+- [ ] Some tasks can only commence when certain others are finished (upstream, downstream)
 - [ ] No task can be left unscheduled for 48 hours
 - [ ] Five workers: Alice, Bob, Carol, Dave, Emily
 	- [ ] Each task must be scheduled to the worker it is assigned to
@@ -18,7 +18,8 @@ When given a list of tasks, automatically build a schedule.
 	- [ ] Each worker has 3 buffer hours daily (180 minutes)
 
 ## Nice to have
-- [ ] Priority should fluctuate proportional to idle time
+- [ ] Priority should increase as idle time increases
+
 - [ ] Schedule should refresh daily during off hours
 
 ## What if
@@ -30,8 +31,15 @@ When given a list of tasks, automatically build a schedule.
 - Sufficient: 
 	- [ ] Every task gets scheduled before its deadline
 - Optimal:
-	- [ ] Earliest estimated completion
+	- [ ] Least total time required to finish all tasks
 	- [ ] Least time wasted by workers waiting for completion of upstream task
+	- [ ] Earlier completion of higher priority tasks
+
+## Cost function
+- Minimize:
+	- total time to finish all tasks
+	- total time wasted waiting for upstream completion
+	- completion date of high-priority tasks
 
 ## Algorithm
 ### Search Tasks
