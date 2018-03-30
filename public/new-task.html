@@ -1,5 +1,36 @@
+<!DOCTYPE html>
+<head></head>
+<html>
+<body>
 <form action="/tasks" method="post">
-	Name:<br>
-	<input type="text" name="name" value="Roe v. Wade"><br><br>
+	Name:
+	<br>
+	<input type="text" name="name" value="">
+	<br>
+	Date created:
+	<br>
+	<input type="date" name="dateOpened" value="">
+	<br>
+	Description:
+	<br>
+	<input type="text" name="description" value="">
+	<br>
+	Case:
+	<select name="caseId" id="case-selection">
+	</select>
+	<!-- in your Javascript:
+	send a request users/all
+	parse that response into drop-down form data
+	db: do something to user
+	do something to task (attach user)
+	-->
+	<br>
 	<input type="submit" value="Submit" id="submit-task">
-  </form>
+</form>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="./new-task.js"></script>
+</body>
+</html>

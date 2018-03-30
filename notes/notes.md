@@ -22,21 +22,24 @@
 2. Users should be able to:
 	- [x] GET list of cases
 	- [x] GET list of tasks
+	- [x] clients
+	- [ ] users
 	- [x] POST a new case
-	- [ ] POST a new task
+	- [x] POST a new task
+	- [x] POST a new client
 	- [ ] GET list of users
 	- [ ] GET list of a case's tasks
 	- [ ] GET list of a user's tasks
 	- [ ] search for and get an individual task
 	- [ ] search for and get an individual case
+	- [ ] UPDATE task
+	- [ ] DELETE task
 4. [x] get some tasks/subtasks into the DB and get them displaying
 5. [x] a page that 'gets' tasks and displays the info
 6. form input
 	- [form](https://www.w3schools.com/html/html_forms.asp)
 	- `Task.create` or `Case.create`
 	- `mongoose.model()`
-	- [ ] POST new case successfully
-	- [ ] POST new task successfully
 
 ### Next
 1. imagine that someone going to the index is 'logged in'
