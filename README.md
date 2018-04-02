@@ -105,6 +105,14 @@ When given a list of tasks, automatically build a schedule.
 ## Simplified Manual Attempt
 - Each task consists of several subtasks
 - Each subtask must be done in order
+- If a task list contains anything, the first one must be picked
+- Try to keep list lengths as close to each other as possible
+
+
+- a series of inequalities
+- coefficients 
+- slack variables
+
 - Example task list:
 ```
 task1 = ["A1", "B2", "A1", "B3"]
@@ -114,11 +122,17 @@ task4 = ["A4", "B1", "A1", "B1"]
 ```
 Where in `task1` `A1`, `A` stands for "assigned to Alice" and `1` means the task takes 1 hour to complete. 
 
-- Example schedule where each worker puts in equal time:
+- Example schedule:
+```
+Alice: 4A4 1A1
+Bob: 3B1 2B1 1B2
+```
+3 hours is wasted; Bob waits 3 hours for Alice to finish 4A4 then 1A1 before Bob can get to 1B2
 ```
 Alice: 1A1 4A4
-Bob: 3B1 1B2 2B1
+Bob: 3B1 2B1 1B2
 ```
+No time is wasted
 
 First round:
 ```
@@ -126,17 +140,20 @@ task1 = ["A1", "B2", "A1", "B3"]
 task2 = ["B2, "A2", "B4", "A3"]
 task3 = ["B1", "A3", "B1", "A1"]
 task4 = ["A4", "B1", "A1", "B1"]
-A = "1A1" => position 1 (has worked 1 hour)
+A = "1A1" => position 1 (worked 1 hour)
 B = "3B1" => position 1
+1 hour has elapsed.
 ```
 Second round:
 ```
 task1 = ["B2", "A1", "B3"]
-task2 = ["B2, "A2", "B4", "A3"]
+task2 = ["B2", "A2", "B4", "A3"]
 task3 = ["A3", "B1", "A1"]
 task4 = ["A4", "B1", "A1", "B1"]
-A = "3A3" => position 4 (has worked 4 hours cumulative)
-B = "2B2" => position 3
+A = "3A3" => position 4 (worked 4 hours cumulative)
+B = "2B2" => position 4 (worked 3 hours, wasted 1 hour)
+3 hours elapsed since last stage.
+Total 4 hours elapsed (including 1 hour wasted).
 ```
 Third round:
 ```
@@ -144,42 +161,47 @@ task1 = ["B2", "A1", "B3"]
 task2 = ["A2", "B4", "A3"]
 task3 = ["B1", "A1"]
 task4 = ["A4", "B1", "A1", "B1"]
-A = "3A1" => 5
-B = "3B1" => 4
+A = "2A2" => (worked 2 hours)
+B = "1B2" => (worked 2 hours)
+2 hours elapsed since last stage.
+Total 6 hours elapsed (incl 1 hour wasted).
 ```
 Fourth round:
 ```
-task1 = ["B2", "A1", "B3"]
-task2 = ["A2", "B4", "A3"]
-task3 = []
+task1 = ["A1", "B3"]
+task2 = ["B4", "A3"]
+task3 = ["B1", "A1"]
 task4 = ["A4", "B1", "A1", "B1"]
-A = "1A1" => 6
-B = "1B2" => 6
+A = "4A4" => (work 4)
+B = "2B4" => (work 4)
+Total 10 hours elapsed (incl 1 hour wasted).
 ```
 Fifth round:
 ```
-task1 = ["B3"]
-task2 = ["A2", "B4", "A3"]
-task3 = []
-task4 = ["A4", "B1", "A1", "B1"]
-A = "2A2" => 8
-B = "1B3" => 9
+task1 = ["A1","B3"]
+task2 = ["A3"]
+task3 = ["B1", "A1"]
+task4 = ["B1", "A1", "B1"]
+A = "1A1" => (work 1)
+B = "4B1" => (work 1)
+Total hours 11 (incl 1 hrs wasted).
 ```
 Sixth round:
 ```
-task1 = []
-task2 = ["B4", "A3"]
-task3 = []
-task4 = ["A4", "B1", "A1", "B1"]
-A = "4A4" => 12
-B = "2B4" => 13
+task1 = ["B3"]
+task2 = ["A3"]
+task3 = ["B1", "A1"]
+task4 = ["A1", "B1"]
+A = "4A1" => work 1
+B = "3B1" => work 1
+Total 11 (1 wasted).
 ```
 Seventh round:
 ```
-task1 = []
+task1 = ["B3"]
 task2 = ["A3"]
-task3 = []
-task4 = ["B1", "A1", "B1"]
+task3 = ["A1"]
+task4 = ["B1"]
 A = "2A3" => 15
 B = "4B1" => 14
 ```
