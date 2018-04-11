@@ -2,6 +2,16 @@
 
 The objective of Chekhov is to use linear programming and heuristics to optimize the arrangement of tasks in a schedule. When given a list of tasks, Chekhov should automatically build a schedule based on a finite set of constraints, by minimizing one or more cost function(s).
 
+The goal is to achieve a simplified version of [Optaplanner](https://www.optaplanner.org/). The inspiration comes from the [history of the simplex method](https://en.wikipedia.org/wiki/Linear_programming#History) attributed to George Danzig and John von Neumann.
+
+Possible use cases can be any situations in which tasks with competing priorities need to be resolved. If the priorities are unclear, they should be clarified through an analytical process.
+
+Sample use case scenarios:
+    - Law firms
+    - Investment funds
+    - Health care institutions
+    - Government agencies
+
 ## Inputs/Outputs
 - CSV
 - JSON
