@@ -7,10 +7,10 @@ The goal is to achieve a simplified version of [Optaplanner](https://www.optapla
 Possible use cases can be any situations in which tasks with competing priorities need to be resolved. If the priorities are unclear, they should be clarified through an analytical process.
 
 Sample use case scenarios:
-    - Law firms
-    - Investment funds
-    - Health care institutions
-    - Government agencies
+- Law firms
+- Investment funds
+- Health care institutions
+- Government agencies
 
 ## Inputs/Outputs
 - CSV
