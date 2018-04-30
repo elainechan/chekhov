@@ -23,7 +23,7 @@ cases.forEach((item, i) => {
 /* Table approach
 */
 function getCaseData(callback) {
-	$.getJSON(`http://localhost:8080/cases/`, callback);
+	$.getJSON(`http://localhost:8080/cases/all`, callback);
 }
 
 function createCaseTable(CASES) {

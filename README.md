@@ -118,7 +118,7 @@ Sample use case scenarios:
 - If a task list contains anything, the first one must be picked
 - Try to keep list lengths as close to each other as possible
 
-
+### Linear Programming Equation
 - a series of inequalities
 - coefficients 
 - slack variables

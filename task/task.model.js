@@ -18,6 +18,10 @@ const TaskSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Case'
 	},
+	clientId: {
+		type:  mongoose.Schema.Types.ObjectId,
+		ref: 'Client'
+	},
 	groupId: { 
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Group'
