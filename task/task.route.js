@@ -18,4 +18,10 @@ router.get('/all', taskController.getAllTasks);
 
 router.post('/', taskController.postNewTask);
 
+router.get('/client/:id', taskController.getTasksByClientId);
+
+router.get('/case/:id', taskController.getTasksByCaseId);
+
+router.get('/user/:id', taskController.getTasksByUserId);
+
 module.exports = router;
