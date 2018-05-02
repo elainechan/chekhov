@@ -1,7 +1,7 @@
 'use strict';
 
 function getTaskData(callback) {
-	$.getJSON(`http://localhost:8080/tasks/`, callback);
+	$.getJSON(`http://localhost:8080/tasks/all`, callback);
 }
 
 function createTaskTable(TASKS) {

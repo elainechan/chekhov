@@ -15,7 +15,7 @@ const clientRoute = require('./client/client.route');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const jsonParser = bodyParser.json();
-app.use(express.static('public'));
+app.use(express.static('public')); // serves static files
 app.use('/tasks', taskRoute);
 app.use('/cases', caseRoute);
 app.use('/clients', clientRoute);
