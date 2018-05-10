@@ -7,6 +7,8 @@ const Case = require("../case/case.model");
 
 const taskController = require('./task.controller');
 
+const common = require('../common/token.verification');
+
 router.get('/', (req, res, next) => {
 	Task.find()
 	.select('case _id')
@@ -14,14 +16,14 @@ router.get('/', (req, res, next) => {
 	.exec();
 });
 
-router.get('/all', taskController.getAllTasks);
+router.get('/all/:token', common.verifyToken, taskController.getAllTasks);
 
-router.post('/', taskController.postNewTask);
+router.post('/:token', common.verifyToken, taskController.postNewTask); // Adds verification
 
-router.get('/client/:id', taskController.getTasksByClientId);
+router.get('/client/:id/:token', common.verifyToken, taskController.getTasksByClientId);
 
-router.get('/case/:id', taskController.getTasksByCaseId);
+router.get('/case/:id/:token', common.verifyToken, taskController.getTasksByCaseId);
 
-router.get('/user/:id', taskController.getTasksByUserId);
+router.get('/user/:id/:token', common.verifyToken, taskController.getTasksByUserId);
 
 module.exports = router;

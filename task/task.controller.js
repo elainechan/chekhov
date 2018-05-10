@@ -13,7 +13,7 @@ exports.getAllTasks = (req, res) => {
 }
 
 exports.postNewTask = (req, res) => {
-	const requiredFields = ['name', 'clientId', 'caseId', 'userId'];
+	const requiredFields = ['name']; // add later  'clientId', 'caseId', 'userId'
   requiredFields.map((field) => {
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`;
