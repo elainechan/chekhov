@@ -55,6 +55,14 @@ function createCaseTable(CASES) {
 		document.getElementById('case-table').appendChild(caseRow); // appends each row to table
 	});
 }
-window.onload = getCaseData(createCaseTable); // calling REST returns an object/JSON
+
+function renderCases(CASES) {
+	console.log(CASES);
+	CASES.forEach((item, i) => {
+		$('#cases').append(`<div class="case-item">${item.name}</div>`);
+	});
+}
+window.onload = getCaseData(renderCases);
+// window.onload = getCaseData(createCaseTable); // calling REST returns an object/JSON
 // get status code
 // curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"
