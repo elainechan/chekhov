@@ -11,6 +11,7 @@ const app = express();
 const taskRoute = require('./task/task.route');
 const caseRoute = require('./case/case.route');
 const clientRoute = require('./client/client.route');
+const authRoute = require('./auth/auth.route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +20,7 @@ app.use(express.static('public')); // serves static files
 app.use('/tasks', taskRoute);
 app.use('/cases', caseRoute);
 app.use('/clients', clientRoute);
+app.use('/auth', authRoute);
 
 let server;
 function runServer(databaseUrl, port=PORT) {

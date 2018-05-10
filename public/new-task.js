@@ -1,7 +1,7 @@
 'use strict';
 
 function getCaseData(callback) {
-	$.getJSON(`http://localhost:8080/cases/`, callback);
+	$.getJSON(`http://localhost:8080/cases/all/${localStorage.getItem('token')}`, callback);
 }
 
 function createCaseSelection(CASES) {
@@ -11,3 +11,5 @@ function createCaseSelection(CASES) {
 	}));
 }
 window.onload = getCaseData(createCaseSelection); // calling REST returns an object/JSON
+
+function createNewTask() {}

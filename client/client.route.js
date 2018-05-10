@@ -6,9 +6,10 @@ const Task = require("../task/task.model");
 const Case = require("../case/case.model");
 const Client = require("./client.model")
 const clientController = require('./client.controller');
+const common = require('../common/token.verification');
 
-router.get('/all', clientController.getAllClients);
+router.get('/all/:token', common.verifyToken, clientController.getAllClients);
 
-router.post('/', clientController.postNewClient);
+router.post('/:token', common.verifyToken, clientController.postNewClient);
 
 module.exports = router;

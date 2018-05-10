@@ -1,6 +1,7 @@
 const User = require('./user.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 exports.register = (req, res) => {
 	// find user by email
@@ -76,7 +77,7 @@ exports.login = (req, res) => {
 				email: existingUser.email
 			}
 			// generate token
-			let token = jwt.sign(userToken, 'userSecret');
+			let token = jwt.sign(userToken, config.SECRET);
 			res.status(201).json({
 				message: 'Token has been generated.',
 				data: {
