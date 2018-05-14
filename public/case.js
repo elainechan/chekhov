@@ -59,10 +59,25 @@ function createCaseTable(CASES) {
 function renderCases(CASES) {
 	console.log(CASES);
 	CASES.forEach((item, i) => {
-		$('#cases').append(`<div class="case-item">${item.name}</div>`);
+		$('#cases').append(`
+		<div class="case-item">
+		<h3>${item.name}</h3>
+		<p>Number of tasks: ${item.tasks.length}</p>
+		<p>Date created: ${item.dateCreated}</p>
+		<button name="go-to-case" value="${item._id}">Go to case </button>
+		</div>`);
 	});
 }
-window.onload = getCaseData(renderCases);
+
+function goToCase(CASES) {
+	// attach the click event of button to body
+	$("body").on("click", "button", function() {
+		console.log($(this).val());
+		window.location.href = `task.html?caseId=${$(this).val()}`;
+	});
+}
+getCaseData(renderCases);
+goToCase();
 // window.onload = getCaseData(createCaseTable); // calling REST returns an object/JSON
 // get status code
 // curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"
