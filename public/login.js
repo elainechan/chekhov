@@ -17,6 +17,7 @@ $('form').submit(event => {
 			localStorage.setItem('email', user.data.email);
 			localStorage.setItem('token', user.data.token);
 			localStorage.setItem('userId', user.data.userId);
+			window.location.href = 'case.html'
 		})
 		.catch(err => {
 			console.log(err);

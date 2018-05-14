@@ -1,8 +1,15 @@
 'use strict';
 
+var url_string = window.location.href;
+var url = new URL(url_string);
+var caseId = url.searchParams.get("caseId");
+console.log(caseId);
+
 function getTaskData(callback) {
 	$.getJSON(`http://localhost:8080/tasks/all/${localStorage.getItem('token')}`, callback);
 }
+
+// make new .html page for getTasksByCaseId
 
 function createTaskTable(TASKS) {
 	// creates table
