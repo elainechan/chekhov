@@ -1,27 +1,5 @@
 'use strict';
-/*
-drop-down menu containing id nums
-*/
-/*
-table containing all cases
-*/
-/*
-var CASES = [{ "name" : "Valen v. Conner", "dateOpened" : "2018-01-20T16:00:00Z", "dateClosed" : "" },
-{ "name" : "Jones v. Williams", "dateOpened" : "2017-11-17T10:00:00Z", "dateClosed" : "" },
-{ "name" : "Lehman v. Kahn", "dateOpened" : "2017-05-24T09:00:00Z", "dateClosed" : "" }];
-*/
 
-/* List approach
-// create a `li` for each case
-cases.forEach((item, i) => {
-	var caseListing = document.createElement('li');
-	caseListing.setAttribute('class', 'case-listing');
-	caseListing.innerHTML = item.name;
-	document.getElementById('case-listings').appendChild(caseListing);
-});
-*/
-/* Table approach
-*/
 function getCaseData(callback) {
 	$.getJSON(`http://localhost:8080/cases/all/${localStorage.getItem('token')}`, callback);
 }
@@ -64,13 +42,14 @@ function renderCases(CASES) {
 		<h3>${item.name}</h3>
 		<p>Number of tasks: ${item.tasks.length}</p>
 		<p>Date created: ${item.dateCreated}</p>
+		<p>ID: ${item._id}</p>
 		<button name="go-to-case" value="${item._id}">Go to case </button>
 		</div>`);
 	});
 }
 
 function goToCase(CASES) {
-	// attach the click event of button to body
+	// attach button click event to body
 	$("body").on("click", "button", function() {
 		console.log($(this).val());
 		window.location.href = `task.html?caseId=${$(this).val()}`;
@@ -78,6 +57,7 @@ function goToCase(CASES) {
 }
 getCaseData(renderCases);
 goToCase();
-// window.onload = getCaseData(createCaseTable); // calling REST returns an object/JSON
+// window.onload = getCaseData(createCaseTable); 
+// calling REST returns an object/JSON
 // get status code
 // curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"

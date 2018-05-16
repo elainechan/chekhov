@@ -9,7 +9,18 @@ function getTaskData(callback) {
 	$.getJSON(`http://localhost:8080/tasks/all/${localStorage.getItem('token')}`, callback);
 }
 
-// make new .html page for getTasksByCaseId
+// TODO: make new .html page for getTasksByCaseId
+
+function renderTasks(TASKS) {
+	console.log(TASKS);
+	TASKS.forEach((item, i) => {
+		$('#tasks').append(`
+		<div class="task-item">
+		<h3>${item.name}</h3>
+		<p>${item.description}</p>
+		</div>`);
+	});
+}
 
 function createTaskTable(TASKS) {
 	// creates table
@@ -40,4 +51,4 @@ function createTaskTable(TASKS) {
 		document.getElementById('task-table').appendChild(taskRow); // appends each row to table
 	});
 }
-window.onload = getTaskData(createTaskTable);
+window.onload = getTaskData(renderTasks);
