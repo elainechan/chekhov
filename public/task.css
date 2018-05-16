@@ -1,4 +1,4 @@
-.case-item {
+.task-item {
 	background-color: #ccccff;
 	color: black;
 	margin: 10px;
@@ -7,13 +7,13 @@
 	height: 300px;
 }
 
-#cases {
+#tasks {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: left;
 }
 
-.case-item h3 {
+.task-item h3 {
 	text-align: center;
 	font-family: sans-serif;
 }
