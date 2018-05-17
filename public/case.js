@@ -13,7 +13,7 @@ function renderCases(CASES) {
 		<p>Number of tasks: ${item.tasks.length}</p>
 		<p>Date created: ${item.dateCreated}</p>
 		<p>ID: ${item._id}</p>
-		<button name="go-to-case" value="${item._id}">Go to case </button>
+		<button name="go-to-case" value="${item._id}">Go to case</button>
 		</div>`);
 	});
 }

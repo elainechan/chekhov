@@ -6,11 +6,11 @@ var url = new URL(url_string);
 var caseId = url.searchParams.get("caseId");
 console.log(caseId);
 
-function getTaskData(callback) { // (3) calls endpoint to get data (calling backend)
+function getTasksByCase(callback) { // (3) calls endpoint to get data (calling backend)
 	$.getJSON(`http://localhost:8080/tasks/case/${caseId}/${localStorage.getItem('token')}`, callback);
 }
 
-function renderTasks(TASKS) { // (4) renders data in browser
+function renderTasksByCase(TASKS) { // (4) renders data in browser
 	console.log(TASKS);
 	if (TASKS.length === 0) {
 		$('#tasks').append(`
@@ -27,4 +27,4 @@ function renderTasks(TASKS) { // (4) renders data in browser
 	}); // renders data
 }
 
-getTaskData(renderTasks);
+getTasksByCase(renderTasksByCase);
