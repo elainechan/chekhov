@@ -12,7 +12,7 @@ function getTasksByClient(callback) {
 function renderTasksByClient(TASKS) {
 	console.log(TASKS);
 	if (TASKS.length === 0) {
-		console.log('No data to display')
+		console.log('No data to display');
 		$('#tasks').append(`<h3>No data to display</h3>`);
 	}
 

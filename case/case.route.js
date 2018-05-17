@@ -20,6 +20,8 @@ router.get('/:id/:token', common.verifyToken, caseController.getCaseById);
 
 router.get('/:id/tasks/:token', common.verifyToken, caseController.getCaseTasksById);
 
+router.get('/client/:token', common.verifyToken, caseController.getCaseByClient);
+
 router.post('/:token', common.verifyToken, caseController.postNewCase);
 
 module.exports = router;
