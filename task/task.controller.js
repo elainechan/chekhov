@@ -50,7 +50,7 @@ exports.getTasksByClientId = (req, res) => {
 exports.getTasksByCaseId = (req, res) => {
   Task
   .find({caseId: req.params.id})
-  .populate('caseId')
+  .populate('caseId') 
   .exec((err, data) => {
 	  if (err) {
 		console.log(err);
