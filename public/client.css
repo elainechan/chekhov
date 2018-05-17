@@ -1,6 +1,19 @@
 .client-item {
-	background-color: red;
-	color: white;
+	background-color: #ccccff;
+	color: black;
 	margin: 10px;
 	padding: 10px;
+	width: 20%;
+	height: 300px;
+}
+
+#clients {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+}
+
+.client-item h3 {
+	text-align: center;
+	font-family: sans-serif;
 }

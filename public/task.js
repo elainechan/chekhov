@@ -1,10 +1,5 @@
 'use strict';
 
-var url_string = window.location.href;
-var url = new URL(url_string);
-var caseId = url.searchParams.get("caseId");
-console.log(caseId);
-
 function getTaskData(callback) {
 	$.getJSON(`http://localhost:8080/tasks/all/${localStorage.getItem('token')}`, callback);
 }
@@ -17,7 +12,9 @@ function renderTasks(TASKS) {
 		$('#tasks').append(`
 		<div class="task-item">
 		<h3>${item.name}</h3>
-		<p>${item.description}</p>
+		<p>Description: ${item.description}</p>
+		<p>ID: ${item._id}</p>
+		<p>Case ID: ${item.caseId}</p>
 		</div>`);
 	});
 }
