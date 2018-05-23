@@ -30,6 +30,7 @@ exports.getCaseByClient = (req, res) => {
     console.log(aCase);
   });
 }
+
 exports.postNewCase = (req, res) => {
 	const requiredFields = ['name'];
 	console.log(req.body.name);

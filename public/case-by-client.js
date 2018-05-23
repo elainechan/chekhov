@@ -2,6 +2,11 @@ import { getCaseByClient } from "../case/case.controller";
 
 'use strict';
 
+var url_string = window.location.href;
+var url = new URL(url_string);
+var clientId = url.searchParams.get("clientId");
+console.log(clientId);
+
 function getCasesByClient(callback) {
 	$.getJSON(`http://localhost:8080/case/client/${clientId}/${localStorage.getItem('token')}`, callback)
 }

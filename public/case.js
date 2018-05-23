@@ -14,7 +14,7 @@ function renderCases(CASES) {
 		<p>Date created: ${item.dateCreated}</p>
 		<p>ID: ${item._id}</p>
 		<button id="go-to-case-tasks" name="go-to-case-tasks" value="${item._id}">Go to case</button>
-		<button id="go-to-case-client" name="go-to-case-client" value="${item._id}">Go to client</button>
+		<button id="go-to-case-client" name="go-to-case-client" value="${item.clientId}">Go to client</button>
 		</div>`);
 	});
 }
