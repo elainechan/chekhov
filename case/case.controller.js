@@ -25,6 +25,12 @@ exports.getCaseTasksById = (req, res) => {
   });
 }
 
+exports.getCaseByClient = (req, res) => {
+  Case.find({ clientId: req.params.clientId }, function(err, aCase) {
+    console.log(aCase);
+  });
+}
+
 exports.postNewCase = (req, res) => {
 	const requiredFields = ['name'];
 	console.log(req.body.name);

@@ -13,20 +13,28 @@ function renderCases(CASES) {
 		<p>Number of tasks: ${item.tasks.length}</p>
 		<p>Date created: ${item.dateCreated}</p>
 		<p>ID: ${item._id}</p>
-		<button name="go-to-case" value="${item._id}">Go to case </button>
+		<button id="go-to-case-tasks" name="go-to-case-tasks" value="${item._id}">Go to case</button>
+		<button id="go-to-case-client" name="go-to-case-client" value="${item.clientId}">Go to client</button>
 		</div>`);
 	});
 }
 
 function goToCaseTasks(CASES) {
 	// attach button click event to body
-	$("body").on("click", "button", function() {
+	$("body").on("click", "#go-to-case-tasks", function() {
 		console.log($(this).val());
 		window.location.href = `task-by-case.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
 	});
 }
+
+function goToClientCase(CASES) {
+	$("body").on("click", "#go-to-case-client", function() {
+		window.location.href = `case-by-client.html?clientId=${$(this).val()}`;
+	});
+}
 getCaseData(renderCases);
 goToCaseTasks();
+goToClientCase();
 
 // calling REST returns an object/JSON
 // get status code
