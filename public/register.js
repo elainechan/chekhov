@@ -1,6 +1,6 @@
 'use strict';
 console.log("register.js is working");
-$('form').submit(event => {
+$('button').click(event => {
 	event.preventDefault();
 	let email = $('.email').val();
 	let password = $('.password').val();

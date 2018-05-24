@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
-.login-form {
+.register-form {
 	margin: auto;
     padding: 20px;
 	background: #bdb8b87a;
@@ -40,6 +40,6 @@ h3 {
 	font-size: 32px;
 }
 html {
-	background: url("../assets/login-background.png") no-repeat center center fixed;
+	background: url("../assets/register-background.jpg") no-repeat center center fixed;
 	background-size: cover;
 }
