@@ -41,4 +41,12 @@ function renderCasesInTab(CASES) {
 }
 
 getTaskData(renderTasksInTab);
+/*
+get data to fit inside box
+*/
+
 getCaseData(renderCasesInTab);
+/*
+failed to load
+no access control allow origin header present on the request resource
+*/
