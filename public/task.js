@@ -7,10 +7,9 @@ function getTaskData(callback) {
 // TODO: make new .html page for getTasksByCaseId
 
 function renderTasks(TASKS) {
-	console.log(TASKS);
 	TASKS.forEach((item, i) => {
 		$('#tasks').append(`
-		<div class="task-item task-list">
+		<div class="task-list task-item">
 		<div>
 		<h3>${item.name}</h3>
 		</div>
