@@ -32,10 +32,26 @@ function goToClientCase(CASES) {
 		window.location.href = `case-by-client.html?clientId=${$(this).val()}`;
 	});
 }
+
+function toggleListView() {
+	// step 1: get click listener
+		$(".list-button").on("click", function() {
+			// remove one class and add another
+			$(".case-item").removeClass("case-card").addClass("case-list");
+		});
+	}
+
+function toggleCardView() {
+	$(".card-button").on("click", function() {
+		// remove one class and add another
+		$(".case-item").removeClass("case-list").addClass("case-card");
+	});
+}
 getCaseData(renderCases);
 goToCaseTasks();
 goToClientCase();
-
+toggleListView();
+toggleCardView();
 // calling REST returns an object/JSON
 // get status code
 // curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"
