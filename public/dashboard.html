@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chekhov</title>
+	<title>Chekhov</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <link rel="stylesheet" href="./dashboard.css">
 </head>
 <body>
+	<header>
+	<h1>Chekhov</h1>
+	<nav class="top-nav">
+		<ul>
+			<li><a href="./dashboard.html">Dashboard</a></li>
+			<li><a href="./case.html">Cases</a></li>
+			<li><a href="./task.html">Tasks</a></li>
+			<li><a href="./client.html">Clients</a></li>
+		</ul>
+	</nav>
+	</header>
   <section class="tabbed-area">
-    <div class="tabs">
-		<div class="tab">
-		<input type="radio" id="tab-1" name="tab-group-1" checked>
-		<label for="tab-1">Tasks</label>
-		<div class="tasks content" id="tasks-content">
-		</div>	
-		</div>
+			<div id="tabs">
+					<ul>
+						<li><a href="#tasks-content">Tasks</a></li>
+						<li><a href="#cases-content">Cases</a></li>
+						<li><a href="#clients-content">Clients</a></li>
+					</ul>
+					<div id="tasks-content">
 
-		<div class="tab">
-		<input type="radio" id="tab-2" name="tab-group-1">
-		<label for="tab-2">Cases</label>
-		<div class="cases content" id="cases-content">
-		</div>	
-		</div>
-
-		<div class="tab">
-		<input type="radio" id="tab-3" name="tab-group-1">
-		<label for="tab-3">Clients</label>
-		<div class="clients content">
-			Clients content
-		</div>	
-		</div>
-	</div>
+					</div>
+					<div id="cases-content">
+					</div>
+					<div id="clients-content">
+						
+					</div>
+				</div>
   </section>
   <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./dashboard.js"></script>
 </body>
 </html>
