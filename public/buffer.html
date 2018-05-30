@@ -1,0 +1,56 @@
+<section class="tabbed-area">
+		
+		<div class="tabs">
+			<div class="tab">
+			<input type="radio" id="tab-1" name="tab-group-1" checked>
+			<label for="tab-1">Tasks</label>
+			<div class="tasks content" id="tasks-content">
+			</div>	
+			</div>
+	
+			<div class="tab">
+			<input type="radio" id="tab-2" name="tab-group-1">
+			<label for="tab-2">Cases</label>
+			<div class="cases content" id="cases-content">
+			</div>	
+			</div>
+	
+			<div class="tab">
+			<input type="radio" id="tab-3" name="tab-group-1">
+			<label for="tab-3">Clients</label>
+			<div class="clients content">
+				Clients content
+			</div>	
+			</div>
+		  </div>
+	  </section>
+	  <style>
+		  [type=radio]:checked ~ label {
+	border-bottom: 1px solid white;
+	z-index: 2;
+}
+[type=radio]:checked ~ label ~ .content {
+	z-index: 1;
+}
+.tab label {
+	background: #eee;
+	padding: 10px;
+	border: 1px solid #ddd;
+	margin-left: -1px;
+	position: relative;
+	left: 1px;
+}
+.tab [type=radio] {
+	display: none;
+}
+.content {
+	position: absolute;
+	top: 28px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 20px;
+	border: 2px solid gray;
+	background: white;
+}
+	  </style>

@@ -22,7 +22,7 @@ function renderTasksInTab(TASKS) {
 }
 
 function getCaseData(callback) {
-	$.getJSON(`http://localhost.8080/cases/all/${localStorage.getItem('token')}`, callback);
+	$.getJSON(`http://localhost:8080/cases/all/${localStorage.getItem('token')}`, callback);
 }
 
 function renderCasesInTab(CASES) {
@@ -40,6 +40,23 @@ function renderCasesInTab(CASES) {
 	});
 }
 
+function getClientData(callback) {
+	$.getJSON(`http://localhost:8080/clients/all/${localStorage.getItem('token')}`, callback);
+}
+
+function renderClients(CLIENTS) {
+	console.log(CLIENTS);
+	CLIENTS.forEach((item, i) => {
+		$('#clients-content').append(`
+		<div class="client-item">
+		<h3>${item.name}</h3>
+		<p>Address: ${item.address}</p>
+		<p>ID: ${item._id}</p>
+		<button name="go-to-client" value="${item._id}">Go to client</button>
+		</div>`);
+	});
+}
+
 getTaskData(renderTasksInTab);
 /*
 get data to fit inside box
@@ -50,3 +67,5 @@ getCaseData(renderCasesInTab);
 failed to load
 no access control allow origin header present on the request resource
 */
+getClientData(renderClients);
+$( "#tabs" ).tabs();

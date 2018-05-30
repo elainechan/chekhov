@@ -26,12 +26,15 @@
 	height: 300px;
 }
 .case-list { 
-	display: flex;
+	display: block;
 	background-color: #ccccff;
 	color: black;
 	margin: 10px;
 	padding: 10px;
 	width: 100%;
+}
+.case-list h3 {
+	text-align: left;
 }
 .views-nav {
     text-align: right;
@@ -47,4 +50,10 @@
 .views-nav i:hover {
 	background: #fafafa;
 	cursor: pointer;
+}
+#go-to-case-tasks {
+	height: 20px;
+}
+#go-to-case-client {
+	height: 20px;
 }
