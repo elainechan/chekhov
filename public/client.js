@@ -9,7 +9,6 @@ function renderClients(CLIENTS) {
 		<div class="client-item">
 		<h3>${item.name}</h3>
 		<p>Address: ${item.address}</p>
-		<p>ID: ${item._id}</p>
 		<button name="go-to-client" value="${item._id}">Go to client</button>
 		</div>`);
 	});

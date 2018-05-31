@@ -17,9 +17,6 @@ function renderTasks(TASKS) {
 		<p>Description: ${item.description}</p>
 		</div>
 		<div>
-		<p>ID: ${item._id}</p>
-		</div>
-		<div>
 		<p>Case ID: ${item.caseId}</p>
 		</div>
 		</div>`);

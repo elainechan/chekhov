@@ -12,14 +12,13 @@ function renderCases(CASES) {
 		<h3>${item.name}</h3>
 		<p>Number of tasks: ${item.tasks.length}</p>
 		<p>Date created: ${item.dateCreated}</p>
-		<p>ID: ${item._id}</p>
 		<button id="go-to-case-tasks" name="go-to-case-tasks" value="${item._id}">Go to case</button>
 		<button id="go-to-case-client" name="go-to-case-client" value="${item.clientId}">Go to client</button>
 		</div>`);
 	});
 }
 
-function goToCaseTasks(CASES) {
+function goToCaseTasksListener(CASES) {
 	// attach button click event to body
 	$("body").on("click", "#go-to-case-tasks", function() {
 		console.log($(this).val());
@@ -27,7 +26,7 @@ function goToCaseTasks(CASES) {
 	});
 }
 
-function goToClientCase(CASES) {
+function goToClientCaseListener(CASES) {
 	$("body").on("click", "#go-to-case-client", function() {
 		window.location.href = `case-by-client.html?clientId=${$(this).val()}`;
 	});
@@ -48,8 +47,8 @@ function toggleCardView() {
 	});
 }
 getCaseData(renderCases);
-goToCaseTasks();
-goToClientCase();
+goToCaseTasksListener();
+goToClientCaseListener();
 toggleListView();
 toggleCardView();
 // calling REST returns an object/JSON

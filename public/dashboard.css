@@ -7,17 +7,40 @@
 .tab {
 	float: left;
 }
+.top-nav {
+	margin-right: 20px;
+}
 .top-nav li {
 	display: inline-block;
 	list-style: none;
-	border: 1px solid gray;
 	padding: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	margin-top: 10px;
+}
+.top-nav li a {
+	color: white;
+}
+.top-nav li:hover {
+	background: gray;
+}
+.tabbed-area {
+	margin-top: 76px;
 }
 h1 {
 	float: left;
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
 }
-
+.top-logo {
+	margin-left: 20px;
+}
 header {
 	display: flex;
+	position: fixed;
+	background: black;
 	justify-content: space-between;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
 }
