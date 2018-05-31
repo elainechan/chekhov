@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 .tabs {
 	position: relative;
 	min-height: 200px;
@@ -19,6 +22,7 @@
 }
 .top-nav li a {
 	color: white;
+	font-size: 1.4em;
 }
 .top-nav li:hover {
 	background: gray;
@@ -43,4 +47,14 @@ header {
 	top: 0;
 	left: 0;
 	z-index: 1;
+}
+p {
+	font-family: 'Roboto', sans-serif;
+}
+#tabs ul li a {
+	font-family: 'Ubuntu', sans-serif;
+}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+	font-family: 'Ubuntu', sans-serif;    font-size: 1em;
+    height: 25px;
 }
