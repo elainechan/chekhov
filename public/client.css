@@ -7,6 +7,11 @@
 	height: 300px;
 }
 
+.client-item {
+	overflow: hidden;
+	white-space: initial;
+}
+
 #clients {
 	display: flex;
 	flex-wrap: wrap;

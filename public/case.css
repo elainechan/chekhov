@@ -6,6 +6,11 @@
 	width: 20%;
 	height: 300px;
 }
+.case-item p {
+
+	white-space: initial;
+	overflow: hidden;
+}
 
 #cases {
 	display: flex;

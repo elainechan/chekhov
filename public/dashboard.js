@@ -57,15 +57,23 @@ function renderClients(CLIENTS) {
 	});
 }
 
-getTaskData(renderTasksInTab);
-/*
-get data to fit inside box
-*/
+function goToCaseTasksListener(CASES) {
+	// attach button click event to body
+	$("body").on("click", "#go-to-case-tasks", function() {
+		console.log($(this).val());
+		window.location.href = `task-by-case.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
+	});
+}
 
+function goToClientCaseListener(CASES) {
+	$("body").on("click", "#go-to-case-client", function() {
+		window.location.href = `case-by-client.html?clientId=${$(this).val()}`;
+	});
+}
+
+getTaskData(renderTasksInTab);
 getCaseData(renderCasesInTab);
-/*
-failed to load
-no access control allow origin header present on the request resource
-*/
 getClientData(renderClients);
 $( "#tabs" ).tabs();
+goToCaseTasksListener();
+goToClientCaseListener();
