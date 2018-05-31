@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
 .case-item {
-	background-color: #ccccff;
+	background-color: #ccffff;
 	color: black;
 	margin: 10px;
 	padding: 10px;
@@ -7,7 +9,6 @@
 	height: 300px;
 }
 .case-item p {
-
 	white-space: initial;
 	overflow: hidden;
 }
@@ -23,7 +24,6 @@
 	font-family: sans-serif;
 }
 .case-card {
-	background-color: #ccccff;
 	color: black;
 	margin: 10px;
 	padding: 10px;
@@ -32,7 +32,6 @@
 }
 .case-list { 
 	display: block;
-	background-color: #ccccff;
 	color: black;
 	margin: 10px;
 	padding: 10px;
@@ -56,9 +55,14 @@
 	background: #fafafa;
 	cursor: pointer;
 }
-#go-to-case-tasks {
-	height: 20px;
+button {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
+	height: 25px;
 }
-#go-to-case-client {
-	height: 20px;
+button:hover {
+	cursor: pointer;
+}
+p {
+	font-family: 'Roboto', sans-serif;
 }

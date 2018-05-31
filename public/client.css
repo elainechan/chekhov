@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
 .client-item {
-	background-color: #ccccff;
+	background-color: #ffffcc;
 	color: black;
 	margin: 10px;
 	padding: 10px;
@@ -21,4 +24,17 @@
 .client-item h3 {
 	text-align: center;
 	font-family: sans-serif;
+}
+
+p {
+	font-family: 'Roboto', sans-serif;
+}
+
+button {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;	
+	height: 25px;
+}
+button:hover {
+	cursor: pointer;
 }
