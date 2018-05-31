@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
 .task-item {
 	background-color: #ccffcc;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);	
+}
+.task-item:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 .task-card {
 	color: black;
@@ -38,4 +44,44 @@
 .views-nav i:hover {
 	background: #fafafa;
 	cursor: pointer;
+}
+main {
+	margin-top: 90px;
+}
+
+/* top nav*/
+.top-nav {
+	margin-right: 20px;
+}
+.top-nav li {
+	display: inline-block;
+	list-style: none;
+	padding: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	margin-top: 10px;
+}
+.top-nav li a {
+	color: white;
+	font-size: 1.4em;
+}
+.top-nav li:hover {
+	background: gray;
+}
+h1 {
+	float: left;
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
+}
+.top-logo {
+	margin-left: 20px;
+}
+header {
+	display: flex;
+	position: fixed;
+	background: black;
+	justify-content: space-between;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
 }
