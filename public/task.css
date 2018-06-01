@@ -23,6 +23,9 @@
 	text-align: center;
 	font-family: sans-serif;
 }
+.task-item:hover {
+	cursor: pointer;
+}
 .task-list { 
 	display: flex;
 	color: black;

@@ -41,3 +41,5 @@ function toggleCardView() {
 getTaskData(renderTasks);
 toggleCardView();
 toggleListView();
+$( "#tasks" ).sortable();
+$( "#tasks" ).disableSelection();
