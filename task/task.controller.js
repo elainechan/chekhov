@@ -71,3 +71,24 @@ exports.getTasksByUserId = (req, res) => {
 	  return res.send(data);
 	})
 }
+
+exports.editTaskName = (req, res) => {
+  /*
+  talk to mongodb
+  .save data in Task.name
+  */
+ Task.findByIdAndUpdate(id, {name:'Jason Bourne'})
+ .then((result) => {
+  // update database here
+  res.status(200).json({
+    message: 'Changes have been saved.',
+    data: result
+  })
+ })
+ .catch((err) => {
+  res.status(500).json({
+    message: 'Something happened while finding task by ID.',
+    data: err
+  })
+ });
+}

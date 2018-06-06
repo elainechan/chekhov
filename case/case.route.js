@@ -7,13 +7,6 @@ const Case = require("./case.model");
 const caseController = require('./case.controller');
 const common = require('../common/token.verification');
 
-router.get('/', (req, res, next) => {
-	Case.find()
-	.select('task _id')
-	.populate('task')
-	.exec();
-});
-
 router.get('/all/:token', common.verifyToken, caseController.getAllCases);
 
 router.get('/:id/:token', common.verifyToken, caseController.getCaseById);

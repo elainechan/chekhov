@@ -9,13 +9,6 @@ const taskController = require('./task.controller');
 
 const common = require('../common/token.verification');
 
-router.get('/', (req, res, next) => {
-	Task.find()
-	.select('case _id')
-	.populate('case')
-	.exec();
-});
-
 router.get('/all/:token', common.verifyToken, taskController.getAllTasks);
 
 router.post('/:token', common.verifyToken, taskController.postNewTask); // Adds verification
@@ -25,5 +18,11 @@ router.get('/client/:id/:token', common.verifyToken, taskController.getTasksByCl
 router.get('/case/:id/:token', common.verifyToken, taskController.getTasksByCaseId);
 
 router.get('/user/:id/:token', common.verifyToken, taskController.getTasksByUserId);
+
+router.patch('/edit/:id/name/:token', common.verifyToken, taskController.editTaskName);
+
+/*
+router.patch('edit/:id/description/:token', common.verifyToken, taskController.editTaskDescription);
+*/
 
 module.exports = router;
