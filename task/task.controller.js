@@ -77,7 +77,7 @@ exports.editTaskName = (req, res) => {
   talk to mongodb
   .save data in Task.name
   */
- Task.findByIdAndUpdate(id, {name:'Jason Bourne'})
+ Task.findByIdAndUpdate(_id, {set:{name:'Jason Bourne'}})
  .then((result) => {
   // update database here
   res.status(200).json({
@@ -87,8 +87,18 @@ exports.editTaskName = (req, res) => {
  })
  .catch((err) => {
   res.status(500).json({
-    message: 'Something happened while finding task by ID.',
+    message: 'Something happened while finding task by ID and updating.',
     data: err
   })
  });
+}
+
+exports.editTaskDescription = (req, res) => {
+  Task.findByIdAndUpdate(_id, { $set:{description: 'Doing something'}},(data) => {
+    task.description = data;
+    task.save((err, updatedTask) => {
+      if (err) return handleError(err);
+      res.send(updatedTask);
+    });
+  });
 }

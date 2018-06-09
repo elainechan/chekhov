@@ -43,7 +43,7 @@ function addTaskEditHandler() {
 		// connect to the route
 		let taskId = $(this).attr("data-id")
 		$.ajax({
-			url: `http://localhost:8080/tasks/edit/${taskId}/${localStorage.getItem('token')}`,
+			url: `http://localhost:8080/task/edit/${taskId}/${localStorage.getItem('token')}`,
 			data: {
 				name: e.target.value
 			},
@@ -53,10 +53,10 @@ function addTaskEditHandler() {
 				console.log(anything);
 			}
 		});
-		$('body').on('blur', '#task-description-input', (e) => {
-			console.log(e.target.value);
-		});
+	$('body').on('blur', '#task-description-input', (e) => {
+		console.log(e.target.value);
 	});
+});
 }
 
 /*

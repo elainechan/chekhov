@@ -21,8 +21,6 @@ router.get('/user/:id/:token', common.verifyToken, taskController.getTasksByUser
 
 router.patch('/edit/:id/name/:token', common.verifyToken, taskController.editTaskName);
 
-/*
 router.patch('edit/:id/description/:token', common.verifyToken, taskController.editTaskDescription);
-*/
 
 module.exports = router;
