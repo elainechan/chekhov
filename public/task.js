@@ -58,6 +58,7 @@ function addTaskDescriptionEditHandler() {
 	$('body').on('blur', '#task-description-input', (e) => {
 		console.log(e.target.value);
 		let taskId = $(e.target).attr('data-id');
+		console.log(taskId);
 		let data = JSON.stringify({ description: e.target.value });
 		$.ajax({
 			url: `http://localhost:8080/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
