@@ -11,5 +11,3 @@ function createCaseSelection(CASES) {
 	}));
 }
 window.onload = getCaseData(createCaseSelection); // calling REST returns an object/JSON
-
-function createNewTask() {}

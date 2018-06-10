@@ -73,11 +73,7 @@ exports.getTasksByUserId = (req, res) => {
 }
 
 exports.editTaskName = (req, res) => {
-  /*
-  talk to mongodb
-  .save data in Task.name
-  */
- Task.findByIdAndUpdate(_id, {set:{name:'Jason Bourne'}})
+  Task.findByIdAndUpdate(req.params.id, { $set:{name: req.body.name } })
  .then((result) => {
   // update database here
   res.status(200).json({
@@ -89,16 +85,22 @@ exports.editTaskName = (req, res) => {
   res.status(500).json({
     message: 'Something happened while finding task by ID and updating.',
     data: err
-  })
+  });
  });
 }
 
 exports.editTaskDescription = (req, res) => {
-  Task.findByIdAndUpdate(_id, { $set:{description: 'Doing something'}},(data) => {
-    task.description = data;
-    task.save((err, updatedTask) => {
-      if (err) return handleError(err);
-      res.send(updatedTask);
+  Task.findByIdAndUpdate(req.params.id, { $set:{description: req.body.description} })
+  .then((result) => {
+    res.status(200).json({
+      message: 'Changes have been saved.',
+      data: result
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      message: 'Something happened while finding task by ID and updating.',
+      data: err
     });
   });
 }
