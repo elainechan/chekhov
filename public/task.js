@@ -14,9 +14,9 @@ function renderTasks(TASKS) {
 		<input id="task-name-input" data-id="${item._id}" value="${item.name}" />
 		</div>
 		<div>
-		<input id="task-description-input" value="${item.description}" />
+		<input id="task-description-input" data-id="${item._id}" value="${item.description}"  />
 		<div>
-		<p>Case ID: ${item.caseId}</p>
+		<p>Case ID: ${item.case_id}</p>
 		</div>
 		</div>`);
 	});
@@ -37,40 +37,45 @@ function toggleCardView() {
 	});
 }
 
-function addTaskEditHandler() {
+function addTaskNameEditHandler() {
 	$('body').on('blur', '#task-name-input', (e) => {
 		console.log(e.target.value);
-		// connect to the route
-		let taskId = $(this).attr("data-id")
+		let taskId = $(e.target).attr('data-id');
+		let data = JSON.stringify({ name: e.target.value });
 		$.ajax({
-			url: `http://localhost:8080/task/edit/${taskId}/${localStorage.getItem('token')}`,
-			data: {
-				name: e.target.value
-			},
+			url: `http://localhost:8080/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
+			data: data,
 			type: 'PATCH',
 			contentType: 'application/json',
-			success: (anything) => {
-				console.log(anything);
+			success: (content) => {
+				console.log(content);
 			}
 		});
-	$('body').on('blur', '#task-description-input', (e) => {
-		console.log(e.target.value);
 	});
-});
 }
 
-/*
-access database from here
+function addTaskDescriptionEditHandler() {
+	$('body').on('blur', '#task-description-input', (e) => {
+		console.log(e.target.value);
+		let taskId = $(e.target).attr('data-id');
+		let data = JSON.stringify({ description: e.target.value });
+		$.ajax({
+			url: `http://localhost:8080/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+	});
+}
 
-e.target.value
-mongodb .update
-data.save()
-
-*/
 
 getTaskData(renderTasks);
 toggleCardView();
 toggleListView();
 $("#tasks").sortable();
 $("#tasks").disableSelection();
-addTaskEditHandler();
+addTaskNameEditHandler();
+addTaskDescriptionEditHandler();
