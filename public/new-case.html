@@ -19,28 +19,26 @@
 				</nav>
 				</header>
 <main>
+	<h3>Create New Case</h3>
 <form class='new-case-form' action="/cases" method="post">
-	<div class="add-case">
-	Create New Case:
-	<input type="text" name="name" value="Case Name">
-	</div>
-
-	<div class="add-client">
-	<div id="add-new-client-div">
-	Create New Client:
-	<input id="add-new-client" type="text" name="client-name" value="Client Name">
-	</div>
-
-<div id="select-existing-client-div">
-		Select Existing Client:
-		<select id="select-existing-client" name="clientId"></select>
+<div class="add-case">
+	Case Name:
+	<input type="text" name="name" value="">
 </div>
+
+<div class="add-client">
+	<div id="add-new-client-div">
+	Client Name:
+	<input id="add-new-client" type="text" name="client-name" value="">
+	</div>
+
+
 </div>
 	
 </div>
 	<div class="toggle-buttons">
 	<button class="existing-client-button">Select Existing Client</button>
-	<button class="new-client-button">Create New Client</button>
+	<button class="new-client-button" style="display: none;">Create New Client</button>
 </div>
 <div class="submit-button">
 		<input type="submit" value="Submit" id="submit-case">
