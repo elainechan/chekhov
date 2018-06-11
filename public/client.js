@@ -21,5 +21,29 @@ function goToClientTasks(CLIENTS) {
 	});
 }
 
+function toggleListView() {
+	// step 1: get click listener
+		$(".list-button").on("click", function() {
+			// remove one class and add another
+			$(".client-item").removeClass("client-card").addClass("client-list");
+		});
+	}
+
+function toggleCardView() {
+	$(".card-button").on("click", function () {
+		// remove one class and add another
+		$(".client-item").removeClass("client-list").addClass("client-card");
+	});
+}
+
+function linkToAddNewClient() {
+	$('.new-client-button').click(
+		window.location = 'http://localhost:8080/new-client.html'
+	);
+}
+
 getClientData(renderClients); 
 goToClientTasks();
+toggleListView();
+toggleCardView();
+linkToAddNewClient();

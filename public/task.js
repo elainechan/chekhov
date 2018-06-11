@@ -10,12 +10,13 @@ function renderTasks(TASKS) {
 	TASKS.forEach((item, i) => {
 		$('#tasks').append(`
 		<div class="task-list task-item">
-		<div>
-		<input id="task-name-input" data-id="${item._id}" value="${item.name}" />
+		<div class="task-name-div">
+		<input class="task-name" id="task-name-input" data-id="${item._id}" value="${item.name}" />
 		</div>
-		<div>
-		<input id="task-description-input" data-id="${item._id}" value="${item.description}"  />
-		<div>
+		<div class="task-description-div">
+		<textarea class="task-description" id="task-description-input" data-id="${item._id}">${item.description}</textarea>
+		</div>
+		<div class="task-case-div">
 		<p>Case ID: ${item.case_id}</p>
 		</div>
 		</div>`);
@@ -52,13 +53,32 @@ function addTaskNameEditHandler() {
 			}
 		});
 	});
+	$('#task-name-input').keypress((e) => {
+		if (e.keyCode === 13) {
+			event.preventDefault();
+			console.log(e.target.value);
+		let taskId = $(e.target).attr('data-id');
+		let data = JSON.stringify({ name: e.target.value });
+		$.ajax({
+			url: `http://localhost:8080/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+		}
+	});
 }
 
 function addTaskDescriptionEditHandler() {
 	$('body').on('blur', '#task-description-input', (e) => {
-		console.log(e.target.value);
 		let taskId = $(e.target).attr('data-id');
-		let data = JSON.stringify({ description: e.target.value });
+		console.log(taskId);
+		let value = $(e.target).val();
+		console.log(value);
+		let data = JSON.stringify({ description: value });
 		$.ajax({
 			url: `http://localhost:8080/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
 			data: data,
@@ -69,8 +89,49 @@ function addTaskDescriptionEditHandler() {
 			}
 		});
 	});
+	$('#task-description-input').keypress((e) => {
+		if (e.keyCode === 13) {
+			console.log('description entered');
+		let taskId = $(e.target).attr('data-id');
+		console.log(taskId);
+		let value = $(e.target).val()
+		let data = JSON.stringify({ description: value });
+		$.ajax({
+			url: `http://localhost:8080/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+		}
+	});
+	$('#text-description-input').bind('keypress', (e) => {
+		if (e.keyCode === 13) {
+			console.log('description entered');
+		let taskId = $(e.target).attr('data-id');
+		console.log(taskId);
+		let value = $(e.target).val()
+		let data = JSON.stringify({ description: value });
+		$.ajax({
+			url: `http://localhost:8080/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+		}
+	});
 }
 
+function linkToAddNewTask() {
+	$('.new-task-button').click(() => {
+		window.location = 'http://localhost:8080/new-task.html';
+	});
+}
 
 getTaskData(renderTasks);
 toggleCardView();
@@ -79,3 +140,4 @@ $("#tasks").sortable();
 $("#tasks").disableSelection();
 addTaskNameEditHandler();
 addTaskDescriptionEditHandler();
+linkToAddNewTask();
