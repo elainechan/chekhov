@@ -37,6 +37,9 @@ header {
 	z-index: 1;
 }
 
+h3 {
+	font-family: 'Roboto', sans-serif;
+}
 main {
 	margin-top: 120px;
 	font-family: 'Roboto', sans-serif;

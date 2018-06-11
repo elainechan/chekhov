@@ -12,6 +12,7 @@ function getTasksByCase(callback) { // (3) calls endpoint to get data (calling b
 
 function renderTasksByCase(TASKS) { // (4) renders data in browser
 	console.log(TASKS);
+	$('#case-title').text(`ID: ${caseId}`)
 	if (TASKS.length === 0) {
 		$('#tasks').append(`
 		<h3>No data to display</h3>`);
