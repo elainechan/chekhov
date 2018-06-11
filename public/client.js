@@ -37,10 +37,13 @@ function toggleCardView() {
 }
 
 function linkToAddNewClient() {
-	$('.new-client-button').click(
+	$('.new-client-button').click((e) => {
+		e.preventDefault();
 		window.location = 'http://localhost:8080/new-client.html'
-	);
+	});
 }
+
+// TODO: display cases
 
 getClientData(renderClients); 
 goToClientTasks();
