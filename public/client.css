@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 .client-item {
-	background-color: #ffffcc;
-	color: black;
+	background-color: #30fedf;
+	color: white;
 	margin: 10px;
 	padding: 10px;
 	width: 20%;
@@ -81,4 +81,38 @@ header {
 	top: 0;
 	left: 0;
 	z-index: 1;
+}
+
+/* views nav */
+.views-nav {
+    text-align: right;
+    margin-right: 30px;
+}
+.views-nav i {
+	color: gray;
+    background: #e5e5e5;
+    padding: 8px;
+    font-size: 20px;
+    border: 2px solid grey;
+}
+.views-nav i:hover {
+	background: #fafafa;
+	cursor: pointer;
+}
+.client-card {
+	color: white;
+	margin: 10px;
+	padding: 10px;
+	width: 20%;
+	height: 300px;
+}
+.client-list { 
+	display: block;
+	color: white;
+	margin: 10px;
+	padding: 10px;
+	width: 100%;
+}
+.client-list h3 {
+	text-align: left;
 }

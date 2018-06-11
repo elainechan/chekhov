@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+/* top nav*/
+.top-nav {
+	margin-right: 20px;
+}
+.top-nav li {
+	display: inline-block;
+	list-style: none;
+	padding: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	margin-top: 10px;
+}
+.top-nav li a {
+	color: white;
+	font-size: 1.4em;
+}
+.top-nav li:hover {
+	background: gray;
+}
+h1 {
+	float: left;
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
+}
+.top-logo {
+	margin-left: 20px;
+}
+header {
+	display: flex;
+	position: fixed;
+	background: black;
+	justify-content: space-between;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+.new-case-form {
+    margin-top: 120px;
+}

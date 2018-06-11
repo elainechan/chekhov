@@ -46,11 +46,19 @@ function toggleCardView() {
 		$(".case-item").removeClass("case-list").addClass("case-card");
 	});
 }
+
+function linkToAddNewCase() {
+	$('.new-case-button').click(() => {
+		window.location = 'http://localhost:8080/new-case.html';
+	});
+}
+
 getCaseData(renderCases);
 goToCaseTasksListener();
 goToClientCaseListener();
 toggleListView();
 toggleCardView();
+linkToAddNewCase();
 // calling REST returns an object/JSON
 // get status code
 // curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"

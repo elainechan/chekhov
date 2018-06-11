@@ -127,6 +127,11 @@ function addTaskDescriptionEditHandler() {
 	});
 }
 
+function linkToAddNewTask() {
+	$('.new-task-button').click(() => {
+		window.location = 'http://localhost:8080/new-task.html';
+	});
+}
 
 getTaskData(renderTasks);
 toggleCardView();
@@ -135,3 +140,4 @@ $("#tasks").sortable();
 $("#tasks").disableSelection();
 addTaskNameEditHandler();
 addTaskDescriptionEditHandler();
+linkToAddNewTask();
