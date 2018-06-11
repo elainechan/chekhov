@@ -15,6 +15,17 @@ function createClientSelection(CLIENTS) {
 	}));
 }
 
+function renderSelectExistingClient() {
+	$('.add-client').append(`
+	<div id="select-existing-client-div" style="display: none;">
+	Select Existing Client:
+	<select id="select-existing-client" name="clientId">
+	</select>
+	</div>
+	`);
+	getClientData(createClientSelection);
+}
+
 function toggleCreateNewClient() {
 	$('.new-client-button').click((e) => {
 		e.preventDefault();
@@ -34,6 +45,6 @@ function toggleSelectExistingClient() {
 	});
 }
 
-getClientData(createClientSelection);
 toggleCreateNewClient();
 toggleSelectExistingClient();
+renderSelectExistingClient();
