@@ -3,6 +3,9 @@
 function getTaskData(callback) {
 	$.getJSON(`http://localhost:8080/tasks/all/${localStorage.getItem('token')}`, callback);
 }
+function getCaseData(callback) {
+	$.getJSON(`http://localhost:8080/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
+}
 
 // TODO: make new .html page for getTasksByCaseId
 
@@ -18,6 +21,9 @@ function renderTasks(TASKS) {
 		</div>
 		<div class="task-case-div">
 		<p>Case ID: ${item.case_id}</p>
+		</div>
+		<div class="go-to-case">
+		<button id="go-to-case-tasks" value="${item.case_id}">Go to case</button>
 		</div>
 		</div>`);
 	});
@@ -133,6 +139,14 @@ function linkToAddNewTask() {
 	});
 }
 
+function goToCaseTasksListener(CASES) {
+	// attach button click event to body
+	$("body").on("click", "#go-to-case-tasks", function() {
+		console.log($(this).val());
+		window.location.href = `task-by-case.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
+	});
+}
+
 getTaskData(renderTasks);
 toggleCardView();
 toggleListView();
@@ -141,3 +155,4 @@ $("#tasks").disableSelection();
 addTaskNameEditHandler();
 addTaskDescriptionEditHandler();
 linkToAddNewTask();
+goToCaseTasksListener(getCaseData);
