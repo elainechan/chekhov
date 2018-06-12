@@ -45,6 +45,22 @@ function toggleSelectExistingClient() {
 	});
 }
 
+function postNewCase() {
+	$('#submit-case').click((e) => {
+		e.preventDefault();
+		/* configure the json of request */
+		console.log($('.case-name').val);
+		caseObj = $({
+			name: $('.case-name').val
+		});
+		/*
+		$.ajax({
+			url: `http://localhost:8080/cases/${localStorage.getItem('token')}`,
+			data: 
+		});*/
+	});
+}
+
 toggleCreateNewClient();
 toggleSelectExistingClient();
 renderSelectExistingClient();
