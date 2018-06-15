@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 .client-item {
-	background-color: #30fedf;
+	background-color: #8630fe;
 	color: white;
 	margin: 10px;
 	padding: 10px;
@@ -44,6 +44,7 @@ button:hover {
 }
 main {
 	margin-top: 90px;
+	font-family: 'Roboto', sans-serif;
 }
 
 /* top nav*/
