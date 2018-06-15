@@ -60,6 +60,7 @@ function addTaskNameEditHandler() {
 		});
 	});
 	$('#task-name-input').keypress((e) => {
+		debugger
 		if (e.keyCode === 13) {
 			event.preventDefault();
 			console.log(e.target.value);
@@ -95,15 +96,18 @@ function addTaskDescriptionEditHandler() {
 			}
 		});
 	});
-	$('#task-description-input').keypress((e) => {
+}
+
+function postOnEnter() {
+	$('body').on('keypress', '#task-name-input', (e) => {
 		if (e.keyCode === 13) {
-			console.log('description entered');
+			console.log('name entered');
 		let taskId = $(e.target).attr('data-id');
 		console.log(taskId);
 		let value = $(e.target).val()
-		let data = JSON.stringify({ description: value });
+		let data = JSON.stringify({ name: value });
 		$.ajax({
-			url: `http://localhost:8080/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
+			url: `http://localhost:8080/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
 			data: data,
 			type: 'PATCH',
 			contentType: 'application/json',
@@ -113,7 +117,7 @@ function addTaskDescriptionEditHandler() {
 		});
 		}
 	});
-	$('#text-description-input').bind('keypress', (e) => {
+	$('body').on('keypress', '#task-description-input', (e) => {
 		if (e.keyCode === 13) {
 			console.log('description entered');
 		let taskId = $(e.target).attr('data-id');
@@ -156,3 +160,4 @@ addTaskNameEditHandler();
 addTaskDescriptionEditHandler();
 linkToAddNewTask();
 goToCaseTasksListener(getCaseData);
+postOnEnter();

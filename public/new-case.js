@@ -49,18 +49,23 @@ function postNewCase() {
 	$('#submit-case').click((e) => {
 		e.preventDefault();
 		/* configure the json of request */
-		console.log($('.case-name').val);
-		caseObj = $({
-			name: $('.case-name').val
-		});
-		/*
+		console.log($('.case-name').val());
+		let caseObj = {
+			name: $('.case-name').val()
+		};
 		$.ajax({
 			url: `http://localhost:8080/cases/${localStorage.getItem('token')}`,
-			data: 
-		});*/
+			data: JSON.stringify(caseObj),
+			type: 'POST',
+			contentType: 'application/json',
+			succes: (content) => {
+				console.log('New case posted');
+			}
+		});
 	});
 }
 
 toggleCreateNewClient();
 toggleSelectExistingClient();
 renderSelectExistingClient();
+postNewCase();

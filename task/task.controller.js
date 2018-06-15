@@ -18,7 +18,8 @@ exports.postNewTask = (req, res) => {
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`;
       console.error(message);
-      return res.status(400).send(message);
+      res.status(400).send(message);
+      return;
     }
   });
   Task.create({ 
@@ -29,7 +30,10 @@ exports.postNewTask = (req, res) => {
     description: req.body.description,
     dateCreated: new Date()
   }, (err, data) => {
-    if (err) return handleError(err);
+    if (err) { 
+      handleError(err);
+      return; 
+    }
     res.status(201).json(data);
     console.log(data);
   });

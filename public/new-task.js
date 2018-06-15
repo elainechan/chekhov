@@ -10,4 +10,26 @@ function createCaseSelection(CASES) {
 		$("#case-selection").append(`<option value="${data._id}">${data.name}</option>`);
 	}));
 }
-window.onload = getCaseData(createCaseSelection); // calling REST returns an object/JSON
+
+function postNewTask() {
+	$('#submit-task').click((e) => {
+		e.preventDefault();
+		/* configure the json of request */
+		console.log($('#task-name').val());
+		let taskObj = {
+			name: $('#task-name').val()
+		};
+		$.ajax({
+			url: `http://localhost:8080/tasks/${localStorage.getItem('token')}`,
+			data: JSON.stringify(taskObj),
+			type: 'POST',
+			contentType: 'application/json',
+			succes: (content) => {
+				console.log('New task posted');
+			}
+		});
+	});
+}
+
+getCaseData(createCaseSelection); // calling REST returns an object/JSON
+postNewTask();
