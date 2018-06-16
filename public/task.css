@@ -41,6 +41,7 @@ input {
 	border: none;
 	background: #304FFE;
 	color: white;
+	font-size: 16px;
 }
 textarea {
 	outline: none;
@@ -48,16 +49,24 @@ textarea {
 	resize: none;
 	background: #304FFE;
 	color: white;
+	font-size: 16px;
 }
 ::placeholder {
-	color: white;
+	color: #bdbdbd;
 }
 .task-name {
 	font-size: 24px;
 }
-.task-description {
+select {
 	font-size: 16px;
+	background: #304FFE;
+	color: #bdbdbd;
+	border: none;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
 }
+
 
 /* views navigation buttons */
 .views-nav {
@@ -116,20 +125,8 @@ header {
 	left: 0;
 	z-index: 1;
 }
-.case-button {
-	margin: 0 10px 0 10px;
-	background: #BDBDBD;
-	color: white;
-	font-family: 'Ubuntu', sans-serif;
-	font-size: 1em;
-	height: 40px;
-	width: 100px;
-	transition: background-color .3s;
-	border: none;
-	border-radius: 2px;
-  	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-}
 button {
+	padding: 10px;
 	background: #BDBDBD;
 	color: white;
 	font-family: 'Ubuntu', sans-serif;
