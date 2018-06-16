@@ -20,14 +20,20 @@ function renderTasks(TASKS) {
 		<textarea class="task-description" id="task-description-input" data-id="${item._id}">${item.description}</textarea>
 		</div>
 		<div class="task-case-div">
-		<p>Case ID: ${item.case_id}</p>
 		</div>
 		<div class="go-to-case">
 		<button class="case-button" id="go-to-case-tasks" value="${item.case_id}">Go to case</button>
 		</div>
 		</div>`);
 	});
+	getCaseData(renderCaseName);
 }
+
+function renderCaseName(CASES) {
+	CASES.forEach((item, i) => {
+		$('.task-case-div').html(`${item.name}`)
+	});
+} 
 
 function toggleListView() {
 	// step 1: get click listener
@@ -45,7 +51,9 @@ function toggleCardView() {
 }
 
 function editTaskName() {
-	$('body').on('blur', '#task-name-input', (e) => {
+	$('body')
+	.not('.new')
+	.on('blur', '#task-name-input', (e) => {
 		console.log(e.target.value);
 		let taskId = $(e.target).attr('data-id');
 		let data = JSON.stringify({ name: e.target.value });
@@ -59,28 +67,12 @@ function editTaskName() {
 			}
 		});
 	});
-	$('#task-name-input').keypress((e) => {
-		debugger
-		if (e.keyCode === 13) {
-			event.preventDefault();
-			console.log(e.target.value);
-		let taskId = $(e.target).attr('data-id');
-		let data = JSON.stringify({ name: e.target.value });
-		$.ajax({
-			url: `http://localhost:8080/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
-			data: data,
-			type: 'PATCH',
-			contentType: 'application/json',
-			success: (content) => {
-				console.log(content);
-			}
-		});
-		}
-	});
 }
 
 function editTaskDescription() {
-	$('body').on('blur', '#task-description-input', (e) => {
+	$('body')
+	.not('.new')
+	.on('blur', '#task-description-input', (e) => {
 		let taskId = $(e.target).attr('data-id');
 		console.log(taskId);
 		let value = $(e.target).val();
@@ -98,8 +90,10 @@ function editTaskDescription() {
 	});
 }
 
-function postOnEnter() {
-	$('body').on('keypress', '#task-name-input', (e) => {
+function patchOnEnter() {
+	$('body')
+	.not('.new')
+	.on('keypress', '#task-name-input', (e) => {
 		if (e.keyCode === 13) {
 			console.log('name entered');
 		let taskId = $(e.target).attr('data-id');
@@ -117,7 +111,9 @@ function postOnEnter() {
 		});
 		}
 	});
-	$('body').on('keypress', '#task-description-input', (e) => {
+	$('body')
+	.not('.new')
+	.on('keypress', '#task-description-input', (e) => {
 		if (e.keyCode === 13) {
 			console.log('description entered');
 		let taskId = $(e.target).attr('data-id');
@@ -157,17 +153,17 @@ function addNewTask() {
 		// value
 		if ($('.task-item').hasClass('task-list')) {
 			$('#tasks').prepend(
-				`<div class="task-item task-list">
+				`<div class="new task-item task-list">
 				<div class="task-name-div">
 				<input class="task-name" id="task-name-input" placeholder="Name" data-id="" value="" />
 				</div>
 				<div class="task-description-div">
 				<textarea class="task-description" id="task-description-input" placeholder="Description" data-id=""></textarea>
 				</div>
-				<div id="case-selection-div" style="display:none;">
+				<div class="case-selection-div" style="display:none;">
 				<select id="select-existing-case"></select>
 				</div>
-				<div id="new-case-div">
+				<div class="new-case-div">
 				<input placeholder="Case name">
 				</div>
 				<div class="toggle-buttons">
@@ -209,8 +205,8 @@ function createCaseSelection(CASES) {
 function toggleCreateNewCase() {
 	$('body').on('click', '.new-case-button', (e) => {
 		e.preventDefault();
-		$('#new-case-div').show();
-		$('#case-selection-div').hide();
+		$('.new-case-div').show();
+		$('.case-selection-div').hide();
 		$('.new-case-button').hide();
 		$('.existing-case-button').show();
 	});
@@ -218,8 +214,8 @@ function toggleCreateNewCase() {
 function toggleSelectExistingCase() {
 	$('body').on('click','.existing-case-button',(e) => {
 		e.preventDefault();
-		$('#new-case-div').hide();
-		$('#case-selection-div').show();
+		$('.new-case-div').hide();
+		$('.case-selection-div').show();
 		$('.new-case-button').show();
 		$('.existing-case-button').hide();
 	});
@@ -234,7 +230,7 @@ function goToCaseTasks(CASES) {
 }
 
 function postNewTask() {
-	$('#submit-task').click((e) => {
+	$('body').on('click','#submit-task',(e) => {
 		e.preventDefault();
 		/* configure the json of request */
 		console.log($('#task-name').val());
@@ -250,6 +246,16 @@ function postNewTask() {
 				console.log('New task posted');
 			}
 		});
+		$('.new.task-item').removeClass('new');
+		$('.new-case-div').remove();
+		$('.case-selection-div').remove();
+		$('.toggle-buttons').remove();
+		$('#submit-task').remove();
+	});
+}
+function printCases(CASES) {
+	CASES.forEach((item, i) => {
+		console.log(item);
 	});
 }
 
@@ -261,8 +267,10 @@ $("#tasks").disableSelection();
 editTaskName();
 editTaskDescription();
 addNewTask();
-goToCaseTasks(getCaseData);
-postOnEnter();
+//goToCaseTasks(getCaseData);
+getCaseData(goToCaseTasks);
+patchOnEnter();
 toggleCreateNewCase();
 toggleSelectExistingCase();
 postNewTask();
+getCaseData(printCases);

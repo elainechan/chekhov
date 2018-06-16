@@ -14,7 +14,6 @@
 	margin: 10px;
 	padding: 10px;
 	width: 20%;
-	height: 300px;
 }
 #tasks {
 	display: flex;
@@ -25,14 +24,13 @@
 	text-align: center;
 	/*font-family: 'Roboto', sans-serif;*/
 }
-.task-item p {
-	/*font-family: 'Roboto', sans-serif;*/
-}
 .task-item:hover {
 	cursor: pointer;
 }
 .task-list { 
 	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	color: white;
 	margin: 10px;
 	padding: 10px;
@@ -59,11 +57,6 @@ textarea {
 }
 .task-description {
 	font-size: 16px;
-}
-
-/* attempt to display list item inline */
-.task-list:first-child {
-	display: inline-block;
 }
 
 /* views navigation buttons */
@@ -124,6 +117,7 @@ header {
 	z-index: 1;
 }
 .case-button {
+	margin: 0 10px 0 10px;
 	background: #BDBDBD;
 	color: white;
 	font-family: 'Ubuntu', sans-serif;
