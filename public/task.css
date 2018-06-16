@@ -123,13 +123,23 @@ header {
 	left: 0;
 	z-index: 1;
 }
-button {
+.case-button {
 	background: #BDBDBD;
 	color: white;
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 1em;
 	height: 40px;
 	width: 100px;
+	transition: background-color .3s;
+	border: none;
+	border-radius: 2px;
+  	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+button {
+	background: #BDBDBD;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
 	transition: background-color .3s;
 	border: none;
 	border-radius: 2px;
