@@ -23,7 +23,7 @@ function renderTasks(TASKS) {
 		<p>Case ID: ${item.case_id}</p>
 		</div>
 		<div class="go-to-case">
-		<button id="go-to-case-tasks" value="${item.case_id}">Go to case</button>
+		<button class="case-button" id="go-to-case-tasks" value="${item.case_id}">Go to case</button>
 		</div>
 		</div>`);
 	});
@@ -44,7 +44,7 @@ function toggleCardView() {
 	});
 }
 
-function addTaskNameEditHandler() {
+function editTaskName() {
 	$('body').on('blur', '#task-name-input', (e) => {
 		console.log(e.target.value);
 		let taskId = $(e.target).attr('data-id');
@@ -79,7 +79,7 @@ function addTaskNameEditHandler() {
 	});
 }
 
-function addTaskDescriptionEditHandler() {
+function editTaskDescription() {
 	$('body').on('blur', '#task-description-input', (e) => {
 		let taskId = $(e.target).attr('data-id');
 		console.log(taskId);
@@ -137,17 +137,119 @@ function postOnEnter() {
 	});
 }
 
-function linkToAddNewTask() {
+function addNewTask() {
+	/*
 	$('.new-task-button').click(() => {
 		window.location = 'http://localhost:8080/new-task.html';
 	});
+	*/
+	$('.new-task-button').click(() => {
+		// TODO: fill in
+		// # task-name-input
+		// data-id
+		// value
+		// #task-description-input
+		// data-id
+		// item description
+		// .task-case-div
+		// case id
+		// #go-to-case-tasks
+		// value
+		if ($('.task-item').hasClass('task-list')) {
+			$('#tasks').prepend(
+				`<div class="task-item task-list">
+				<div class="task-name-div">
+				<input class="task-name" id="task-name-input" placeholder="Name" data-id="" value="" />
+				</div>
+				<div class="task-description-div">
+				<textarea class="task-description" id="task-description-input" placeholder="Description" data-id=""></textarea>
+				</div>
+				<div id="case-selection-div" style="display:none;">
+				<select id="select-existing-case"></select>
+				</div>
+				<div id="new-case-div">
+				<input placeholder="Case name">
+				</div>
+				<div class="toggle-buttons">
+				<button class="existing-case-button">Select Existing Case</button>
+				<button class="new-case-button" style="display:none;">Create New Case</button>
+				</div>
+				<button class="submit-button" id="submit-task">Submit</button>
+				</div>`
+			);
+		} else if (($('.task-item').hasClass('task-card'))) {
+			$('#tasks').prepend(
+				`<div class="task-item task-card">
+				<div class="task-name-div">
+				<input class="task-name" id="task-name-input" data-id="" value="" />
+				</div>
+				<div class="task-description-div">
+				<textarea class="task-description" id="task-description-input" data-id=""></textarea>
+				</div>
+				<div class="task-case-div">
+				<p>Case ID:</p>
+				</div>
+				<div class="go-to-case">
+				<button id="go-to-case-tasks" value="">Go to case</button>
+				</div>
+				</div>`
+			);
+		}
+		getCaseData(createCaseSelection);
+	});
 }
 
-function goToCaseTasksListener(CASES) {
+function createCaseSelection(CASES) {
+	console.log(CASES);
+	CASES.forEach((data => {
+		$("#select-existing-case").append(`<option value="${data._id}">${data.name}</option>`);
+	}));
+}
+
+function toggleCreateNewCase() {
+	$('body').on('click', '.new-case-button', (e) => {
+		e.preventDefault();
+		$('#new-case-div').show();
+		$('#case-selection-div').hide();
+		$('.new-case-button').hide();
+		$('.existing-case-button').show();
+	});
+}
+function toggleSelectExistingCase() {
+	$('body').on('click','.existing-case-button',(e) => {
+		e.preventDefault();
+		$('#new-case-div').hide();
+		$('#case-selection-div').show();
+		$('.new-case-button').show();
+		$('.existing-case-button').hide();
+	});
+}
+
+function goToCaseTasks(CASES) {
 	// attach button click event to body
 	$("body").on("click", "#go-to-case-tasks", function() {
 		console.log($(this).val());
 		window.location.href = `task-by-case.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
+	});
+}
+
+function postNewTask() {
+	$('#submit-task').click((e) => {
+		e.preventDefault();
+		/* configure the json of request */
+		console.log($('#task-name').val());
+		let taskObj = {
+			name: $('#task-name').val()
+		};
+		$.ajax({
+			url: `http://localhost:8080/tasks/${localStorage.getItem('token')}`,
+			data: JSON.stringify(taskObj),
+			type: 'POST',
+			contentType: 'application/json',
+			succes: (content) => {
+				console.log('New task posted');
+			}
+		});
 	});
 }
 
@@ -156,8 +258,11 @@ toggleCardView();
 toggleListView();
 $("#tasks").sortable();
 $("#tasks").disableSelection();
-addTaskNameEditHandler();
-addTaskDescriptionEditHandler();
-linkToAddNewTask();
-goToCaseTasksListener(getCaseData);
+editTaskName();
+editTaskDescription();
+addNewTask();
+goToCaseTasks(getCaseData);
 postOnEnter();
+toggleCreateNewCase();
+toggleSelectExistingCase();
+postNewTask();
