@@ -31,7 +31,7 @@ function renderTasks(TASKS) {
 
 function renderCaseName(CASES) {
 	CASES.forEach((item, i) => {
-		$('.task-case-div').html(`${item.name}`)
+		$('.task-case-div').html(`Case: ${item.name}`)
 	});
 } 
 
@@ -155,16 +155,16 @@ function addNewTask() {
 			$('#tasks').prepend(
 				`<div class="new task-item task-list">
 				<div class="task-name-div">
-				<input class="task-name" id="task-name-input" placeholder="Name" data-id="" value="" />
+				<input class="task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
 				</div>
 				<div class="task-description-div">
-				<textarea class="task-description" id="task-description-input" placeholder="Description" data-id=""></textarea>
+				<textarea class="task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
 				</div>
-				<div class="case-selection-div" style="display:none;">
+				<div class="case-selection-div mdc-select" style="display:none;">
 				<select id="select-existing-case"></select>
 				</div>
 				<div class="new-case-div">
-				<input placeholder="Case name">
+				<input placeholder="Enter new case name">
 				</div>
 				<div class="toggle-buttons">
 				<button class="existing-case-button">Select Existing Case</button>
