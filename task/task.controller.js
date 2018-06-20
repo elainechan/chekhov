@@ -3,7 +3,7 @@ const Task = require('./task.model');
 exports.getAllTasks = (req, res) => {
   Task
   .find()
-  .populate('clientId', 'name address')
+  .populate('caseId')
   .exec((err, data) => {
 	  if (err) {
 		console.log(err);

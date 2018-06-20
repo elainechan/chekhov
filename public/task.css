@@ -56,6 +56,16 @@ textarea {
 }
 .task-name {
 	font-size: 24px;
+	overflow-wrap: break-word;
+}
+.task-description {
+	overflow-wrap: break-word;
+}
+.task-list>.task-name-div>.task-name {
+	width: 300px;
+}
+.task-list>.task-description-div>.task-description {
+	width: 300px;
 }
 select {
 	font-size: 16px;

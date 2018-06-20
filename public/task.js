@@ -11,27 +11,39 @@ function getCaseData(callback) {
 
 function renderTasks(TASKS) {
 	TASKS.forEach((item, i) => {
+		if (!item.caseId) {
+			item.caseId = {
+				_id: 0,
+				name: 'No case name'
+			}
+		}
 		$('#tasks').append(`
 		<div class="task-list task-item">
 		<div class="task-name-div">
-		<input class="task-name" id="task-name-input" data-id="${item._id}" value="${item.name}" />
+		<textarea class="task-name" id="task-name-input" data-id="${item._id}" value="${item.name}">${item.name}
+		</textarea>
 		</div>
 		<div class="task-description-div">
 		<textarea class="task-description" id="task-description-input" data-id="${item._id}">${item.description}</textarea>
 		</div>
 		<div class="task-case-div">
+		${item.caseId.name}
 		</div>
 		<div class="go-to-case">
-		<button class="case-button" id="go-to-case-tasks" value="${item.case_id}">Go to case</button>
+		<button class="case-button" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Go to case</button>
 		</div>
 		</div>`);
+		//getCaseData(renderCaseName);
 	});
-	getCaseData(renderCaseName);
+	
 }
 
 function renderCaseName(CASES) {
 	CASES.forEach((item, i) => {
-		$('.task-case-div').html(`Case: ${item.name}`)
+		console.log($('.case-button').attr('data-id'));
+		if ($('.case-button').attr('value') === item._id) {
+			$('.task-case-div').html(`Case: ${item.name}`);
+		}
 	});
 } 
 
@@ -54,6 +66,9 @@ function editTaskName() {
 	$('body')
 	.not('.new')
 	.on('blur', '#task-name-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
 		console.log(e.target.value);
 		let taskId = $(e.target).attr('data-id');
 		let data = JSON.stringify({ name: e.target.value });
@@ -73,6 +88,9 @@ function editTaskDescription() {
 	$('body')
 	.not('.new')
 	.on('blur', '#task-description-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
 		let taskId = $(e.target).attr('data-id');
 		console.log(taskId);
 		let value = $(e.target).val();
@@ -92,9 +110,11 @@ function editTaskDescription() {
 
 function patchOnEnter() {
 	$('body')
-	.not('.new')
 	.on('keypress', '#task-name-input', (e) => {
-		if (e.keyCode === 13) {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		else if (e.keyCode === 13) {
 			console.log('name entered');
 		let taskId = $(e.target).attr('data-id');
 		console.log(taskId);
@@ -112,7 +132,6 @@ function patchOnEnter() {
 		}
 	});
 	$('body')
-	.not('.new')
 	.on('keypress', '#task-description-input', (e) => {
 		if (e.keyCode === 13) {
 			console.log('description entered');
@@ -139,7 +158,7 @@ function addNewTask() {
 		window.location = 'http://localhost:8080/new-task.html';
 	});
 	*/
-	$('.new-task-button').click(() => {
+	$('.new-task-button').click((e) => {
 		// TODO: fill in
 		// # task-name-input
 		// data-id
@@ -151,14 +170,18 @@ function addNewTask() {
 		// case id
 		// #go-to-case-tasks
 		// value
+
+		if ($('#tasks').length === 0) {
+		}
+		
 		if ($('.task-item').hasClass('task-list')) {
 			$('#tasks').prepend(
 				`<div class="new task-item task-list">
 				<div class="task-name-div">
-				<input class="task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
+				<input class=" new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
 				</div>
 				<div class="task-description-div">
-				<textarea class="task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
+				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
 				</div>
 				<div class="case-selection-div mdc-select" style="display:none;">
 				<select id="select-existing-case"></select>
@@ -177,10 +200,10 @@ function addNewTask() {
 			$('#tasks').prepend(
 				`<div class="task-item task-card">
 				<div class="task-name-div">
-				<input class="task-name" id="task-name-input" data-id="" value="" />
+				<input class="new task-name" id="task-name-input" data-id="" value="" />
 				</div>
 				<div class="task-description-div">
-				<textarea class="task-description" id="task-description-input" data-id=""></textarea>
+				<textarea class="new task-description" id="task-description-input" data-id=""></textarea>
 				</div>
 				<div class="task-case-div">
 				<p>Case ID:</p>
@@ -190,13 +213,34 @@ function addNewTask() {
 				</div>
 				</div>`
 			);
+		} else {
+			$('#tasks').prepend(
+				`<div class="new task-item task-list">
+				<div class="task-name-div">
+				<input class=" new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
+				</div>
+				<div class="task-description-div">
+				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
+				</div>
+				<div class="case-selection-div mdc-select" style="display:none;">
+				<select id="select-existing-case"></select>
+				</div>
+				<div class="new-case-div">
+				<input placeholder="Enter new case name">
+				</div>
+				<div class="toggle-buttons">
+				<button class="existing-case-button">Select Existing Case</button>
+				<button class="new-case-button" style="display:none;">Create New Case</button>
+				</div>
+				<button class="submit-button" id="submit-task">Submit</button>
+				</div>`
+			);
 		}
 		getCaseData(createCaseSelection);
 	});
 }
 
 function createCaseSelection(CASES) {
-	console.log(CASES);
 	CASES.forEach((data => {
 		$("#select-existing-case").append(`<option value="${data._id}">${data.name}</option>`);
 	}));
@@ -235,7 +279,9 @@ function postNewTask() {
 		/* configure the json of request */
 		console.log($('#task-name').val());
 		let taskObj = {
-			name: $('#task-name').val()
+			name: $('.task-name').val(),
+			description: $('.task-description').val(),
+			caseId: $('option:selected', this).attr('value')
 		};
 		$.ajax({
 			url: `http://localhost:8080/tasks/${localStorage.getItem('token')}`,
@@ -273,4 +319,4 @@ patchOnEnter();
 toggleCreateNewCase();
 toggleSelectExistingCase();
 postNewTask();
-getCaseData(printCases);
+// getCaseData(printCases);
