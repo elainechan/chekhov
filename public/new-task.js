@@ -1,4 +1,7 @@
 'use strict';
+// when working locally, comment out line 3, vice versa
+// const url = `http://localhost:8080`;
+const url = `http://chekhov.herokuapp.com`;
 
 function getCaseData(callback) {
 	$.getJSON(`http://localhost:8080/cases/all/${localStorage.getItem('token')}`, callback);
@@ -25,7 +28,7 @@ function postNewTask() {
 			caseId: caseIdStr
 		};
 		$.ajax({
-			url: `http://localhost:8080/tasks/${localStorage.getItem('token')}`,
+			url: `${url}/tasks/${localStorage.getItem('token')}`,
 			data: JSON.stringify(taskObj),
 			type: 'POST',
 			contentType: 'application/json',
