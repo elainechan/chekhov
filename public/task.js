@@ -1,10 +1,13 @@
 'use strict';
+// when working locally, comment out line 3, vice versa
+// const url = `http://localhost:8080`;
+const url = `http://chekhov.herokuapp.com`;
 
 function getTaskData(callback) {
-	$.getJSON(`http://localhost:8080/tasks/all/${localStorage.getItem('token')}`, callback);
+	$.getJSON(`${url}/tasks/all/${localStorage.getItem('token')}`, callback);
 }
 function getCaseData(callback) {
-	$.getJSON(`http://localhost:8080/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
+	$.getJSON(`${url}/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
 }
 
 // TODO: make new .html page for getTasksByCaseId
@@ -73,7 +76,7 @@ function editTaskName() {
 		let taskId = $(e.target).attr('data-id');
 		let data = JSON.stringify({ name: e.target.value });
 		$.ajax({
-			url: `http://localhost:8080/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
+			url: `${url}/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
 			data: data,
 			type: 'PATCH',
 			contentType: 'application/json',
@@ -97,7 +100,7 @@ function editTaskDescription() {
 		console.log(value);
 		let data = JSON.stringify({ description: value });
 		$.ajax({
-			url: `http://localhost:8080/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
+			url: `${url}/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
 			data: data,
 			type: 'PATCH',
 			contentType: 'application/json',
