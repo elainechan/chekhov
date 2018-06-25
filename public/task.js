@@ -307,6 +307,23 @@ function printCases(CASES) {
 		console.log(item);
 	});
 }
+function createNewCase() {
+	// get value from html
+		// name
+		// id will be auto created by mongo
+	// create data object
+	// do ajax call
+	$.ajax({
+		url: `/cases/${localStorage.getItem('token')}`,
+		data: JSON.stringify(taskObj),
+		type: 'POST',
+		contentType: 'application/json',
+		succes: (content) => {
+			console.log('New case posted');
+		}
+	});
+	// post to cases/
+}
 
 getTaskData(renderTasks);
 toggleCardView();
