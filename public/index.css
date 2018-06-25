@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+button {
+	padding: 10px;
+	background: #BDBDBD;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
+	transition: background-color .3s;
+	border: none;
+	border-radius: 2px;
+  	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+button:hover {
+	cursor: pointer;
+}
+body {
+	font-family: 'Roboto';
+	color: white;
+	font-size: 20px;
+}
+html {
+	background: url("../assets/index-background.jpg") no-repeat center center fixed;
+	background-size: cover;
+}
+h1 {
+	font-family: 'Ubuntu';
+	color: white;
+}
+
+/* grid */
+
+.item .header {
+	justify-content: center;
+	text-align: center;
+}
+.item .blurb {
+	justify-content: center;
+	text-align: center;
+}
+.item .buttons {
+	justify-content: center;
+	text-align: center;
+}
+
+.container {
+	display: block;
+	text-align: center;
+	justify-content: center;
+}
+

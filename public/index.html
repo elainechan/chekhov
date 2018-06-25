@@ -1,28 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Chekhov</title>
-	<link rel="stylesheet" href="./login.css">
+	<title>Chekhov Home</title>
+	<link rel="stylesheet" href="index.css">
 </head>
 <body>
-	<!--Login form-->
-	<h2>Chekhov</h2>
-	<h3>Log in</h3>
-  <form class="login-form">
-	<div>
-	<input class="email" type="email" placeholder="E-mail" name="email" value="">
-	</div>	
-	<div>
-	<input class="password" type="password" placeholder="Password" name="password" value="">
-	</div>
-	<div>
-	<button>Submit</button>
-	</div>
-</form>
-<script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous"></script>
-<script src="./login.js"></script>
+<div class="container">
+<div class="header item">
+<header>
+	<h1>Chekhov</h1>
+</header>
+</div>
+<main>
+<div class="blurb item">
+	<section>
+	<p>Chekhov is a project management application.</p>
+	<p>While a smart scheduling algorithm is under development, the standalone frontend works as a filesystem.</p>
+	</section>
+</div>
+
+<div class="buttons item">
+	<footer class="buttons">
+		<button class="register">Register</button>
+		<button class="login">Log in</button>
+		<button class="demo">Demo</button>
+	</footer>
+</div>
+</main>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="./index.js"></script>
 </body>
 </html>
