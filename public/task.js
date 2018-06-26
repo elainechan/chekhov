@@ -9,13 +9,24 @@ function getTaskData(callback) {
 function getCaseData(callback) {
 	$.getJSON(`/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
 }
-function getCaseByName(name, callback) {
+function getCaseByName(name) {
+	$.ajax({
+		url: `/cases/name/${localStorage.getItem('token')}`,
+		data: {name: name},
+		type: 'GET',
+		contentType: 'application/json',
+		success: (content) => {
+			console.log(content);
+		}
+	});
+	/*
 	$.getJSON(`/cases/name/${localStorage.getItem('token')}?name=${name}`)
 	.done((data) => {
 		$.each(data.items, (i, item) => {
 			console.log(item.name);
 		});
 	});
+	*/
 }
 function getCaseById(id, callback) {
 	$.getJSON(`cases/id/${localStorage.getItem('token')}?id=${id}`, callback);
