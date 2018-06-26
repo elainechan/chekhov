@@ -11,6 +11,8 @@ router.get('/all/:token', common.verifyToken, caseController.getAllCases);
 
 router.get('/:id/:token', common.verifyToken, caseController.getCaseById);
 
+router.get('/:name/:token', common.verifyToken, caseController.getCaseByName);
+
 router.get('/:id/tasks/:token', common.verifyToken, caseController.getCaseTasksById);
 
 router.get('/client/:token', common.verifyToken, caseController.getCaseByClient);

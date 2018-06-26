@@ -9,8 +9,17 @@ function getTaskData(callback) {
 function getCaseData(callback) {
 	$.getJSON(`/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
 }
-
-// TODO: make new .html page for getTasksByCaseId
+function getCaseByName(name, callback) {
+	$.getJSON(`/cases/name/${localStorage.getItem('token')}?name=${name}`)
+	.done((data) => {
+		$.each(data.items, (i, item) => {
+			console.log(item.name);
+		});
+	});
+}
+function getCaseById(id, callback) {
+	$.getJSON(`cases/id/${localStorage.getItem('token')}?id=${id}`, callback);
+}
 
 function renderTasks(TASKS) {
 	TASKS.forEach((item, i) => {
@@ -36,18 +45,23 @@ function renderTasks(TASKS) {
 		<button class="case-button" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Go to case</button>
 		</div>
 		</div>`);
-		//getCaseData(renderCaseName);
 	});
 	
 }
 
 function renderCaseName(CASES) {
 	CASES.forEach((item, i) => {
+		console.log(`Name: ${item.name}`);
+	});
+	
+	/*
+	CASES.forEach((item, i) => {
 		console.log($('.case-button').attr('data-id'));
 		if ($('.case-button').attr('value') === item._id) {
 			$('.task-case-div').html(`Case: ${item.name}`);
 		}
 	});
+	*/
 } 
 
 function toggleListView() {
@@ -156,11 +170,6 @@ function patchOnEnter() {
 }
 
 function addNewTask() {
-	/*
-	$('.new-task-button').click(() => {
-		window.location = 'http://localhost:8080/new-task.html';
-	});
-	*/
 	$('.new-task-button').click((e) => {
 		// TODO: fill in
 		// # task-name-input
@@ -190,7 +199,7 @@ function addNewTask() {
 				<select id="select-existing-case"></select>
 				</div>
 				<div class="new-case-div">
-				<input placeholder="Enter new case name">
+				<input class="new-case-input" placeholder="Enter new case name">
 				</div>
 				<div class="toggle-buttons">
 				<button class="existing-case-button">Select Existing Case</button>
@@ -281,17 +290,26 @@ function postNewTask() {
 		e.preventDefault();
 		/* configure the json of request */
 		console.log($('#task-name').val());
-		let taskObj = {
-			name: $('.task-name').val(),
-			description: $('.task-description').val(),
-			caseId: $('option:selected', this).attr('value')
-		};
+		if ($(".new-case-div").attr("style") === "dispay: none;") {
+			var taskObj = {
+				name: $('.task-name').val(),
+				description: $('.task-description').val(),
+				caseId: $('option:selected', this).attr('value')
+			};
+		} else {
+			postNewCase();
+			var taskObj = {
+				name: $('.task-name').val(),
+				description: $('.task-description').val()//,
+				//caseId: 
+			}
+		}
 		$.ajax({
 			url: `/tasks/${localStorage.getItem('token')}`,
 			data: JSON.stringify(taskObj),
 			type: 'POST',
 			contentType: 'application/json',
-			succes: (content) => {
+			success: (content) => {
 				console.log('New task posted');
 			}
 		});
@@ -302,27 +320,30 @@ function postNewTask() {
 		$('#submit-task').remove();
 	});
 }
-function printCases(CASES) {
-	CASES.forEach((item, i) => {
-		console.log(item);
-	});
-}
-function createNewCase() {
-	// get value from html
-		// name
-		// id will be auto created by mongo
-	// create data object
-	// do ajax call
+
+function postNewCase() {
+	let caseObj = {
+		name: $(".new-case-input").val(),
+
+	}
 	$.ajax({
 		url: `/cases/${localStorage.getItem('token')}`,
-		data: JSON.stringify(taskObj),
+		data: JSON.stringify(caseObj),
 		type: 'POST',
 		contentType: 'application/json',
-		succes: (content) => {
-			console.log('New case posted');
+		success: (content) => {
+			console.log(content);
 		}
 	});
-	// post to cases/
+	$.ajax({
+		url: `/cases/name/${localStorage.getItem('token')}`,
+		data: JSON.stringify(caseObj),
+		type: 'GET',
+		contentType: 'application/json',
+		success: (content) => {
+			console.log(content.name);
+		}
+	});
 }
 
 getTaskData(renderTasks);
@@ -339,4 +360,3 @@ patchOnEnter();
 toggleCreateNewCase();
 toggleSelectExistingCase();
 postNewTask();
-// getCaseData(printCases);
