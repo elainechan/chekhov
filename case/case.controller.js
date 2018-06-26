@@ -9,6 +9,15 @@ exports.getAllCases = (req, res) => {
 	})
 }
 
+exports.getCaseByName = (req, res) => {
+  Case.find(req.params.name).exec((err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.send(data);
+  });
+}
+
 exports.getCaseById = (req, res) => {
 	Case.findById(req.params.id).exec((err, data) => {
     if (err) {
