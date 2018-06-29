@@ -1,4 +1,5 @@
 const Task = require('./task.model');
+const Case = require('../case/case.model.js');
 
 exports.getAllTasks = (req, res) => {
   Task
@@ -11,7 +12,6 @@ exports.getAllTasks = (req, res) => {
 	  return res.send(data);
 	})
 }
-
 exports.postNewTask = (req, res) => {
 	const requiredFields = ['name']; // add later  'clientId', 'caseId', 'userId'
   requiredFields.map((field) => {
@@ -22,6 +22,41 @@ exports.postNewTask = (req, res) => {
       return;
     }
   });
+  // if case doesn't exist already
+  if (!req.body.caseId) {
+    Case.create({
+      name: req.body.caseName,
+      dateCreated: new Date(),
+      dateOpened: new Date()
+    }, (err, data) => {
+      if (err)  {
+        handleError(err);
+        return;
+      }
+      // create task in callback
+      Task.create({ 
+        name: req.body.name,
+        clientId: req.body.clientId,
+        caseId: data._id,
+        userId: req.body.userId,
+        description: req.body.description,
+        dateCreated: new Date()
+      }, (err, data) => {
+        if (err) { 
+          handleError(err);
+          return; 
+        }
+        res.status(201).json({
+          task: data,
+          caseName: req.body.caseName
+        });
+        return;
+        console.log(data);
+      }); 
+      console.log(data);
+    });
+  }
+  // if case exists
   Task.create({ 
     name: req.body.name,
     clientId: req.body.clientId,
@@ -34,11 +69,20 @@ exports.postNewTask = (req, res) => {
       handleError(err);
       return; 
     }
-    res.status(201).json(data);
-    console.log(data);
+    req.task = data; // save entire task
+    Case.findById(req.body.caseId, (err, data) => {
+      if (err) {
+        handleError(err);
+        return;
+      }
+      res.status(201).json({
+        task: req.task,
+        case: data
+      });
+      console.log(data);
+    });
   });
 }
-
 exports.getTasksByClientId = (req, res) => {
   Task
   .find({clientId: req.params.id})
@@ -50,7 +94,6 @@ exports.getTasksByClientId = (req, res) => {
 	  return res.send(data);
 	})
 }
-
 exports.getTasksByCaseId = (req, res) => {
   Task
   .find({caseId: req.params.id})
@@ -62,7 +105,6 @@ exports.getTasksByCaseId = (req, res) => {
 	  return res.send(data);
 	})
 }
-
 exports.getTasksByUserId = (req, res) => {
   Task
   .find({userId: req.params.id})
@@ -75,7 +117,6 @@ exports.getTasksByUserId = (req, res) => {
 	  return res.send(data);
 	})
 }
-
 exports.editTaskName = (req, res) => {
   Task.findByIdAndUpdate(req.params.id, { $set:{name: req.body.name } })
  .then((result) => {
@@ -92,7 +133,6 @@ exports.editTaskName = (req, res) => {
   });
  });
 }
-
 exports.editTaskDescription = (req, res) => {
   Task.findByIdAndUpdate(req.params.id, { $set:{description: req.body.description} })
   .then((result) => {

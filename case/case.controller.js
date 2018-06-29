@@ -41,7 +41,7 @@ exports.getCaseByClient = (req, res) => {
 }
 
 exports.postNewCase = (req, res) => {
-	const requiredFields = ['name'];
+  const requiredFields = ['name'];
 	console.log(req.body.name);
   requiredFields.map((field) => {
     if (!(field in req.body)) {
