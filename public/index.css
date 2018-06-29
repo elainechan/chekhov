@@ -28,6 +28,10 @@ h1 {
 	color: white;
 }
 
+ul {
+	list-style-type: none;
+}
+
 /* grid */
 
 .item .header {

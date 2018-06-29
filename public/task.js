@@ -311,8 +311,9 @@ function postNewTask() {
 			postNewCase();
 			var taskObj = {
 				name: $('.task-name').val(),
-				description: $('.task-description').val()//,
-				//caseId: 
+				description: $('.task-description').val(),
+				caseId: null,
+				caseName: $(".new-case-input").val()
 			}
 		}
 		$.ajax({
