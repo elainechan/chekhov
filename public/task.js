@@ -301,7 +301,7 @@ function postNewTask() {
 		e.preventDefault();
 		/* configure the json of request */
 		console.log($('#task-name').val());
-		if ($(".new-case-div").attr("style") === "dispay: none;") {
+		if ($(".new-case-div").attr("style") === "display: none;") {
 			var taskObj = {
 				name: $('.task-name').val(),
 				description: $('.task-description').val(),
@@ -323,13 +323,17 @@ function postNewTask() {
 			contentType: 'application/json',
 			success: (content) => {
 				console.log('New task posted');
+				$('.new.task-item')
+				.append(`<div class="task-case-div">
+				${content.case.name}
+				</div>`)
+				$('.new.task-item').removeClass('new');
+				$('.new-case-div').remove();
+				$('.case-selection-div').remove();
+				$('.toggle-buttons').remove();
+				$('#submit-task').remove();
 			}
 		});
-		$('.new.task-item').removeClass('new');
-		$('.new-case-div').remove();
-		$('.case-selection-div').remove();
-		$('.toggle-buttons').remove();
-		$('#submit-task').remove();
 	});
 }
 

@@ -1,6 +1,5 @@
 'use strict';
 const mongoose = require('mongoose');
-
 const TaskSchema = mongoose.Schema({
 	name: String,
 	description: String,
