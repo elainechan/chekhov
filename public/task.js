@@ -9,6 +9,7 @@ function getTaskData(callback) {
 function getCaseData(callback) {
 	$.getJSON(`/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
 }
+/*
 function getCaseByName(name) {
 	$.ajax({
 		url: `/cases/name/${localStorage.getItem('token')}`,
@@ -19,18 +20,12 @@ function getCaseByName(name) {
 			console.log(content);
 		}
 	});
-	/*
-	$.getJSON(`/cases/name/${localStorage.getItem('token')}?name=${name}`)
-	.done((data) => {
-		$.each(data.items, (i, item) => {
-			console.log(item.name);
-		});
-	});
-	*/
 }
+
 function getCaseById(id, callback) {
 	$.getJSON(`cases/id/${localStorage.getItem('token')}?id=${id}`, callback);
 }
+*/
 
 function renderTasks(TASKS) {
 	TASKS.forEach((item, i) => {
@@ -64,15 +59,6 @@ function renderCaseName(CASES) {
 	CASES.forEach((item, i) => {
 		console.log(`Name: ${item.name}`);
 	});
-	
-	/*
-	CASES.forEach((item, i) => {
-		console.log($('.case-button').attr('data-id'));
-		if ($('.case-button').attr('value') === item._id) {
-			$('.task-case-div').html(`Case: ${item.name}`);
-		}
-	});
-	*/
 } 
 
 function toggleListView() {
@@ -308,7 +294,6 @@ function postNewTask() {
 				caseId: $('option:selected', this).attr('value')
 			};
 		} else {
-			postNewCase();
 			var taskObj = {
 				name: $('.task-name').val(),
 				description: $('.task-description').val(),
@@ -322,10 +307,11 @@ function postNewTask() {
 			type: 'POST',
 			contentType: 'application/json',
 			success: (content) => {
+				debugger
 				console.log('New task posted');
 				$('.new.task-item')
 				.append(`<div class="task-case-div">
-				${content.case.name}
+				${content.caseName}
 				</div>`)
 				$('.new.task-item').removeClass('new');
 				$('.new-case-div').remove();

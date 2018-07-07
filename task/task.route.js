@@ -23,4 +23,6 @@ router.patch('/edit/:id/name/:token', common.verifyToken, taskController.editTas
 
 router.patch('/edit/:id/description/:token', common.verifyToken, taskController.editTaskDescription);
 
+router.get('/case/:caseId/count/:token', common.verifyToken, taskController.getNumberOfTasksByCaseId);
+
 module.exports = router;
