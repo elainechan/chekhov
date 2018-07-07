@@ -154,3 +154,16 @@ exports.editTaskDescription = (req, res) => {
     });
   });
 }
+
+exports.getNumberOfTasksByCaseId = (req, res) => {
+  // call mongoose to get task count
+  Task.count(
+    {caseId: req.params.caseId},
+    (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      return res.json({taskCount: data});
+    }
+  );
+}
