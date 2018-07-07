@@ -14,6 +14,7 @@ exports.getAllTasks = (req, res) => {
 	  return res.send(data);
 	})
 }
+
 exports.postNewTask = (req, res) => {
 	const requiredFields = ['name']; // add later  'clientId', 'caseId', 'userId'
   requiredFields.map((field) => {

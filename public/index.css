@@ -33,23 +33,33 @@ ul {
 }
 
 /* grid */
-
 .item .header {
+	grid-area: header;
 	justify-content: center;
 	text-align: center;
 }
 .item .blurb {
+	grid-area: blurb;
 	justify-content: center;
 	text-align: center;
 }
 .item .buttons {
+	grid-area: buttons;
 	justify-content: center;
 	text-align: center;
 }
-
+.item .tech {
+	grid-area: tech;
+	justify-content: center;
+	text-align: center;
+}
 .container {
-	display: block;
-	text-align: center;
-	justify-content: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-rows: auto;
+	grid-template-areas: 
+	".  header header ."
+	". blurb blurb ."
+	". buttons buttons ."
+	". tech tech .";
 }
-

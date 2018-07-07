@@ -1,6 +1,6 @@
 'use strict';
-const { scheduleByGroupOrder } = require('../schedule/schedule');
-const { TASKLIST1 } = require('../app/helpers');
+const { scheduleByGroupOrder } = require('../solver/schedule');
+const { TASKLIST1 } = require('../solver/helpers');
 const expect = require('chai').expect;
 const _ = require('lodash');
 

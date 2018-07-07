@@ -1,7 +1,7 @@
 'use strict';
 const { 
 	TASKLIST, TASKLIST1, findTasksInGroups, findSortedUniqueGroupNames, findTasksBySortedGroupOrder,findEarliestGroupOrder, findTasksByEarliestGroupOrder, findLongestIdle, findTasksWithLongestIdle, findStrongestPriority, findTasksWithStrongestPriority, findShortestLength, pickShortestTasks 
-} = require('../app/helpers');
+} = require('../solver/helpers');
 const expect = require('chai').expect;
 
 // array of task objects that belong in groups

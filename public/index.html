@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Chekhov Home</title>
-	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="./index.css">
 </head>
 <body>
 <div class="container">
@@ -11,6 +11,7 @@
 	<h1>Chekhov</h1>
 </header>
 </div>
+
 <main>
 <div class="blurb item">
 	<section class="intro">
@@ -18,15 +19,18 @@
 	<p>Chekhov is a project management application.</p>
 	<p>While a smart scheduling algorithm is under development, the standalone frontend works as a filesystem.</p>
 	</section>
-	<section class="documentation">
-	<h3>Tech Stack</h3>
-	<ul>
-		<li>Node backend</li>
-		<li>MongoDB database</li>
-		<li>Heroku hosting</li>
-	</ul>
-	</section>
-</div>
+</div><!--blurb item-->
+
+<div class="tech item">
+		<section>
+				<h3>Tech Stack</h3>
+				<ul>
+					<li>Node.js backend</li>
+					<li>MongoDB database</li>
+					<li>Heroku hosting</li>
+				</ul>
+		</section>
+</div><!--blurb item-->
 
 <div class="buttons item">
 	<footer class="buttons">
@@ -34,9 +38,9 @@
 		<button class="login">Log in</button>
 		<button class="demo">Demo</button>
 	</footer>
-</div>
+</div><!--buttons item-->
 </main>
-</div>
+</div><!--container-->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="./index.js"></script>
 </body>
