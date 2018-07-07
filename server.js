@@ -40,6 +40,18 @@ function runServer(databaseUrl, port=PORT) {
     });
   });
 }
+
+function closeServer() {
+  return new Promise((resolve, reject) => {
+    console.log("Closing server...");
+    server.close((err) => {
+      if (err) {
+        reject(err);
+      }
+      resolve();
+    });
+  });
+}
 // If module is distributed, prevents external sources from accessing database
 if (require.main === module) { // separates db concerns if planning to distribute module
   console.log('Called directly');
@@ -47,3 +59,5 @@ if (require.main === module) { // separates db concerns if planning to distribut
 } else {
   console.log('Required as a module');
 }
+
+module.exports = {app, closeServer, runServer};
