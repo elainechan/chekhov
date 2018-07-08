@@ -6,26 +6,10 @@
 function getTaskData(callback) {
 	$.getJSON(`/tasks/all/${localStorage.getItem('token')}`, callback);
 }
+
 function getCaseData(callback) {
 	$.getJSON(`/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
 }
-/*
-function getCaseByName(name) {
-	$.ajax({
-		url: `/cases/name/${localStorage.getItem('token')}`,
-		data: {name: name},
-		type: 'GET',
-		contentType: 'application/json',
-		success: (content) => {
-			console.log(content);
-		}
-	});
-}
-
-function getCaseById(id, callback) {
-	$.getJSON(`cases/id/${localStorage.getItem('token')}?id=${id}`, callback);
-}
-*/
 
 function renderTasks(TASKS) {
 	TASKS.forEach((item, i) => {
@@ -50,9 +34,29 @@ function renderTasks(TASKS) {
 		<div class="go-to-case">
 		<button class="case-button" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Go to case</button>
 		</div>
+		<button class="delete-task" data-id=${item._id}>Delete task</button>
 		</div>`);
 	});
 	
+}
+
+function deleteTask() {
+	$('body').on( 'click', '.delete-task', (e) => {
+		e.preventDefault;
+		let taskId = $('.delete-task').attr('data-id');
+		let element = e;
+		$.ajax({
+			context: e.target,
+			url: `/tasks/delete/${taskId}/${localStorage.getItem('token')}`,
+			type: 'DELETE',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+				window.location.reload();
+			}
+		});
+		
+	});
 }
 
 function renderCaseName(CASES) {
@@ -307,7 +311,6 @@ function postNewTask() {
 			type: 'POST',
 			contentType: 'application/json',
 			success: (content) => {
-				debugger
 				console.log('New task posted');
 				$('.new.task-item')
 				.append(`<div class="task-case-div">
@@ -362,3 +365,4 @@ patchOnEnter();
 toggleCreateNewCase();
 toggleSelectExistingCase();
 postNewTask();
+deleteTask();
