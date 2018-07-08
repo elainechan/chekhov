@@ -168,3 +168,16 @@ exports.getNumberOfTasksByCaseId = (req, res) => {
     }
   );
 }
+
+exports.deleteTaskById = (req, res) => {
+  Task.findByIdAndRemove(req.params.id, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.status(201).json({
+      message: "Task has been deleted.",
+      data: data
+  });
+
+  });
+}
