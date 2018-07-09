@@ -52,7 +52,7 @@ function deleteTask() {
 			contentType: 'application/json',
 			success: (content) => {
 				console.log(content);
-				window.location.reload();
+				// window.location.reload();
 			}
 		});
 		
@@ -172,18 +172,6 @@ function patchOnEnter() {
 
 function addNewTask() {
 	$('.new-task-button').click((e) => {
-		// TODO: fill in
-		// # task-name-input
-		// data-id
-		// value
-		// #task-description-input
-		// data-id
-		// item description
-		// .task-case-div
-		// case id
-		// #go-to-case-tasks
-		// value
-
 		if ($('#tasks').length === 0) {
 		}
 		
