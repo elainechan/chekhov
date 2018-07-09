@@ -9,7 +9,7 @@
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 .case-item:hover {
-	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
 }
 .case-item p {
 	white-space: initial;
@@ -69,8 +69,8 @@ button {
 	transition: background-color .3s;
 	border: none;
 	border-radius: 2px;
-	  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-	  margin: 10px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+	margin: 10px;
 }
 button:hover {
 	cursor: pointer;
@@ -118,4 +118,11 @@ header {
 	top: 0;
 	left: 0;
 	z-index: 1;
+}
+input.new.case-name {
+	outline: none;
+	border: none;
+	background: #fe5c30;
+	color: white;
+	font-size: 20px;
 }

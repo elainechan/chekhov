@@ -11,7 +11,7 @@ function renderCases(CASES) {
 		let myRegex = /(.*)\ GMT/;
 		let match = myRegex.exec(dateDisplay);
 		$('#cases').append(`
-		<div class="case-item">
+		<div class="case-item case-card">
 		<h3>${item.name}</h3>
 		<p>Date created: ${match[1]}</p>
 		<button id="go-to-case-tasks" name="go-to-case-tasks" value="${item._id}">Go to case</button>
@@ -39,6 +39,32 @@ function deleteCase() {
 		
 	});
 }
+
+function addNewCase() {
+	$('.new-case-button').click((e) => {
+		e.preventDefault;
+		if ($('.case-item').hasClass('case-list')) {
+			$('#cases').prepend(
+				`<div class="new case-item case-list">
+				<div class="case-name-div">
+				<input class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" value="" />
+				</div>
+				<button class="submit-button" id="submit-task">Submit</button>
+				</div>`
+			);
+		} else if (($('.case-item').hasClass('case-card'))) {
+			$('#cases').prepend(
+				`<div class="new case-item case-card">
+				<div class="case-name-div">
+				<input class=" new case-name" id="case-name-input" placeholder="Enter name" data-id="" value="" />
+				</div>
+				<button class="submit-button" id="submit-task">Submit</button>
+				</div>`
+			);
+		}
+	});
+}
+
 
 function goToCaseTasksListener(CASES) {
 	// attach button click event to body
@@ -80,8 +106,9 @@ goToCaseTasksListener();
 goToClientCaseListener();
 toggleListView();
 toggleCardView();
-linkToAddNewCase();
+//linkToAddNewCase();
 deleteCase();
+addNewCase();
 // calling REST returns an object/JSON
 // get status code
 // curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"
