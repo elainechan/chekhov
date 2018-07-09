@@ -4,28 +4,238 @@
 var url_string = window.location.href;
 var url = new URL(url_string);
 var caseId = url.searchParams.get("caseId");
-console.log(caseId);
+var caseName;
 
 function getTasksByCase(callback) { // (3) calls endpoint to get data (calling backend)
 	$.getJSON(`http://localhost:8080/tasks/case/${caseId}/${localStorage.getItem('token')}`, callback);
 }
 
 function renderTasksByCase(TASKS) { // (4) renders data in browser
-	console.log(TASKS);
-	$('#case-title').text(`ID: ${caseId}`)
+	$.ajax({
+		url: `cases/${caseId}/${localStorage.getItem('token')}`,
+		type: 'GET',
+		contentType: 'application/json',
+		success: (content) => {
+			// case name: content.name
+			caseName = content.name;
+			$('.title').append(`<h2>Case Profile: ${content.name}</h2>`)
+		}
+	});
 	if (TASKS.length === 0) {
 		$('#tasks').append(`
 		<h3>No data to display</h3>`);
 	} // renders if no data present in response
 	TASKS.forEach((item, i) => {
 		$('#tasks').append(`
-		<div class="task-item">
-		<h3>${item.name}</h3>
-		<p>Description: ${item.description}</p>
-		<p>ID: ${item._id}</p>
-		<p>Case ID: ${item.caseId}</p>
+		<div class="task-list task-item">
+		<div class="task-name-div">
+		<textarea class="task-name" id="task-name-input" data-id="${item._id}" value="${item.name}">${item.name}
+		</textarea>
+		</div>
+		<div class="task-description-div">
+		<textarea class="task-description" id="task-description-input" data-id="${item._id}">${item.description}</textarea>
+		</div>
+		<div class="task-case-div">
+		${item.caseId.name}
+		</div>
+		<button class="delete-task" data-id=${item._id}>Delete task</button>
 		</div>`);
 	}); // renders data
 }
 
+function toggleListView() {
+	// step 1: get click listener
+	$(".list-button").on("click", function () {
+		// remove one class and add another
+		$(".task-item").removeClass("task-card").addClass("task-list");
+	});
+}
+
+function toggleCardView() {
+	$(".card-button").on("click", function () {
+		// remove one class and add another
+		$(".task-item").removeClass("task-list").addClass("task-card");
+	});
+}
+
+function editTaskName() {
+	$('body')
+	.not('.new')
+	.on('blur', '#task-name-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		console.log(e.target.value);
+		let taskId = $(e.target).attr('data-id');
+		let data = JSON.stringify({ name: e.target.value });
+		$.ajax({
+			url: `/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+	});
+}
+
+function editTaskDescription() {
+	$('body')
+	.not('.new')
+	.on('blur', '#task-description-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		let taskId = $(e.target).attr('data-id');
+		console.log(taskId);
+		let value = $(e.target).val();
+		console.log(value);
+		let data = JSON.stringify({ description: value });
+		$.ajax({
+			url: `/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+	});
+}
+
+function patchOnEnter() {
+	$('body')
+	.on('keypress', '#task-name-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		else if (e.keyCode === 13) {
+			console.log('name entered');
+		let taskId = $(e.target).attr('data-id');
+		console.log(taskId);
+		let value = $(e.target).val()
+		let data = JSON.stringify({ name: value });
+		$.ajax({
+			url: `/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+		}
+	});
+	$('body')
+	.on('keypress', '#task-description-input', (e) => {
+		if (e.keyCode === 13) {
+			console.log('description entered');
+		let taskId = $(e.target).attr('data-id');
+		console.log(taskId);
+		let value = $(e.target).val()
+		let data = JSON.stringify({ description: value });
+		$.ajax({
+			url: `/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+		}
+	});
+}
+
+function addNewTask() {
+	$('.new-task-button').click((e) => {
+		if ($('.task-item').hasClass('task-list')) {
+			$('#tasks').prepend(
+			`<div class="new task-item task-list">
+			<div class="task-name-div">
+			<input class=" new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
+			</div>
+			<div class="task-description-div">
+			<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
+			</div>
+			<div class="task-case-div" data-id="${caseId}">${caseName}
+			</div>
+			<button class="submit-button" id="submit-task">Submit</button>
+			</div>`
+			);
+		} else if (($('.task-item').hasClass('task-card'))) {
+			$('#tasks').prepend(
+				`<div class="new task-item task-card">
+				<div class="task-name-div">
+				<input class=" new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
+				</div>
+				<div class="task-description-div">
+				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
+				</div>
+				<div class="task-case-div" data-id="${caseId}">${caseName}
+			</div>
+				<button class="submit-button" id="submit-task">Submit</button>
+				</div>`
+			);
+		} else {
+			$('#tasks').prepend(
+				`<div class="new task-item task-list">
+				<div class="task-name-div">
+				<input class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
+				</div>
+				<div class="task-description-div">
+				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
+				</div>
+				<div class="task-case-div" data-id="${caseId}">${caseName}
+			</div>
+				<button class="submit-button" id="submit-task">Submit</button>
+				</div>`
+			);
+		}
+	});
+}
+
+function postNewTask() {
+	$('body').on('click','#submit-task',(e) => {
+		e.preventDefault();
+		/* configure the json of request */
+		console.log($('.task-name').val());
+			var taskObj = {
+				name: $('.task-name').val(),
+				description: $('.task-description').val(),
+				caseId: caseId
+			};
+			$.ajax({
+				url: `/tasks/${localStorage.getItem('token')}`,
+				data: JSON.stringify(taskObj),
+				type: 'POST',
+				contentType: 'application/json',
+				success: (content) => {
+					console.log('New task posted');
+					$('.new.task-item')
+					.append(`<div class="task-case-div">
+					${content.case.name}
+					</div>
+					<button class="delete-task" data-id=${content.task._id}>Delete task</button>
+					</div>`);
+					$('.new.task-item').removeClass('new');
+					$('.new-case-div').remove();
+					$('.case-selection-div').remove();
+					$('.toggle-buttons').remove();
+					$('#submit-task').remove();
+				}
+			});
+	});
+}
+
 getTasksByCase(renderTasksByCase);
+toggleCardView();
+toggleListView();
+editTaskName();
+editTaskDescription();
+patchOnEnter();
+addNewTask();
+postNewTask();
+$("#tasks").sortable();
+$("#tasks").disableSelection();

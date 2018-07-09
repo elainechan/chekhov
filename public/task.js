@@ -28,7 +28,7 @@ function renderTasks(TASKS) {
 		<div class="task-description-div">
 		<textarea class="task-description" id="task-description-input" data-id="${item._id}">${item.description}</textarea>
 		</div>
-		<div class="task-case-div">
+		<div class="task-case-div" data-id="${item.caseId._id}>
 		${item.caseId.name}
 		</div>
 		<div class="go-to-case">
@@ -281,31 +281,89 @@ function postNewTask() {
 		e.preventDefault();
 		/* configure the json of request */
 		console.log($('.task-name').val());
+		// existing case
 		if ($(".new-case-div").attr("style") === "display: none;") {
 			var taskObj = {
 				name: $('.task-name').val(),
 				description: $('.task-description').val(),
 				caseId: $('option:selected', this).attr('value')
 			};
+			$.ajax({
+				url: `/tasks/${localStorage.getItem('token')}`,
+				data: JSON.stringify(taskObj),
+				type: 'POST',
+				contentType: 'application/json',
+				success: (content) => {
+					console.log('New task posted');
+					$('.new.task-item')
+					.append(`<div class="task-case-div">
+					${content.case.name}
+					</div>
+					<div class="go-to-case">
+					<button class="case-button" id="go-to-case-tasks" value="${content.case._id}" data-id="${content.case._id}">Go to case</button>
+					</div>
+					<button class="delete-task" data-id=${content.task._id}>Delete task</button>
+					</div>`);
+					$('.new.task-item').removeClass('new');
+					$('.new-case-div').remove();
+					$('.case-selection-div').remove();
+					$('.toggle-buttons').remove();
+					$('#submit-task').remove();
+				}
+			});
 		} else {
+			// new case
 			var taskObj = {
 				name: $('.task-name').val(),
 				description: $('.task-description').val(),
 				caseId: null,
 				caseName: $(".new-case-input").val()
-			}
-		}
+			};
+			$.ajax({
+				url: `/tasks/${localStorage.getItem('token')}`,
+				data: JSON.stringify(taskObj),
+				type: 'POST',
+				contentType: 'application/json',
+				success: (content) => {
+					debugger
+					console.log('New task posted');
+					$('.new.task-item')
+					.append(`<div class="task-case-div">
+					${content.caseName}
+					</div>
+					<div class="go-to-case">
+					<button class="case-button" id="go-to-case-tasks" value="${content.task.caseId}" data-id="${content.task.caseId}">Go to case</button>
+					</div>
+					<button class="delete-task" data-id=${content.task._id}>Delete task</button>
+					</div>`);
+					$('.new.task-item').removeClass('new');
+					$('.new-case-div').remove();
+					$('.case-selection-div').remove();
+					$('.toggle-buttons').remove();
+					$('#submit-task').remove();
+				}
+			});
+		}	
+	});
+}
+			/*
 		$.ajax({
 			url: `/tasks/${localStorage.getItem('token')}`,
 			data: JSON.stringify(taskObj),
 			type: 'POST',
 			contentType: 'application/json',
 			success: (content) => {
+				debugger
 				console.log('New task posted');
 				$('.new.task-item')
 				.append(`<div class="task-case-div">
-				${content.caseName}
-				</div>`)
+				${content.case.name}
+				</div>
+				<div class="go-to-case">
+				<button class="case-button" id="go-to-case-tasks" value="${content.case._id}" data-id="${content.case._id}">Go to case</button>
+				</div>
+				<button class="delete-task" data-id=${content.task._id}>Delete task</button>
+				</div>`);
 				$('.new.task-item').removeClass('new');
 				$('.new-case-div').remove();
 				$('.case-selection-div').remove();
@@ -313,8 +371,8 @@ function postNewTask() {
 				$('#submit-task').remove();
 			}
 		});
-	});
-}
+		*/
+
 
 getTaskData(renderTasks);
 toggleCardView();
