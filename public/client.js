@@ -10,14 +10,30 @@ function renderClients(CLIENTS) {
 		<h3>${item.name}</h3>
 		<p>Address: ${item.address}</p>
 		<button name="go-to-client" value="${item._id}">Go to client</button>
+		<button class="delete-client" data-id="${item._id}">Delete client</button>
 		</div>`);
 	});
 }
 
-function goToClientTasks(CLIENTS) {
+function goToClient(CLIENTS) {
 	$("body").on("click", "button", function() {
 		console.log($(this).val());
 		window.location.href = `client-profile.html?clientId=${$(this).val()}`;
+	});
+}
+
+function deleteClient() {
+	$('body').on('click', '.delete-client', (e) => {
+		e.preventDefault();
+		let clientId = $('.delete-client').attr('data-id');
+		$.ajax({
+			url: `/clients/delete/${clientId}/${localStorage.getItem('token')}`,
+			type: 'DELETE',
+			contentType: 'application/json',
+			success: (content) => {
+				debugger
+			}
+		})
 	});
 }
 
@@ -43,12 +59,11 @@ function linkToAddNewClient() {
 	});
 }
 
-// TODO: display cases
-
 $("#clients").sortable();
 $("#clients").disableSelection();
 getClientData(renderClients); 
-goToClientTasks();
+goToClient();
+deleteClient();
 toggleListView();
 toggleCardView();
 linkToAddNewClient();

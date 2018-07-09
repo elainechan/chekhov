@@ -27,3 +27,15 @@ exports.postNewClient = (req, res) => {
     console.log(data);
   });
 }
+
+exports.deleteClientById = (req, res) => {
+  Client.findByIdAndRemove(req.params.id, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.status(200).json({
+      message: "Client has been deleted.",
+      data: data
+    });
+  });
+}

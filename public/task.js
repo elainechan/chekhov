@@ -42,7 +42,7 @@ function renderTasks(TASKS) {
 
 function deleteTask() {
 	$('body').on( 'click', '.delete-task', (e) => {
-		e.preventDefault;
+		e.preventDefault();
 		let taskId = $('.delete-task').attr('data-id');
 		let element = e;
 		$.ajax({

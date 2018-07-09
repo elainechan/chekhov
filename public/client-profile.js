@@ -1,5 +1,3 @@
-import { getCaseByClient } from "../case/case.controller";
-
 'use strict';
 
 var url_string = window.location.href;
@@ -11,7 +9,7 @@ function getCasesByClient(callback) {
 	$.getJSON(`http://localhost:8080/case/client/${clientId}/${localStorage.getItem('token')}`, callback)
 }
 
-function renderCaseByClient(CASES) {
+function renderCasesByClient(CASES) {
 	if (CASES.length === 0) {
 		console.log('No data to display');
 	}
@@ -20,4 +18,4 @@ function renderCaseByClient(CASES) {
 	});
 }
 
-getCaseByClient(renderCaseByClient);
+getCasesByClient(renderCasesByClient);
