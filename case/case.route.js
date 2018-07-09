@@ -19,4 +19,6 @@ router.get('/client/:token', common.verifyToken, caseController.getCaseByClient)
 
 router.post('/:token', common.verifyToken, caseController.postNewCase);
 
+router.delete('/delete/:id/:token', common.verifyToken, caseController.deleteCaseById);
+
 module.exports = router;

@@ -61,3 +61,16 @@ exports.postNewCase = (req, res) => {
     console.log(data);
   });
 }
+
+exports.deleteCaseById = (req, res) => {
+  Case.findByIdAndRemove(req.params.id, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.status(200).json({
+      message: "Case has been deleted.",
+      data: data
+  });
+
+  });
+}

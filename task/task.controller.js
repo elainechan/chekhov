@@ -174,7 +174,7 @@ exports.deleteTaskById = (req, res) => {
     if (err) {
       console.log(err);
     }
-    return res.status(201).json({
+    return res.status(200).json({
       message: "Task has been deleted.",
       data: data
   });
