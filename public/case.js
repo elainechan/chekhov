@@ -27,17 +27,16 @@ function renderCases(CASES) {
 
 function deleteCase() {
 	$('body').on( 'click', '.delete-case', (e) => {
-		e.preventDefault;
-		let caseId = $('.delete-case').attr('data-id');
-		let element = e;
+		e.preventDefault();
+		debugger
+		let caseId = e.currentTarget.attributes[1].nodeValue;
+		e.currentTarget.parentElement.remove();
 		$.ajax({
-			context: e.target,
 			url: `/cases/delete/${caseId}/${localStorage.getItem('token')}`,
 			type: 'DELETE',
 			contentType: 'application/json',
 			success: (content) => {
-				console.log(content);
-				window.location.reload();
+				console.log("Case deleted");
 			}
 		});
 		

@@ -50,7 +50,7 @@ function deleteTask() {
 			type: 'DELETE',
 			contentType: 'application/json',
 			success: (content) => {
-
+				console.log("Task deleted.")
 			}
 		});
 		

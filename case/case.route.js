@@ -15,7 +15,7 @@ router.get('/:name/:token', common.verifyToken, caseController.getCaseByName);
 
 router.get('/:id/tasks/:token', common.verifyToken, caseController.getCaseTasksById);
 
-router.get('/client/:token', common.verifyToken, caseController.getCaseByClient);
+router.get('/client/:clientId/:token', common.verifyToken, caseController.getCaseByClient);
 
 router.post('/:token', common.verifyToken, caseController.postNewCase);
 
