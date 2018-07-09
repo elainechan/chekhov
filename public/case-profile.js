@@ -1,6 +1,6 @@
 'use strict';
 
-// (2) by the time we call this, window.location.href is `task-by-case.html?caseId=${$(this).val()}` from goToCase() in case.js (frontend)
+// (2) by the time we call this, window.location.href is `case-profile.html?caseId=${$(this).val()}` from goToCase() in case.js (frontend)
 var url_string = window.location.href;
 var url = new URL(url_string);
 var caseId = url.searchParams.get("caseId");

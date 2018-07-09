@@ -172,9 +172,6 @@ function patchOnEnter() {
 
 function addNewTask() {
 	$('.new-task-button').click((e) => {
-		if ($('#tasks').length === 0) {
-		}
-		
 		if ($('.task-item').hasClass('task-list')) {
 			$('#tasks').prepend(
 				`<div class="new task-item task-list">
@@ -185,7 +182,7 @@ function addNewTask() {
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
 				</div>
 				<div class="case-selection-div mdc-select" style="display:none;">
-				<select id="select-existing-case"></select>
+				<select class="select-existing-case"></select>
 				</div>
 				<div class="new-case-div">
 				<input class="new-case-input" placeholder="Enter new case name">
@@ -199,24 +196,7 @@ function addNewTask() {
 			);
 		} else if (($('.task-item').hasClass('task-card'))) {
 			$('#tasks').prepend(
-				`<div class="task-item task-card">
-				<div class="task-name-div">
-				<input class="new task-name" id="task-name-input" data-id="" value="" />
-				</div>
-				<div class="task-description-div">
-				<textarea class="new task-description" id="task-description-input" data-id=""></textarea>
-				</div>
-				<div class="task-case-div">
-				<p>Case ID:</p>
-				</div>
-				<div class="go-to-case">
-				<button id="go-to-case-tasks" value="">Go to case</button>
-				</div>
-				</div>`
-			);
-		} else {
-			$('#tasks').prepend(
-				`<div class="new task-item task-list">
+				`<div class="new task-item task-card">
 				<div class="task-name-div">
 				<input class=" new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
 				</div>
@@ -224,7 +204,29 @@ function addNewTask() {
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
 				</div>
 				<div class="case-selection-div mdc-select" style="display:none;">
-				<select id="select-existing-case"></select>
+				<select class="select-existing-case"></select>
+				</div>
+				<div class="new-case-div">
+				<input class="new-case-input" placeholder="Enter new case name">
+				</div>
+				<div class="toggle-buttons">
+				<button class="existing-case-button">Select Existing Case</button>
+				<button class="new-case-button" style="display:none;">Create New Case</button>
+				</div>
+				<button class="submit-button" id="submit-task">Submit</button>
+				</div>`
+			);
+		} else {
+			$('#tasks').prepend(
+				`<div class="new task-item task-list">
+				<div class="task-name-div">
+				<input class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
+				</div>
+				<div class="task-description-div">
+				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
+				</div>
+				<div class="case-selection-div mdc-select" style="display:none;">
+				<select class="select-existing-case"></select>
 				</div>
 				<div class="new-case-div">
 				<input placeholder="Enter new case name">
@@ -243,7 +245,7 @@ function addNewTask() {
 
 function createCaseSelection(CASES) {
 	CASES.forEach((data => {
-		$("#select-existing-case").append(`<option value="${data._id}">${data.name}</option>`);
+		$(".select-existing-case").append(`<option value="${data._id}">${data.name}</option>`);
 	}));
 }
 
@@ -266,11 +268,11 @@ function toggleSelectExistingCase() {
 	});
 }
 
-function goToCaseTasks(CASES) {
+function goToCase(CASES) {
 	// attach button click event to body
 	$("body").on("click", "#go-to-case-tasks", function() {
 		console.log($(this).val());
-		window.location.href = `task-by-case.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
+		window.location.href = `case-profile.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
 	});
 }
 
@@ -278,7 +280,7 @@ function postNewTask() {
 	$('body').on('click','#submit-task',(e) => {
 		e.preventDefault();
 		/* configure the json of request */
-		console.log($('#task-name').val());
+		console.log($('.task-name').val());
 		if ($(".new-case-div").attr("style") === "display: none;") {
 			var taskObj = {
 				name: $('.task-name').val(),
@@ -314,31 +316,6 @@ function postNewTask() {
 	});
 }
 
-function postNewCase() {
-	let caseObj = {
-		name: $(".new-case-input").val(),
-
-	}
-	$.ajax({
-		url: `/cases/${localStorage.getItem('token')}`,
-		data: JSON.stringify(caseObj),
-		type: 'POST',
-		contentType: 'application/json',
-		success: (content) => {
-			console.log(content);
-		}
-	});
-	$.ajax({
-		url: `/cases/name/${localStorage.getItem('token')}`,
-		data: JSON.stringify(caseObj),
-		type: 'GET',
-		contentType: 'application/json',
-		success: (content) => {
-			console.log(content.name);
-		}
-	});
-}
-
 getTaskData(renderTasks);
 toggleCardView();
 toggleListView();
@@ -347,8 +324,8 @@ $("#tasks").disableSelection();
 editTaskName();
 editTaskDescription();
 addNewTask();
-//goToCaseTasks(getCaseData);
-getCaseData(goToCaseTasks);
+goToCase(getCaseData);
+getCaseData(goToCase);
 patchOnEnter();
 toggleCreateNewCase();
 toggleSelectExistingCase();

@@ -1,4 +1,5 @@
 const Case = require('./case.model');
+const Client = require('../client/client.model');
 
 exports.getAllCases = (req, res) => {
 	Case.find().exec((err, data) => {
@@ -51,15 +52,50 @@ exports.postNewCase = (req, res) => {
 			return;
     }
   });
-  Case.create({
-    name: req.body.name,
-    dateCreated: new Date(),
-    dateOpened: new Date()
-  }, (err, data) => {
-    if (err) return handleError(err);
-    res.status(201).json(data); // problem
-    console.log(data);
-  });
+  // if client doesn't exist already
+  if (!req.body.clientId) {
+    Client.create({
+      name: req.body.clientName
+    }, (err, data) => {
+      if (err) {
+        handleError(err);
+        return;
+      } else {
+        Case.create({
+          name: req.body.name,
+          dateOpened: new Date()
+        }, (err, data) => {
+          if (err) {
+            handleError(err);
+            return;
+          } else {
+            res.status(201).json({
+              case: data,
+              clientName: req.body.clientName
+            });
+            return;
+          }
+        });
+        return;
+      }
+    });
+  } else {
+    // if client exists
+    Case.create({
+      name: req.body.name,
+      clientId: mongoose.Types.ObjectId(req.body.clientId),
+      dateOpened: new Date()
+    }, (err, data) => {
+      if (err) {
+        handleError(err);
+        return;
+      } else {
+        req.case = data; // save entire case
+        console.log(`Client ID from body (req.body.clientId): ${req.body.clientId}`);
+        console.log(`Client ID from case (req.case.clientId): ${req.case.clientId}`);
+      }
+    });
+  }
 }
 
 exports.deleteCaseById = (req, res) => {
