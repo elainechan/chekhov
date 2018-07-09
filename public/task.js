@@ -28,31 +28,29 @@ function renderTasks(TASKS) {
 		<div class="task-description-div">
 		<textarea class="task-description" id="task-description-input" data-id="${item._id}">${item.description}</textarea>
 		</div>
-		<div class="task-case-div" data-id="${item.caseId._id}>
+		<div class="task-case-div" data-id="${item.caseId._id}">
 		${item.caseId.name}
 		</div>
 		<div class="go-to-case">
 		<button class="case-button" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Go to case</button>
 		</div>
-		<button class="delete-task" data-id=${item._id}>Delete task</button>
+		<button class="delete-task" data-id="${item._id}">Delete task</button>
 		</div>`);
 	});
 	
 }
 
 function deleteTask() {
-	$('body').on( 'click', '.delete-task', (e) => {
-		e.preventDefault;
-		let taskId = $('.delete-task').attr('data-id');
-		let element = e;
+	$('body').on('click', '.delete-task', (e) => {
+		e.preventDefault();
+		let taskId = e.currentTarget.attributes[1].nodeValue;
+		e.currentTarget.parentElement.remove();
 		$.ajax({
-			context: e.target,
 			url: `/tasks/delete/${taskId}/${localStorage.getItem('token')}`,
 			type: 'DELETE',
 			contentType: 'application/json',
 			success: (content) => {
-				console.log(content);
-				// window.location.reload();
+				console.log("Task deleted.")
 			}
 		});
 		
@@ -302,7 +300,7 @@ function postNewTask() {
 					<div class="go-to-case">
 					<button class="case-button" id="go-to-case-tasks" value="${content.case._id}" data-id="${content.case._id}">Go to case</button>
 					</div>
-					<button class="delete-task" data-id=${content.task._id}>Delete task</button>
+					<button class="delete-task" data-id="${content.task._id}">Delete task</button>
 					</div>`);
 					$('.new.task-item').removeClass('new');
 					$('.new-case-div').remove();
@@ -334,7 +332,7 @@ function postNewTask() {
 					<div class="go-to-case">
 					<button class="case-button" id="go-to-case-tasks" value="${content.task.caseId}" data-id="${content.task.caseId}">Go to case</button>
 					</div>
-					<button class="delete-task" data-id=${content.task._id}>Delete task</button>
+					<button class="delete-task" data-id="${content.task._id}">Delete task</button>
 					</div>`);
 					$('.new.task-item').removeClass('new');
 					$('.new-case-div').remove();

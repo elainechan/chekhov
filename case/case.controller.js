@@ -1,5 +1,6 @@
 const Case = require('./case.model');
 const Client = require('../client/client.model');
+const mongoose = require('mongoose');
 
 exports.getAllCases = (req, res) => {
 	Case.find().exec((err, data) => {
@@ -37,7 +38,13 @@ exports.getCaseTasksById = (req, res) => {
 
 exports.getCaseByClient = (req, res) => {
   Case.find({ clientId: req.params.clientId }, function(err, aCase) {
-    console.log(aCase);
+    if (err) {
+      console.log(err);
+        return;
+    }
+    res.json({
+      cases: aCase 
+    });
   });
 }
 
@@ -63,6 +70,7 @@ exports.postNewCase = (req, res) => {
       } else {
         Case.create({
           name: req.body.name,
+          clientId: data._id,
           dateOpened: new Date()
         }, (err, data) => {
           if (err) {

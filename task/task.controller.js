@@ -138,6 +138,7 @@ exports.editTaskName = (req, res) => {
   });
  });
 }
+
 exports.editTaskDescription = (req, res) => {
   Task.findByIdAndUpdate(req.params.id, { $set:{description: req.body.description} })
   .then((result) => {
