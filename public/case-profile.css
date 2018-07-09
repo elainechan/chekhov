@@ -37,10 +37,114 @@ header {
 	z-index: 1;
 }
 
+.title {
+	text-align: center;
+	font-size: 30px;
+}
+
 h3 {
 	font-family: 'Roboto', sans-serif;
 }
 main {
 	margin-top: 120px;
 	font-family: 'Roboto', sans-serif;
+}
+
+.task-item {
+	font-family: 'Roboto', sans-serif;
+	background-color: #304FFE;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);	
+}
+.task-item:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.task-card {
+	color: white;
+	margin: 10px;
+	padding: 10px;
+	width: 20%;
+}
+#tasks {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+}
+.task-item h3 {
+	text-align: center;
+	/*font-family: 'Roboto', sans-serif;*/
+}
+.task-item:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
+.task-list { 
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	margin: 10px;
+	padding: 10px;
+	width: 100%;
+}
+input {
+	outline: none;
+	border: none;
+	background: #304FFE;
+	color: white;
+	font-size: 16px;
+}
+textarea {
+	outline: none;
+	border: none;
+	resize: none;
+	background: #304FFE;
+	color: white;
+	font-size: 16px;
+}
+::placeholder {
+	color: #bdbdbd;
+}
+.task-name {
+	font-size: 24px;
+	overflow-wrap: break-word;
+}
+.task-description {
+	overflow-wrap: break-word;
+}
+.task-list>.task-name-div>.task-name {
+	width: 300px;
+}
+.task-list>.task-description-div>.task-description {
+	width: 300px;
+}
+button {
+	padding: 10px;
+	margin: 10px;
+	background: #BDBDBD;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
+	transition: background-color .3s;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+button:hover {
+	cursor: pointer;
+}
+
+/* views navigation buttons */
+.views-nav {
+    text-align: right;
+    margin-right: 30px;
+}
+.views-nav i {
+	color: gray;
+    background: #e5e5e5;
+    padding: 8px;
+    font-size: 20px;
+    border: 2px solid grey;
+}
+.views-nav i:hover {
+	background: #fafafa;
+	cursor: pointer;
 }
