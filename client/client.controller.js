@@ -1,4 +1,5 @@
 const Client = require('./client.model');
+const mongoose = require('mongoose');
 
 exports.getAllClients = (req, res) => {
 	Client.find().exec((err, data) => {
@@ -25,6 +26,18 @@ exports.postNewClient = (req, res) => {
     if (err) return handleError(err);
     res.status(201).json(data);
     console.log(data);
+  });
+}
+
+exports.getClientById = (req, res) => {
+  Client.findById({_id: req.params.id}, (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    res.json({
+      client: data
+    })
   });
 }
 

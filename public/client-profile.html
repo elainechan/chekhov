@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Chekhov</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="client-profile.css">
 </head>
 <body>
@@ -20,18 +22,23 @@
         </header>
         <main>
             <div class="title">
-                <h2>Client Profile</h2>
                 </div>
+                <nav class="views-nav">
+                    <i class="far fa-plus-square new-client-button"></i>
+                    <i class="fas fa-list-ul list-button"></i>
+                    <i class="fas fa-th-large card-button"></i>
+                  </nav>
   <ul class="case-board", id="case-listings">
   </ul>
   <section id="table-area">
-    <div id="cases"></div>
+    <div id="cases" class="ui sortable"></div>
   </section>
 </main>
   <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="./client-profile.js"></script>
 </body>
 </html>

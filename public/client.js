@@ -25,13 +25,15 @@ function goToClient(CLIENTS) {
 function deleteClient() {
 	$('body').on('click', '.delete-client', (e) => {
 		e.preventDefault();
-		let clientId = $('.delete-client').attr('data-id');
+		debugger
+		let clientId = e.currentTarget.attributes[1].nodeValue;
+		e.currentTarget.parentElement.remove();
 		$.ajax({
 			url: `/clients/delete/${clientId}/${localStorage.getItem('token')}`,
 			type: 'DELETE',
 			contentType: 'application/json',
 			success: (content) => {
-				debugger
+				console.log("Client deleted");
 			}
 		})
 	});

@@ -17,18 +17,26 @@ function renderCases(CASES) {
 		$('#cases').append(`
 		<div class="case-item case-card">
 		<h3>${item.name}</h3>
-		<p>Date created: ${match[1]}</p>
-		<button id="go-to-case-tasks" name="go-to-case-tasks" value="${item._id}">Go to case</button>
-		<button id="go-to-case-client" name="go-to-case-client" value="${item.clientId}">Go to client</button>
+		<div class="case-date">Date created: ${match[1]}</div>
+		<div class="case-client-div"></div>
+		<button id="go-to-case" name="go-to-case" value="${item._id}">Go to case</button>
+		<button id="go-to-client" name="go-to-client" value="${item.clientId}">Go to client</button>
 		<button class="delete-case" data-id="${item._id}">Delete case</button>
 		</div>`);
+		$.ajax({
+			url: `/clients/${item.clientId}/${localStorage.getItem('token')}`,
+			type: 'GET',
+			contentType: 'application/json',
+			success: (content) => {
+				$('.case-client-div').text(`${content.client.name}`);
+			}
+		});
 	});
 }
 
 function deleteCase() {
 	$('body').on( 'click', '.delete-case', (e) => {
 		e.preventDefault();
-		debugger
 		let caseId = e.currentTarget.attributes[1].nodeValue;
 		e.currentTarget.parentElement.remove();
 		$.ajax({
@@ -132,15 +140,25 @@ function postNewCase() {
 			contentType: 'application/json',
 			success: (content) => {
 				console.log('New case posted');
+				let dateDisplay = new Date(content.case.dateOpened);
+				let myRegex = /(.*)\ GMT/;
+				let match = myRegex.exec(dateDisplay);
 				$('.new.case-item')
-				.append(`<div class="case-client-div">
-				${content.clientName}
-				</div>`)
+				.append(`<div class="case-date">Date created: ${match[1]}</div>
+				<div class="case-client-div">
+				Client: ${content.clientName}
+				</div>
+				<button id="go-to-case" name="go-to-case" value="${content.case._id}">Go to case</button>
+				<button id="go-to-client" name="go-to-client" value="${content.case.clientId}">Go to client</button>
+				<button class="delete-case" data-id="${content.case._id}">Delete case</button>
+				</div>
+				`);
 				$('.new.case-item').removeClass('new');
-				$('.new-case-div').remove();
-				$('.case-selection-div').remove();
+				$('.new-client-div').remove();
+				$('.client-selection-div').remove();
 				$('.toggle-buttons').remove();
-				$('#submit-task').remove();
+				$('#submit-case').remove();
+				
 			}
 		});
 	});
@@ -171,16 +189,16 @@ function toggleSelectExistingClient() {
 	});
 }
 
-function goToCaseTasksListener(CASES) {
+function goToCase(CASES) {
 	// attach button click event to body
-	$("body").on("click", "#go-to-case-tasks", function() {
+	$("body").on("click", "#go-to-case", function() {
 		console.log($(this).val());
 		window.location.href = `case-profile.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
 	});
 }
 
-function goToClientCaseListener(CASES) {
-	$("body").on("click", "#go-to-case-client", function() {
+function goToClient(CASES) {
+	$("body").on("click", "#go-to-client", function() {
 		window.location.href = `client-profile.html?clientId=${$(this).val()}`;
 	});
 }
@@ -207,8 +225,8 @@ function linkToAddNewCase() {
 }
 
 getCaseData(renderCases);
-goToCaseTasksListener();
-goToClientCaseListener();
+goToCase();
+goToClient();
 toggleListView();
 toggleCardView();
 //linkToAddNewCase();
