@@ -17,7 +17,7 @@ function renderClients(CLIENTS) {
 function goToClientTasks(CLIENTS) {
 	$("body").on("click", "button", function() {
 		console.log($(this).val());
-		window.location.href = `task-by-client.html?clientId=${$(this).val()}`;
+		window.location.href = `client-profile.html?clientId=${$(this).val()}`;
 	});
 }
 
@@ -45,6 +45,8 @@ function linkToAddNewClient() {
 
 // TODO: display cases
 
+$("#clients").sortable();
+$("#clients").disableSelection();
 getClientData(renderClients); 
 goToClientTasks();
 toggleListView();

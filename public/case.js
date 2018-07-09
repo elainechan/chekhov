@@ -4,6 +4,10 @@ function getCaseData(callback) {
 	$.getJSON(`http://localhost:8080/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
 }
 
+function getClientData(callback) {
+	$.getJSON(`http://localhost:8080/clients/all/${localStorage.getItem('token')}`, callback);
+}
+
 function renderCases(CASES) {
 	console.log(CASES);
 	CASES.forEach((item, i) => {
@@ -49,6 +53,16 @@ function addNewCase() {
 				<div class="case-name-div">
 				<input class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" value="" />
 				</div>
+				<div class="client-selection-div mdc-select" style="display:none;">
+				<select class="select-existing-client"></select>
+				</div>
+				<div class="new-client-div">
+				<input class="new-client-input" type="text" name="client-name" value="" placeholder="Enter client name">
+				</div>
+				<div class="toggle-buttons">
+				<button class="existing-client-button">Select Existing Client</button>
+				<button class="new-client-button" style="display: none;">Create New Client</button>
+				</div>
 				<button class="submit-button" id="submit-task">Submit</button>
 				</div>`
 			);
@@ -56,27 +70,119 @@ function addNewCase() {
 			$('#cases').prepend(
 				`<div class="new case-item case-card">
 				<div class="case-name-div">
-				<input class=" new case-name" id="case-name-input" placeholder="Enter name" data-id="" value="" />
+				<input class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" value="" />
 				</div>
-				<button class="submit-button" id="submit-task">Submit</button>
+				<div class="client-selection-div mdc-select" style="display:none;">
+				<select class="select-existing-client"></select>
+				</div>
+				<div class="new-client-div">
+				<input class="new-client-input" type="text" name="client-name" value="" placeholder="Enter client name">
+				</div>
+				<div class="toggle-buttons">
+				<button class="existing-client-button">Select Existing Client</button>
+				<button class="new-client-button" style="display: none;">Create New Client</button>
+				</div>
+				<button class="submit-button" id="submit-case">Submit</button>
+				</div>`
+			);
+		} else {
+			$('#cases').prepend(
+				`<div class="new case-item case-card">
+				<div class="case-name-div">
+				<input class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" value="" />
+				</div>
+				<div class="client-selection-div mdc-select" style="display:none;">
+				<select class="select-existing-client"></select>
+				</div>
+				<div class="new-client-div">
+				<input class="new-client-input" type="text" name="client-name" value="" placeholder="Enter client name">
+				</div>
+				<div class="toggle-buttons">
+				<button class="existing-client-button">Select Existing Client</button>
+				<button class="new-client-button" style="display: none;">Create New Client</button>
+				</div>
+				<button class="submit-button" id="submit-case">Submit</button>
 				</div>`
 			);
 		}
+		getClientData(createClientSelection);
 	});
 }
 
+function postNewCase() {
+	$('body').on('click','#submit-case',(e) => {
+		e.preventDefault();
+		/* configure the json of request */
+		console.log(`New case name: ${$('.case-name').val()}`);
+		if ($(".new-client-div").attr("style") === "display: none;") {
+			var caseObj = {
+				name: $('.case-name').val(),
+				clientId: $('option:selected', this).attr('value')
+			};
+		} else {
+			var caseObj = {
+				name: $('.case-name').val(),
+				clientId: null,
+				clientName: $(".new-client-input").val()
+			}
+		}
+		$.ajax({
+			url: `/cases/${localStorage.getItem('token')}`,
+			data: JSON.stringify(caseObj),
+			type: 'POST',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log('New case posted');
+				$('.new.case-item')
+				.append(`<div class="case-client-div">
+				${content.clientName}
+				</div>`)
+				$('.new.case-item').removeClass('new');
+				$('.new-case-div').remove();
+				$('.case-selection-div').remove();
+				$('.toggle-buttons').remove();
+				$('#submit-task').remove();
+			}
+		});
+	});
+}
+
+function createClientSelection(CLIENTS) {
+	CLIENTS.forEach((data => {
+		$(".select-existing-client").append(`<option value="${data._id}">${data.name}</option>`);
+	}));
+}
+
+function toggleCreateNewClient() {
+	$('body').on('click', '.new-client-button', (e) => {
+		e.preventDefault();
+		$('.new-client-div').show();
+		$('.client-selection-div').hide();
+		$('.new-client-button').hide();
+		$('.existing-client-button').show();
+	});
+}
+function toggleSelectExistingClient() {
+	$('body').on('click','.existing-client-button',(e) => {
+		e.preventDefault();
+		$('.new-client-div').hide();
+		$('.client-selection-div').show();
+		$('.new-client-button').show();
+		$('.existing-client-button').hide();
+	});
+}
 
 function goToCaseTasksListener(CASES) {
 	// attach button click event to body
 	$("body").on("click", "#go-to-case-tasks", function() {
 		console.log($(this).val());
-		window.location.href = `task-by-case.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
+		window.location.href = `case-profile.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
 	});
 }
 
 function goToClientCaseListener(CASES) {
 	$("body").on("click", "#go-to-case-client", function() {
-		window.location.href = `case-by-client.html?clientId=${$(this).val()}`;
+		window.location.href = `client-profile.html?clientId=${$(this).val()}`;
 	});
 }
 
@@ -109,6 +215,11 @@ toggleCardView();
 //linkToAddNewCase();
 deleteCase();
 addNewCase();
+toggleCreateNewClient();
+toggleSelectExistingClient();
+postNewCase();
+$("#cases").sortable();
+$("#cases").disableSelection();
 // calling REST returns an object/JSON
 // get status code
 // curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"

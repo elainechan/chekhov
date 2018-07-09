@@ -68,13 +68,13 @@ function goToCaseTasksListener(CASES) {
 	// attach button click event to body
 	$("body").on("click", "#go-to-case-tasks", function() {
 		console.log($(this).val());
-		window.location.href = `task-by-case.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
+		window.location.href = `case-profile.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
 	});
 }
 
 function goToClientCaseListener(CASES) {
 	$("body").on("click", "#go-to-case-client", function() {
-		window.location.href = `case-by-client.html?clientId=${$(this).val()}`;
+		window.location.href = `client-profile.html?clientId=${$(this).val()}`;
 	});
 }
 

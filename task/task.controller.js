@@ -29,7 +29,6 @@ exports.postNewTask = (req, res) => {
   if (!req.body.caseId) {
     Case.create({
       name: req.body.caseName,
-      dateCreated: new Date(),
       dateOpened: new Date()
     }, (err, data) => {
       if (err)  {
@@ -54,9 +53,7 @@ exports.postNewTask = (req, res) => {
           caseName: req.body.caseName
         });
         return;
-        //console.log(data);
       }); 
-      //console.log(data);
       return;
     });
   } else {
@@ -90,6 +87,7 @@ exports.postNewTask = (req, res) => {
     });
   }
 }
+
 exports.getTasksByClientId = (req, res) => {
   Task
   .find({clientId: req.params.id})

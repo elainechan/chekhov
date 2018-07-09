@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+.title {
+	text-align: center;
+	font-size: 28px;
+}
+
 .case-item {
 	background-color: #fe5c30;
 	color: white;
-	margin: 10px;
-	padding: 10px;
-	width: 20%;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 .case-item:hover {
@@ -60,12 +63,12 @@
 	cursor: pointer;
 }
 button {
+	padding: 10px;
+	margin: 10px;
 	background: #BDBDBD;
 	color: white;
 	font-family: 'Ubuntu', sans-serif;
 	font-size: 1em;
-	height: 40px;
-	width: 100px;
 	transition: background-color .3s;
 	border: none;
 	border-radius: 2px;
@@ -120,9 +123,37 @@ header {
 	z-index: 1;
 }
 input.new.case-name {
+	font-size: 24px;
+}
+input {
 	outline: none;
 	border: none;
 	background: #fe5c30;
 	color: white;
-	font-size: 20px;
+}
+input.new-client-input {
+	font-size: 16px;
+}
+select {
+	font-size: 16px;
+	background:#fe5c30;
+	color: #bdbdbd;
+	border: none;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+.case-name {
+	font-size: 24px;
+	overflow-wrap: break-word;
+}
+.case-item h3 {
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+}
+#cases {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
 }

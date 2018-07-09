@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
+.title {
+	text-align: center;
+	font-size: 28px;
+	margin: 10px;
+}
+
 .client-item {
 	background-color: #8630fe;
 	color: white;
@@ -26,20 +32,12 @@
 
 .client-item h3 {
 	text-align: center;
-	font-family: sans-serif;
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
 }
 
 p {
 	font-family: 'Roboto', sans-serif;
-}
-
-button {
-	font-family: 'Ubuntu', sans-serif;
-	font-size: 1em;	
-	height: 25px;
-}
-button:hover {
-	cursor: pointer;
 }
 main {
 	margin-top: 90px;
@@ -83,6 +81,22 @@ header {
 	z-index: 1;
 }
 
+button {
+	padding: 10px;
+	margin: 10px;
+	background: #BDBDBD;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
+	transition: background-color .3s;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+button:hover {
+	cursor: pointer;
+}
+
 /* views nav */
 .views-nav {
     text-align: right;
@@ -98,6 +112,12 @@ header {
 .views-nav i:hover {
 	background: #fafafa;
 	cursor: pointer;
+}
+
+#clients {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
 }
 .client-card {
 	color: white;
