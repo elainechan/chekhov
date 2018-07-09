@@ -55,6 +55,19 @@ p {
 	font-family: 'Ubuntu', sans-serif;
 }
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
-	font-family: 'Ubuntu', sans-serif;    font-size: 1em;
-    height: 25px;
+	font-family: 'Ubuntu', sans-serif;
+	padding: 10px;
+	margin: 10px;
+	background: #BDBDBD;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
+	transition: background-color .3s;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+
+button:hover {
+	cursor: pointer;
 }
