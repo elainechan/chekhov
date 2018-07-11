@@ -77,3 +77,8 @@ p {
 button:hover {
 	cursor: pointer;
 }
+
+.task-item {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}

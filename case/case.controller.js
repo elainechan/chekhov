@@ -35,9 +35,12 @@ exports.getCaseById = (req, res) => {
 }
 
 exports.getCaseTasksById = (req, res) => {
-	Case.findById({ _id: req.params.id }, function(err, aCase) {
-    console.log(aCase.tasks);
-    return res.json({ tasks: aCase.tasks });
+	Case.findById({ _id: req.params.id }, function(err, data) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    return res.json({ tasks: data.tasks });
   });
 }
 
@@ -106,6 +109,9 @@ exports.postNewCase = (req, res) => {
         req.case = data; // save entire case
         console.log(`Client ID from body (req.body.clientId): ${req.body.clientId}`);
         console.log(`Client ID from case (req.case.clientId): ${req.case.clientId}`);
+        return res.json({
+          case: data
+        });
       }
     });
   }
