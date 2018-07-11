@@ -212,18 +212,11 @@ function toggleCardView() {
 	});
 }
 
-function linkToAddNewCase() {
-	$('.new-case-button').click(() => {
-		window.location = 'http://localhost:8080/new-case.html';
-	});
-}
-
 getCaseData(renderCases);
 goToCase();
 goToClient();
 toggleListView();
 toggleCardView();
-//linkToAddNewCase();
 deleteCase();
 addNewCase();
 toggleCreateNewClient();

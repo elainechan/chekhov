@@ -120,3 +120,12 @@ main {
 	margin-top: 120px;
 	font-family: 'Roboto', sans-serif;
 }
+
+textarea {
+	outline: none;
+	border: none;
+	resize: none;
+	background:#fe5c30;;
+	color: white;
+	font-size: 16px;
+}

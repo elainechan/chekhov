@@ -36,10 +36,33 @@ header {
 	left: 0;
 	z-index: 1;
 }
-
+h2 {
+	margin-top: 14px;
+	margin-bottom: 14px;
+}
 .title {
 	text-align: center;
-	font-size: 30px;
+	margin-left: 20px;
+	font-size: 24px;
+
+}
+
+.title-client {
+	display: flex;
+	justify-content: center;
+}
+.title-client>.go-to-client {
+	height: 52px;
+	padding: 10px;
+	margin: 10px;
+	background: #BDBDBD;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
+	transition: background-color .3s;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
 }
 
 h3 {

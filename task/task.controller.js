@@ -129,7 +129,7 @@ exports.editTaskName = (req, res) => {
   res.status(200).json({
     message: 'Changes have been saved.',
     data: result
-  })
+  });
  })
  .catch((err) => {
   res.status(500).json({
