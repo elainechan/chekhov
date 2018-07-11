@@ -1,5 +1,5 @@
 function getClientData(callback) {
-	$.getJSON(`http://localhost:8080/clients/all/${localStorage.getItem('token')}`, callback);
+	$.getJSON(`/clients/all/${localStorage.getItem('token')}`, callback);
 }
 
 function renderClients(CLIENTS) {

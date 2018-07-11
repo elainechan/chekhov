@@ -1,5 +1,5 @@
 function getTaskData(callback) {
-	$.getJSON(`http://localhost:8080/tasks/all/${localStorage.getItem('token')}`, callback);
+	$.getJSON(`/tasks/all/${localStorage.getItem('token')}`, callback);
 }
 
 function renderTasksInTab(TASKS) {
@@ -19,7 +19,7 @@ function renderTasksInTab(TASKS) {
 }
 
 function getCaseData(callback) {
-	$.getJSON(`http://localhost:8080/cases/all/${localStorage.getItem('token')}`, callback);
+	$.getJSON(`/cases/all/${localStorage.getItem('token')}`, callback);
 }
 
 function renderCasesInTab(CASES) {
@@ -60,7 +60,7 @@ function goToCase(CASES) {
 }
 
 function getClientData(callback) {
-	$.getJSON(`http://localhost:8080/clients/all/${localStorage.getItem('token')}`, callback);
+	$.getJSON(`/clients/all/${localStorage.getItem('token')}`, callback);
 }
 
 function renderClientsInTab(CLIENTS) {

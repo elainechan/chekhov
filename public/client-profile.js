@@ -6,7 +6,7 @@ var clientId = url.searchParams.get("clientId");
 var clientName;
 
 function getCasesByClient(callback) {
-	$.getJSON(`http://localhost:8080/cases/client/${clientId}/${localStorage.getItem('token')}`, callback)
+	$.getJSON(`/cases/client/${clientId}/${localStorage.getItem('token')}`, callback)
 }
 
 function renderCasesByClient(CASES) {

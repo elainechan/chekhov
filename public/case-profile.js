@@ -7,7 +7,7 @@ var caseId = url.searchParams.get("caseId");
 var caseName;
 
 function getTasksByCase(callback) { // (3) calls endpoint to get data (calling backend)
-	$.getJSON(`http://localhost:8080/tasks/case/${caseId}/${localStorage.getItem('token')}`, callback);
+	$.getJSON(`/tasks/case/${caseId}/${localStorage.getItem('token')}`, callback);
 }
 
 function getCaseData(callback) {}
