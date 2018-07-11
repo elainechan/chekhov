@@ -41,6 +41,14 @@ h1 {
 	font-family: 'Ubuntu', sans-serif;
 	color: white;
 }
+
+h1>a {
+	color: white;
+}
+
+a {
+	text-decoration: none;
+}
 .top-logo {
 	margin-left: 20px;
 }
