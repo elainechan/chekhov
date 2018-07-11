@@ -1,11 +1,11 @@
 'use strict';
 
 function getCaseData(callback) {
-	$.getJSON(`http://localhost:8080/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
+	$.getJSON(`/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
 }
 
 function getClientData(callback) {
-	$.getJSON(`http://localhost:8080/clients/all/${localStorage.getItem('token')}`, callback);
+	$.getJSON(`/clients/all/${localStorage.getItem('token')}`, callback);
 }
 
 function renderCases(CASES) {
