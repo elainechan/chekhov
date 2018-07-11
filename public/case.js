@@ -16,21 +16,15 @@ function renderCases(CASES) {
 		let match = myRegex.exec(dateDisplay);
 		$('#cases').append(`
 		<div class="case-item case-card">
-		<h3>${item.name}</h3>
-		<div class="case-date">Date created: ${match[1]}</div>
-		<div class="case-client-div"></div>
+		<div class="case-name-div">
+		<textarea class="case-name" id="case-name-input" data-id="${item._id}" value="${item.name}">${item.name}</textarea>
+		</div>
+		<div class="case-client-div" data-id="${item.clientId._id}">${item.clientId.name}</div>
+		<div class="case-date">Opened: ${match[1]}</div>
 		<button id="go-to-case" name="go-to-case" value="${item._id}">Go to case</button>
-		<button id="go-to-client" name="go-to-client" value="${item.clientId}">Go to client</button>
+		<button id="go-to-client" name="go-to-client" value="${item.clientId._id}">Go to client</button>
 		<button class="delete-case" data-id="${item._id}">Delete case</button>
 		</div>`);
-		$.ajax({
-			url: `/clients/${item.clientId}/${localStorage.getItem('token')}`,
-			type: 'GET',
-			contentType: 'application/json',
-			success: (content) => {
-				$('.case-client-div').text(`${content.client.name}`);
-			}
-		});
 	});
 }
 
@@ -58,7 +52,7 @@ function addNewCase() {
 			$('#cases').prepend(
 				`<div class="new case-item case-list">
 				<div class="case-name-div">
-				<input class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" value="" />
+				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
@@ -77,7 +71,7 @@ function addNewCase() {
 			$('#cases').prepend(
 				`<div class="new case-item case-card">
 				<div class="case-name-div">
-				<input class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" value="" />
+				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
@@ -96,7 +90,7 @@ function addNewCase() {
 			$('#cases').prepend(
 				`<div class="new case-item case-card">
 				<div class="case-name-div">
-				<input class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" value="" />
+				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
@@ -144,7 +138,7 @@ function postNewCase() {
 				let myRegex = /(.*)\ GMT/;
 				let match = myRegex.exec(dateDisplay);
 				$('.new.case-item')
-				.append(`<div class="case-date">Date created: ${match[1]}</div>
+				.append(`<div class="case-date">Opened: ${match[1]}</div>
 				<div class="case-client-div">
 				Client: ${content.clientName}
 				</div>

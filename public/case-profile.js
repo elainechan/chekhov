@@ -21,10 +21,6 @@ function renderTasksByCase(TASKS) { // (4) renders data in browser
 			$('.title').append(`<h2>Case Profile: ${content.name}</h2>`)
 		}
 	});
-	if (TASKS.length === 0) {
-		$('#tasks').append(`
-		<h3>No data to display</h3>`);
-	} // renders if no data present in response
 	TASKS.forEach((item, i) => {
 		$('#tasks').append(`
 		<div class="task-list task-item">
@@ -214,9 +210,7 @@ function postNewTask() {
 				success: (content) => {
 					console.log('New task posted');
 					$('.new.task-item')
-					.append(`<div class="task-case-div">
-					${content.case.name}
-					</div>
+					.append(`
 					<button class="delete-task" data-id=${content.task._id}>Delete task</button>
 					</div>`);
 					$('.new.task-item').removeClass('new');

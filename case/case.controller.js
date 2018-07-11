@@ -3,7 +3,10 @@ const Client = require('../client/client.model');
 const mongoose = require('mongoose');
 
 exports.getAllCases = (req, res) => {
-	Case.find().exec((err, data) => {
+  Case
+  .find()
+  .populate('clientId')
+  .exec((err, data) => {
 	  if (err) {
 		console.log(err);
 	  }
