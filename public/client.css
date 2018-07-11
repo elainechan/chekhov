@@ -23,6 +23,37 @@
 	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+input {
+	outline: none;
+	border: none;
+	background: #8630fe;
+	color: white;
+}
+textarea {
+	outline: none;
+	border: none;
+	resize: none;
+	background: #8630fe;
+	color: white;
+}
+::placeholder {
+	color: #bdbdbd;
+}
+.client-name {
+	font-size: 24px;
+	overflow-wrap: break-word;
+}
+.client-address {
+	font-size: 16px;
+	overflow-wrap: break-word;
+}
+.client-list>.tclientask-name-div>.client-name {
+	width: 300px;
+}
+.client-list>.client-address-div>.client-address {
+	width: 300px;
+}
+
 #clients {
 	display: flex;
 	flex-wrap: wrap;

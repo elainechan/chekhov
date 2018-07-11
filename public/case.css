@@ -131,6 +131,17 @@ input {
 	background: #fe5c30;
 	color: white;
 }
+textarea {
+	outline: none;
+	border: none;
+	resize: none;
+	background:#fe5c30;;
+	color: white;
+	font-size: 16px;
+}
+::placeholder {
+	color: #bdbdbd;
+}
 input.new-client-input {
 	font-size: 16px;
 }
@@ -152,6 +163,20 @@ select {
 	font-family: 'Roboto', sans-serif;
 	font-size: 24px;
 }
+.case-list>.case-name-div>.case-name {
+	width: 300px;
+}
+.case-client-div {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+.case-date {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
 #cases {
 	display: flex;
 	flex-wrap: wrap;

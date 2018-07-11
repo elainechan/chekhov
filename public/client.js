@@ -7,16 +7,21 @@ function renderClients(CLIENTS) {
 	CLIENTS.forEach((item, i) => {
 		$('#clients').append(`
 		<div class="client-item">
-		<h3>${item.name}</h3>
-		<p>Address: ${item.address}</p>
-		<button name="go-to-client" value="${item._id}">Go to client</button>
+		<div class="client-name-div">
+		<input class="client-name" id="client-name-input" data-id="" value="${item.name}" />
+		</div>
+		<div class="client-address-div">
+			<p>Address:</p>
+				<textarea class="client-address" id="client-address-input" value="" data-id="">${item.address}</textarea>
+			</div>
+		<button class="go-to-client" value="${item._id}">Go to client</button>
 		<button class="delete-client" data-id="${item._id}">Delete client</button>
 		</div>`);
 	});
 }
 
 function goToClient(CLIENTS) {
-	$("body").on("click", "button", function() {
+	$("body").on("click", ".go-to-client", function() {
 		console.log($(this).val());
 		window.location.href = `client-profile.html?clientId=${$(this).val()}`;
 	});
@@ -61,6 +66,71 @@ function linkToAddNewClient() {
 	});
 }
 
+function addNewClient() {
+	$('body').on('click', '.new-client-button', (e) => {
+		e.preventDefault();
+		if($('.client-item').hasClass('client-list')) {
+			$('#clients').prepend(`<div class="new client-item client-list">
+			<div class="client-name-div">
+			<input class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value="" />
+			</div>
+			<div class="client-address-div">
+			<p>Address:</p>
+				<textarea class="new client-address" id="client-address-input" placeholder="Enter address" data-id=""></textarea>
+			</div>
+			<button class="submit-button" id="submit-client">Submit</button>
+			</div>`);
+		} else if ($('.client-item').hasClass('client-card')) {
+			$('#clients').prepend(`<div class="new client-item client-card">
+			<div class="client-name-div">
+			<input class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value="" />
+			</div>
+			<div class="client-address-div">
+			<p>Address:</p>
+				<textarea class="new client-address" id="client-address-input" placeholder="Enter address" data-id=""></textarea>
+			</div>
+			<button class="submit-button" id="submit-client">Submit</button>
+			</div>`);
+		} else {
+			$('#clients').prepend(`<div class="new client-item client-card">
+			<div class="client-name-div">
+			<input class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value="" />
+			</div>
+			<div class="client-address-div">
+			<p>Address:</p>
+				<textarea class="new client-address" id="client-address-input" placeholder="Enter address" data-id=""></textarea>
+			</div>
+			<button class="submit-button" id="submit-client">Submit</button>
+			</div>`);
+		}
+	});
+}
+
+function postNewClient() {
+	$('body').on('click', '#submit-client', (e) => {
+		e.preventDefault();
+		let clientObj = {
+			name: $('.client-name').val(),
+			address: $('.client-address').val()
+		};
+		$.ajax({
+			url: `/clients/${localStorage.getItem('token')}`,
+			data: JSON.stringify(clientObj),
+			type: 'POST',
+			contentType: 'application/json',
+			success: (content) => {
+				debugger
+				$('.new.client-item').append(`<button class="go-to-client" value="${content._id}">Go to client</button>
+				<button class="delete-client" data-id="${content._id}">Delete client</button>`)
+				$('.new.client-item').removeClass('new');
+				$('.new.client-name').removeClass('new');
+				$('.new.client-address').removeClass('new');
+				$('#submit-client').remove();
+			}
+		});
+	});
+}
+
 $("#clients").sortable();
 $("#clients").disableSelection();
 getClientData(renderClients); 
@@ -68,4 +138,5 @@ goToClient();
 deleteClient();
 toggleListView();
 toggleCardView();
-linkToAddNewClient();
+addNewClient();
+postNewClient();

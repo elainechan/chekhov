@@ -2,7 +2,8 @@ const Client = require('./client.model');
 const mongoose = require('mongoose');
 
 exports.getAllClients = (req, res) => {
-	Client.find().exec((err, data) => {
+  Client.find()
+  .exec((err, data) => {
 	  if (err) {
 		console.log(err);
 	  }
