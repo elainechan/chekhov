@@ -30,7 +30,6 @@ function renderCasesInTab(CASES) {
 			type: 'GET',
 			contentType: 'application/json',
 			success: (content) => {
-				//debugger
 				let dateDisplay = new Date(item.dateOpened);
 				let myRegex = /(.*)\ GMT/;
 				let match = myRegex.exec(dateDisplay);
