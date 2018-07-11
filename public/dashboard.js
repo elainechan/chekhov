@@ -6,15 +6,12 @@ function renderTasksInTab(TASKS) {
 	TASKS.forEach((item, i) => {
 		$('#tasks-content').append(
 			`<div class='task-list task-item'>
-			<div>
-			<h3>${item.name}</h3>
-			</div>
-			<div>
-			<p>Description: ${item.description}
-			</p>
-			</div>
-			<div>
-			<p>ID: ${item._id}</p>
+			<div class="task-name">
+			<h3>${item.name}</h3></div>
+			<div class="task-description"><p>${item.description}</p></div>
+			<div class="case-name"><p>${item.caseId.name}</p></div>
+			<div class="go-to-case-div">
+			<button class="go-to-case" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Go to case</button>
 			</div>
 			</div>`
 		);
@@ -27,19 +24,27 @@ function getCaseData(callback) {
 
 function renderCasesInTab(CASES) {
 	CASES.forEach((item, i) => {
+		
 		$.ajax({
 			url: `/tasks/case/${item._id}/count/${localStorage.getItem('token')}`,
 			type: 'GET',
 			contentType: 'application/json',
 			success: (content) => {
+				//debugger
+				let dateDisplay = new Date(item.dateOpened);
+				let myRegex = /(.*)\ GMT/;
+				let match = myRegex.exec(dateDisplay);
 				$('#cases-content').append(`
 				<div class="case-item">
 				<h3>${item.name}</h3>
-				<p class="task-count">Number of tasks: ${content.taskCount}</p>
-				<p>Date created: ${item.dateCreated}</p>
-				<p>ID: ${item._id}</p>
-				<button id="go-to-case-tasks" name="go-to-case-tasks" value="${item._id}">Go to case</button>
-				<button id="go-to-case-client" name="go-to-case-client" value="${item.clientId}">Go to client</button>
+				<div class="task-count" data-id="${item._id}">Task count: ${content.taskCount}
+				</div>
+				<div class="case-date">
+				<p>Opened: ${match[1]}</p>
+				</div>
+				<div class="go-to-case-div">
+				<button class="go-to-case" id="go-to-case-tasks" value="${item._id}" data-id="${item._id}">Go to case</button>
+				<button id="go-to-case-client" name="go-to-case-client" value="${item.clientId._id}">Go to client</button>
 				</div>
 				`);
 			}
@@ -47,28 +52,29 @@ function renderCasesInTab(CASES) {
 	});
 }
 
+function goToCase(CASES) {
+	$("body").on("click", ".go-to-case", function() {
+		console.log($(this).val());
+		window.location.href = `case-profile.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
+	});
+}
+
 function getClientData(callback) {
 	$.getJSON(`http://localhost:8080/clients/all/${localStorage.getItem('token')}`, callback);
 }
 
-function renderClients(CLIENTS) {
-	console.log(CLIENTS);
+function renderClientsInTab(CLIENTS) {
 	CLIENTS.forEach((item, i) => {
 		$('#clients-content').append(`
 		<div class="client-item">
+		<div class="client-name" data-id="${item._id}">
 		<h3>${item.name}</h3>
-		<p>Address: ${item.address}</p>
-		<p>ID: ${item._id}</p>
+		</div>
+		<div class="client-address" data-id="${item._id}">
+		<p>${item.address}</p>
+		</div>
 		<button name="go-to-client" value="${item._id}">Go to client</button>
 		</div>`);
-	});
-}
-
-function goToCaseTasksListener(CASES) {
-	// attach button click event to body
-	$("body").on("click", "#go-to-case-tasks", function() {
-		console.log($(this).val());
-		window.location.href = `case-profile.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 
 	});
 }
 
@@ -80,7 +86,7 @@ function goToClientCaseListener(CASES) {
 
 getTaskData(renderTasksInTab);
 getCaseData(renderCasesInTab);
-getClientData(renderClients);
+getClientData(renderClientsInTab);
 $( "#tabs" ).tabs();
-goToCaseTasksListener();
 goToClientCaseListener();
+goToCase();

@@ -271,7 +271,6 @@ function toggleSelectExistingCase() {
 }
 
 function goToCase(CASES) {
-	// attach button click event to body
 	$("body").on("click", "#go-to-case-tasks", function() {
 		console.log($(this).val());
 		window.location.href = `case-profile.html?caseId=${$(this).val()}`; // (1) passing a parameter to the URL window.location.href 

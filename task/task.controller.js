@@ -127,7 +127,7 @@ exports.editTaskName = (req, res) => {
  .then((result) => {
   // update database here
   res.status(200).json({
-    message: 'Changes have been saved.',
+    message: 'Changes to task name have been saved.',
     data: result
   });
  })
@@ -143,7 +143,7 @@ exports.editTaskDescription = (req, res) => {
   Task.findByIdAndUpdate(req.params.id, { $set:{description: req.body.description} })
   .then((result) => {
     res.status(200).json({
-      message: 'Changes have been saved.',
+      message: 'Changes to task description have been saved.',
       data: result
     });
   })
