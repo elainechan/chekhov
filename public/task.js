@@ -198,8 +198,7 @@ function addNewTask() {
 			$('#tasks').prepend(
 				`<div class="new task-item task-card">
 				<div class="task-name-div">
-				<textarea class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="">
-				</textarea>
+				<textarea class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value=""></textarea>
 				</div>
 				<div class="task-description-div">
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
@@ -221,8 +220,7 @@ function addNewTask() {
 			$('#tasks').prepend(
 				`<div class="new task-item task-list">
 				<div class="task-name-div">
-				<textarea class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="">
-				</textarea>
+				<textarea class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value=""></textarea>
 				</div>
 				<div class="task-description-div">
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
@@ -325,7 +323,6 @@ function postNewTask() {
 				type: 'POST',
 				contentType: 'application/json',
 				success: (content) => {
-					debugger
 					console.log('New task posted');
 					$('.new.task-item')
 					.append(`<div class="task-case-div">

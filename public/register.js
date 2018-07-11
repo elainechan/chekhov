@@ -13,6 +13,7 @@ $('button').click(event => {
 	})
 		.then(user => {
 			console.log(user);
+			window.location.href = `login.html`
 		})
 		.catch(err => {
 			console.log(err);

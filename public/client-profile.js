@@ -105,7 +105,6 @@ function postNewCase() {
 			type: 'POST',
 			contentType: 'application/json',
 			success: (content) => {
-				debugger
 				console.log('New case posted');
 				let dateDisplay = new Date(content.case.dateOpened);
 				let myRegex = /(.*)\ GMT/;

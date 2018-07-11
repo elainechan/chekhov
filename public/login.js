@@ -19,7 +19,7 @@ function logIn() {
 				localStorage.setItem('email', user.data.email);
 				localStorage.setItem('token', user.data.token);
 				localStorage.setItem('userId', user.data.userId);
-				window.location.href = 'task.html'
+				window.location.href = 'dashboard.html'
 			})
 			.catch(err => {
 				console.log(err);
