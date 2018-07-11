@@ -86,7 +86,6 @@ function addNewClient() {
 			<textarea class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value=""></textarea>
 			</div>
 			<div class="client-address-div">
-			<p>Address:</p>
 				<textarea class="new client-address" id="client-address-input" placeholder="Enter address" data-id=""></textarea>
 			</div>
 			<button class="submit-button" id="submit-client">Submit</button>
