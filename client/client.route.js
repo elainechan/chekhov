@@ -16,4 +16,8 @@ router.post('/:token', common.verifyToken, clientController.postNewClient);
 
 router.delete('/delete/:id/:token', common.verifyToken, clientController.deleteClientById);
 
+router.patch('/edit/:id/name/:token', common.verifyToken, clientController.editClientName);
+
+router.patch('/edit/:id/address/:token', common.verifyToken, clientController.editClientAddress);
+
 module.exports = router;

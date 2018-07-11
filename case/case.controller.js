@@ -24,7 +24,9 @@ exports.getCaseByName = (req, res) => {
 }
 
 exports.getCaseById = (req, res) => {
-	Case.findById(req.params.id).exec((err, data) => {
+  Case.findById(req.params.id)
+  .populate('clientId')
+  .exec((err, data) => {
     if (err) {
       console.log(err);
     }

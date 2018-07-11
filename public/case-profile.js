@@ -10,15 +10,23 @@ function getTasksByCase(callback) { // (3) calls endpoint to get data (calling b
 	$.getJSON(`http://localhost:8080/tasks/case/${caseId}/${localStorage.getItem('token')}`, callback);
 }
 
+function getCaseData(callback) {}
+
+function renderClientName() {}
+
 function renderTasksByCase(TASKS) { // (4) renders data in browser
 	$.ajax({
 		url: `cases/${caseId}/${localStorage.getItem('token')}`,
 		type: 'GET',
 		contentType: 'application/json',
 		success: (content) => {
-			// case name: content.name
 			caseName = content.name;
-			$('.title').append(`<h2>Case Profile: ${content.name}</h2>`)
+			$('.title').append(`<h2>${content.name}</h2>
+			<div class="title-client">
+			<h2>${content.clientId.name}</h2>
+			<button class="go-to-client" name="go-to-client" value="${content.clientId._id}">Go to client</button>
+			<div>
+			`)
 		}
 	});
 	TASKS.forEach((item, i) => {
@@ -31,12 +39,15 @@ function renderTasksByCase(TASKS) { // (4) renders data in browser
 		<div class="task-description-div">
 		<textarea class="task-description" id="task-description-input" data-id="${item._id}">${item.description}</textarea>
 		</div>
-		<div class="task-case-div">
-		${item.caseId.name}
-		</div>
 		<button class="delete-task" data-id=${item._id}>Delete task</button>
 		</div>`);
 	}); // renders data
+}
+
+function goToClient() {
+	$("body").on("click", ".go-to-client", function() {
+		window.location.href = `client-profile.html?clientId=${$(this).val()}`;
+	});
 }
 
 function toggleListView() {
@@ -155,8 +166,6 @@ function addNewTask() {
 			<div class="task-description-div">
 			<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
 			</div>
-			<div class="task-case-div" data-id="${caseId}">${caseName}
-			</div>
 			<button class="submit-button" id="submit-task">Submit</button>
 			</div>`
 			);
@@ -169,8 +178,6 @@ function addNewTask() {
 				<div class="task-description-div">
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
 				</div>
-				<div class="task-case-div" data-id="${caseId}">${caseName}
-			</div>
 				<button class="submit-button" id="submit-task">Submit</button>
 				</div>`
 			);
@@ -231,5 +238,6 @@ editTaskDescription();
 patchOnEnter();
 addNewTask();
 postNewTask();
+goToClient();
 $("#tasks").sortable();
 $("#tasks").disableSelection();

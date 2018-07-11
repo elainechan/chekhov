@@ -150,21 +150,22 @@ function patchOnEnter() {
 	});
 	$('body')
 	.on('keypress', '#task-description-input', (e) => {
-		if (e.keyCode === 13) {
-			console.log('description entered');
-		let taskId = $(e.target).attr('data-id');
-		console.log(taskId);
-		let value = $(e.target).val()
-		let data = JSON.stringify({ description: value });
-		$.ajax({
-			url: `/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
-			data: data,
-			type: 'PATCH',
-			contentType: 'application/json',
-			success: (content) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		} else if (e.keyCode === 13) {
+			let taskId = $(e.target).attr('data-id');
+			console.log(taskId);
+			let value = $(e.target).val()
+			let data = JSON.stringify({ description: value });
+			$.ajax({
+				url: `/tasks/edit/${taskId}/description/${localStorage.getItem('token')}`,
+				data: data,
+				type: 'PATCH',
+				contentType: 'application/json',
+				success: (content) => {
 				console.log(content);
-			}
-		});
+				}
+			});
 		}
 	});
 }
@@ -346,33 +347,6 @@ function postNewTask() {
 		}	
 	});
 }
-			/*
-		$.ajax({
-			url: `/tasks/${localStorage.getItem('token')}`,
-			data: JSON.stringify(taskObj),
-			type: 'POST',
-			contentType: 'application/json',
-			success: (content) => {
-				debugger
-				console.log('New task posted');
-				$('.new.task-item')
-				.append(`<div class="task-case-div">
-				${content.case.name}
-				</div>
-				<div class="go-to-case">
-				<button class="case-button" id="go-to-case-tasks" value="${content.case._id}" data-id="${content.case._id}">Go to case</button>
-				</div>
-				<button class="delete-task" data-id=${content.task._id}>Delete task</button>
-				</div>`);
-				$('.new.task-item').removeClass('new');
-				$('.new-case-div').remove();
-				$('.case-selection-div').remove();
-				$('.toggle-buttons').remove();
-				$('#submit-task').remove();
-			}
-		});
-		*/
-
 
 getTaskData(renderTasks);
 toggleCardView();

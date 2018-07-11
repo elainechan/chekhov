@@ -8,12 +8,11 @@ function renderClients(CLIENTS) {
 		$('#clients').append(`
 		<div class="client-item">
 		<div class="client-name-div">
-		<input class="client-name" id="client-name-input" data-id="" value="${item.name}" />
+		<textarea class="client-name" id="client-name-input" data-id="${item._id}">${item.name}</textarea>
 		</div>
 		<div class="client-address-div">
-			<p>Address:</p>
-				<textarea class="client-address" id="client-address-input" value="" data-id="">${item.address}</textarea>
-			</div>
+		<textarea class="client-address" id="client-address-input" value="" data-id="${item._id}">${item.address}</textarea>
+		</div>
 		<button class="go-to-client" value="${item._id}">Go to client</button>
 		<button class="delete-client" data-id="${item._id}">Delete client</button>
 		</div>`);
@@ -30,7 +29,6 @@ function goToClient(CLIENTS) {
 function deleteClient() {
 	$('body').on('click', '.delete-client', (e) => {
 		e.preventDefault();
-		debugger
 		let clientId = e.currentTarget.attributes[1].nodeValue;
 		e.currentTarget.parentElement.remove();
 		$.ajax({
@@ -59,23 +57,15 @@ function toggleCardView() {
 	});
 }
 
-function linkToAddNewClient() {
-	$('.new-client-button').click((e) => {
-		e.preventDefault();
-		window.location = 'http://localhost:8080/new-client.html'
-	});
-}
-
 function addNewClient() {
 	$('body').on('click', '.new-client-button', (e) => {
 		e.preventDefault();
 		if($('.client-item').hasClass('client-list')) {
 			$('#clients').prepend(`<div class="new client-item client-list">
 			<div class="client-name-div">
-			<input class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value="" />
+			<textarea class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value=""></textarea>
 			</div>
 			<div class="client-address-div">
-			<p>Address:</p>
 				<textarea class="new client-address" id="client-address-input" placeholder="Enter address" data-id=""></textarea>
 			</div>
 			<button class="submit-button" id="submit-client">Submit</button>
@@ -83,10 +73,9 @@ function addNewClient() {
 		} else if ($('.client-item').hasClass('client-card')) {
 			$('#clients').prepend(`<div class="new client-item client-card">
 			<div class="client-name-div">
-			<input class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value="" />
+			<textarea class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value=""></textarea>
 			</div>
 			<div class="client-address-div">
-			<p>Address:</p>
 				<textarea class="new client-address" id="client-address-input" placeholder="Enter address" data-id=""></textarea>
 			</div>
 			<button class="submit-button" id="submit-client">Submit</button>
@@ -94,7 +83,7 @@ function addNewClient() {
 		} else {
 			$('#clients').prepend(`<div class="new client-item client-card">
 			<div class="client-name-div">
-			<input class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value="" />
+			<textarea class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value=""></textarea>
 			</div>
 			<div class="client-address-div">
 			<p>Address:</p>
@@ -119,7 +108,6 @@ function postNewClient() {
 			type: 'POST',
 			contentType: 'application/json',
 			success: (content) => {
-				debugger
 				$('.new.client-item').append(`<button class="go-to-client" value="${content._id}">Go to client</button>
 				<button class="delete-client" data-id="${content._id}">Delete client</button>`)
 				$('.new.client-item').removeClass('new');
@@ -131,6 +119,94 @@ function postNewClient() {
 	});
 }
 
+function editClientName() {
+	$('body')
+	.not('.new')
+	.on('blur', '#client-name-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		console.log(e.target.value);
+		let clientId = $(e.target).attr('data-id');
+		let data = JSON.stringify({ name: e.target.value });
+		$.ajax({
+			url: `/clients/edit/${clientId}/name/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+	});
+}
+
+function editClientAddress() {
+	$('body')
+	.not('.new')
+	.on('blur', '#client-address-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		let clientId = $(e.target).attr('data-id');
+		let data = JSON.stringify({
+			address: e.target.value
+		});
+		$.ajax({
+			url: `clients/edit/${clientId}/address/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		})
+	})
+}
+
+function patchOnEnter() {
+	$('body')
+	.on('keypress', '#client-address-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		else if (e.keyCode === 13) {
+			console.log('Address entered');
+		let clientId = $(e.target).attr('data-id');
+		let value = $(e.target).val()
+		let data = JSON.stringify({ address: value });
+		$.ajax({
+			url: `clients/edit/${clientId}/address/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+		}
+	});
+	$('body')
+	.on('keypress', '#client-name-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		} else if (e.keyCode === 13) {
+			let clientId = $(e.target).attr('data-id');
+			let value = $(e.target).val()
+			let data = JSON.stringify({ name: value });
+			$.ajax({
+				url: `clients/edit/${clientId}/name/${localStorage.getItem('token')}`,
+				data: data,
+				type: 'PATCH',
+				contentType: 'application/json',
+				success: (content) => {
+					console.log(content);
+				}
+			});
+		}
+	})
+}
+
 $("#clients").sortable();
 $("#clients").disableSelection();
 getClientData(renderClients); 
@@ -140,3 +216,6 @@ toggleListView();
 toggleCardView();
 addNewClient();
 postNewClient();
+editClientName();
+editClientAddress();
+patchOnEnter();
