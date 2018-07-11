@@ -27,7 +27,7 @@ function renderCasesByClient(CASES) {
 		$('#cases').append(`
 		<div class="case-item case-card">
 		<h3>${item.name}</h3>
-		<p>Date created: ${match[1]}</p>
+		<p>Opened: ${match[1]}</p>
 		<button id="go-to-case-tasks" name="go-to-case-tasks" value="${item._id}">Go to case</button>
 		<button class="delete-case" data-id="${item._id}">Delete case</button>
 		</div>
