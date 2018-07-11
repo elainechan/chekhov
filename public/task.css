@@ -139,6 +139,13 @@ header {
 	left: 0;
 	z-index: 1;
 }
+h1>a {
+	color: white;
+}
+a {
+	text-decoration: none;
+}
+
 button {
 	padding: 10px;
 	margin: 10px;

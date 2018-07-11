@@ -41,11 +41,9 @@ h1 {
 	font-family: 'Ubuntu', sans-serif;
 	color: white;
 }
-
 h1>a {
 	color: white;
 }
-
 a {
 	text-decoration: none;
 }
@@ -62,6 +60,7 @@ header {
 	left: 0;
 	z-index: 1;
 }
+
 p {
 	font-family: 'Roboto', sans-serif;
 }
