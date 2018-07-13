@@ -41,7 +41,7 @@ function renderTasks(TASKS) {
 		<button class="delete-task" data-id="${item._id}">Delete task</button>
 		</div>`);
 		getCaseData(createCaseSelection);
-		$(`.select-existing-case option[value=${item.caseId._id}]`).attr('selected', true);
+		$(`.select-existing-case > option[value=${item.caseId._id}]`).attr('selected', true);
 	});
 
 }
