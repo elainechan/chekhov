@@ -348,18 +348,12 @@ function postNewTask() {
 					$('.case-option').forEach((option) => {
 						console.log(option.val());
 						
-					})
-					if ($())
-					
+					})					
 				}
 			});
 
 		}	
 	});
-}
-
-function editCase() {
-	$()
 }
 
 getTaskData(renderTasks);
