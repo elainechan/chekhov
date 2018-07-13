@@ -30,6 +30,9 @@ function renderTasks(TASKS) {
 		<textarea class="task-description" id="task-description-input" data-id="${item._id}">${item.description}</textarea>
 		</div>
 		<div class="task-case-div" data-id="${item.caseId._id}">
+		<div class="case-selection-div mdc-select" style="display:none;">
+		<select class="select-existing-case"></select>
+		</div>
 		<textarea data-id="${item.caseId._id}">${item.caseId.name}</textarea>
 		</div>
 		<div class="go-to-case">
@@ -37,7 +40,10 @@ function renderTasks(TASKS) {
 		</div>
 		<button class="delete-task" data-id="${item._id}">Delete task</button>
 		</div>`);
-	});	
+		getCaseData(createCaseSelection);
+		$(`.select-existing-case option[value=${item.caseId._id}]`).attr('selected', true);
+	});
+
 }
 
 function deleteTask() {
@@ -340,12 +346,13 @@ function postNewTask() {
 					$('.case-selection-div').remove();
 					$('.toggle-buttons').remove();
 					$('#submit-task').remove();
+					getCaseData(createCaseSelection);
+					$('.case-option').forEach((option) => {
+						console.log(option.val());
+					})
 				}
 			});
-			getCaseData(createCaseSelection);
-			$('.case-option').forEach((option) => {
-				console.log(option.val());
-			})
+
 		}	
 	});
 }
