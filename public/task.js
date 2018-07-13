@@ -30,15 +30,14 @@ function renderTasks(TASKS) {
 		<textarea class="task-description" id="task-description-input" data-id="${item._id}">${item.description}</textarea>
 		</div>
 		<div class="task-case-div" data-id="${item.caseId._id}">
-		${item.caseId.name}
+		<textarea data-id="${item.caseId._id}">${item.caseId.name}</textarea>
 		</div>
 		<div class="go-to-case">
 		<button class="case-button" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Go to case</button>
 		</div>
 		<button class="delete-task" data-id="${item._id}">Delete task</button>
 		</div>`);
-	});
-	
+	});	
 }
 
 function deleteTask() {
@@ -53,8 +52,7 @@ function deleteTask() {
 			success: (content) => {
 				console.log("Task deleted.")
 			}
-		});
-		
+		});	
 	});
 }
 
@@ -245,7 +243,7 @@ function addNewTask() {
 
 function createCaseSelection(CASES) {
 	CASES.forEach((data => {
-		$(".select-existing-case").append(`<option value="${data._id}">${data.name}</option>`);
+		$(".select-existing-case").append(`<option class="case-option" value="${data._id}">${data.name}</option>`);
 	}));
 }
 
@@ -258,6 +256,7 @@ function toggleCreateNewCase() {
 		$('.existing-case-button').show();
 	});
 }
+
 function toggleSelectExistingCase() {
 	$('body').on('click','.existing-case-button',(e) => {
 		e.preventDefault();
@@ -325,8 +324,11 @@ function postNewTask() {
 				success: (content) => {
 					console.log('New task posted');
 					$('.new.task-item')
-					.append(`<div class="task-case-div">
-					${content.caseName}
+					.append(`<div class="task-case-div" data-id="${content.task.caseId}">
+					<div class="case-selection-div mdc-select" style="display:none;">
+					<select class="select-existing-case"></select>
+					</div>
+					<textarea data-id="${content.task.caseId}">${content.caseName}
 					</div>
 					<div class="go-to-case">
 					<button class="case-button" id="go-to-case-tasks" value="${content.task.caseId}" data-id="${content.task.caseId}">Go to case</button>
@@ -340,8 +342,16 @@ function postNewTask() {
 					$('#submit-task').remove();
 				}
 			});
+			getCaseData(createCaseSelection);
+			$('.case-option').forEach((option) => {
+				console.log(option.val());
+			})
 		}	
 	});
+}
+
+function editCase() {
+	$()
 }
 
 getTaskData(renderTasks);
