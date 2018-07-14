@@ -145,3 +145,20 @@ exports.putClientByCaseId = (req, res) => {
     });
   });
 }
+
+exports.patchCaseName = (req, res) => {
+  Task.findByIdAndUpdate(req.params.id, { $set:{name: req.body.name } })
+  .then((result) => {
+   // update database here
+   res.status(200).json({
+     message: 'Changes to case name have been saved.',
+     data: result
+   });
+  })
+  .catch((err) => {
+   res.status(500).json({
+     message: 'Something happened while finding case by ID and updating case name.',
+     data: err
+   });
+  });
+}
