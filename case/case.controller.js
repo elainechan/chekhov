@@ -129,3 +129,19 @@ exports.deleteCaseById = (req, res) => {
 
   });
 }
+
+exports.putClientByCaseId = (req, res) => {
+  Case.findByIdAndUpdate(req.params.id, { $set:{clientId: mongoose.Types.ObjectId(req.body.clientId) } })
+  .then((result) => {
+    res.status(200).json({
+      message: 'Changes to case client have been saved.',
+      data: result
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      message: 'Something happened while finding case by ID and updating client.',
+      data: err
+    });
+  });
+}
