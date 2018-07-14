@@ -14,22 +14,40 @@ function renderCases(CASES) {
 		let dateDisplay = new Date(item.dateOpened);
 		let myRegex = /(.*)\ GMT/;
 		let match = myRegex.exec(dateDisplay);
-		$('#cases').append(`
-		<div class="case-item case-card" data-id="${item._id}" client="${item.clientId._id}">
-		<div class="case-name-div">
-		<textarea class="case-name" data-id="${item._id}" value="${item.name}">${item.name}</textarea>
-		</div>
-		<div class="case-client">
-		<div class="client-selection-div mdc-select">
-		<select class="select-existing-client"></select>
-		</div>
-		<div class="case-client-name" data-id="${item.clientId._id}">${item.clientId.name}</div>
-		</div>
-		<div class="case-date">Opened: ${match[1]}</div>
-		<button id="go-to-case" name="go-to-case" value="${item._id}">Go to case</button>
-		<button id="go-to-client" name="go-to-client" value="${item.clientId._id}">Go to client</button>
-		<button class="delete-case" data-id="${item._id}">Delete case</button>
-		</div>`);
+		if (item.clientId) {
+			$('#cases').append(`
+			<div class="case-item case-card" data-id="${item._id}" client="${item.clientId._id}">
+			<div class="case-name-div">
+			<textarea class="case-name" data-id="${item._id}" value="${item.name}">${item.name}</textarea>
+			</div>
+			<div class="case-client">
+			<div class="client-selection-div mdc-select">
+			<select class="select-existing-client"></select>
+			</div>
+			</div>
+			<div class="case-date">Opened: ${match[1]}</div>
+			<button id="go-to-case" name="go-to-case" value="${item._id}">Go to case</button>
+			<button id="go-to-client" name="go-to-client" value="${item.clientId._id}">Go to client</button>
+			<button class="delete-case" data-id="${item._id}">Delete case</button>
+			</div>`);
+		} else {
+			$('#cases').append(`
+			<div class="case-item case-card" data-id="${item._id}" client="">
+			<div class="case-name-div">
+			<textarea class="case-name" data-id="${item._id}" value="${item.name}">${item.name}</textarea>
+			</div>
+			<div class="case-client">
+			<div class="client-selection-div mdc-select">
+			<select class="select-existing-client">
+			<option class="client-option" selected>Select client</option>
+			</select>
+			</div>
+			</div>
+			<div class="case-date">Opened: ${match[1]}</div>
+			<button id="go-to-case" name="go-to-case" value="${item._id}">Go to case</button>
+			<button class="delete-case" data-id="${item._id}">Delete case</button>
+			</div>`);
+		}
 	});
 	getClientData(createClientSelection);
 }
@@ -148,14 +166,13 @@ function postNewCase() {
 				$('.new.case-item')
 				.append(`<div class="case-date">Opened: ${match[1]}</div>
 				<div class="case-client" data-id="${content.case.clientId}">
-				<div class="case-client-name">${content.client.name}
-				</div>
 				</div>
 				<button id="go-to-case" name="go-to-case" value="${content.case._id}">Go to case</button>
 				<button id="go-to-client" name="go-to-client" value="${content.case.clientId}">Go to client</button>
 				<button class="delete-case" data-id="${content.case._id}">Delete case</button>
 				</div>
 				`);
+				$('.client-selection-div').show();
 				$('.new.case-item').attr('data-id', `${content.case._id}`)
 				$('.new.case-item').attr('client', `${content.case.clientId}`);
 				$('.new.case-item').removeClass('new');
@@ -260,21 +277,28 @@ function editCaseClient() {
 		if ($(e.currentTarget).parent().parent().hasClass('new')) {
 			return;
 		}
-		let selected = $(e.currentTarget).find(':selected');
-		let caseId = $(e.currentTarget).parent().parent().parent().attr('data-id');
-		let clientId = $(e.currentTarget).find(':selected').attr('value');
-		let data = JSON.stringify({
-			clientId: clientId
-		});
-		$.ajax({
-			url: `cases/edit/${caseId}/client/${localStorage.getItem('token')}`,
-			data: data,
-			type: 'PUT',
-			contentType: 'application/json',
-			success: (content) => {
-				console.log(content);
+		let selectedContent = $(e.currentTarget).find(':selected').text();
+		let dummyOption = $(e.currentTarget).find(".client-option:contains('Select client')");
+		if (selectedContent !== 'Select client') {
+			let selected = $(e.currentTarget).find(':selected');
+			let caseId = $(e.currentTarget).parent().parent().parent().attr('data-id');
+			let clientId = $(e.currentTarget).find(':selected').attr('value');
+			let data = JSON.stringify({
+				clientId: clientId
+			});
+			$.ajax({
+				url: `cases/edit/${caseId}/client/${localStorage.getItem('token')}`,
+				data: data,
+				type: 'PUT',
+				contentType: 'application/json',
+				success: (content) => {
+					console.log(content);
+				}
+			});
+			if (dummyOption) {
+				dummyOption.remove();
 			}
-		})
+		}
 	});
 }
 

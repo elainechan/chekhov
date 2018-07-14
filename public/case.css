@@ -156,7 +156,7 @@ input.new-client-input {
 select {
 	font-size: 16px;
 	background:#fe5c30;
-	color: #bdbdbd;
+	color: white;
 	border: none;
 	appearance: none;
 	-moz-appearance: none;
