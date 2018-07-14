@@ -109,9 +109,16 @@ exports.postNewCase = (req, res) => {
         req.case = data; // save entire case
         console.log(`Client ID from body (req.body.clientId): ${req.body.clientId}`);
         console.log(`Client ID from case (req.case.clientId): ${req.case.clientId}`);
-        return res.json({
-          case: data
-        });
+        Client.findById(req.body.clientId, (err, data) => {
+          if (err) {
+            handleError(err);
+            return;
+          }
+          res.status(201).json({
+            case: req.case,
+            client: data
+          })
+        })
       }
     });
   }
@@ -147,7 +154,7 @@ exports.putClientByCaseId = (req, res) => {
 }
 
 exports.patchCaseName = (req, res) => {
-  Task.findByIdAndUpdate(req.params.id, { $set:{name: req.body.name } })
+  Case.findByIdAndUpdate(req.params.id, { $set:{name: req.body.name } })
   .then((result) => {
    // update database here
    res.status(200).json({

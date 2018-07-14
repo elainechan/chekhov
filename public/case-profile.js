@@ -12,8 +12,6 @@ function getTasksByCase(callback) { // (3) calls endpoint to get data (calling b
 
 function getCaseData(callback) {}
 
-function renderClientName() {}
-
 function renderTasksByCase(TASKS) { // (4) renders data in browser
 	$.ajax({
 		url: `cases/${caseId}/${localStorage.getItem('token')}`,
@@ -21,7 +19,8 @@ function renderTasksByCase(TASKS) { // (4) renders data in browser
 		contentType: 'application/json',
 		success: (content) => {
 			caseName = content.name;
-			$('.title').append(`<h2>${content.name}</h2>
+			$('.title').append(`
+			<h2>${content.name}</h2>
 			<div class="title-client">
 			<h2>${content.clientId.name}</h2>
 			<button class="go-to-client" name="go-to-client" value="${content.clientId._id}">Go to client</button>

@@ -122,6 +122,7 @@ function postNewCase() {
 		/* configure the json of request */
 		console.log(`New case name: ${$('.case-name').val()}`);
 		if ($(".new-client-div").attr("style") === "display: none;") {
+			debugger
 			var caseObj = {
 				name: $('.case-name').val(),
 				clientId: $('option:selected', this).attr('value')
@@ -139,6 +140,7 @@ function postNewCase() {
 			type: 'POST',
 			contentType: 'application/json',
 			success: (content) => {
+				debugger
 				console.log('New case posted');
 				let dateDisplay = new Date(content.case.dateOpened);
 				let myRegex = /(.*)\ GMT/;
@@ -146,11 +148,7 @@ function postNewCase() {
 				$('.new.case-item')
 				.append(`<div class="case-date">Opened: ${match[1]}</div>
 				<div class="case-client" data-id="${content.case.clientId}">
-				<div class="client-selection-div mdc-select">
-				<select class="select-existing-client"></select>
-				</div>
-				<div class="case-client-name">
-				Client: ${content.clientName}
+				<div class="case-client-name">${content.client.name}
 				</div>
 				</div>
 				<button id="go-to-case" name="go-to-case" value="${content.case._id}">Go to case</button>
@@ -162,10 +160,9 @@ function postNewCase() {
 				$('.new.case-item').attr('client', `${content.case.clientId}`);
 				$('.new.case-item').removeClass('new');
 				$('.new-client-div').remove();
-				$('.client-selection-div').remove();
 				$('.toggle-buttons').remove();
 				$('#submit-case').remove();
-				
+				getClientData(createClientSelection);
 			}
 		});
 	});
@@ -238,6 +235,7 @@ function editCase() {
 	$('body')
 	.not('.new')
 	.on('blur', '#task-name-input', (e) => {
+		e.preventDefault;
 		if ($(e.target).hasClass('new')) {
 			return;
 		}
@@ -259,6 +257,9 @@ function editCase() {
 function editCaseClient() {
 	$('body').on('change', '.select-existing-client', (e) => {
 		e.preventDefault;
+		if ($(e.currentTarget).parent().parent().hasClass('new')) {
+			return;
+		}
 		let selected = $(e.currentTarget).find(':selected');
 		let caseId = $(e.currentTarget).parent().parent().parent().attr('data-id');
 		let clientId = $(e.currentTarget).find(':selected').attr('value');
@@ -271,7 +272,6 @@ function editCaseClient() {
 			type: 'PUT',
 			contentType: 'application/json',
 			success: (content) => {
-				debugger
 				console.log(content);
 			}
 		})
@@ -285,9 +285,10 @@ function editCaseName() {
 		if ($(e.target).hasClass('new')) {
 			return;
 		}
-		console.log(e.target.value);
 		let caseId = $(e.target).attr('data-id');
-		let data = JSON.stringify({ name: e.target.value });
+		let caseName = $(e.target).val();
+		let data = JSON.stringify({ name: caseName });
+		debugger
 		$.ajax({
 			url: `/cases/edit/${caseId}/name/${localStorage.getItem('token')}`,
 			data: data,
@@ -297,6 +298,29 @@ function editCaseName() {
 				console.log(content);
 			}
 		});
+	});
+}
+
+function patchOnEnter() {
+	$('body').on('keypress', '.case-name', (e) => {
+		e.preventDefault;
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		else if (e.keyCode === 13) {
+			let caseId = $(e.target).attr('data-id');
+			let caseName = $(e.target).val();
+			let data = JSON.stringify({name: caseName});
+			$.ajax({
+				url: `/cases/edit/${caseId}/name/${localStorage.getItem('token')}`,
+				data: data,
+				type: 'PATCH',
+				contentType: 'application/json',
+				success: (content) => {
+					console.log(content);
+				}
+			});
+		}
 	});
 }
 
@@ -312,6 +336,7 @@ toggleSelectExistingClient();
 postNewCase();
 editCaseClient();
 editCaseName();
+patchOnEnter();
 $("#cases").sortable();
 $("#cases").disableSelection();
 // calling REST returns an object/JSON

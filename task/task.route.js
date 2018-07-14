@@ -19,9 +19,9 @@ router.get('/case/:id/:token', common.verifyToken, taskController.getTasksByCase
 
 router.get('/user/:id/:token', common.verifyToken, taskController.getTasksByUserId);
 
-router.patch('/edit/:id/name/:token', common.verifyToken, taskController.editTaskName);
+router.patch('/edit/:id/name/:token', common.verifyToken, taskController.patchTaskName);
 
-router.patch('/edit/:id/description/:token', common.verifyToken, taskController.editTaskDescription);
+router.patch('/edit/:id/description/:token', common.verifyToken, taskController.patchTaskDescription);
 
 router.put('/edit/:id/case/:token', common.verifyToken, taskController.putCaseByTaskId);
 

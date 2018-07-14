@@ -23,6 +23,6 @@ router.delete('/delete/:id/:token', common.verifyToken, caseController.deleteCas
 
 router.put('/edit/:id/client/:token', common.verifyToken, caseController.putClientByCaseId);
 
-router.patch('edit/:id/name/:token', common.verifyToken, caseController.patchCaseName);
+router.patch('/edit/:id/name/:token', common.verifyToken, caseController.patchCaseName);
 
 module.exports = router;
