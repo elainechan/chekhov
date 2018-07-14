@@ -127,15 +127,15 @@ function editTaskDescription() {
 function patchOnEnter() {
 	$('body')
 	.on('keypress', '#task-name-input', (e) => {
+		e.preventDefault;
 		if ($(e.target).hasClass('new')) {
 			return;
 		}
 		else if (e.keyCode === 13) {
 			console.log('name entered');
 		let taskId = $(e.target).attr('data-id');
-		console.log(taskId);
-		let value = $(e.target).val()
-		let data = JSON.stringify({ name: value });
+		let caseName = $(e.target).val();
+		let data = JSON.stringify({ name: caseName });
 		$.ajax({
 			url: `/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
 			data: data,
@@ -170,8 +170,13 @@ function patchOnEnter() {
 }
 
 function editTaskCase() {
-	$('body').on('change', '.select-existing-case', (e) => {
+	$('body')
+	.not('.new')
+	.on('change', '.select-existing-case', (e) => {
 		e.preventDefault;
+		if ($(e.currentTarget).parent().parent().hasClass('new')) {
+			return;
+		}
 		let selected = $(e.currentTarget).find(':selected');
 		let taskId = $(e.currentTarget).parent().parent().parent().attr('data-id');
 		let caseId = $(e.currentTarget).find(':selected').attr('value');
@@ -381,7 +386,6 @@ function postNewTask() {
 					})					
 				}
 			});
-
 		}	
 	});
 }

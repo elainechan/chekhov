@@ -82,7 +82,6 @@ exports.postNewTask = (req, res) => {
           task: req.task,
           case: data
         });
-        //console.log(data);
       });
     });
   }
@@ -122,7 +121,7 @@ exports.getTasksByUserId = (req, res) => {
 	  return res.send(data);
 	})
 }
-exports.editTaskName = (req, res) => {
+exports.patchTaskName = (req, res) => {
   Task.findByIdAndUpdate(req.params.id, { $set:{name: req.body.name } })
  .then((result) => {
   // update database here
@@ -139,7 +138,7 @@ exports.editTaskName = (req, res) => {
  });
 }
 
-exports.editTaskDescription = (req, res) => {
+exports.patchTaskDescription = (req, res) => {
   Task.findByIdAndUpdate(req.params.id, { $set:{description: req.body.description} })
   .then((result) => {
     res.status(200).json({
