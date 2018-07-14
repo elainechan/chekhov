@@ -30,7 +30,6 @@ function renderTasks(TASKS) {
 		<div class="case-selection-div mdc-select">
 		<select class="select-existing-case"></select>
 		</div>
-		<textarea data-id="${item.caseId._id}">${item.caseId.name}</textarea>
 		</div>
 		<div class="go-to-case">
 		<button class="case-button" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Go to case</button>
@@ -207,11 +206,13 @@ function addNewTask() {
 				<div class="task-description-div">
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
 				</div>
+				<div class="task-case-div">
 				<div class="case-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-case"></select>
 				</div>
 				<div class="new-case-div">
 				<input class="new-case-input" placeholder="Enter new case name">
+				</div>
 				</div>
 				<div class="toggle-buttons">
 				<button class="existing-case-button">Select Existing Case</button>
@@ -229,11 +230,13 @@ function addNewTask() {
 				<div class="task-description-div">
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
 				</div>
+				<div class="task-case-div">
 				<div class="case-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-case"></select>
 				</div>
 				<div class="new-case-div">
 				<input class="new-case-input" placeholder="Enter new case name">
+				</div>
 				</div>
 				<div class="toggle-buttons">
 				<button class="existing-case-button">Select Existing Case</button>
@@ -251,11 +254,13 @@ function addNewTask() {
 				<div class="task-description-div">
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
 				</div>
+				<div class="task-case-div">
 				<div class="case-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-case"></select>
 				</div>
 				<div class="new-case-div">
 				<input placeholder="Enter new case name">
+				</div>
 				</div>
 				<div class="toggle-buttons">
 				<button class="existing-case-button">Select Existing Case</button>
@@ -333,9 +338,14 @@ function postNewTask() {
 				contentType: 'application/json',
 				success: (content) => {
 					console.log('New task posted');
+					$('.new.task-item > .task-case-div').remove();
 					$('.new.task-item')
 					.append(`
-					<div class="task-case-div">${content.case.name}</div>
+					<div class="task-case-div">
+					<div class="case-selection-div mdc-select">
+					<select class="select-existing-case"></select>
+					</div>
+					</div>
 					<div class="go-to-case">
 					<button class="case-button" id="go-to-case-tasks" value="${content.case._id}" data-id="${content.case._id}">Go to case</button>
 					</div>
@@ -343,20 +353,19 @@ function postNewTask() {
 					</div>`);
 					$('.new.task-item').attr('data-id', `${content.task._id}`)
 					$('.new.task-item').removeClass('new');
-					$('.new-case-div').remove();
-					//$('.case-selection-div').remove();
-					$()
 					$('.toggle-buttons').remove();
 					$('#submit-task').remove();
+					getCaseData(createCaseSelection);
 				}
 			});
 		} else {
 			// new case
+			let caseName = $(".new-case-input").val();
 			var taskObj = {
 				name: $('.task-name').val(),
 				description: $('.task-description').val(),
 				caseId: null,
-				caseName: $(".new-case-input").val()
+				caseName: caseName
 			};
 			$.ajax({
 				url: `/tasks/${localStorage.getItem('token')}`,
@@ -365,9 +374,13 @@ function postNewTask() {
 				contentType: 'application/json',
 				success: (content) => {
 					console.log('New task posted');
+					$('.new.task-item > .task-case-div').remove();
 					$('.new.task-item')
-					.append(`<div class="task-case-div" data-id="${content.task.caseId}">
-					<textarea data-id="${content.task.caseId}">${content.caseName}
+					.append(`
+					<div class="task-case-div">
+					<div class="case-selection-div mdc-select">
+					<select class="select-existing-case"></select>
+					</div>
 					</div>
 					<div class="go-to-case">
 					<button class="case-button" id="go-to-case-tasks" value="${content.task.caseId}" data-id="${content.task.caseId}">Go to case</button>
@@ -375,15 +388,9 @@ function postNewTask() {
 					<button class="delete-task" data-id="${content.task._id}">Delete task</button>
 					</div>`);
 					$('.new.task-item').removeClass('new');
-					$('.new-case-div').remove();
-					// $('.case-selection-div').remove();
 					$('.toggle-buttons').remove();
 					$('#submit-task').remove();
 					getCaseData(createCaseSelection);
-					$('.case-option').forEach((option) => {
-						console.log(option.val());
-						
-					})					
 				}
 			});
 		}	
