@@ -23,6 +23,8 @@ router.patch('/edit/:id/name/:token', common.verifyToken, taskController.editTas
 
 router.patch('/edit/:id/description/:token', common.verifyToken, taskController.editTaskDescription);
 
+router.put('/edit/:id/case/:token', common.verifyToken, taskController.patchCaseByTaskId);
+
 router.get('/case/:caseId/count/:token', common.verifyToken, taskController.getNumberOfTasksByCaseId);
 
 router.delete('/delete/:id/:token', common.verifyToken, taskController.deleteTaskById);

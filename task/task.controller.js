@@ -133,7 +133,7 @@ exports.editTaskName = (req, res) => {
  })
  .catch((err) => {
   res.status(500).json({
-    message: 'Something happened while finding task by ID and updating.',
+    message: 'Something happened while finding task by ID and updating task name.',
     data: err
   });
  });
@@ -149,8 +149,23 @@ exports.editTaskDescription = (req, res) => {
   })
   .catch((err) => {
     res.status(500).json({
-      message: 'Something happened while finding task by ID and updating.',
+      message: 'Something happened while finding task by ID and updating task description.',
       data: err
+    });
+  });
+}
+
+exports.putCaseByTaskId = (req, res) => {
+  Task.findByIdAndUpdate(req.params.id, {$set:{caseId: mongoose.Types.ObjectId(req.body.caseId)}})
+  .then((result) => {
+    res.status(200).json({
+      message: 'Changes to task case have been saved.',
+      data: result
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      message: 'Something happened while finding task by ID and updating case.'
     });
   });
 }
@@ -179,4 +194,16 @@ exports.deleteTaskById = (req, res) => {
   });
 
   });
+}
+
+exports.patchCaseByTaskId = (req, res) => {
+  Task.findByIdAndUpdate(req.params.id, (err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.status(200).json({
+      message: "Task case has been updated.",
+      data: data
+    })
+  })
 }

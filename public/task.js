@@ -1,7 +1,4 @@
 'use strict';
-// when working locally, comment out line 3, vice versa
-// const url = `http://localhost:8080`;
-//const url = `https://chekhov.herokuapp.com`;
 
 function getTaskData(callback) {
 	$.getJSON(`/tasks/all/${localStorage.getItem('token')}`, callback);
@@ -21,7 +18,7 @@ function renderTasks(TASKS) {
 			}
 		}
 		$('#tasks').append(`
-		<div class="task-list task-item">
+		<div class="task-list task-item" data-id="${item._id}" case="${item.caseId._id}">
 		<div class="task-name-div">
 		<textarea class="task-name" id="task-name-input" data-id="${item._id}" value="${item.name}">${item.name}
 		</textarea>
@@ -40,10 +37,8 @@ function renderTasks(TASKS) {
 		</div>
 		<button class="delete-task" data-id="${item._id}">Delete task</button>
 		</div>`);
-		getCaseData(createCaseSelection);
-		$(`.select-existing-case > option[value=${item.caseId._id}]`).attr('selected', true);
 	});
-
+	getCaseData(createCaseSelection);
 }
 
 function deleteTask() {
@@ -174,6 +169,28 @@ function patchOnEnter() {
 	});
 }
 
+function editTaskCase() {
+	$('body').on('change', '.select-existing-case', (e) => {
+		e.preventDefault;
+		let selected = $(e.currentTarget).find(':selected');
+		let taskId = $(e.currentTarget).parent().parent().parent().attr('data-id');
+		let caseId = $(e.currentTarget).find(':selected').attr('value');
+		let data = JSON.stringify({
+			caseId: caseId
+		});
+		$.ajax({
+			url: `/tasks/edit/${taskId}/case/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PUT',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});	
+	});
+
+}
+
 function addNewTask() {
 	$('.new-task-button').click((e) => {
 		if ($('.task-item').hasClass('task-list')) {
@@ -248,9 +265,21 @@ function addNewTask() {
 }
 
 function createCaseSelection(CASES) {
-	CASES.forEach((data => {
-		$(".select-existing-case").append(`<option class="case-option" value="${data._id}">${data.name}</option>`);
-	}));
+	// for each task item
+	// if task item has case attr
+	// option selected = selected
+	let taskList = $('.task-item');
+	$(taskList).each((i, task) => {
+		let taskCaseId = $(task).attr('case');
+		let taskSelect = $(task).find('.select-existing-case')[0];
+		CASES.forEach((data => {
+			if (taskCaseId === data._id) {
+				$(taskSelect).append(`<option class="case-option" value="${data._id}" selected>${data.name}</option>`);
+			} else {
+				$(taskSelect).append(`<option class="case-option" value="${data._id}">${data.name}</option>`);
+			}
+		}));
+	});	
 }
 
 function toggleCreateNewCase() {
@@ -307,6 +336,7 @@ function postNewTask() {
 					</div>
 					<button class="delete-task" data-id="${content.task._id}">Delete task</button>
 					</div>`);
+					$('.new.task-item').attr('data-id', `${content.task._id}`)
 					$('.new.task-item').removeClass('new');
 					$('.new-case-div').remove();
 					//$('.case-selection-div').remove();
@@ -363,6 +393,7 @@ $("#tasks").sortable();
 $("#tasks").disableSelection();
 editTaskName();
 editTaskDescription();
+editTaskCase();
 addNewTask();
 goToCase(getCaseData);
 getCaseData(goToCase);

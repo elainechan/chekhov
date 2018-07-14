@@ -15,17 +15,23 @@ function renderCases(CASES) {
 		let myRegex = /(.*)\ GMT/;
 		let match = myRegex.exec(dateDisplay);
 		$('#cases').append(`
-		<div class="case-item case-card">
+		<div class="case-item case-card" data-id="${item._id}" client="${item.clientId._id}">
 		<div class="case-name-div">
 		<textarea class="case-name" id="case-name-input" data-id="${item._id}" value="${item.name}">${item.name}</textarea>
 		</div>
-		<div class="case-client-div" data-id="${item.clientId._id}">${item.clientId.name}</div>
+		<div class="case-client">
+		<div class="client-selection-div mdc-select">
+		<select class="select-existing-client"></select>
+		</div>
+		<div class="case-client-name" data-id="${item.clientId._id}">${item.clientId.name}</div>
+		</div>
 		<div class="case-date">Opened: ${match[1]}</div>
 		<button id="go-to-case" name="go-to-case" value="${item._id}">Go to case</button>
 		<button id="go-to-client" name="go-to-client" value="${item.clientId._id}">Go to client</button>
 		<button class="delete-case" data-id="${item._id}">Delete case</button>
 		</div>`);
 	});
+	getClientData(createClientSelection);
 }
 
 function deleteCase() {
@@ -50,7 +56,7 @@ function addNewCase() {
 		e.preventDefault;
 		if ($('.case-item').hasClass('case-list')) {
 			$('#cases').prepend(
-				`<div class="new case-item case-list">
+				`<div class="new case-item case-list" data-id="" client="">
 				<div class="case-name-div">
 				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
 				</div>
@@ -69,7 +75,7 @@ function addNewCase() {
 			);
 		} else if (($('.case-item').hasClass('case-card'))) {
 			$('#cases').prepend(
-				`<div class="new case-item case-card">
+				`<div class="new case-item case-card" data-id="" client="">
 				<div class="case-name-div">
 				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
 				</div>
@@ -88,7 +94,7 @@ function addNewCase() {
 			);
 		} else {
 			$('#cases').prepend(
-				`<div class="new case-item case-card">
+				`<div class="new case-item case-card" data-id="" client="">
 				<div class="case-name-div">
 				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
 				</div>
@@ -139,14 +145,21 @@ function postNewCase() {
 				let match = myRegex.exec(dateDisplay);
 				$('.new.case-item')
 				.append(`<div class="case-date">Opened: ${match[1]}</div>
-				<div class="case-client-div">
+				<div class="case-client" data-id="${content.case.clientId}">
+				<div class="client-selection-div mdc-select">
+				<select class="select-existing-client"></select>
+				</div>
+				<div class="case-client-name">
 				Client: ${content.clientName}
+				</div>
 				</div>
 				<button id="go-to-case" name="go-to-case" value="${content.case._id}">Go to case</button>
 				<button id="go-to-client" name="go-to-client" value="${content.case.clientId}">Go to client</button>
 				<button class="delete-case" data-id="${content.case._id}">Delete case</button>
 				</div>
 				`);
+				$('.new.case-item').attr('data-id', `${content.case._id}`)
+				$('.new.case-item').attr('client', `${content.case.clientId}`);
 				$('.new.case-item').removeClass('new');
 				$('.new-client-div').remove();
 				$('.client-selection-div').remove();
@@ -159,9 +172,18 @@ function postNewCase() {
 }
 
 function createClientSelection(CLIENTS) {
-	CLIENTS.forEach((data => {
-		$(".select-existing-client").append(`<option value="${data._id}">${data.name}</option>`);
-	}));
+	let caseList = $('.case-item');
+	$(caseList).each((i, caseItem) => {
+		let caseClientId = $(caseItem).attr('client');
+		let caseSelect = $(caseItem).find('.select-existing-client')[0];
+		CLIENTS.forEach((data) => {
+			if (caseClientId === data._id) {
+				$(caseSelect).append(`<option class="client-option" value="${data._id}" selected>${data.name}</option>`);
+			} else {
+				$(caseSelect).append(`<option class="client-option" value="${data._id}">${data.name}</option>`);
+			}
+		});
+	});
 }
 
 function toggleCreateNewClient() {
@@ -212,6 +234,32 @@ function toggleCardView() {
 	});
 }
 
+function editCase() {
+
+}
+
+function editCaseClient() {
+	$('body').on('change', '.select-existing-client', (e) => {
+		e.preventDefault;
+		let selected = $(e.currentTarget).find(':selected');
+		let caseId = $(e.currentTarget).parent().parent().parent().attr('data-id');
+		let clientId = $(e.currentTarget).find(':selected').attr('value');
+		let data = JSON.stringify({
+			clientId: clientId
+		});
+		$.ajax({
+			url: `case/edit/${caseId}/client/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PUT',
+			contentType: 'application/json',
+			success: (content) => {
+				debugger
+				console.log(content);
+			}
+		})
+	});
+}
+
 getCaseData(renderCases);
 goToCase();
 goToClient();
@@ -222,6 +270,7 @@ addNewCase();
 toggleCreateNewClient();
 toggleSelectExistingClient();
 postNewCase();
+editCaseClient();
 $("#cases").sortable();
 $("#cases").disableSelection();
 // calling REST returns an object/JSON

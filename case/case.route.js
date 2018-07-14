@@ -21,4 +21,6 @@ router.post('/:token', common.verifyToken, caseController.postNewCase);
 
 router.delete('/delete/:id/:token', common.verifyToken, caseController.deleteCaseById);
 
+router.put('/edit/:id/client/:token', common.verifyToken, caseController.putClientByCaseId);
+
 module.exports = router;
