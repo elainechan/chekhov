@@ -10,11 +10,20 @@ Possible use cases can be any situations in which tasks with competing prioritie
 
 ## Phase 1
 - Basic frontend
-	- Components: Tasks, Cases, Clients
-	- CRUD operations
+	- [x] Components: Tasks, Cases, Clients
+	- [x] CRUD operations
 
 ## Phase 2
-- 
+- Components
+	- [ ] Users
+	- [ ] Groups
+	- [ ] Updates
+	- [ ] Records
+- Assets
+	- [ ] Calendar
+- Algorithms
+	- [ ] Schedule Tasks
+	- [ ] Populate Calendar with Task when scheduled
 
 ## Constraints
 - [ ] Each case consists of several tasks
