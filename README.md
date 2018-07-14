@@ -8,6 +8,14 @@ While the algorithm is under development, the frontend acts as a project managem
 
 Possible use cases can be any situations in which tasks with competing priorities need to be resolved. If the priorities are unclear, they should be clarified through an analytical process.
 
+## Phase 1
+- Basic frontend
+	- Components: Tasks, Cases, Clients
+	- CRUD operations
+
+## Phase 2
+- 
+
 ## Constraints
 - [ ] Each case consists of several tasks
 - [ ] Each task must be scheduled before its deadline
