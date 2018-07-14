@@ -17,7 +17,7 @@ function renderCases(CASES) {
 		$('#cases').append(`
 		<div class="case-item case-card" data-id="${item._id}" client="${item.clientId._id}">
 		<div class="case-name-div">
-		<textarea class="case-name" id="case-name-input" data-id="${item._id}" value="${item.name}">${item.name}</textarea>
+		<textarea class="case-name" data-id="${item._id}" value="${item.name}">${item.name}</textarea>
 		</div>
 		<div class="case-client">
 		<div class="client-selection-div mdc-select">
@@ -58,7 +58,7 @@ function addNewCase() {
 			$('#cases').prepend(
 				`<div class="new case-item case-list" data-id="" client="">
 				<div class="case-name-div">
-				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
+				<textarea class="new case-name" placeholder="Enter name" data-id=""></textarea>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
@@ -235,7 +235,25 @@ function toggleCardView() {
 }
 
 function editCase() {
-
+	$('body')
+	.not('.new')
+	.on('blur', '#task-name-input', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		console.log(e.target.value);
+		let taskId = $(e.target).attr('data-id');
+		let data = JSON.stringify({ name: e.target.value });
+		$.ajax({
+			url: `/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
+	});
 }
 
 function editCaseClient() {
@@ -248,7 +266,7 @@ function editCaseClient() {
 			clientId: clientId
 		});
 		$.ajax({
-			url: `case/edit/${caseId}/client/${localStorage.getItem('token')}`,
+			url: `cases/edit/${caseId}/client/${localStorage.getItem('token')}`,
 			data: data,
 			type: 'PUT',
 			contentType: 'application/json',
@@ -257,6 +275,28 @@ function editCaseClient() {
 				console.log(content);
 			}
 		})
+	});
+}
+
+function editCaseName() {
+	$('body')
+	.not('.new')
+	.on('blur', '.case-name', (e) => {
+		if ($(e.target).hasClass('new')) {
+			return;
+		}
+		console.log(e.target.value);
+		let caseId = $(e.target).attr('data-id');
+		let data = JSON.stringify({ name: e.target.value });
+		$.ajax({
+			url: `/cases/edit/${caseId}/name/${localStorage.getItem('token')}`,
+			data: data,
+			type: 'PATCH',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log(content);
+			}
+		});
 	});
 }
 
@@ -271,6 +311,7 @@ toggleCreateNewClient();
 toggleSelectExistingClient();
 postNewCase();
 editCaseClient();
+editCaseName();
 $("#cases").sortable();
 $("#cases").disableSelection();
 // calling REST returns an object/JSON
