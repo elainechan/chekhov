@@ -1,31 +1,71 @@
 # Chekhov
 
-The objective of Chekhov is to use linear programming and heuristics to optimize the arrangement of tasks in a schedule. When given a list of tasks, Chekhov should automatically build a schedule based on a finite set of constraints, by minimizing one or more cost function(s).
+The objective of Chekhov is to optimize the arrangement of tasks in a schedule. When given a list of tasks, Chekhov should automatically build a schedule based on a finite set of constraints, by minimizing one or more cost function(s). The goal is to achieve a simplified version of [Optaplanner](https://www.optaplanner.org/). 
 
-The goal is to achieve a simplified version of [Optaplanner](https://www.optaplanner.org/).
-
-While the algorithm is under development, the frontend acts as a project management tool, like a simple version of Asana.
+While the smart scheduling algorithm is under development, the frontend acts as a project management tool, like a simplified version of Asana.
 
 Possible use cases can be any situations in which tasks with competing priorities need to be resolved. If the priorities are unclear, they should be clarified through an analytical process.
 
-## Phase 1
-- Basic frontend
-	- [x] Components: Tasks, Cases, Clients
-	- [x] CRUD operations
+## Phase 1: Basic
+- Components
+	- [x] Tasks
+	- [x] Cases
+	- [x] Clients
+- Backend
+	- [x] Database
+	- [x] Middleware
+- Processes
+	- [x] Create
+	- [x] Read
+	- [x] Update
+	- [x] Delete
 
-## Phase 2
+## Phase 2: Expanded
 - Components
 	- [ ] Users
 	- [ ] Groups
 	- [ ] Updates
 	- [ ] Records
-- Assets
 	- [ ] Calendar
-- Algorithms
-	- [ ] Schedule Tasks
+- Processes
+	- [ ] Schedule Task
 	- [ ] Populate Calendar with Task when scheduled
+	- [ ] Show schedule in components
 
-## Constraints
+## Phase 3: Smart Scheduling
+- Linear Programming
+- Heuristics
+
+## Data Schema
+![Data schema image](https://github.com/elainechan/chekhov/blob/master/assets/schema2.png)
+- [x] **Task** _object_
+	- [x] ID: _string_
+	- [ ] Deadline: _date_
+	- [ ] Priority: _enum_ _integer_ (1 to 4, related to[ ]  Deadline)
+	- [ ] Length: _integer_ (minutes)
+	- [ ] Last touched: _date_
+	- [ ] Idle: _integer_ (current time minus last touched)
+	- [ ] User ID: _string_
+	- [x] Case ID: _string_
+	- [ ] Group ID (optional): _string_
+	- [ ] Group order (optional): _integer_
+	- [ ] Upstream task ID (optional): _string_
+	- [ ] Downstream task ID (optional): _string_
+- [ ] **User** _object_
+	- [ ] ID: _string_
+	- [ ] Role: _enum_ (worker, manager)
+	- [ ] Task IDs: _array_
+	- [ ] Case IDs: _array_
+	- [ ] Group IDs (optional): _array_
+	- [ ] Billable hours: _integer_
+	- [ ] Buffer hours: _integer_
+- [ ] **Group** _object_
+	- [ ] ID: _string_
+	- [ ] Task IDs: _array_
+	- [ ] Worker IDs: _array_
+
+## Smart Scheduling Notes
+### Constraints
 - [ ] Each case consists of several tasks
 - [ ] Each task must be scheduled before its deadline
 - [ ] Each task must be scheduled in order of priority
@@ -36,17 +76,17 @@ Possible use cases can be any situations in which tasks with competing prioritie
 	- [ ] Each worker has 5 billable hours daily (300 minutes)
 	- [ ] Each worker has 3 buffer hours daily (180 minutes)
 
-## Nice to have
+### Nice to have
 - [ ] Priority should increase as idle time increases
 
 - [ ] Schedule should refresh daily during off hours
 
-## What if
+### What if
 - [ ] A task is not completed in scheduled time
 - [ ] Worker is out sick
 - [ ] Tasks are added/eliminated
 
-## Definition of a Solution 
+### Definition of a Solution 
 - Sufficient: 
 	- [ ] Every task gets scheduled before its deadline
 - Optimal:
@@ -54,14 +94,14 @@ Possible use cases can be any situations in which tasks with competing prioritie
 	- [ ] Least time wasted by workers waiting for completion of upstream task
 	- [ ] Earlier completion of higher priority tasks
 
-## Cost function
+### Cost function
 - Minimize:
 	- total time to finish all tasks
 	- total time wasted waiting for upstream completion
 	- completion date of high-priority tasks
 
-## Algorithm
-### Search Tasks
+### Algorithm
+#### Search Tasks
 - [x] Search Task list by several criteria:
 	- Group
 		- [x] Search for tasks that belong in groups
@@ -77,12 +117,12 @@ Possible use cases can be any situations in which tasks with competing prioritie
 	- Length
 		- [x] Search for the shortest length
 		- [x] Pick the shortest task
-### Pick
+#### Pick
 - [x] Pick by earliest Group order
 	- [ ] Pick by Idle time
 		- [ ] Pick by Priority level
 			- [ ] Pick by Length
-### Populate Agenda
+#### Populate Agenda
 - [ ] Search Worker schedule
 	- [ ] Check if billable hours
 		- [ ] If billable hours, schedule task to billable hours
@@ -91,37 +131,7 @@ Possible use cases can be any situations in which tasks with competing prioritie
 	- [ ] If no buffer hours
 		- [ ] Alert manager
 
-## Data Schema
-![Data schema image](https://github.com/elainechan/chekhov/blob/master/assets/schema2.png)
-- [x] **Task** _object_
-	- [x] ID: _string_
-	- [x] Deadline: _date_
-	- [x] Priority: _enum_ _integer_ (1 to 4, related to[ ]  Deadline)
-	- [x] Length: _integer_ (minutes)
-	- [x] Last touched: _date_
-	- [x] Idle: _integer_ (current time minus last touched)
-	- [x] User ID: _string_
-	- [x] Case ID: _string_
-	- [x] Group ID (optional): _string_
-	- [x] Group order (optional): _integer_
-	- [x] Upstream task ID (optional): _string_
-	- [x] Downstream task ID (optional): _string_
-- [ ] **User** _object_
-	- [ ] ID: _string_
-	- [ ] Role: _enum_ (worker, manager)
-	- [ ] Task IDs: _array_
-	- [ ] Case IDs: _array_
-	- [ ] Group IDs (optional): _array_
-	- [ ] Billable hours: _integer_
-	- [ ] Buffer hours: _integer_
-- [ ] **Group** _object_
-	- [ ] ID: _string_
-	- [ ] Task IDs: _array_
-	- [ ] Worker IDs: _array_
-- [ ] **TaskList**
-	- array of Task objects
-
-## Simplified Manual Attempt
+### Simplified Manual Attempt
 - Each task consists of several subtasks
 - Each subtask must be done in order
 - If a task list contains anything, the first one must be picked
