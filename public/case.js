@@ -76,13 +76,13 @@ function addNewCase() {
 			$('#cases').prepend(
 				`<div class="new case-item case-list" data-id="" client="">
 				<div class="case-name-div">
-				<textarea class="new case-name" placeholder="Enter name" data-id=""></textarea>
+				<textarea class="new case-name" placeholder="Enter name" data-id="" required></textarea>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
 				</div>
 				<div class="new-client-div">
-				<input class="new-client-input" type="text" name="client-name" value="" placeholder="Enter client name">
+				<input class="new-client-input" type="text" name="client-name" value="" placeholder="Enter client name" required>
 				</div>
 				<div class="toggle-buttons">
 				<button class="existing-client-button">Select Existing Client</button>
@@ -95,13 +95,13 @@ function addNewCase() {
 			$('#cases').prepend(
 				`<div class="new case-item case-card" data-id="" client="">
 				<div class="case-name-div">
-				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
+				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" required></textarea>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
 				</div>
 				<div class="new-client-div">
-				<input class="new-client-input" type="text" name="client-name" value="" placeholder="Enter client name">
+				<input class="new-client-input" type="text" name="client-name" value="" placeholder="Enter client name" required>
 				</div>
 				<div class="toggle-buttons">
 				<button class="existing-client-button">Select Existing Client</button>
@@ -114,13 +114,13 @@ function addNewCase() {
 			$('#cases').prepend(
 				`<div class="new case-item case-card" data-id="" client="">
 				<div class="case-name-div">
-				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
+				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" required></textarea>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
 				</div>
 				<div class="new-client-div">
-				<input class="new-client-input" type="text" name="client-name" value="" placeholder="Enter client name">
+				<input class="new-client-input" type="text" name="client-name" value="" placeholder="Enter client name" required>
 				</div>
 				<div class="toggle-buttons">
 				<button class="existing-client-button">Select Existing Client</button>
@@ -214,6 +214,7 @@ function toggleSelectExistingClient() {
 		e.preventDefault();
 		$('.new-client-div').hide();
 		$('.client-selection-div').show();
+		$('.new-client-input').removeAttr('required');
 		$('.new-client-button').show();
 		$('.existing-client-button').hide();
 	});
