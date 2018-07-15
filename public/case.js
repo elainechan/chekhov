@@ -22,7 +22,7 @@ function renderCases(CASES) {
 			</div>
 			<div class="case-client">
 			<div class="client-selection-div mdc-select">
-			<select class="select-existing-client"></select>
+			<select class="select-existing-client" required></select>
 			</div>
 			</div>
 			<div class="case-date">Opened: ${match[1]}</div>
@@ -38,8 +38,8 @@ function renderCases(CASES) {
 			</div>
 			<div class="case-client">
 			<div class="client-selection-div mdc-select">
-			<select class="select-existing-client">
-			<option class="client-option" selected>Select client</option>
+			<select class="select-existing-client" required>
+			<option class="client-option" selected></option>
 			</select>
 			</div>
 			</div>
@@ -140,7 +140,6 @@ function postNewCase() {
 		/* configure the json of request */
 		console.log(`New case name: ${$('.case-name').val()}`);
 		if ($(".new-client-div").attr("style") === "display: none;") {
-			debugger
 			var caseObj = {
 				name: $('.case-name').val(),
 				clientId: $('option:selected', this).attr('value')
@@ -158,7 +157,6 @@ function postNewCase() {
 			type: 'POST',
 			contentType: 'application/json',
 			success: (content) => {
-				debugger
 				console.log('New case posted');
 				let dateDisplay = new Date(content.case.dateOpened);
 				let myRegex = /(.*)\ GMT/;
@@ -205,6 +203,8 @@ function toggleCreateNewClient() {
 		e.preventDefault();
 		$('.new-client-div').show();
 		$('.client-selection-div').hide();
+		$('.select-existing-client').removeAttr('required');
+		$('.new-client-input').attr('required', '');
 		$('.new-client-button').hide();
 		$('.existing-client-button').show();
 	});
@@ -214,6 +214,7 @@ function toggleSelectExistingClient() {
 		e.preventDefault();
 		$('.new-client-div').hide();
 		$('.client-selection-div').show();
+		$('.select-existing-client').attr('required', '')
 		$('.new-client-input').removeAttr('required');
 		$('.new-client-button').show();
 		$('.existing-client-button').hide();
@@ -279,8 +280,8 @@ function editCaseClient() {
 			return;
 		}
 		let selectedContent = $(e.currentTarget).find(':selected').text();
-		let dummyOption = $(e.currentTarget).find(".client-option:contains('Select client')");
-		if (selectedContent !== 'Select client') {
+		let dummyOption = $(e.currentTarget).find(".client-option:contains('')");
+		if (selectedContent !== '') {
 			let selected = $(e.currentTarget).find(':selected');
 			let caseId = $(e.currentTarget).parent().parent().parent().attr('data-id');
 			let clientId = $(e.currentTarget).find(':selected').attr('value');
