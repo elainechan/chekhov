@@ -19,6 +19,9 @@ Possible use cases can be any situations in which tasks with competing prioritie
 	- [x] Read
 	- [x] Update
 	- [x] Delete
+- Features
+	- [x] Patch on enter
+	- [x] Patch on blur
 
 ## Phase 2: Expanded
 - Components
