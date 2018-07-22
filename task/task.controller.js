@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 exports.getAllTasks = (req, res) => {
   Task
-  .find()
+  .find({ userId: mongoose.Types.ObjectId(req.user.userId) })
   .populate('caseId')
   .sort({'dateOpened': 'descending'})
   .exec((err, data) => {
@@ -29,6 +29,7 @@ exports.postNewTask = (req, res) => {
   if (!req.body.caseId) {
     Case.create({
       name: req.body.caseName,
+      userId: req.user.userId,
       dateOpened: new Date()
     }, (err, data) => {
       if (err)  {
@@ -40,7 +41,7 @@ exports.postNewTask = (req, res) => {
         name: req.body.name,
         clientId: req.body.clientId,
         caseId: data._id,
-        userId: req.body.userId,
+        userId: req.user.userId,
         description: req.body.description,
         dateOpened: new Date()
       }, (err, data) => {
@@ -60,6 +61,7 @@ exports.postNewTask = (req, res) => {
     // if case exists
     Task.create({ 
       name: req.body.name,
+      userId: req.user.userId,
       caseId: mongoose.Types.ObjectId(req.body.caseId),
       description: req.body.description,
       dateOpened: new Date()
@@ -121,6 +123,7 @@ exports.getTasksByUserId = (req, res) => {
 	  return res.send(data);
 	})
 }
+
 exports.patchTaskName = (req, res) => {
   Task.findByIdAndUpdate(req.params.id, { $set:{name: req.body.name } })
  .then((result) => {

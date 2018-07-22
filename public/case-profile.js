@@ -229,6 +229,22 @@ function postNewTask() {
 	});
 }
 
+function deleteTask() {
+	$('body').on('click', '.delete-task', (e) => {
+		e.preventDefault();
+		let taskId = e.currentTarget.attributes[1].nodeValue;
+		e.currentTarget.parentElement.remove();
+		$.ajax({
+			url: `/tasks/delete/${taskId}/${localStorage.getItem('token')}`,
+			type: 'DELETE',
+			contentType: 'application/json',
+			success: (content) => {
+				console.log("Task deleted.")
+			}
+		});	
+	});
+}
+
 getTasksByCase(renderTasksByCase);
 toggleCardView();
 toggleListView();
@@ -238,5 +254,6 @@ patchOnEnter();
 addNewTask();
 postNewTask();
 goToClient();
+deleteTask();
 $("#tasks").sortable();
 $("#tasks").disableSelection();

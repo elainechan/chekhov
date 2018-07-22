@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+/* Mobile 
+font size
+margins, padding
+widths heights - > %
+*/
 button {
 	padding: 10px;
 	background: #BDBDBD;
@@ -62,4 +68,15 @@ ul {
 	". blurb blurb ."
 	". buttons buttons ."
 	". tech tech .";
+}
+
+/* Tablet */
+@media only screen and (min-width: 640px) {
+/* change widths and positions */
+}
+
+/* Desktop */
+@media only screen and (min-width: 800px) {
+/* change widths and positions */
+
 }

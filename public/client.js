@@ -6,7 +6,7 @@ function renderClients(CLIENTS) {
 	console.log(CLIENTS);
 	CLIENTS.forEach((item, i) => {
 		$('#clients').append(`
-		<div class="client-item">
+		<div class="client-item client-card">
 		<div class="client-name-div">
 		<textarea class="client-name" id="client-name-input" data-id="${item._id}">${item.name}</textarea>
 		</div>

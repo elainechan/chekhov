@@ -9,10 +9,10 @@ const CaseSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Client'
 	},
-	userIds: [{
+	userId: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
-	}],
+	},
 	groupIds: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Group'

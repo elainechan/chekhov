@@ -70,7 +70,8 @@ exports.postNewCase = (req, res) => {
   // if client doesn't exist already
   if (!req.body.clientId) {
     Client.create({
-      name: req.body.clientName
+      name: req.body.clientName,
+      userId: req.user.userId
     }, (err, data) => {
       if (err) {
         handleError(err);
@@ -79,6 +80,7 @@ exports.postNewCase = (req, res) => {
         Case.create({
           name: req.body.name,
           clientId: data._id,
+          userId: req.user.userId,
           dateOpened: new Date()
         }, (err, data) => {
           if (err) {
@@ -100,6 +102,7 @@ exports.postNewCase = (req, res) => {
     Case.create({
       name: req.body.name,
       clientId: mongoose.Types.ObjectId(req.body.clientId),
+      userId: req.user.userId,
       dateOpened: new Date()
     }, (err, data) => {
       if (err) {

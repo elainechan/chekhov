@@ -68,6 +68,12 @@ Possible use cases can be any situations in which tasks with competing prioritie
 	- [ ] Worker IDs: _array_
 
 ## Smart Scheduling Notes
+
+### Data Structure
+ - Group: doubly linked list
+	- prev = upstream task
+	- next = downstream task
+
 ### Constraints
 - [ ] Each case consists of several tasks
 - [ ] Each task must be scheduled before its deadline

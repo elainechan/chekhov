@@ -18,7 +18,7 @@ function renderTasks(TASKS) {
 			}
 		}
 		$('#tasks').append(`
-		<div class="task-list task-item" data-id="${item._id}" case="${item.caseId._id}">
+		<div class="task-card task-item" data-id="${item._id}" case="${item.caseId._id}">
 		<div class="task-name-div">
 		<textarea class="task-name" id="task-name-input" data-id="${item._id}" value="${item.name}">${item.name}
 		</textarea>
@@ -199,7 +199,7 @@ function addNewTask() {
 	$('.new-task-button').click((e) => {
 		if ($('.task-item').hasClass('task-list')) {
 			$('#tasks').prepend(
-				`<div class="new task-item task-list">
+				`<div class="new task-item task-list" data-id="" case="">
 				<div class="task-name-div">
 				<textarea class="new task-name" id="task-name-input" placeholder="Enter name" data-id=""></textarea>
 				</div>
@@ -223,7 +223,7 @@ function addNewTask() {
 			);
 		} else if (($('.task-item').hasClass('task-card'))) {
 			$('#tasks').prepend(
-				`<div class="new task-item task-card">
+				`<div class="new task-item task-card" data-id="" case="">
 				<div class="task-name-div">
 				<textarea class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value=""></textarea>
 				</div>
@@ -247,7 +247,7 @@ function addNewTask() {
 			);
 		} else {
 			$('#tasks').prepend(
-				`<div class="new task-item task-list">
+				`<div class="new task-item task-list" data-id="" case="">
 				<div class="task-name-div">
 				<textarea class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value=""></textarea>
 				</div>
@@ -259,7 +259,7 @@ function addNewTask() {
 				<select class="select-existing-case"></select>
 				</div>
 				<div class="new-case-div">
-				<input placeholder="Enter new case name">
+				<input class="new-case-input" placeholder="Enter new case name">
 				</div>
 				</div>
 				<div class="toggle-buttons">
@@ -319,6 +319,23 @@ function goToCase(CASES) {
 	});
 }
 
+function validateTask(task, hasCaseId) {
+	if (!task.name) {
+		return false;
+	} else if (!task.description) {
+		return false;
+	}
+	if (hasCaseId && !task.caseId) {
+		// existing case
+		return false;
+	}
+	if (!hasCaseId && !task.caseName) {
+		// new case
+		return false;
+	}
+	return true;
+}
+
 function postNewTask() {
 	$('body').on('click','#submit-task',(e) => {
 		e.preventDefault();
@@ -331,6 +348,10 @@ function postNewTask() {
 				description: $('.task-description').val(),
 				caseId: $('option:selected', this).attr('value')
 			};
+			if (!validateTask(taskObj, true)) {
+				alert('Please fill in valid data.');
+				return
+			}
 			$.ajax({
 				url: `/tasks/${localStorage.getItem('token')}`,
 				data: JSON.stringify(taskObj),
@@ -351,7 +372,8 @@ function postNewTask() {
 					</div>
 					<button class="delete-task" data-id="${content.task._id}">Delete task</button>
 					</div>`);
-					$('.new.task-item').attr('data-id', `${content.task._id}`)
+					$('.new.task-item').attr('data-id', `${content.task._id}`);
+					$('.new.task-item').attr('case', `${content.case._id}`);
 					$('.new.task-item').removeClass('new');
 					$('.toggle-buttons').remove();
 					$('#submit-task').remove();
@@ -367,6 +389,10 @@ function postNewTask() {
 				caseId: null,
 				caseName: caseName
 			};
+			if (!validateTask(taskObj, false)) {
+				alert('Please fill in valid data.');
+				return
+			}
 			$.ajax({
 				url: `/tasks/${localStorage.getItem('token')}`,
 				data: JSON.stringify(taskObj),
@@ -375,6 +401,7 @@ function postNewTask() {
 				success: (content) => {
 					console.log('New task posted');
 					$('.new.task-item > .task-case-div').remove();
+					$('.new.task-item').attr('case', `${content.task.caseId}`);
 					$('.new.task-item')
 					.append(`
 					<div class="task-case-div">
