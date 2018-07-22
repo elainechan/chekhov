@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chekhov</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -18,19 +19,24 @@
 			<li><a href="./task.html">Tasks</a></li>
 			<li><a href="./client.html">Clients</a></li>
 		</ul>
-	</nav>
+  </nav>
+  <div class="title">
+      <h2>Tasks</h2>
+      <nav class="views-nav">
+          <i class="far fa-plus-square new-task-button tooltip">
+            <span class="tooltiptext">Add new case</span>
+          </i>
+          <i class="fas fa-list-ul list-button tooltip">
+              <span class="tooltiptext">List view</span>
+          </i>
+          <i class="fas fa-th-large card-button tooltip">
+              <span class="tooltiptext">Card view</span>
+          </i>
+        </nav>
+      </div>
   </header>
   <main>
-    <div class="title">
-    <h2>Tasks</h2>
-    </div>
-  <nav class="views-nav">
-    <i class="far fa-plus-square new-task-button"></i>
-    <i class="fas fa-list-ul list-button"></i>
-    <i class="fas fa-th-large card-button"></i>
-  </nav>
-  <!--List of a case's tasks-->
-  <section id="table-area">
+  <section id="task-section">
     <div id="tasks"></div>
   </section>
 </main>

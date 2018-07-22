@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Chekhov</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./case.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">  
 </head>
@@ -17,22 +18,27 @@
 			<li><a href="./task.html">Tasks</a></li>
 			<li><a href="./client.html">Clients</a></li>
 		</ul>
-	</nav>
+  </nav>
+  <div class="title">
+      <h2>Cases</h2>
+      <nav class="views-nav">
+          <i class="far fa-plus-square new-case-button tooltip">
+            <span class="tooltiptext">Add new case</span>
+          </i>
+          <i class="fas fa-list-ul list-button tooltip">
+              <span class="tooltiptext">List view</span>
+          </i>
+          <i class="fas fa-th-large card-button tooltip">
+              <span class="tooltiptext">Card view</span>
+          </i>
+        </nav>
+    </div>
   </header>
   <main>
-    <div class="title">
-      <h2>Cases</h2>
-    </div>
+
     
-  <nav class="views-nav">
-    <i class="far fa-plus-square new-case-button"></i>
-    <i class="fas fa-list-ul list-button"></i>
-    <i class="fas fa-th-large card-button"></i>
-  </nav>
-  <!--List of a case's tasks-->
-  <ul class="case-board", id="case-listings">
-  </ul>
-  <section id="table-area">
+
+  <section id="case-section">
     <div id="cases"></div>
   </section>
 </main>

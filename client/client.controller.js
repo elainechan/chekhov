@@ -22,7 +22,8 @@ exports.postNewClient = (req, res) => {
   });
   Client.create({
     name: req.body.name,
-    address: req.body.address
+    address: req.body.address,
+    userId: req.user.userId
   }, (err, data) => {
     if (err) return handleError(err);
     res.status(201).json(data);
