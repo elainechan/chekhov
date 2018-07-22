@@ -77,6 +77,9 @@ function addNewCase() {
 				`<div class="new case-item case-list" data-id="" client="">
 				<div class="case-name-div">
 				<textarea class="new case-name" placeholder="Enter name" data-id="" required></textarea>
+				<i class="fas fa-times remove-case-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
@@ -96,6 +99,9 @@ function addNewCase() {
 				`<div class="new case-item case-card" data-id="" client="">
 				<div class="case-name-div">
 				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" required></textarea>
+				<i class="fas fa-times remove-case-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
@@ -115,6 +121,9 @@ function addNewCase() {
 				`<div class="new case-item case-card" data-id="" client="">
 				<div class="case-name-div">
 				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id="" required></textarea>
+				<i class="fas fa-times remove-case-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 				</div>
 				<div class="client-selection-div mdc-select" style="display:none;">
 				<select class="select-existing-client"></select>
@@ -131,6 +140,13 @@ function addNewCase() {
 			);
 		}
 		getClientData(createClientSelection);
+	});
+}
+
+function removeNewCaseItem() {
+	$('body').on('click', '.remove-case-item', (e) => {
+		e.preventDefault();
+		$('.new.case-item').remove();
 	});
 }
 
@@ -161,6 +177,7 @@ function postNewCase() {
 				let dateDisplay = new Date(content.case.dateOpened);
 				let myRegex = /(.*)\ GMT/;
 				let match = myRegex.exec(dateDisplay);
+				$('.remove-case-item').remove();
 				$('.new.case-item')
 				.append(`<div class="case-date">Opened: ${match[1]}</div>
 				<div class="case-client" data-id="${content.case.clientId}">
@@ -357,6 +374,7 @@ toggleListView();
 toggleCardView();
 deleteCase();
 addNewCase();
+removeNewCaseItem();
 toggleCreateNewClient();
 toggleSelectExistingClient();
 postNewCase();
