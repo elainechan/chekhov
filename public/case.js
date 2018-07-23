@@ -26,8 +26,8 @@ function renderCases(CASES) {
 			</div>
 			</div>
 			<div class="case-date">Opened: ${match[1]}</div>
-			<button id="go-to-case" name="go-to-case" value="${item._id}">Go to case</button>
-			<button id="go-to-client" name="go-to-client" value="${item.clientId._id}">Go to client</button>
+			<button id="go-to-case" name="go-to-case" value="${item._id}">Case profile</button>
+			<button id="go-to-client" name="go-to-client" value="${item.clientId._id}">Client profile</button>
 			<button class="delete-case" data-id="${item._id}">Delete case</button>
 			</div>`);
 		} else {
@@ -44,7 +44,7 @@ function renderCases(CASES) {
 			</div>
 			</div>
 			<div class="case-date">Opened: ${match[1]}</div>
-			<button id="go-to-case" name="go-to-case" value="${item._id}">Go to case</button>
+			<button id="go-to-case" name="go-to-case" value="${item._id}">Case profile</button>
 			<button class="delete-case" data-id="${item._id}">Delete case</button>
 			</div>`);
 		}
@@ -182,8 +182,8 @@ function postNewCase() {
 				.append(`<div class="case-date">Opened: ${match[1]}</div>
 				<div class="case-client" data-id="${content.case.clientId}">
 				</div>
-				<button id="go-to-case" name="go-to-case" value="${content.case._id}">Go to case</button>
-				<button id="go-to-client" name="go-to-client" value="${content.case.clientId}">Go to client</button>
+				<button id="go-to-case" name="go-to-case" value="${content.case._id}">Case profile</button>
+				<button id="go-to-client" name="go-to-client" value="${content.case.clientId}">Client profile</button>
 				<button class="delete-case" data-id="${content.case._id}">Delete case</button>
 				</div>
 				`);
@@ -367,6 +367,30 @@ function patchOnEnter() {
 	});
 }
 
+function greet() {
+	let email = localStorage.getItem('email');
+	$('.greeting').text(`Hello, ${email}`);
+}
+
+function logOut() {
+	$('body').on('click', '.logout', (e) => {
+		e.preventDefault;
+		localStorage.removeItem('email');
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
+		console.log('User has been logged out.')
+		$('.logout').remove();
+		$('.greeting').remove();
+		window.location.href = './index.html';
+	})
+}
+
+function rejectUnauthorized() {
+	if (!localStorage.getItem('token')) {
+		window.location.href = './index.html'
+	}
+}
+
 getCaseData(renderCases);
 goToCase();
 goToClient();
@@ -383,6 +407,9 @@ editCaseName();
 patchOnEnter();
 $("#cases").sortable();
 $("#cases").disableSelection();
+greet();
+logOut();
+rejectUnauthorized();
 // calling REST returns an object/JSON
 // get status code
 // curl -I -s -L http://localhost:8080/cases | grep "HTTP/1.1"

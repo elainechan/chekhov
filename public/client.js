@@ -13,7 +13,7 @@ function renderClients(CLIENTS) {
 		<div class="client-address-div">
 		<textarea class="client-address" id="client-address-input" value="" data-id="${item._id}">${item.address}</textarea>
 		</div>
-		<button class="go-to-client" value="${item._id}">Go to client</button>
+		<button class="go-to-client" value="${item._id}">Client profile</button>
 		<button class="delete-client" data-id="${item._id}">Delete client</button>
 		</div>`);
 	});
@@ -107,7 +107,7 @@ function postNewClient() {
 			type: 'POST',
 			contentType: 'application/json',
 			success: (content) => {
-				$('.new.client-item').append(`<button class="go-to-client" value="${content._id}">Go to client</button>
+				$('.new.client-item').append(`<button class="go-to-client" value="${content._id}">Client profile</button>
 				<button class="delete-client" data-id="${content._id}">Delete client</button>`)
 				$('.new.client-item').removeClass('new');
 				$('.new.client-name').removeClass('new');

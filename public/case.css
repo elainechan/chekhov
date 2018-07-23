@@ -80,6 +80,13 @@ header {
 h1>a {
 	color: white;
 }
+.username {
+	display: flex;
+}
+.greeting {
+	color: white;
+	font-family: 'Roboto', sans-serif;
+}
 
 /* Title: Case + new button */
 .title {
@@ -247,7 +254,6 @@ button {
 	border: none;
 	border-radius: 2px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-	margin: 10px;
 }
 button:hover {
 	cursor: pointer;

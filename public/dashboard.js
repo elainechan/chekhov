@@ -11,7 +11,7 @@ function renderTasksInTab(TASKS) {
 			<div class="task-description"><p>${item.description}</p></div>
 			<div class="case-name"><p>${item.caseId.name}</p></div>
 			<div class="go-to-case-div">
-			<button class="go-to-case" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Go to case</button>
+			<button class="go-to-case" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Case profile</button>
 			</div>
 			</div>`
 		);
@@ -42,8 +42,8 @@ function renderCasesInTab(CASES) {
 				<p>Opened: ${match[1]}</p>
 				</div>
 				<div class="go-to-case-div">
-				<button class="go-to-case" id="go-to-case-tasks" value="${item._id}" data-id="${item._id}">Go to case</button>
-				<button id="go-to-case-client" name="go-to-case-client" value="${item.clientId._id}">Go to client</button>
+				<button class="go-to-case" id="go-to-case-tasks" value="${item._id}" data-id="${item._id}">Case profile</button>
+				<button id="go-to-case-client" name="go-to-case-client" value="${item.clientId._id}">Client profile</button>
 				</div>
 				`);
 			}
@@ -72,7 +72,7 @@ function renderClientsInTab(CLIENTS) {
 		<div class="client-address" data-id="${item._id}">
 		<p>${item.address}</p>
 		</div>
-		<button name="go-to-client" value="${item._id}">Go to client</button>
+		<button name="go-to-client" value="${item._id}">Client profile</button>
 		</div>`);
 	});
 }

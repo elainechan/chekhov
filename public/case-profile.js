@@ -19,11 +19,15 @@ function renderTasksByCase(TASKS) { // (4) renders data in browser
 		contentType: 'application/json',
 		success: (content) => {
 			caseName = content.name;
-			$('.title').append(`
-			<h2>${content.name}</h2>
+			$('.title').prepend(`<div class="title-case-profile">
+			<h2 class="title-case-profile-text">Case Profile</h2>
+			</div>
+			<div class="title-case-name">
+			<h3 class="title-case-name-text">Case: ${content.name}</h3>
+			</div>
 			<div class="title-client">
-			<h2>${content.clientId.name}</h2>
-			<button class="go-to-client" name="go-to-client" value="${content.clientId._id}">Go to client</button>
+			<h3 class="title-client-text">Client: ${content.clientId.name}</h3>
+			<button class="go-to-client" name="go-to-client" value="${content.clientId._id}">Client profile</button>
 			<div>
 			`)
 		}
