@@ -53,6 +53,13 @@ h1>a:hover {
 .top-logo {
 	margin-left: 20px;
 }
+.username {
+	display: flex;
+}
+.greeting {
+	color: white;
+	font-family: 'Roboto', sans-serif;
+}
 header {
 	display: flex;
 	position: fixed;
@@ -84,6 +91,18 @@ p {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
 }
 
+button {
+	padding: 10px;
+	margin: 10px;
+	background: #BDBDBD;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
+	transition: background-color .3s;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
 button:hover {
 	cursor: pointer;
 }
@@ -91,4 +110,13 @@ button:hover {
 .task-item {
 	margin-top: 20px;
 	margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 640px) {
+	/* change widths and positions */
+}
+	
+/* Desktop */
+@media only screen and (min-width: 800px) {
+	
 }

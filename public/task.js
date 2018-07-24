@@ -32,7 +32,7 @@ function renderTasks(TASKS) {
 		</div>
 		</div>
 		<div class="go-to-case">
-		<button class="case-button" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Go to case</button>
+		<button class="case-button" id="go-to-case-tasks" value="${item.caseId._id}" data-id="${item.caseId._id}">Case profile</button>
 		</div>
 		<button class="delete-task" data-id="${item._id}">Delete task</button>
 		</div>`);
@@ -368,7 +368,7 @@ function postNewTask() {
 					</div>
 					</div>
 					<div class="go-to-case">
-					<button class="case-button" id="go-to-case-tasks" value="${content.case._id}" data-id="${content.case._id}">Go to case</button>
+					<button class="case-button" id="go-to-case-tasks" value="${content.case._id}" data-id="${content.case._id}">Case profile</button>
 					</div>
 					<button class="delete-task" data-id="${content.task._id}">Delete task</button>
 					</div>`);
@@ -410,7 +410,7 @@ function postNewTask() {
 					</div>
 					</div>
 					<div class="go-to-case">
-					<button class="case-button" id="go-to-case-tasks" value="${content.task.caseId}" data-id="${content.task.caseId}">Go to case</button>
+					<button class="case-button" id="go-to-case-tasks" value="${content.task.caseId}" data-id="${content.task.caseId}">Case profile</button>
 					</div>
 					<button class="delete-task" data-id="${content.task._id}">Delete task</button>
 					</div>`);
@@ -422,6 +422,30 @@ function postNewTask() {
 			});
 		}	
 	});
+}
+
+function greet() {
+	let email = localStorage.getItem('email');
+	$('.greeting').text(`Hello, ${email}`);
+}
+
+function logOut() {
+	$('body').on('click', '.logout', (e) => {
+		e.preventDefault;
+		localStorage.removeItem('email');
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
+		console.log('User has been logged out.')
+		$('.logout').remove();
+		$('.greeting').remove();
+		window.location.href = './index.html';
+	})
+}
+
+function rejectUnauthorized() {
+	if (!localStorage.getItem('token')) {
+		window.location.href = './index.html'
+	}
 }
 
 getTaskData(renderTasks);
@@ -440,3 +464,6 @@ toggleCreateNewCase();
 toggleSelectExistingCase();
 postNewTask();
 deleteTask();
+greet();
+logOut();
+rejectUnauthorized();

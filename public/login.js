@@ -9,6 +9,7 @@ function logIn() {
 		console.log(email);
 		console.log(password);
 		console.log('Form submitted');
+		validateLogin(email,password);
 		$.post(`/auth/login`, {
 			email: email,
 			password: password
@@ -23,7 +24,33 @@ function logIn() {
 			})
 			.catch(err => {
 				console.log(err);
+				alert('Incorrect email or password.');
 			});
 	});
 }
+
+function validateLogin(email, password) {
+	if (!validateEmail(email)) {
+		// feedback
+		alert('Invalid email.')
+		return false;
+	}
+	if (!validatePassword(password)) {
+		// feedback
+		alert('Invalid password.')
+		return false;
+	}
+	return true;
+}
+
+function validateEmail(email) { 	
+	let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email); 
+}
+
+function validatePassword(password) {
+	let re = /(?=.{8,})/;
+	return re.test(password);
+}
+
 logIn();

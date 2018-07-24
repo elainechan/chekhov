@@ -43,3 +43,20 @@ html {
 	background: url("../assets/login-background.png") no-repeat center center fixed;
 	background-size: cover;
 }
+a {
+	text-decoration: none;
+	color: white;
+}
+a:hover {
+	color: gray;
+	cursor: pointer;
+}
+
+@media only screen and (min-width: 640px) {
+	/* change widths and positions */
+}
+	
+/* Desktop */
+@media only screen and (min-width: 800px) {
+	
+}

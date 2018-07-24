@@ -28,7 +28,7 @@ function renderCasesByClient(CASES) {
 		<div class="case-item case-card">
 		<h3>${item.name}</h3>
 		<p>Opened: ${match[1]}</p>
-		<button id="go-to-case-tasks" name="go-to-case-tasks" value="${item._id}">Go to case</button>
+		<button id="go-to-case-tasks" name="go-to-case-tasks" value="${item._id}">Case profile</button>
 		<button class="delete-case" data-id="${item._id}">Delete case</button>
 		</div>
 		`);
@@ -111,7 +111,7 @@ function postNewCase() {
 				let match = myRegex.exec(dateDisplay);
 				$('.new.case-item')
 				.append(`<div class="case-date">Opened: ${match[1]}</div>
-				<button id="go-to-case" name="go-to-case" value="${content.case._id}">Go to case</button>
+				<button id="go-to-case" name="go-to-case" value="${content.case._id}">Case profile</button>
 				<button class="delete-case" data-id="${content.case._id}">Delete case</button>
 				</div>
 				`);
@@ -139,6 +139,30 @@ function deleteCase() {
 	});
 }
 
+function greet() {
+	let email = localStorage.getItem('email');
+	$('.greeting').text(`Hello, ${email}`);
+}
+
+function logOut() {
+	$('body').on('click', '.logout', (e) => {
+		e.preventDefault;
+		localStorage.removeItem('email');
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
+		console.log('User has been logged out.')
+		$('.logout').remove();
+		$('.greeting').remove();
+		window.location.href = './index.html';
+	})
+}
+
+function rejectUnauthorized() {
+	if (!localStorage.getItem('token')) {
+		window.location.href = './index.html'
+	}
+}
+
 getCasesByClient(renderCasesByClient);
 goToCase();
 addNewCase();
@@ -148,3 +172,6 @@ toggleListView();
 toggleCardView();
 $("#cases").sortable();
 $("#cases").disableSelection();
+greet();
+logOut();
+rejectUnauthorized();

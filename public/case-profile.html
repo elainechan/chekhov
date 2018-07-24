@@ -2,15 +2,22 @@
 <html>
 <head>
   <title>Chekhov</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
   <link rel="stylesheet" href="./case-profile.css">
 </head>
 <body>
     <header>
+      <div class="top-bar">
 				<div class="top-logo">
             <h1><a href="./index.html">Chekhov</a></h1>
-				</div>
+            <img class="logo-image" src="./assets/eyeglasses1.svg" alt="Eyeglasses">
+        </div>
+        <div class="username">
+            <h3 class="greeting"></h3>
+            <button class="logout">Log out</button>
+        </div>
 				<nav class="top-nav">
 					<ul>
 						<li><a href="./dashboard.html">Dashboard</a></li>
@@ -18,18 +25,23 @@
 						<li><a href="./task.html">Tasks</a></li>
 						<li><a href="./client.html">Clients</a></li>
 					</ul>
-				</nav>
+        </nav>
+      </div>
+        <div class="title">
+              <nav class="views-nav">
+                  <i class="far fa-plus-square new-task-button tooltip">
+                      <span class="tooltiptext">Add new task</span>
+                  </i>
+                  <i class="fas fa-list-ul list-button tooltip">
+                      <span class="tooltiptext">List view</span>
+                  </i>
+                  <i class="fas fa-th-large card-button tooltip">
+                      <span class="tooltiptext">Card view</span>
+                  </i>
+                </nav>
+    </div>
 				</header>
   <main>
-      <div class="title">
-          </div>
-          <nav class="views-nav">
-              <i class="far fa-plus-square new-task-button"></i>
-              <i class="fas fa-list-ul list-button"></i>
-              <i class="fas fa-th-large card-button"></i>
-            </nav>
-  <ul class="task-board", id="task-listings">
-  </ul>
   <section id="table-area">
     <div id="tasks"></div>
   </section>
