@@ -16,6 +16,13 @@
     margin-bottom: -20px !important;
     vertical-align: top !important;
 }
+.username {
+	display: flex;
+}
+.greeting {
+	color: white;
+	font-family: 'Roboto', sans-serif;
+}
 /*
 .top-nav {
 	display: flex;
@@ -345,6 +352,13 @@ textarea {
 	}
 	h1>a {
 		color: white;
+	}
+	.username {
+		display: flex;
+	}
+	.greeting {
+		color: white;
+		font-family: 'Roboto', sans-serif;
 	}
 
 	/* Title and views nav */

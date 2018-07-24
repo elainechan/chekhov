@@ -139,6 +139,30 @@ function deleteCase() {
 	});
 }
 
+function greet() {
+	let email = localStorage.getItem('email');
+	$('.greeting').text(`Hello, ${email}`);
+}
+
+function logOut() {
+	$('body').on('click', '.logout', (e) => {
+		e.preventDefault;
+		localStorage.removeItem('email');
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
+		console.log('User has been logged out.')
+		$('.logout').remove();
+		$('.greeting').remove();
+		window.location.href = './index.html';
+	})
+}
+
+function rejectUnauthorized() {
+	if (!localStorage.getItem('token')) {
+		window.location.href = './index.html'
+	}
+}
+
 getCasesByClient(renderCasesByClient);
 goToCase();
 addNewCase();
@@ -148,3 +172,6 @@ toggleListView();
 toggleCardView();
 $("#cases").sortable();
 $("#cases").disableSelection();
+greet();
+logOut();
+rejectUnauthorized();

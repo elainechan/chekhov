@@ -226,6 +226,7 @@ function toggleCreateNewClient() {
 		$('.existing-client-button').show();
 	});
 }
+
 function toggleSelectExistingClient() {
 	$('body').on('click','.existing-client-button',(e) => {
 		e.preventDefault();
