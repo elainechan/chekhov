@@ -66,6 +66,9 @@ function addNewCase() {
 				`<div class="new case-item case-list">
 				<div class="case-name-div">
 				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
+				<i class="fas fa-times remove-case-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 				</div>
 				<button class="submit-button" id="submit-task">Submit</button>
 				</div>`
@@ -75,6 +78,9 @@ function addNewCase() {
 				`<div class="new case-item case-card">
 				<div class="case-name-div">
 				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
+				<i class="fas fa-times remove-case-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 				</div>
 				<button class="submit-button" id="submit-case">Submit</button>
 				</div>`
@@ -84,11 +90,21 @@ function addNewCase() {
 				`<div class="new case-item case-card">
 				<div class="case-name-div">
 				<textarea class="new case-name" id="case-name-input" placeholder="Enter name" data-id=""></textarea>
+				<i class="fas fa-times remove-case-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 				</div>
 				<button class="submit-button" id="submit-case">Submit</button>
 				</div>`
 			);
 		}
+	});
+}
+
+function removeNewCaseItem() {
+	$('body').on('click', '.remove-case-item', (e) => {
+		e.preventDefault();
+		$(e.target).parent().parent().remove();
 	});
 }
 
@@ -177,6 +193,7 @@ function rejectUnauthorized() {
 getCasesByClient(renderCasesByClient);
 goToCase();
 addNewCase();
+removeNewCaseItem();
 postNewCase();
 deleteCase();
 toggleListView();

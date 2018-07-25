@@ -163,6 +163,9 @@ function addNewTask() {
 			`<div class="new task-item task-list">
 			<div class="task-name-div">
 			<input class=" new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
+			<i class="fas fa-times remove-task-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 			</div>
 			<div class="task-description-div">
 			<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
@@ -175,6 +178,9 @@ function addNewTask() {
 				`<div class="new task-item task-card">
 				<div class="task-name-div">
 				<input class=" new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
+				<i class="fas fa-times remove-task-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 				</div>
 				<div class="task-description-div">
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
@@ -187,6 +193,9 @@ function addNewTask() {
 				`<div class="new task-item task-list">
 				<div class="task-name-div">
 				<input class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value="" />
+				<i class="fas fa-times remove-task-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 				</div>
 				<div class="task-description-div">
 				<textarea class="new task-description" id="task-description-input" placeholder="Enter description" data-id=""></textarea>
@@ -197,6 +206,13 @@ function addNewTask() {
 				</div>`
 			);
 		}
+	});
+}
+
+function removeNewTaskItem() {
+	$('body').on('click', '.remove-task-item', (e) => {
+		e.preventDefault();
+		$(e.target).parent().parent().remove();
 	});
 }
 
@@ -292,6 +308,7 @@ editTaskName();
 editTaskDescription();
 patchOnEnter();
 addNewTask();
+removeNewTaskItem();
 postNewTask();
 goToClient();
 deleteTask();

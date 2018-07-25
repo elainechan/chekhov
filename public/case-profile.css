@@ -253,6 +253,22 @@ main {
 	font-size: 24px;
 	overflow-wrap: break-word;
 }
+.task-name-div {
+	display: flex;
+	justify-content: space-between;
+}
+.remove-task-item {
+	font-size: 2em;
+	margin: 4px 4px;
+}
+.remove-task-item:hover {
+	cursor: pointer;
+	color: #bdbdbd;
+}
+.tooltip:hover .tooltiptext {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
 .task-description {
 	overflow-wrap: break-word;
 }
@@ -468,5 +484,21 @@ textarea {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: left;
+	}
+	.task-name-div {
+		display: flex;
+		justify-content: space-between;
+	}
+	.remove-task-item {
+		font-size: 2em;
+		margin: 4px 4px;
+	}
+	.remove-task-item:hover {
+		cursor: pointer;
+		color: #bdbdbd;
+	}
+	.tooltip:hover .tooltiptext {
+		visibility: visible !important;
+		opacity: 1 !important;
 	}
 }
