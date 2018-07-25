@@ -92,6 +92,14 @@ function addNewCase() {
 	});
 }
 
+function validateCase(caseObj) {
+	if (!caseObj.name) {
+		alert('Please enter a case name.');
+		return false;
+	}
+	return true;
+}
+
 function postNewCase() {
 	$('body').on('click','#submit-case',(e) => {
 		e.preventDefault();
@@ -99,6 +107,9 @@ function postNewCase() {
 			name: $('.new.case-name').val(),
 			clientId: clientId
 		};
+		if (!validateCase(caseObj)) {
+			return;
+		}
 		$.ajax({
 			url: `/cases/${localStorage.getItem('token')}`,
 			data: JSON.stringify(caseObj),
