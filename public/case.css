@@ -292,6 +292,18 @@ select {
 @media only screen and (min-width: 800px) {
 	/* change widths and positions */
 
+	header {
+		display: block;
+		position: fixed;
+		background: black;
+		justify-content: space-between;
+		width: 100%;
+		top: 0;
+		left: 0;
+	}
+	h1>a {
+		color: white;
+	}
 	/* top nav */
 	.top-bar {
 		display: flex;
@@ -326,18 +338,6 @@ select {
 		margin-top: -4px;
 		vertical-align: top;
 		height: 60px;
-	}
-	header {
-		display: block;
-		position: fixed;
-		background: black;
-		justify-content: space-between;
-		width: 100%;
-		top: 0;
-		left: 0;
-	}
-	h1>a {
-		color: white;
 	}
 		
 	/* Title: Case and views nav */
