@@ -139,15 +139,27 @@ function addNewCase() {
 				</div>`
 			);
 		}
-		getClientData(createClientSelection);
+		getClientData(createClientSelectionNew);
 	});
 }
 
 function removeNewCaseItem() {
 	$('body').on('click', '.remove-case-item', (e) => {
 		e.preventDefault();
-		$('.new.case-item').remove();
+		$(e.target).parent().parent().remove();
 	});
+}
+
+function validateCase(caseObj, hasClientId) {
+	if (!caseObj.name) {
+		alert('Please enter a case name.');
+		return false;
+	} else if (!caseObj.clientName) {
+		// new client
+		alert('Please enter a client name.');
+		return false;
+	}
+	return true;
 }
 
 function postNewCase() {
@@ -166,6 +178,9 @@ function postNewCase() {
 				clientId: null,
 				clientName: $(".new-client-input").val()
 			}
+		}
+		if (!validateCase(caseObj, true)) {
+			return
 		}
 		$.ajax({
 			url: `/cases/${localStorage.getItem('token')}`,
@@ -200,6 +215,14 @@ function postNewCase() {
 	});
 }
 
+function createClientSelectionNew(CLIENTS) {
+	let caseSelect = $('.new.case-item').find('.select-existing-client')[0];
+	CLIENTS.forEach((data) => {
+			$(caseSelect).append(`<option class="client-option" value="${data._id}">${data.name}</option>`);
+	});
+	//$('.new.case-item>.select-existing-client')
+}
+
 function createClientSelection(CLIENTS) {
 	let caseList = $('.case-item');
 	$(caseList).each((i, caseItem) => {
@@ -219,7 +242,7 @@ function toggleCreateNewClient() {
 	$('body').on('click', '.new-client-button', (e) => {
 		e.preventDefault();
 		$('.new-client-div').show();
-		$('.client-selection-div').hide();
+		$('.new.case-item > .client-selection-div').hide();
 		$('.select-existing-client').removeAttr('required');
 		$('.new-client-input').attr('required', '');
 		$('.new-client-button').hide();
@@ -255,11 +278,11 @@ function goToClient(CASES) {
 
 function toggleListView() {
 	// step 1: get click listener
-		$(".list-button").on("click", function() {
-			// remove one class and add another
-			$(".case-item").removeClass("case-card").addClass("case-list");
-		});
-	}
+	$(".list-button").on("click", function() {
+		// remove one class and add another
+		$(".case-item").removeClass("case-card").addClass("case-list");
+	});
+}
 
 function toggleCardView() {
 	$(".card-button").on("click", function() {
@@ -298,7 +321,6 @@ function editCaseClient() {
 			return;
 		}
 		let selectedContent = $(e.currentTarget).find(':selected').text();
-		let dummyOption = $(e.currentTarget).find(".client-option:contains('')");
 		if (selectedContent !== '') {
 			let selected = $(e.currentTarget).find(':selected');
 			let caseId = $(e.currentTarget).parent().parent().parent().attr('data-id');
@@ -315,9 +337,6 @@ function editCaseClient() {
 					console.log(content);
 				}
 			});
-			if (dummyOption) {
-				dummyOption.remove();
-			}
 		}
 	});
 }
