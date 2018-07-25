@@ -205,6 +205,22 @@ main {
 .task-list>.task-description-div>.task-description {
 	width: 30%;
 }
+.task-name-div {
+	display: flex;
+	justify-content: space-between;
+}
+.remove-task-item {
+	font-size: 2em;
+	margin: 4px 4px;
+}
+.remove-task-item:hover {
+	cursor: pointer;
+	color: #bdbdbd;
+}
+.tooltip:hover .tooltiptext {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
 
 /* general */
 ::placeholder {
@@ -448,6 +464,22 @@ h3 {
 	}
 	.task-list>.task-description-div>.task-description {
 		width: 300px;
+	}
+	.task-name-div {
+		display: flex;
+		justify-content: space-between;
+	}
+	.remove-task-item {
+		font-size: 2em;
+		margin: 4px 4px;
+	}
+	.remove-task-item:hover {
+		cursor: pointer;
+		color: #bdbdbd;
+	}
+	.tooltip:hover .tooltiptext {
+		visibility: visible !important;
+		opacity: 1 !important;
 	}
 	
 	/* general */
