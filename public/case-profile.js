@@ -10,8 +10,6 @@ function getTasksByCase(callback) { // (3) calls endpoint to get data (calling b
 	$.getJSON(`/tasks/case/${caseId}/${localStorage.getItem('token')}`, callback);
 }
 
-function getCaseData(callback) {}
-
 function renderTasksByCase(TASKS) { // (4) renders data in browser
 	$.ajax({
 		url: `cases/${caseId}/${localStorage.getItem('token')}`,
@@ -202,6 +200,17 @@ function addNewTask() {
 	});
 }
 
+function validateTask(taskObj) {
+	if (!taskObj.name) {
+		alert('Please enter a task name.');
+		return false;
+	} else if (!taskObj.description) {
+		alert('Please enter a task description.');
+		return false;
+	}
+	return true;
+}
+
 function postNewTask() {
 	$('body').on('click','#submit-task',(e) => {
 		e.preventDefault();
@@ -212,6 +221,9 @@ function postNewTask() {
 				description: $('.task-description').val(),
 				caseId: caseId
 			};
+			if (!validateTask(taskObj)) {
+				return;
+			}
 			$.ajax({
 				url: `/tasks/${localStorage.getItem('token')}`,
 				data: JSON.stringify(taskObj),

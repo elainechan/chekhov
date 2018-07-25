@@ -94,6 +94,17 @@ function addNewClient() {
 	});
 }
 
+function validateClient(clientObj) {
+	if (!clientObj.name) {
+		alert('Please enter client name.');
+		return false;
+	} else if (!clientObj.address) {
+		alert('Please enter client addres.');
+		return false;
+	}
+	return true;
+}
+
 function postNewClient() {
 	$('body').on('click', '#submit-client', (e) => {
 		e.preventDefault();
@@ -101,6 +112,9 @@ function postNewClient() {
 			name: $('.client-name').val(),
 			address: $('.client-address').val()
 		};
+		if (!validateClient(clientObj)) {
+			return;
+		}
 		$.ajax({
 			url: `/clients/${localStorage.getItem('token')}`,
 			data: JSON.stringify(clientObj),
