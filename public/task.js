@@ -319,18 +319,21 @@ function goToCase(CASES) {
 	});
 }
 
-function validateTask(task, hasCaseId) {
-	if (!task.name) {
+function validateTask(taskObj, hasCaseId) {
+	if (!taskObj.name) {
+		alert('Please enter a task name.');
 		return false;
-	} else if (!task.description) {
+	} else if (!taskObj.description) {
+		alert('Please enter a task description.');
 		return false;
 	}
-	if (hasCaseId && !task.caseId) {
+	if (hasCaseId && !taskObj.caseId) {
 		// existing case
 		return false;
 	}
-	if (!hasCaseId && !task.caseName) {
+	if (!hasCaseId && !taskObj.caseName) {
 		// new case
+		alert('Please enter a case name.')
 		return false;
 	}
 	return true;
@@ -349,7 +352,7 @@ function postNewTask() {
 				caseId: $('option:selected', this).attr('value')
 			};
 			if (!validateTask(taskObj, true)) {
-				alert('Please fill in valid data.');
+				alert('Data validation failed.');
 				return
 			}
 			$.ajax({
@@ -390,7 +393,7 @@ function postNewTask() {
 				caseName: caseName
 			};
 			if (!validateTask(taskObj, false)) {
-				alert('Please fill in valid data.');
+				alert('Data validation failed.');
 				return
 			}
 			$.ajax({
