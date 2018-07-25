@@ -181,6 +181,22 @@ main {
 	font-size: 24px;
 	overflow-wrap: break-word;
 }
+.client-name-div {
+	display: flex;
+	justify-content: space-between;
+}
+.remove-client-item {
+	font-size: 2em;
+	margin: 4px 4px;
+}
+.remove-client-item:hover {
+	cursor: pointer;
+	color: #333333;
+}
+.tooltip:hover .tooltiptext {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
 .client-address {
 	font-size: 20px;
 	overflow-wrap: break-word;
@@ -422,6 +438,22 @@ textarea {
 	.client-name {
 		font-size: 24px;
 		overflow-wrap: break-word;
+	}
+	.client-name-div {
+		display: flex;
+		justify-content: space-between;
+	}
+	.remove-client-item {
+		font-size: 2em;
+		margin: 4px 4px;
+	}
+	.remove-client-item:hover {
+		cursor: pointer;
+		color: #333333;
+	}
+	.tooltip:hover .tooltiptext {
+		visibility: visible !important;
+		opacity: 1 !important;
 	}
 	.client-address {
 		font-size: 16px;

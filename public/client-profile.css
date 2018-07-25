@@ -68,6 +68,22 @@ a {
 	white-space: initial;
 	overflow: hidden;
 }
+.case-name-div {
+	display: flex;
+	justify-content: space-between;
+}
+.remove-case-item {
+	font-size: 2em;
+	margin: 4px 4px;
+}
+.remove-case-item:hover {
+	cursor: pointer;
+	color: #333333;
+}
+.tooltip:hover .tooltiptext {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
 
 #cases {
 	display: flex;

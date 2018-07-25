@@ -64,6 +64,9 @@ function addNewClient() {
 			$('#clients').prepend(`<div class="new client-item client-list">
 			<div class="client-name-div">
 			<textarea class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value=""></textarea>
+			<i class="fas fa-times remove-client-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 			</div>
 			<div class="client-address-div">
 				<textarea class="new client-address" id="client-address-input" placeholder="Enter address" data-id=""></textarea>
@@ -74,6 +77,9 @@ function addNewClient() {
 			$('#clients').prepend(`<div class="new client-item client-card">
 			<div class="client-name-div">
 			<textarea class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value=""></textarea>
+			<i class="fas fa-times remove-client-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 			</div>
 			<div class="client-address-div">
 				<textarea class="new client-address" id="client-address-input" placeholder="Enter address" data-id=""></textarea>
@@ -84,6 +90,9 @@ function addNewClient() {
 			$('#clients').prepend(`<div class="new client-item client-card">
 			<div class="client-name-div">
 			<textarea class="new client-name" id="client-name-input" placeholder="Enter name" data-id="" value=""></textarea>
+			<i class="fas fa-times remove-client-item tooltip">
+				<span class="tooltiptext">Cancel</span>
+				</i>
 			</div>
 			<div class="client-address-div">
 				<textarea class="new client-address" id="client-address-input" placeholder="Enter address" data-id=""></textarea>
@@ -91,6 +100,13 @@ function addNewClient() {
 			<button class="submit-button" id="submit-client">Submit</button>
 			</div>`);
 		}
+	});
+}
+
+function removeNewClientItem() {
+	$('body').on('click', '.remove-client-item', (e) => {
+		e.preventDefault();
+		$(e.target).parent().parent().remove();
 	});
 }
 
@@ -252,6 +268,7 @@ deleteClient();
 toggleListView();
 toggleCardView();
 addNewClient();
+removeNewClientItem();
 postNewClient();
 editClientName();
 editClientAddress();
