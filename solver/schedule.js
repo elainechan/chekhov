@@ -5,6 +5,9 @@ const {
 } = require('../app/helpers');
 
 // GIPL order
+// Group ==> a task is part of a group
+// Date ==> 
+// Length ==> length (this is handled thru partitioning by len)
 function scheduleByGroupOrder(taskList, agenda) {
 	findTasksByEarliestGroupOrder(taskList).map(task => {
 		agenda.push(task);

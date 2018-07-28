@@ -14,6 +14,13 @@ exports.getAllCases = (req, res) => {
 	})
 }
 
+exports.getCaseCount = (req, res) => {
+  Case.count((err, data) => {
+    if(err) {console.log(err)}
+    return res.json({caseCount: data});
+  })
+}
+
 exports.getCaseByName = (req, res) => {
   Case.find(req.params.name).exec((err, data) => {
     if (err) {

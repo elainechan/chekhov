@@ -11,6 +11,16 @@ exports.getAllClients = (req, res) => {
 	})
 }
 
+exports.getClientCount = (req, res) => {
+  Client.find()
+  .exec((err, data) => {
+	  if (err) {
+		console.log(err);
+	  }
+	  return res.send({clientCount: data.length});
+	})
+}
+
 exports.postNewClient = (req, res) => {
 	const requiredFields = ['name', 'address'];
   requiredFields.map((field) => {

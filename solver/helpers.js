@@ -7,7 +7,7 @@ const TASKLIST = [
 		userId: "Alice",
 		priority: 4,
 		length: 30,
-		idle: 20,
+		idle: 20, // current date - date created
 		groupId: "discovery",
 		groupOrder: 1
 	},

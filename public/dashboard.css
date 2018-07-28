@@ -57,6 +57,44 @@ main {
 	margin-top: 120px;
 	font-family: 'Roboto', sans-serif;
 }
+.panes {
+	display: flex;
+	justify-content: stretch;
+	flex-direction: column;
+}
+.case-section, .task-section, .client-section {
+	width: 300px;
+	background: red;
+	border-radius: 10px;
+	border: 3px solid;
+	box-shadow: 2px 2px 2px grey;
+	text-align: center;
+	padding: 10px 0px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.stats-header {
+	font-size: 2em;
+color: white;
+}
+.stats-body {
+	font-size: 2.5em;
+	color: white;
+	font-size: 2.5em;
+	color: white;
+	background: gray;
+	width: fit-content;
+	min-width: 46px;
+	margin: auto;
+	padding: 16px;
+	border-radius: 50%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.stats-footer {
+	font-size: 2em;
+color: white;
+}
 h1 {
 	float: left;
 	font-family: 'Ubuntu', sans-serif;
@@ -218,6 +256,9 @@ button:hover {
 		margin-top: 120px;
 		font-family: 'Roboto', sans-serif;
 	}
+	.tabbed-area {
+		margin-top: 800px;
+	}
 	.tabs {
 		position: relative;
 		min-height: 200px;
@@ -227,7 +268,44 @@ button:hover {
 	.tab {
 		float: left;
 	}
-
+	.panes {
+		display: flex;
+		justify-content: stretch;
+		flex-direction: row;
+	}
+	.case-section, .task-section, .client-section {
+		width: 300px;
+		background: red;
+		border-radius: 10px;
+		border: 3px solid;
+		box-shadow: 2px 2px 2px grey;
+		text-align: center;
+		padding: 10px 0px;
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+	.stats-header {
+		font-size: 2em;
+    color: white;
+	}
+	.stats-body {
+		font-size: 2.5em;
+		color: white;
+		font-size: 2.5em;
+		color: white;
+		background: gray;
+		width: fit-content;
+		min-width: 46px;
+		margin: auto;
+		padding: 16px;
+		border-radius: 50%;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.stats-footer {
+		font-size: 2em;
+    color: white;
+	}
 	button {
 		padding: 10px;
 		margin: 10px;

@@ -12,6 +12,8 @@ router.get('/all/:token', common.verifyToken, clientController.getAllClients);
 
 router.get('/:id/:token', common.verifyToken, clientController.getClientById);
 
+router.get('/count/:token', common.verifyToken, clientController.getClientCount);
+
 router.post('/:token', common.verifyToken, clientController.postNewClient);
 
 router.delete('/delete/:id/:token', common.verifyToken, clientController.deleteClientById);

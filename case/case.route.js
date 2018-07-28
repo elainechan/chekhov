@@ -9,6 +9,8 @@ const common = require('../common/token.verification');
 
 router.get('/all/:token', common.verifyToken, caseController.getAllCases);
 
+router.get('/count/:token', common.verifyToken, caseController.getCaseCount);
+
 router.get('/:id/:token', common.verifyToken, caseController.getCaseById);
 
 router.get('/:name/:token', common.verifyToken, caseController.getCaseByName);
