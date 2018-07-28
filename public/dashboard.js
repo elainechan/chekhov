@@ -2,6 +2,29 @@ function getTaskData(callback) {
 	$.getJSON(`/tasks/all/${localStorage.getItem('token')}`, callback);
 }
 
+function renderTaskStats(TASKS) {
+	$.ajax({ // task count
+		url: `/tasks/count/${localStorage.getItem('token')}`,
+		type: 'GET',
+		contentType: 'application/json',
+		success: (content) => {
+			console.log(content.taskCount);
+			$('.task-section').append(`<div class="task-count">
+			<div class="stats-header">You have</div>
+			<div class="stats-body">${content.taskCount}</div> 
+			<div class="stats-footer">tasks</div>
+			</div>`)
+			/*
+			<div class="case-count">
+			<div class="stats-header">You have</div> 
+			<div class="stats-body">${content.caseCount}</div> 
+			<div class="stats-footer">cases</div>
+			</div>
+			*/
+		}
+	});
+}
+
 function renderTasksInTab(TASKS) {
 	TASKS.forEach((item, i) => {
 		$('#tasks-content').append(
@@ -20,6 +43,22 @@ function renderTasksInTab(TASKS) {
 
 function getCaseData(callback) {
 	$.getJSON(`/cases/all/${localStorage.getItem('token')}`, callback);
+}
+
+function renderCaseStats(CASES) {
+	$.ajax({
+		url: `/cases/count/${localStorage.getItem('token')}`,
+		type: 'GET',
+		contentType: 'application/json',
+		success: (content) => {
+			console.log(content.caseCount);
+			$('.case-section').append(`<div class="case-count">
+			<div class="stats-header">You have</div> 
+			<div class="stats-body">${content.caseCount}</div> 
+			<div class="stats-footer">cases</div>
+			</div>`);
+		}
+	})
 }
 
 function renderCasesInTab(CASES) {
@@ -60,6 +99,22 @@ function goToCase(CASES) {
 
 function getClientData(callback) {
 	$.getJSON(`/clients/all/${localStorage.getItem('token')}`, callback);
+}
+
+function renderClientStats(CLIENTS) {
+	$.ajax({ 
+		url: `/clients/count/${localStorage.getItem('token')}`,
+		type: 'GET',
+		contentType: 'application/json',
+		success: (content) => {
+			console.log(content.clientCount);
+			$('.client-section').append(`<div class="client-count">
+			<div class="stats-header">You have</div>
+			<div class="stats-body">${content.clientCount}</div> 
+			<div class="stats-footer">clients</div>
+			</div>`)
+		}
+	});
 }
 
 function renderClientsInTab(CLIENTS) {
@@ -107,10 +162,12 @@ function rejectUnauthorized() {
 	}
 }
 
-getTaskData(renderTasksInTab);
-getCaseData(renderCasesInTab);
-getClientData(renderClientsInTab);
-$( "#tabs" ).tabs();
+//getTaskData(renderTasksInTab);
+getTaskData(renderTaskStats);
+//getCaseData(renderCasesInTab);
+getCaseData(renderCaseStats);
+//getClientData(renderClientsInTab);
+getClientData(renderClientStats);
 goToClientCaseListener();
 goToCase();
 greet();

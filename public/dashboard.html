@@ -3,14 +3,13 @@
 <head>
 	<title>Chekhov</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   	<link rel="stylesheet" href="./dashboard.css">
 </head>
 <body>
 	<header>
 		<div class="top-bar">
 			<div class="top-logo">
-					<h1><a href="./index.html">Chekhov</a></h1>
+					<h1><a href="./dashboard.html">Chekhov</a></h1>
 					<img class="logo-image" src="./assets/eyeglasses1.svg" alt="Eyeglasses">
 			</div>
 
@@ -20,7 +19,6 @@
 			</div>
 		<nav class="top-nav">
 		<ul>
-			<li><a href="./dashboard.html">Dashboard</a></li>
 			<li><a href="./case.html">Cases</a></li>
 			<li><a href="./task.html">Tasks</a></li>
 			<li><a href="./client.html">Clients</a></li>
@@ -31,27 +29,16 @@
 			<h2>Dashboard</h2>
 		</div>
 	</header>
-	<main>
-  <section class="tabbed-area">
-			<div id="tabs">
-					<ul>
-						<li><a href="#tasks-content">Tasks</a></li>
-						<li><a href="#cases-content">Cases</a></li>
-						<li><a href="#clients-content">Clients</a></li>
-					</ul>
-					<div id="tasks-content">
+	<main >
+<div class="panes" >
+	<div class="case-section"></div>
+	<div class="task-section"></div>
+	<div class="client-section"></div>
 
-					</div>
-					<div id="cases-content">
-					</div>
-					<div id="clients-content">
-						
-					</div>
-				</div>
-	</section>
+</div>
+  
 	</main>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>  
 <script src="./dashboard.js"></script>
 </body>
 </html>

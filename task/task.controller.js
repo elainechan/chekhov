@@ -172,6 +172,15 @@ exports.putCaseByTaskId = (req, res) => {
   });
 }
 
+exports.getTaskCount = (req, res) => {
+  Task.count((err, data) => {
+    if (err) {
+      console.log(err);
+    }
+    return res.json({taskCount: data});
+  })
+}
+
 exports.getNumberOfTasksByCaseId = (req, res) => {
   // call mongoose to get task count
   Task.count(
