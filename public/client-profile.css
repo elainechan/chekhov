@@ -16,8 +16,8 @@
 	color: white;
 	font-size: 1.4em;
 }
-.top-nav li:hover {
-	background: gray;
+.top-nav li a:hover {
+	color: gray;
 }
 h1 {
 	float: left;
@@ -52,8 +52,49 @@ a {
 }
 
 .title {
-	text-align: center;
-	font-size: 28px;
+	font-size: 1em;
+	width: 100%;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	font-family: 'Ubuntu';
+	margin-top: 79px;
+	margin-bottom: 2px;
+	background: white;
+	z-index: 1;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.title-client-profile {
+	margin-left: 10px;
+	margin-top: 6px;
+	margin-bottom: 2px;
+}
+.title-client-profile-text {
+	margin-top: 0px;
+    margin-bottom: 0px;
+}
+.title-client-name {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 12px;
+}
+.title-client-name-text {
+	margin-top: 2px;
+	margin-bottom: 0px;
+	margin-left: 2px;
+}
+/* Title address field*/
+.title-address {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0px;
+    margin-bottom: 0px;
+}
+.title-address-text {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 14px;
 }
 
 .case-item {
@@ -169,15 +210,14 @@ textarea {
 
 	/* header */
 	header {
-		display: flex;
-		flex-direction: row;
+		display: block;
 		position: fixed;
 		background: black;
 		justify-content: space-between;
 		width: 100%;
+		height: 60px;
 		top: 0;
 		left: 0;
-		z-index: 1;
 	}
 	h1>a {
 		color: white;
@@ -199,10 +239,18 @@ textarea {
 		margin-left: 16px;
 	}
 	.logo-image {
-		width: 82px;
-		margin-top: -4px;
+		width: 80px;
+		margin-top: -6px;
+		margin-bottom: -20px;
 		vertical-align: top;
 		height: 60px;
+	}
+	.username {
+		display: flex;
+	}
+	.greeting {
+		color: white;
+		font-family: 'Roboto', sans-serif;
 	}
 	.top-nav {
 		display: block;
@@ -219,33 +267,58 @@ textarea {
 		color: white;
 		font-size: 1.4em;
 	}
-	.top-nav li:hover {
-		background: gray;
+	.top-nav li a:hover {
+		color: gray;
 	}
-	.username {
-		display: flex;
-	}
-	.greeting {
-		color: white;
-		font-family: 'Roboto', sans-serif;
-	}
+
 
 	/* Title: Task and views nav */
 	.title {
-		text-align: center;
-		font-size: 1.2em;
-		margin-top: 58px;
+		font-size: 1em;
+		width: 100%;
+		position: fixed;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		font-family: 'Ubuntu';
+		margin-top: 0;
+		margin-bottom: 0;
+		background: white;
+		z-index: 1;
 		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	}
-	.title h2 {
+	.title-client-profile {
 		margin-left: 16px;
 		margin-top: 4px;
 		margin-bottom: 2px;
 	}
+	.title-client-profile-text {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	.title-client-name {
+		margin-left: 10px;
+		margin-top: 8px;
+	}
+	.title-client-name-text {
+		margin-top: 0;
+    	margin-bottom: 0;
+	}
+	.title-address {
+		display: flex;
+		justify-content: center;
+		margin-top: 0;
+    	margin-bottom: 0;
+	}
+	.title-address-text {
+		margin-top: 8px;
+    	margin-bottom: 0;
+	}
 	.views-nav {
 		text-align: right;
-		margin-right: 2px;
-		margin-top: 2px;
+		margin-right: 1px;
+		margin-top: 1px;
+		margin-bottom: 1px;
 	}
 	.views-nav i {
 		color: gray;

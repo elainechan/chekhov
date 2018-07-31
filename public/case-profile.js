@@ -246,7 +246,7 @@ function postNewTask() {
 				type: 'POST',
 				contentType: 'application/json',
 				success: (content) => {
-					console.log('New task posted');
+					console.log('New task posted');$('.remove-task-item').remove();
 					$('.new.task-item')
 					.append(`
 					<button class="delete-task" data-id=${content.task._id}>Delete task</button>

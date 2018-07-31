@@ -253,7 +253,7 @@ function addNewTask() {
 			);
 		} else {
 			$('#tasks').prepend(
-				`<div class="new task-item task-list" data-id="" case="">
+				`<div class="new task-item task-card" data-id="" case="">
 				<div class="task-name-div">
 				<textarea class="new task-name" id="task-name-input" placeholder="Enter name" data-id="" value=""></textarea>
 				<i class="fas fa-times remove-task-item tooltip">
@@ -378,6 +378,7 @@ function postNewTask() {
 				contentType: 'application/json',
 				success: (content) => {
 					console.log('New task posted');
+					$('.remove-task-item').remove();
 					$('.new.task-item > .task-case-div').remove();
 					$('.new.task-item')
 					.append(`
@@ -419,6 +420,7 @@ function postNewTask() {
 				contentType: 'application/json',
 				success: (content) => {
 					console.log('New task posted');
+					$('.remove-task-item').remove();
 					$('.new.task-item > .task-case-div').remove();
 					$('.new.task-item').attr('case', `${content.task.caseId}`);
 					$('.new.task-item')

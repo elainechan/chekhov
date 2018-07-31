@@ -16,8 +16,15 @@ function renderCasesByClient(CASES) {
 		contentType: 'application/json',
 		success: (content) => {
 			clientName = content.client.name;
-			$('.title').append(`<h2>${content.client.name}</h2>
-			<h3>${content.client.address}</h3>`)
+			$('.title').prepend(`<div class="title-client-profile">
+			<h2 class="title-client-profile-text">Client Profile</h2>
+			</div>
+			<div class="title-client-name">
+			<h3 class="title-client-name-text">Case: ${content.client.name}</h3>
+			</div>
+			<div class="title-address">
+			<h3 class="title-address-text">Address: ${content.client.address}</h3>
+			</div>`)
 		}
 	});
 	CASES.cases.forEach((item, i) => {
@@ -136,6 +143,7 @@ function postNewCase() {
 				let dateDisplay = new Date(content.case.dateOpened);
 				let myRegex = /(.*)\ GMT/;
 				let match = myRegex.exec(dateDisplay);
+				$('.remove-case-item').remove();
 				$('.new.case-item')
 				.append(`<div class="case-date">Opened: ${match[1]}</div>
 				<button id="go-to-case" name="go-to-case" value="${content.case._id}">Case profile</button>

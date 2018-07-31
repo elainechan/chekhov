@@ -170,7 +170,8 @@ function postNewCase() {
 		if ($(".new-client-div").attr("style") === "display: none;") {
 			var caseObj = {
 				name: $('.case-name').val(),
-				clientId: $('option:selected', this).attr('value')
+				clientId: $('option:selected', this).attr('value'),
+				clientName: $('option:selected', this).text()
 			};
 		} else {
 			var caseObj = {
