@@ -1,29 +1,71 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-.title {
-	text-align: center;
-	font-size: 30px;
+header {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	background: black;
+	justify-content: space-between;
+	height: 120px;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
 }
-
-.tabs {
-	position: relative;
-	min-height: 200px;
-	clear: both;
-	margin: 25px 0;
+.top-bar {
+	display: block;
+	width: 100%;
+	height: 120px;
 }
-.tab {
+.top-logo {
+	margin-left: 20px;
+	margin-top: 0;
+	padding-top: 0;
+	display: flex;
+	/* height: 52px;*/
+}
+h1 {
 	float: left;
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
+	margin-bottom: 2px;
+	margin-top: 5px;
+}
+.logo-image {
+	display: none;
+}
+.username {
+	display: flex;
+	margin-left: 20px;
+}
+.greeting {
+	color: white;
+	font-family: 'Roboto', sans-serif;
 }
 .top-nav {
-	margin-right: 20px;
+	display: flex;
+    justify-content: left;
+    margin-top: 2px;
+    padding-top: 0;
+    margin-bottom: 10px;
+    height: 36px;
+    z-index: 2;
+    background: black;
+}
+.top-nav ul {
+	padding-top: 0;
+	margin-top: 0;
+	margin-left: -24px;
 }
 .top-nav li {
-	display: inline-block;
+	float: left;
 	list-style: none;
-	padding: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 0;
+	margin-top: 0;
 	font-family: 'Ubuntu', sans-serif;
-	margin-top: 10px;
 }
 .top-nav li a {
 	color: white;
@@ -41,7 +83,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	font-family: 'Ubuntu';
-	margin-top: 79px;
+	margin-top: 140px;
 	margin-bottom: 2px;
 	background: white;
 	z-index: 1;
@@ -54,7 +96,7 @@
 }
 
 main {
-	margin-top: 120px;
+	margin-top: 180px;
 	font-family: 'Roboto', sans-serif;
 }
 .overview {
@@ -99,11 +141,12 @@ video {
 	border: 2px gray;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
-
 h1 {
 	float: left;
 	font-family: 'Ubuntu', sans-serif;
 	color: white;
+	margin-bottom: 2px;
+	margin-top: 6px;
 }
 h1>a {
 	color: white;
@@ -112,21 +155,9 @@ a {
 	text-decoration: none;
 }
 h1>a:hover {
-	background: gray;
+	color: gray;
 }
-.top-logo {
-	margin-left: 20px;
-}
-.logo-image {
-	display: none;
-}
-.username {
-	display: flex;
-}
-.greeting {
-	color: white;
-	font-family: 'Roboto', sans-serif;
-}
+/*
 header {
 	display: flex;
 	position: fixed;
@@ -138,7 +169,7 @@ header {
 	left: 0;
 	z-index: 1;
 }
-
+*/
 p {
 	font-family: 'Roboto', sans-serif;
 }
@@ -264,6 +295,12 @@ button:hover {
 	main {
 		margin-top: 120px;
 		font-family: 'Roboto', sans-serif;
+	}
+	.overview-title, .tutorials-title {
+		font-size: 2em;
+	}
+	.case-tutorials, .task-tutorials, .client-tutorials {
+		font-size: 1.5em;
 	}
 	.tabbed-area {
 		margin-top: 800px;

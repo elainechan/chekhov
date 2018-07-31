@@ -2,22 +2,54 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 /* top nav*/
+header {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	background: black;
+	justify-content: space-between;
+	height: 120px;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
 .top-bar {
 	display: block;
 	width: 100%;
 	height: 120px;
 }
-.top-nav {
-	display: block;
-	margin-top: 2px;
+.top-logo {
+	margin-left: 20px;
+	margin-top: 0;
 	padding-top: 0;
-	margin-bottom: 10px;
-	height: 20px;
-	z-index: 2;
+	display: flex;
+}
+.logo-image {
+	display: none;
+}
+.username {
+	display: flex;
+	margin-left: 20px;
+}
+.greeting {
+	color: white;
+	font-family: 'Roboto', sans-serif;
+}
+.top-nav {
+	display: flex;
+    justify-content: left;
+    margin-top: 2px;
+    padding-top: 0;
+    margin-bottom: 10px;
+    height: 36px;
+    z-index: 2;
+    background: black;
 }
 .top-nav ul {
 	padding-top: 0;
 	margin-top: 0;
+	margin-left: -24px;
 }
 .top-nav li {
 	float: left;
@@ -42,34 +74,6 @@ h1 {
 	margin-bottom: 2px;
 	margin-top: 5px;
 }
-.top-logo {
-	margin-left: 20px;
-	margin-top: 0;
-	padding-top: 0;
-	display: flex;
-}
-.logo-image {
-	display: none;
-}
-.username {
-	display: flex;
-}
-.greeting {
-	color: white;
-	font-family: 'Roboto', sans-serif;
-}
-header {
-	display: flex;
-	flex-direction: column;
-	position: fixed;
-	background: black;
-	justify-content: space-between;
-	height: 120px;
-	width: 100%;
-	top: 0;
-	left: 0;
-	z-index: 1;
-}
 h1>a {
 	color: white;
 }
@@ -83,7 +87,7 @@ h1>a {
 	flex-direction: row;
 	justify-content: space-between;
 	font-family: 'Ubuntu';
-	margin-top: 120px;
+	margin-top: 140px;
 	margin-bottom: 2px;
 	background: white;
 	z-index: 1;
@@ -150,7 +154,7 @@ h1>a {
 
 /* Main */
 main {
-	margin-top: 160px;
+	margin-top: 180px;
 	font-family: 'Roboto', sans-serif;
 }
 #clients {

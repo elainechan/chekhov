@@ -16,7 +16,7 @@ function loginDemo() {
 	$('.demo').click(event => {
 		event.preventDefault();
 		let email = `ger@many.com`;
-		let password = `5678`;
+		let password = `12345678`;
 		console.log(email);
 		console.log(password);
 		console.log('Form submitted');

@@ -447,7 +447,7 @@ function postNewTask() {
 
 function greet() {
 	let email = localStorage.getItem('email');
-	$('.greeting').text(`Hello, ${email}`);
+	$('.greeting').text(`Hi, ${email}`);
 }
 
 function logOut() {
