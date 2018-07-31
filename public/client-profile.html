@@ -9,6 +9,7 @@
 </head>
 <body>
     <header>
+        <div class="top-bar">
         <div class="top-logo">
             <h1><a href="./dashboard.html">Chekhov</a></h1>
             <img class="logo-image" src="./assets/eyeglasses1.svg" alt="Eyeglasses">
@@ -24,17 +25,22 @@
             <li><a href="./client.html">Clients</a></li>
           </ul>
         </nav>
+        </div>
+        <div class="title">
+            <nav class="views-nav">
+              <i class="far fa-plus-square new-case-button tooltip">
+                <span class="tooltiptext">Add new case</span>
+                </i>
+                <i class="fas fa-list-ul list-button tooltip">
+                  <span class="tooltiptext">List view</span>
+                </i>
+                <i class="fas fa-th-large card-button tooltip">
+                  <span class="tooltiptext">Card view</span>
+                </i>
+              </nav>
+            </div>
         </header>
-        <main>
-            <div class="title">
-                </div>
-                <nav class="views-nav">
-                    <i class="far fa-plus-square new-case-button"></i>
-                    <i class="fas fa-list-ul list-button"></i>
-                    <i class="fas fa-th-large card-button"></i>
-                  </nav>
-  <ul class="case-board", id="case-listings">
-  </ul>
+        <main>    
   <section id="table-area">
     <div id="cases" class="ui sortable"></div>
   </section>

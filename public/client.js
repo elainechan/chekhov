@@ -137,6 +137,7 @@ function postNewClient() {
 			type: 'POST',
 			contentType: 'application/json',
 			success: (content) => {
+				$('.remove-client-item').remove();
 				$('.new.client-item').append(`<button class="go-to-client" value="${content._id}">Client profile</button>
 				<button class="delete-client" data-id="${content._id}">Delete client</button>`)
 				$('.new.client-item').removeClass('new');

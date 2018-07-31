@@ -23,14 +23,19 @@ h1>a {
 	width: 100%;
 	height: 60px;
 }
+/*
 .top-logo {
 	height: 30px;
 }
+*/
 .logo-image {
-	width: 60px !important;
-    margin-top: 2px !important;
-    margin-bottom: -20px !important;
-    vertical-align: top !important;
+	display: none;
+	/*
+	width: 60px;
+    margin-top: 2px;
+    margin-bottom: -20px;
+	vertical-align: top;
+	*/
 }
 .top-nav ul {
 	padding-top: 0;
@@ -50,7 +55,7 @@ h1>a {
 	font-size: 1.2em;
 }
 .top-nav li:hover {
-	background: gray;
+	color: gray;
 }
 h1 {
 	float: left;
@@ -310,10 +315,12 @@ select {
 
 	header {
 		display: block;
+		flex-direction: row;
 		position: fixed;
 		background: black;
 		justify-content: space-between;
 		width: 100%;
+		height: 60px;
 		top: 0;
 		left: 0;
 	}
@@ -338,10 +345,10 @@ select {
 		color: white;
 		font-size: 1.4em;
 	}
-	.top-nav li:hover {
-		background: gray;
+	.top-nav li a:hover {
+		color: gray;
 	}
-	h1 {
+	.top-logo > h1 {
 		float: left;
 		font-family: 'Ubuntu', sans-serif;
 		color: white;
@@ -350,10 +357,19 @@ select {
 		margin-left: 16px;
 	}
 	.logo-image {
-		width: 82px;
-		margin-top: -4px;
+		display: flex;
+		width: 80px;
+		margin-top: -6px;
+		margin-bottom: -20px;
 		vertical-align: top;
 		height: 60px;
+	}
+	.username {
+		display: flex;
+	}
+	.greeting {
+		color: white;
+		font-family: 'Roboto', sans-serif;
 	}
 		
 	/* Title: Case and views nav */
