@@ -57,7 +57,7 @@ main {
 	margin-top: 120px;
 	font-family: 'Roboto', sans-serif;
 }
-.panes {
+.overview {
 	display: flex;
 	justify-content: stretch;
 	flex-direction: column;
@@ -95,6 +95,11 @@ color: white;
 	font-size: 2em;
 color: white;
 }
+video {
+	border: 2px gray;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
 h1 {
 	float: left;
 	font-family: 'Ubuntu', sans-serif;
@@ -111,6 +116,9 @@ h1>a:hover {
 }
 .top-logo {
 	margin-left: 20px;
+}
+.logo-image {
+	display: none;
 }
 .username {
 	display: flex;
@@ -269,7 +277,7 @@ button:hover {
 	.tab {
 		float: left;
 	}
-	.panes {
+	.overview>.cards {
 		display: flex;
 		justify-content: stretch;
 		flex-direction: row;
@@ -306,6 +314,10 @@ button:hover {
 	.stats-footer {
 		font-size: 2em;
     color: white;
+	}
+	video {
+		border: 2px gray;
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 	}
 	button {
 		padding: 10px;

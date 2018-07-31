@@ -2,11 +2,17 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
 /* top nav*/
+.top-bar {
+	display: block;
+	width: 100%;
+	height: 120px;
+}
 .top-nav {
 	display: block;
 	margin-top: 2px;
 	padding-top: 0;
 	margin-bottom: 10px;
+	height: 20px;
 	z-index: 2;
 }
 .top-nav ul {
@@ -27,7 +33,7 @@
 	font-size: 1.2em;
 }
 .top-nav li:hover {
-	background: gray;
+	color: gray;
 }
 h1 {
 	float: left;
@@ -40,6 +46,10 @@ h1 {
 	margin-left: 20px;
 	margin-top: 0;
 	padding-top: 0;
+	display: flex;
+}
+.logo-image {
+	display: none;
 }
 .username {
 	display: flex;
@@ -54,6 +64,7 @@ header {
 	position: fixed;
 	background: black;
 	justify-content: space-between;
+	height: 120px;
 	width: 100%;
 	top: 0;
 	left: 0;
@@ -72,7 +83,7 @@ h1>a {
 	flex-direction: row;
 	justify-content: space-between;
 	font-family: 'Ubuntu';
-	margin-top: 79px;
+	margin-top: 120px;
 	margin-bottom: 2px;
 	background: white;
 	z-index: 1;
@@ -139,7 +150,7 @@ h1>a {
 
 /* Main */
 main {
-	margin-top: 120px;
+	margin-top: 160px;
 	font-family: 'Roboto', sans-serif;
 }
 #clients {
