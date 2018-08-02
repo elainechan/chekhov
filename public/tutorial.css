@@ -2,6 +2,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 /* header */
+html {
+	min-height: 100%;
+	position: relative;
+}
+body {
+	margin: 0;
+}
 header {
 	display: flex;
 	flex-direction: column;
@@ -54,6 +61,9 @@ h1>a:hover {
 	color: white;
 	font-family: 'Roboto', sans-serif;
 }
+.auth {
+	margin-left: 10px;
+}
 .top-nav {
 	display: flex;
     justify-content: left;
@@ -95,7 +105,7 @@ h1>a:hover {
 	flex-direction: row;
 	justify-content: space-between;
 	font-family: 'Ubuntu';
-	margin-top: 140px;
+	margin-top: 120px;
 	margin-bottom: 2px;
 	background: white;
 	z-index: 1;
@@ -107,10 +117,12 @@ h1>a:hover {
 	margin-bottom: 2px;
 }
 main {
-	margin-top: 180px;
+	margin: 180px 8px 40px 8px;
 	font-family: 'Roboto', sans-serif;
 }
 video {
+	width: 100%;
+	height: auto;
 	border: 2px gray;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
@@ -133,6 +145,53 @@ button {
 button:hover {
 	cursor: pointer;
 }
+footer {
+	display: flex;
+	position: absolute;
+	flex-direction: row;
+	justify-content: center;
+	background: black;
+	width: 100%;
+	margin-bottom: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-shadow: 0 8px 4px 0 rgba(0,0,0,0.2);
+}
+.bottom-nav {
+	display: flex;
+    justify-content: center;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    height: 36px;
+    z-index: 2;
+	background: black;
+}
+.bottom-nav ul {
+	display: flex;
+	justify-content: center;
+	padding-top: 4px;
+	padding-left: 0;
+	margin-top: 0;
+	margin-left: 0;
+}
+.bottom-nav li {
+	list-style: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 0;
+	margin-top: 0;
+	font-family: 'Ubuntu', sans-serif;
+}
+.bottom-nav li a {
+	color: white;
+	font-size: 1.4em;
+}
+.bottom-nav li:hover {
+	color: gray;
+}
+
 
 @media only screen and (min-width: 640px) {
 	/* change widths and positions */
@@ -140,6 +199,9 @@ button:hover {
 	
 /* Desktop */
 @media only screen and (min-width: 800px) {
+	body {
+		margin: 0;
+	}
 	header {
 		display: block;
 		flex-direction: row;
@@ -184,7 +246,7 @@ button:hover {
 		margin-left: 16px;
 	}
 	.logo-image {
-		display: flex;
+		display: none;
 		width: 80px;
 		margin-top: -6px;
 		margin-bottom: -20px;
@@ -212,8 +274,15 @@ button:hover {
 		margin-bottom: 2px;
 	}
 	main {
-		margin-top: 120px;
+		margin: 120px 8px 40px 8px;
 		font-family: 'Roboto', sans-serif;
+	}
+	footer {
+		display: flex;
+		flex-direction: row;
+		background: black;
+		width: 100%;
+		padding-top: 10px;
 	}
 	/* general */
 	button {

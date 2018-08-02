@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 
+html {
+	min-height: 100%;
+	position: relative;
+}
+body {
+	margin: 0;
+}
 /* header */
 header {
 	display: flex;
@@ -154,9 +161,10 @@ h1 {
 	font-family: 'Roboto', sans-serif;
 }
 
+
 /* Main */
 main {
-	margin-top: 180px;
+	margin: 180px 8px 40px 8px;
 	font-family: 'Roboto', sans-serif;
 }
 #cases {
@@ -247,6 +255,55 @@ input.new-client-input {
 .tooltip:hover .tooltiptext {
 	visibility: visible !important;
 	opacity: 1 !important;
+}
+#go-to-case, #go-to-client {
+	display: none;
+}
+footer {
+	display: flex;
+	position: absolute;
+	flex-direction: row;
+	justify-content: center;
+	background: black;
+	width: 100%;
+	margin-bottom: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-shadow: 0 8px 4px 0 rgba(0,0,0,0.2);
+}
+.bottom-nav {
+	display: flex;
+    justify-content: center;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    height: 36px;
+    z-index: 2;
+	background: black;
+}
+.bottom-nav ul {
+	display: flex;
+	justify-content: center;
+	padding-top: 4px;
+	padding-left: 0;
+	margin-top: 0;
+	margin-left: 0;
+}
+.bottom-nav li {
+	list-style: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 0;
+	margin-top: 0;
+	font-family: 'Ubuntu', sans-serif;
+}
+.bottom-nav li a {
+	color: white;
+	font-size: 1.4em;
+}
+.bottom-nav li:hover {
+	color: gray;
 }
 
 /* general */
@@ -352,7 +409,7 @@ select {
 		margin-left: 16px;
 	}
 	.logo-image {
-		display: flex;
+		display: none;
 		width: 80px;
 		margin-top: -6px;
 		margin-bottom: -20px;
@@ -433,7 +490,7 @@ select {
 
 	/* Main */
 	main {
-		margin-top: 120px;
+		margin: 140px 8px 40px 8px;
 		font-family: 'Roboto', sans-serif;
 	}
 	#cases {
@@ -522,7 +579,24 @@ select {
 		margin-bottom: 10px;
 		font-size: 16px;
 	}
-	
+	#go-to-case, #go-to-client {
+		display: none;
+	}
+
+	footer {
+		display: flex;
+		position: absolute;
+		flex-direction: row;
+		justify-content: center;
+		background: black;
+		width: 100%;
+		margin-bottom: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		box-shadow: 0 8px 4px 0 rgba(0,0,0,0.2);
+	}
+
 	/* general */
 	button {
 		padding: 10px;

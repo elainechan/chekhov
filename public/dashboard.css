@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+html {
+	min-height: 100%;
+	position: relative;
+}
+body {
+	margin: 0;
+}
 header {
 	display: flex;
 	flex-direction: column;
@@ -42,6 +49,10 @@ h1 {
 .greeting {
 	color: white;
 	font-family: 'Roboto', sans-serif;
+	margin-top: 12px;
+}
+.logout {
+	padding: 2px 8px 2px 8px;
 }
 .top-nav {
 	display: flex;
@@ -72,7 +83,7 @@ h1 {
 	font-size: 1.4em;
 }
 .top-nav li:hover {
-	background: gray;
+	color: gray;
 }
 
 .title {
@@ -83,7 +94,7 @@ h1 {
 	flex-direction: row;
 	justify-content: space-between;
 	font-family: 'Ubuntu';
-	margin-top: 140px;
+	margin-top: 135px;
 	margin-bottom: 2px;
 	background: white;
 	z-index: 1;
@@ -96,7 +107,7 @@ h1 {
 }
 
 main {
-	margin-top: 180px;
+	margin: 180px 8px 40px 8px;
 	font-family: 'Roboto', sans-serif;
 }
 .overview {
@@ -104,38 +115,45 @@ main {
 	justify-content: stretch;
 	flex-direction: column;
 }
+.cards {}
 .case-section, .task-section, .client-section {
 	width: 300px;
-	background: red;
-	border-radius: 10px;
-	border: 3px solid;
-	box-shadow: 2px 2px 2px grey;
+	border: 1px solid #BDBDBD;
 	text-align: center;
 	padding: 10px 0px;
 	margin-left: 20px;
 	margin-right: 20px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.case-section {
+	background: #fe5c30;
+}
+.task-section {
+	background: #304FFE;
+}
+.client-section {
+	background: #8630fe;
 }
 .stats-header {
-	font-size: 2em;
-color: white;
+	font-size: 1.4em;
+	color: white;
 }
 .stats-body {
-	font-size: 2.5em;
+	font-size: 1.8em;
 	color: white;
-	font-size: 2.5em;
 	color: white;
-	background: gray;
 	width: fit-content;
 	min-width: 46px;
 	margin: auto;
 	padding: 16px;
-	border-radius: 50%;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 .stats-footer {
-	font-size: 2em;
-color: white;
+	font-size: 1.4em;
+	color: white;
 }
 video {
 	border: 2px gray;
@@ -173,22 +191,6 @@ header {
 p {
 	font-family: 'Roboto', sans-serif;
 }
-#tabs ul li a {
-	font-family: 'Ubuntu', sans-serif;
-}
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
-	font-family: 'Ubuntu', sans-serif;
-	padding: 10px;
-	margin: 10px;
-	background: #BDBDBD;
-	color: white;
-	font-family: 'Ubuntu', sans-serif;
-	font-size: 1em;
-	transition: background-color .3s;
-	border: none;
-	border-radius: 2px;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-}
 
 button {
 	padding: 10px;
@@ -206,9 +208,55 @@ button:hover {
 	cursor: pointer;
 }
 
-.task-item {
-	margin-top: 20px;
-	margin-bottom: 20px;
+/* footer */
+body {
+	margin: 0;
+}
+footer {
+	display: flex;
+	position: absolute;
+	flex-direction: row;
+	justify-content: center;
+	background: black;
+	width: 100%;
+	margin-bottom: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-shadow: 0 8px 4px 0 rgba(0,0,0,0.2);
+}
+.bottom-nav {
+	display: flex;
+    justify-content: center;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    height: 36px;
+    z-index: 2;
+	background: black;
+}
+.bottom-nav ul {
+	display: flex;
+	justify-content: center;
+	padding-top: 4px;
+	padding-left: 0;
+	margin-top: 0;
+	margin-left: 0;
+}
+.bottom-nav li {
+	list-style: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 0;
+	margin-top: 0;
+	font-family: 'Ubuntu', sans-serif;
+}
+.bottom-nav li a {
+	color: white;
+	font-size: 1.4em;
+}
+.bottom-nav li:hover {
+	color: gray;
 }
 
 @media only screen and (min-width: 640px) {
@@ -253,8 +301,8 @@ button:hover {
 		color: white;
 		font-size: 1.4em;
 	}
-	.top-nav li:hover {
-		background: gray;
+	li>a:hover {
+		color: gray;
 	}
 	h1 {
 		float: left;
@@ -265,6 +313,7 @@ button:hover {
 		margin-left: 16px;
 	}
 	.logo-image {
+		display: none;
 		width: 80px;
 		margin-top: -6px;
 		margin-bottom: -20px;
@@ -291,28 +340,12 @@ button:hover {
 		margin-top: 4px;
 		margin-bottom: 2px;
 	}
-
 	main {
-		margin-top: 120px;
+		margin: 120px 8px 40px 8px;
 		font-family: 'Roboto', sans-serif;
 	}
 	.overview-title, .tutorials-title {
 		font-size: 2em;
-	}
-	.case-tutorials, .task-tutorials, .client-tutorials {
-		font-size: 1.5em;
-	}
-	.tabbed-area {
-		margin-top: 800px;
-	}
-	.tabs {
-		position: relative;
-		min-height: 200px;
-		clear: both;
-		margin: 25px 0;
-	}
-	.tab {
-		float: left;
 	}
 	.overview>.cards {
 		display: flex;
@@ -321,14 +354,20 @@ button:hover {
 	}
 	.case-section, .task-section, .client-section {
 		width: 300px;
-		background: red;
-		border-radius: 10px;
-		border: 3px solid;
-		box-shadow: 2px 2px 2px grey;
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 		text-align: center;
 		padding: 10px 0px;
 		margin-left: 20px;
 		margin-right: 20px;
+	}
+	.case-section {
+		background: #fe5c30;
+	}
+	.task-section {
+		background: #304FFE;
+	}
+	.client-section {
+		background: #8630fe;
 	}
 	.stats-header {
 		font-size: 2em;
@@ -339,12 +378,10 @@ button:hover {
 		color: white;
 		font-size: 2.5em;
 		color: white;
-		background: gray;
 		width: fit-content;
 		min-width: 46px;
 		margin: auto;
 		padding: 16px;
-		border-radius: 50%;
 		margin-top: 10px;
 		margin-bottom: 10px;
 	}
@@ -355,6 +392,13 @@ button:hover {
 	video {
 		border: 2px gray;
 		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	}
+	footer {
+		display: flex;
+		flex-direction: row;
+		background: black;
+		width: 100%;
+		padding-top: 10px;
 	}
 	button {
 		padding: 10px;
@@ -378,5 +422,27 @@ button:hover {
 	}
 	a {
 		text-decoration: none;
+	}
+	
+	/* footer */
+	html {
+		min-height: 100%;
+		position: relative;
+	}
+	body {
+		margin: 0;
+	}
+	footer {
+		display: flex;
+		position: absolute;
+		flex-direction: row;
+		justify-content: center;
+		background: black;
+		width: 100%;
+		margin-bottom: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		box-shadow: 0 8px 4px 0 rgba(0,0,0,0.2);
 	}
 }

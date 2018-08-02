@@ -239,7 +239,7 @@ function patchOnEnter() {
 
 function greet() {
 	let email = localStorage.getItem('email');
-	$('.greeting').text(`Hi, ${email}`);
+	$('.greeting').text(`${email}`);
 }
 
 function logOut() {

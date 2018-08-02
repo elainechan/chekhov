@@ -1,5 +1,33 @@
 'use strict';
 
+function validateLogIn() {
+	if (localStorage.getItem('token')) {
+		$('.username').show();
+		$('.auth').hide();
+		let email = localStorage.getItem('email');
+		$('.greeting').text(`${email}`);
+		$('.top-logo>h1>a').attr('href', './dashboard.html');
+	} else {
+		$('.top-nav').hide();
+		$('.username').hide();
+		$('.auth').show();
+		$('.top-logo>h1>a').attr('href', './index.html');
+	}
+}
+
+function logOut() {
+	$('body').on('click', '.logout', (e) => {
+		e.preventDefault;
+		localStorage.removeItem('email');
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
+		console.log('User has been logged out.')
+		$('.logout').remove();
+		$('.greeting').remove();
+		$('.top-nav').hide();
+	})
+}
+
 function goToRegister() {
 	$(".register").on('click', (e) => {
 		window.location.href = `register.html`;
@@ -11,7 +39,6 @@ function goToLogin() {
 		window.location.href = `login.html`;
 	});
 }
-
 function loginDemo() {
 	$('.demo').click(event => {
 		event.preventDefault();
@@ -41,22 +68,8 @@ function loginDemo() {
 
 }
 
-function goToTutorials() {
-	$('.tutorials').click(event => {
-		event.preventDefault();
-		window.location.href = './tutorial.html';
-	})
-}
-
-function goToGithub() {
-	$('.github').click(event => {
-		event.preventDefault();
-		window.location.href = 'https://github.com/elainechan/chekhov';
-	})
-}
-
+validateLogIn();
+logOut();
 goToRegister();
 goToLogin();
 loginDemo();
-goToTutorials();
-goToGithub();
