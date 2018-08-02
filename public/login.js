@@ -2,7 +2,7 @@
 console.log("login.js is working");
 
 function logIn() {
-	$('button').click(event => {
+	$('.submit').click(event => {
 		event.preventDefault();
 		let email = $('.email').val();
 		let password = $('.password').val();
@@ -20,7 +20,7 @@ function logIn() {
 				localStorage.setItem('email', user.data.email);
 				localStorage.setItem('token', user.data.token);
 				localStorage.setItem('userId', user.data.userId);
-				window.location.href = 'dashboard.html'
+				window.location.href = './dashboard.html'
 			})
 			.catch(err => {
 				console.log(err);
@@ -53,4 +53,11 @@ function validatePassword(password) {
 	return re.test(password);
 }
 
+function goToRegister() {
+	$(".register").on('click', (e) => {
+		window.location.href = `register.html`;
+	});
+}
+
 logIn();
+goToRegister();
