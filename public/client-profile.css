@@ -239,6 +239,7 @@ textarea {
 		margin-left: 16px;
 	}
 	.logo-image {
+		display: none;
 		width: 80px;
 		margin-top: -6px;
 		margin-bottom: -20px;

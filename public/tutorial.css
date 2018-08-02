@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/* header */
+html {
+	min-height: 100%;
+	position: relative;
+}
+body {
+	margin: 0;
+}
+header {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	background: black;
+	justify-content: space-between;
+	width: 100%;
+	height: 120px;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+h1 {
+	float: left;
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
+	margin-bottom: 2px;
+	margin-top: 6px;
+}
+h1>a {
+	color: white;
+}
+a {
+	text-decoration: none;
+}
+h1>a:hover {
+	color: gray;
+}
+/* top nav*/
+.top-bar {
+	display: block;
+	width: 100%;
+	height: 120px;
+}
+.top-logo {
+	margin-left: 20px;
+	margin-top: 0;
+	padding-top: 0;
+	display: flex;
+	/* height: 52px;*/
+}
+.logo-image {
+	display: none;
+}
+.username {
+	display: flex;
+	margin-left: 20px;
+}
+.greeting {
+	color: white;
+	font-family: 'Roboto', sans-serif;
+}
+.auth {
+	margin-left: 10px;
+}
+.top-nav {
+	display: flex;
+    justify-content: left;
+    margin-top: 2px;
+    padding-top: 0;
+    margin-bottom: 10px;
+    height: 36px;
+    z-index: 2;
+    background: black;
+}
+.top-nav ul {
+	padding-top: 0;
+	margin-top: 0;
+	margin-left: -24px;
+}
+.top-nav li {
+	float: left;
+	list-style: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 0;
+	margin-top: 0;
+	font-family: 'Ubuntu', sans-serif;
+}
+.top-nav li a {
+	color: white;
+	font-size: 1.2em;
+}
+.top-nav li:hover {
+	color: gray;
+}
+
+/* Title: Case + new button */
+.title {
+	font-size: 1em;
+	width: 100%;
+	position: fixed;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	font-family: 'Ubuntu';
+	margin-top: 120px;
+	margin-bottom: 2px;
+	background: white;
+	z-index: 1;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.title h2 {
+	margin-left: 10px;
+	margin-top: 6px;
+	margin-bottom: 2px;
+}
+main {
+	margin: 180px 8px 40px 8px;
+	font-family: 'Roboto', sans-serif;
+}
+video {
+	width: 100%;
+	height: auto;
+	border: 2px gray;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+video:hover {
+	cursor: pointer;
+}
+
+button {
+	padding: 10px;
+	margin: 10px;
+	background: #BDBDBD;
+	color: white;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
+	transition: background-color .3s;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+button:hover {
+	cursor: pointer;
+}
+footer {
+	display: flex;
+	position: absolute;
+	flex-direction: row;
+	justify-content: center;
+	background: black;
+	width: 100%;
+	margin-bottom: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	box-shadow: 0 8px 4px 0 rgba(0,0,0,0.2);
+}
+.bottom-nav {
+	display: flex;
+    justify-content: center;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    height: 36px;
+    z-index: 2;
+	background: black;
+}
+.bottom-nav ul {
+	display: flex;
+	justify-content: center;
+	padding-top: 4px;
+	padding-left: 0;
+	margin-top: 0;
+	margin-left: 0;
+}
+.bottom-nav li {
+	list-style: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 0;
+	margin-top: 0;
+	font-family: 'Ubuntu', sans-serif;
+}
+.bottom-nav li a {
+	color: white;
+	font-size: 1.4em;
+}
+.bottom-nav li:hover {
+	color: gray;
+}
+
+
+@media only screen and (min-width: 640px) {
+	/* change widths and positions */
+}
+	
+/* Desktop */
+@media only screen and (min-width: 800px) {
+	body {
+		margin: 0;
+	}
+	header {
+		display: block;
+		flex-direction: row;
+		position: fixed;
+		background: black;
+		justify-content: space-between;
+		width: 100%;
+		height: 60px;
+		top: 0;
+		left: 0;
+	}
+	h1>a {
+		color: white;
+	}
+	/* top nav */
+	.top-bar {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		height: 60px;
+	}
+	.top-nav li {
+		display: inline-block;
+		list-style: none;
+		padding: 5px;
+		font-family: 'Ubuntu', sans-serif;
+		margin-top: 10px;
+	}
+	.top-nav li a {
+		color: white;
+		font-size: 1.4em;
+	}
+	.top-nav li a:hover {
+		color: gray;
+	}
+	.top-logo > h1 {
+		float: left;
+		font-family: 'Ubuntu', sans-serif;
+		color: white;
+	}
+	.top-logo {
+		margin-left: 16px;
+	}
+	.logo-image {
+		display: none;
+		width: 80px;
+		margin-top: -6px;
+		margin-bottom: -20px;
+		vertical-align: top;
+		height: 60px;
+	}
+	.username {
+		display: flex;
+	}
+	.greeting {
+		color: white;
+		font-family: 'Roboto', sans-serif;
+	}
+		
+	/* Title: Case and views nav */
+	.title {
+		text-align: center;
+		font-size: 1.2em;
+		margin-top: 0;
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	}
+	.title h2 {
+		margin-left: 16px;
+		margin-top: 4px;
+		margin-bottom: 2px;
+	}
+	main {
+		margin: 120px 8px 40px 8px;
+		font-family: 'Roboto', sans-serif;
+	}
+	footer {
+		display: flex;
+		flex-direction: row;
+		background: black;
+		width: 100%;
+		padding-top: 10px;
+	}
+	/* general */
+	button {
+		padding: 10px;
+		margin: 10px;
+		background: #BDBDBD;
+		color: white;
+		font-family: 'Ubuntu', sans-serif;
+		font-size: 1em;
+		transition: background-color .3s;
+		border: none;
+		border-radius: 2px;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+		margin: 10px;
+	}
+	button:hover {
+		cursor: pointer;
+		color: gray;
+	}
+	p {
+		font-family: 'Roboto', sans-serif;
+	}
+	a {
+		text-decoration: none;
+	}
+}

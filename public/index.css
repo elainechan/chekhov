@@ -7,7 +7,7 @@ margins, padding
 widths heights - > %
 */
 button {
-	padding: 10px;
+	padding: 8px;
 	background: #BDBDBD;
 	color: white;
 	font-family: 'Ubuntu', sans-serif;
@@ -24,6 +24,13 @@ body {
 	font-family: 'Roboto';
 	color: white;
 	font-size: 20px;
+	margin: 0;
+}
+header {
+	margin-left: 8px;
+}
+main {
+	margin: 8px 8px 8px 8px;
 }
 html {
 	background: url("../assets/index-background.jpg") no-repeat center center fixed;
@@ -33,39 +40,51 @@ h1 {
 	font-family: 'Ubuntu';
 	color: white;
 }
-
+h3 {
+	margin-bottom: -14px;
+}
 ul {
 	list-style-type: none;
+	margin-left: -36px;
+}
+p {
+	margin-left: 4px;
+	margin-right: 4px;
 }
 
 /* grid */
 .item .header {
 	grid-area: header;
 	justify-content: center;
-	text-align: center;
+	text-align: left;
 }
-.item .blurb {
-	grid-area: blurb;
+.item .intro {
+	grid-area: intro;
 	justify-content: center;
-	text-align: center;
+	text-align: left;
+}
+.item .explain {
+	justify-content: center;
+	text-align: left;
 }
 .item .buttons {
 	grid-area: buttons;
 	justify-content: center;
-	text-align: center;
+	text-align: left;
+	margin-bottom: 0px;
 }
 .item .tech {
 	grid-area: tech;
 	justify-content: center;
-	text-align: center;
+	text-align: left;
 }
 .container {
-	display: grid;
+	display: block;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-template-rows: auto;
 	grid-template-areas: 
 	".  header header ."
-	". blurb blurb ."
+	". intro intro ."
 	". buttons buttons ."
 	". tech tech .";
 }
@@ -78,5 +97,88 @@ ul {
 /* Desktop */
 @media only screen and (min-width: 800px) {
 /* change widths and positions */
+	button {
+		padding: 8px;
+		background: #BDBDBD;
+		color: white;
+		font-family: 'Ubuntu', sans-serif;
+		font-size: 1em;
+		transition: background-color .3s;
+		border: none;
+		border-radius: 2px;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+	}
+	button:hover {
+		cursor: pointer;
+	}
+	body {
+		font-family: 'Roboto';
+		color: white;
+		font-size: 20px;
+		margin: 0;
+	}
+	header {
+		margin-left: 8px;
+	}
+	main {
+		margin: 8px 8px 8px 8px;
+	}
+	html {
+		background: url("../assets/index-background.jpg") no-repeat center center fixed;
+		background-size: cover;
+	}
+	h1 {
+		font-family: 'Ubuntu';
+		color: white;
+		text-align: center;
+	}
+	h3 {
+		text-align: center;
+	}
+	ul {
+		list-style-type: none;
+		margin-left: -42px;
+		text-align: center;
+	}
+	p {
+		margin-left: 60px;
+		margin-right: 60px;
+	}
 
+	/* grid */
+	.item .header {
+		grid-area: header;
+		justify-content: center;
+		text-align: left;
+	}
+	.item .intro {
+		grid-area: intro;
+		justify-content: center;
+		text-align: left;
+	}
+	.item .explain {
+		justify-content: center;
+		text-align: left;
+	}
+	.item .buttons {
+		grid-area: buttons;
+		justify-content: center;
+		text-align: center;
+		margin-bottom: 0px;
+	}
+	.item .tech {
+		grid-area: tech;
+		justify-content: center;
+		text-align: center;
+	}
+	.container {
+		display: block;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-rows: auto;
+		grid-template-areas: 
+		".  header header ."
+		". intro intro ."
+		". buttons buttons ."
+		". tech tech .";
+	}
 }

@@ -279,7 +279,7 @@ function deleteTask() {
 
 function greet() {
 	let email = localStorage.getItem('email');
-	$('.greeting').text(`Hello, ${email}`);
+	$('.greeting').text(`${email}`);
 }
 
 function logOut() {

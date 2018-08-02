@@ -140,7 +140,7 @@ function goToClientCaseListener(CASES) {
 
 function greet() {
 	let email = localStorage.getItem('email');
-	$('.greeting').text(`Hello, ${email}`);
+	$('.greeting').text(`${email}`);
 }
 
 function logOut() {
@@ -168,8 +168,8 @@ getTaskData(renderTaskStats);
 getCaseData(renderCaseStats);
 //getClientData(renderClientsInTab);
 getClientData(renderClientStats);
-goToClientCaseListener();
-goToCase();
+//goToClientCaseListener();
+//goToCase();
 greet();
 logOut();
 rejectUnauthorized();

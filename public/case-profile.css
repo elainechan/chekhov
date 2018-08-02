@@ -69,6 +69,7 @@ h1 {
 	display: flex;
 }
 .logo-image {
+	display: none;
     width: 55px;
 	margin-top: 4px;
 	margin-bottom: 4px;
@@ -353,6 +354,7 @@ textarea {
 		margin-left: 16px;
 	}
 	.logo-image {
+		display: none;
 		width: 80px;
 		margin-top: -6px;
 		margin-bottom: -20px;

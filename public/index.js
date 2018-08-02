@@ -16,7 +16,7 @@ function loginDemo() {
 	$('.demo').click(event => {
 		event.preventDefault();
 		let email = `ger@many.com`;
-		let password = `5678`;
+		let password = `12345678`;
 		console.log(email);
 		console.log(password);
 		console.log('Form submitted');
@@ -41,6 +41,22 @@ function loginDemo() {
 
 }
 
+function goToTutorials() {
+	$('.tutorials').click(event => {
+		event.preventDefault();
+		window.location.href = './tutorial.html';
+	})
+}
+
+function goToGithub() {
+	$('.github').click(event => {
+		event.preventDefault();
+		window.location.href = 'https://github.com/elainechan/chekhov';
+	})
+}
+
 goToRegister();
 goToLogin();
 loginDemo();
+goToTutorials();
+goToGithub();

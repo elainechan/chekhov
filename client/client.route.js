@@ -8,11 +8,13 @@ const Client = require("./client.model")
 const clientController = require('./client.controller');
 const common = require('../common/token.verification');
 
+// rule of thumb: with routes using the same method ('get'), the more wild cards there are, put lower down; the more "specific" the route is (fewer parameters that aren't wildcards), put higher up
+
 router.get('/all/:token', common.verifyToken, clientController.getAllClients);
 
-router.get('/:id/:token', common.verifyToken, clientController.getClientById);
-
 router.get('/count/:token', common.verifyToken, clientController.getClientCount);
+
+router.get('/:id/:token', common.verifyToken, clientController.getClientById);
 
 router.post('/:token', common.verifyToken, clientController.postNewClient);
 
