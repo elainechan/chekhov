@@ -4,7 +4,7 @@
 	margin: auto;
     padding: 20px;
 	background: #bdb8b87a;
-    width: 30%;
+    width: 80%;
 }
 input {
 	margin-top: 10px;
@@ -19,12 +19,22 @@ input:focus {
 	outline: none;
 }
 button {
-    background: #df5b33;
-    width: 100%;
-    border: 2px solid gray;
-    padding: 10px;
+	padding: 10px;
+	margin: 10px;
+	background: #BDBDBD;
 	color: white;
-	font-size: 16px;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 1em;
+	transition: background-color .3s;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+}
+button:hover {
+	cursor: pointer;
+}
+.register-div {
+	text-align: center;
 }
 h2{
 	font-family: 'Ubuntu', sans-serif;
@@ -54,9 +64,20 @@ a:hover {
 
 @media only screen and (min-width: 640px) {
 	/* change widths and positions */
+	.login-form {
+		margin: auto;
+		padding: 20px;
+		background: #bdb8b87a;
+		width: 50%;
+	}
 }
 	
 /* Desktop */
 @media only screen and (min-width: 800px) {
-	
+	.login-form {
+		margin: auto;
+		padding: 20px;
+		background: #bdb8b87a;
+		width: 30%;
+	}
 }

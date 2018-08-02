@@ -1,7 +1,7 @@
 'use strict';
 
 function register() {
-	$('button').click(event => {
+	$('.submit').click(event => {
 		event.preventDefault();
 		let email = $('.email').val();
 		let password = $('.password').val();
@@ -42,4 +42,11 @@ function validatePassword(password) {
 	return re.test(password);
 }
 
+function goToLogin() {
+	$(".login").on('click', (e) => {
+		window.location.href = `login.html`;
+	});
+}
+
 register();
+goToLogin();
