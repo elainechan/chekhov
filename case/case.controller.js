@@ -14,6 +14,18 @@ exports.getAllCases = (req, res) => {
 	})
 }
 
+exports.getUserCases = (req, res) => {
+  Case.find({userId: req.params.userId})
+  .populate('clientId')
+  .exec((err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    return res.send(data);
+  })
+}
+
 exports.getCaseCount = (req, res) => {
   Case.count((err, data) => {
     if(err) {console.log(err)}
@@ -63,6 +75,19 @@ exports.getCaseByClient = (req, res) => {
   });
 }
 
+exports.getUserCases = (req, res) => {
+  Case.find({userId: req.params.userId})
+  .populate('clientId')
+  .exec((err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    return res.send(data);
+  })
+
+}
+
 exports.postNewCase = (req, res) => {
   const requiredFields = ['name'];
 	console.log(req.body.name);
@@ -78,7 +103,7 @@ exports.postNewCase = (req, res) => {
   if (!req.body.clientId) {
     Client.create({
       name: req.body.clientName,
-      userId: req.user.userId
+      userId: mongoose.Types.ObjectId(req.params.userId)
     }, (err, data) => {
       if (err) {
         handleError(err);
@@ -87,7 +112,7 @@ exports.postNewCase = (req, res) => {
         Case.create({
           name: req.body.name,
           clientId: data._id,
-          userId: req.user.userId,
+          userId: mongoose.Types.ObjectId(req.params.userId),
           dateOpened: new Date()
         }, (err, data) => {
           if (err) {
@@ -108,7 +133,7 @@ exports.postNewCase = (req, res) => {
     // if client exists
     Case.create({
       name: req.body.name,
-      clientId: mongoose.Types.ObjectId(req.body.clientId),
+      clientId: req.body.clientId,
       userId: req.user.userId,
       dateOpened: new Date()
     }, (err, data) => {

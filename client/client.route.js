@@ -6,22 +6,24 @@ const Task = require("../task/task.model");
 const Case = require("../case/case.model");
 const Client = require("./client.model")
 const clientController = require('./client.controller');
-const common = require('../common/token.verification');
+const auth = require('../auth/token.verification');
 
-// rule of thumb: with routes using the same method ('get'), the more wild cards there are, put lower down; the more "specific" the route is (fewer parameters that aren't wildcards), put higher up
+// rule of thumb: with routes using the same method ('get'), the more wild cards there are, put lower down; the more "specific" the route is (parameters that aren't wildcards), put higher up
 
-router.get('/all/:token', common.verifyToken, clientController.getAllClients);
+router.get('/all/:token', auth.verifyToken, clientController.getAllClients);
 
-router.get('/count/:token', common.verifyToken, clientController.getClientCount);
+router.get('/count/:token', auth.verifyToken, clientController.getClientCount);
 
-router.get('/:id/:token', common.verifyToken, clientController.getClientById);
+router.get('/user/:userId/:token', auth.verifyToken, clientController.getUserClients);
 
-router.post('/:token', common.verifyToken, clientController.postNewClient);
+router.get('/:id/:token', auth.verifyToken, clientController.getClientById);
 
-router.delete('/delete/:id/:token', common.verifyToken, clientController.deleteClientById);
+router.post('/:token', auth.verifyToken, clientController.postNewClient);
 
-router.patch('/edit/:id/name/:token', common.verifyToken, clientController.editClientName);
+router.delete('/delete/:id/:token', auth.verifyToken, clientController.deleteClientById);
 
-router.patch('/edit/:id/address/:token', common.verifyToken, clientController.editClientAddress);
+router.patch('/edit/:id/name/:token', auth.verifyToken, clientController.editClientName);
+
+router.patch('/edit/:id/address/:token', auth.verifyToken, clientController.editClientAddress);
 
 module.exports = router;

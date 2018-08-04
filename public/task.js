@@ -1,15 +1,18 @@
 'use strict';
 
-function getTaskData(callback) {
-	$.getJSON(`/tasks/all/${localStorage.getItem('token')}`, callback);
+const token = localStorage.getItem('token');
+const userId = localStorage.getItem('userId');
+
+function getUserTaskData(callback) {
+	$.getJSON(`/tasks/user/${userId}/${token}`, callback);
 }
 
-function getCaseData(callback) {
-	$.getJSON(`/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
+function getUserCaseData(callback) {
+	$.getJSON(`/cases/user/${userId}/${token}`, callback); // server getting endpoint
 }
 
 function renderTasks(TASKS) {
-	console.log(TASKS);
+	console.log('renderTasks');
 	TASKS.forEach((item, i) => {
 		if (!item.caseId) {
 			item.caseId = {
@@ -37,7 +40,7 @@ function renderTasks(TASKS) {
 		<button class="delete-task" data-id="${item._id}">Delete task</button>
 		</div>`);
 	});
-	getCaseData(createCaseSelection);
+	getUserCaseData(createCaseSelection);
 }
 
 function deleteTask() {
@@ -279,7 +282,7 @@ function addNewTask() {
 				</div>`
 			);
 		}
-		getCaseData(createCaseSelection);
+		getUserCaseData(createCaseSelection);
 	});
 }
 
@@ -365,7 +368,8 @@ function postNewTask() {
 			var taskObj = {
 				name: $('.task-name').val(),
 				description: $('.task-description').val(),
-				caseId: $('option:selected', this).attr('value')
+				caseId: $('option:selected', this).attr('value'),
+				userId: userId
 			};
 			if (!validateTask(taskObj, true)) {
 				alert('Data validation failed.');
@@ -397,7 +401,7 @@ function postNewTask() {
 					$('.new.task-item').removeClass('new');
 					$('.toggle-buttons').remove();
 					$('#submit-task').remove();
-					getCaseData(createCaseSelection);
+					getUserCaseData(createCaseSelection);
 				}
 			});
 		} else {
@@ -407,14 +411,15 @@ function postNewTask() {
 				name: $('.task-name').val(),
 				description: $('.task-description').val(),
 				caseId: null,
-				caseName: caseName
+				caseName: caseName,
+				userId: userId
 			};
 			if (!validateTask(taskObj, false)) {
 				alert('Data validation failed.');
 				return
 			}
 			$.ajax({
-				url: `/tasks/${localStorage.getItem('token')}`,
+				url: `/tasks/user/${userId}/${token}`,
 				data: JSON.stringify(taskObj),
 				type: 'POST',
 				contentType: 'application/json',
@@ -438,7 +443,7 @@ function postNewTask() {
 					$('.new.task-item').removeClass('new');
 					$('.toggle-buttons').remove();
 					$('#submit-task').remove();
-					getCaseData(createCaseSelection);
+					getUserCaseData(createCaseSelection);
 				}
 			});
 		}	
@@ -469,7 +474,8 @@ function rejectUnauthorized() {
 	}
 }
 
-getTaskData(renderTasks);
+//getUserTaskData(renderTasks);
+getUserTaskData(renderTasks);
 toggleCardView();
 toggleListView();
 $("#tasks").sortable();
@@ -479,8 +485,8 @@ editTaskDescription();
 editTaskCase();
 addNewTask();
 removeNewTaskItem();
-goToCase(getCaseData);
-getCaseData(goToCase);
+goToCase(getUserCaseData);
+getUserCaseData(goToCase);
 patchOnEnter();
 toggleCreateNewCase();
 toggleSelectExistingCase();

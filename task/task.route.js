@@ -7,28 +7,30 @@ const Case = require("../case/case.model");
 
 const taskController = require('./task.controller');
 
-const common = require('../common/token.verification');
+const auth = require('../auth/token.verification');
 
-router.get('/all/:token', common.verifyToken, taskController.getAllTasks);
+router.get('/all/:token', auth.verifyToken, taskController.getAllTasks);
 
-router.post('/:token', common.verifyToken, taskController.postNewTask); // Adds verification
+router.post('/:token', auth.verifyToken, taskController.postNewTask); // Adds verification
 
-router.get('/client/:id/:token', common.verifyToken, taskController.getTasksByClientId);
+router.get('/user/:userId/:token', auth.verifyToken, taskController.getUserTasks);
 
-router.get('/case/:id/:token', common.verifyToken, taskController.getTasksByCaseId);
+router.get('/client/:id/:token', auth.verifyToken, taskController.getTasksByClientId);
 
-router.get('/user/:id/:token', common.verifyToken, taskController.getTasksByUserId);
+router.get('/case/:id/:token', auth.verifyToken, taskController.getTasksByCaseId);
 
-router.patch('/edit/:id/name/:token', common.verifyToken, taskController.patchTaskName);
+router.get('/user/:id/:token', auth.verifyToken, taskController.getTasksByUserId);
 
-router.patch('/edit/:id/description/:token', common.verifyToken, taskController.patchTaskDescription);
+router.patch('/edit/:id/name/:token', auth.verifyToken, taskController.patchTaskName);
 
-router.put('/edit/:id/case/:token', common.verifyToken, taskController.putCaseByTaskId);
+router.patch('/edit/:id/description/:token', auth.verifyToken, taskController.patchTaskDescription);
 
-router.get('/count/:token', common.verifyToken, taskController.getTaskCount);
+router.put('/edit/:id/case/:token', auth.verifyToken, taskController.putCaseByTaskId);
 
-router.get('/case/:caseId/count/:token', common.verifyToken, taskController.getNumberOfTasksByCaseId);
+router.get('/count/:token', auth.verifyToken, taskController.getTaskCount);
 
-router.delete('/delete/:id/:token', common.verifyToken, taskController.deleteTaskById);
+router.get('/case/:caseId/count/:token', auth.verifyToken, taskController.getNumberOfTasksByCaseId);
+
+router.delete('/delete/:id/:token', auth.verifyToken, taskController.deleteTaskById);
 
 module.exports = router;

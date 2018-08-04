@@ -11,6 +11,18 @@ exports.getAllClients = (req, res) => {
 	})
 }
 
+exports.getUserClients = (req, res) => {
+  Client.find({userId: mongoose.Types.ObjectId(req.params.userId)})
+  .populate('caseId')
+  .exec((err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    return res.send(data);
+  });
+}
+
 exports.getClientCount = (req, res) => {
   Client.find()
   .exec((err, data) => {
@@ -33,7 +45,7 @@ exports.postNewClient = (req, res) => {
   Client.create({
     name: req.body.name,
     address: req.body.address,
-    userId: req.user.userId
+    userId: mongoose.Types.ObjectId(req.user.userId)
   }, (err, data) => {
     if (err) return handleError(err);
     res.status(201).json(data);

@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 
 exports.getAllTasks = (req, res) => {
   Task
-  .find({ userId: mongoose.Types.ObjectId(req.user.userId) })
+  .find()
   .populate('caseId')
+  .populate('userId')
   .sort({'dateOpened': 'descending'})
   .exec((err, data) => {
 	  if (err) {
@@ -14,6 +15,20 @@ exports.getAllTasks = (req, res) => {
 	  return res.send(data);
 	})
 }
+
+exports.getUserTasks = (req, res) => {
+  Task
+  .find({ userId: mongoose.Types.ObjectId(req.user.userId) })
+  .populate('caseId')
+  .sort({'dateOpened': 'descending'})
+  .exec((err, data) => {
+	  if (err) {
+		console.log(err);
+	  }
+	  return res.send(data);
+	});
+}
+
 
 exports.postNewTask = (req, res) => {
 	const requiredFields = ['name']; // add later  'clientId', 'caseId', 'userId'
@@ -62,7 +77,7 @@ exports.postNewTask = (req, res) => {
     Task.create({ 
       name: req.body.name,
       userId: req.user.userId,
-      caseId: mongoose.Types.ObjectId(req.body.caseId),
+      caseId: req.body.caseId,
       description: req.body.description,
       dateOpened: new Date()
     }, (err, data) => {

@@ -19,6 +19,8 @@ const authRoute = require('./auth/auth.route');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // serves static files
+
+// use middleware
 app.use('/tasks', taskRoute);
 app.use('/cases', caseRoute);
 app.use('/clients', clientRoute);
