@@ -1,4 +1,5 @@
 # Chekhov
+## [Go to application](https://chekhov.herokuapp.com/)
 
 The objective of Chekhov is to optimize the arrangement of tasks in a schedule. When given a list of tasks, Chekhov should automatically build a schedule based on a finite set of constraints, by minimizing one or more cost function(s). The goal is to achieve a simplified version of [Optaplanner](https://www.optaplanner.org/). 
 
