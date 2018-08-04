@@ -25,6 +25,7 @@ function logOut() {
 		$('.logout').remove();
 		$('.greeting').remove();
 		$('.top-nav').hide();
+		$('.auth').show();
 	})
 }
 
@@ -42,7 +43,7 @@ function goToLogin() {
 function loginDemo() {
 	$('.demo').click(event => {
 		event.preventDefault();
-		let email = `ger@many.com`;
+		let email = `sherlock@holmes.com`;
 		let password = `12345678`;
 		console.log(email);
 		console.log(password);
