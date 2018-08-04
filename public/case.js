@@ -1,14 +1,19 @@
 'use strict';
 
-function getCaseData(callback) {
-	$.getJSON(`/cases/all/${localStorage.getItem('token')}`, callback); // server getting endpoint
+const userId = localStorage.getItem('userId');
+const token = localStorage.getItem('token');
+
+function getUserCaseData(callback) {
+	console.log('getUserCaseData');
+	$.getJSON(`/cases/user/${userId}/${token}`, callback); // server getting endpoint
 }
 
-function getClientData(callback) {
-	$.getJSON(`/clients/all/${localStorage.getItem('token')}`, callback);
+function getUserClientData(callback) {
+	$.getJSON(`/clients/user/${userId}/${token}`, callback);
 }
 
 function renderCases(CASES) {
+	console.log('renderCases')
 	console.log(CASES);
 	CASES.forEach((item, i) => {
 		let dateDisplay = new Date(item.dateOpened);
@@ -49,7 +54,7 @@ function renderCases(CASES) {
 			</div>`);
 		}
 	});
-	getClientData(createClientSelection);
+	getUserClientData(createClientSelection);
 }
 
 function deleteCase() {
@@ -91,7 +96,7 @@ function addNewCase() {
 				<button class="existing-client-button">Select Existing Client</button>
 				<button class="new-client-button" style="display: none;">Create New Client</button>
 				</div>
-				<button class="submit-button" id="submit-task">Submit</button>
+				<button class="submit-button" id="submit-case">Submit</button>
 				</div>`
 			);
 		} else if (($('.case-item').hasClass('case-card'))) {
@@ -139,7 +144,7 @@ function addNewCase() {
 				</div>`
 			);
 		}
-		getClientData(createClientSelectionNew);
+		getUserClientData(createClientSelectionNew);
 	});
 }
 
@@ -170,12 +175,14 @@ function postNewCase() {
 		if ($(".new-client-div").attr("style") === "display: none;") {
 			var caseObj = {
 				name: $('.case-name').val(),
+				userId: userId,
 				clientId: $('option:selected', this).attr('value'),
 				clientName: $('option:selected', this).text()
 			};
 		} else {
 			var caseObj = {
 				name: $('.case-name').val(),
+				userId: userId,
 				clientId: null,
 				clientName: $(".new-client-input").val()
 			}
@@ -210,7 +217,7 @@ function postNewCase() {
 				$('.new-client-div').remove();
 				$('.toggle-buttons').remove();
 				$('#submit-case').remove();
-				getClientData(createClientSelection);
+				getUserClientData(createClientSelection);
 			}
 		});
 	});
@@ -295,16 +302,16 @@ function toggleCardView() {
 function editCase() {
 	$('body')
 	.not('.new')
-	.on('blur', '#task-name-input', (e) => {
+	.on('blur', '#case-name-input', (e) => {
 		e.preventDefault;
 		if ($(e.target).hasClass('new')) {
 			return;
 		}
 		console.log(e.target.value);
-		let taskId = $(e.target).attr('data-id');
+		let caseId = $(e.target).attr('data-id');
 		let data = JSON.stringify({ name: e.target.value });
 		$.ajax({
-			url: `/tasks/edit/${taskId}/name/${localStorage.getItem('token')}`,
+			url: `/cases/edit/${caseId}/name/${token}`,
 			data: data,
 			type: 'PATCH',
 			contentType: 'application/json',
@@ -376,7 +383,7 @@ function patchOnEnter() {
 			let caseName = $(e.target).val();
 			let data = JSON.stringify({name: caseName});
 			$.ajax({
-				url: `/cases/edit/${caseId}/name/${localStorage.getItem('token')}`,
+				url: `/cases/edit/${caseId}/name/${token}`,
 				data: data,
 				type: 'PATCH',
 				contentType: 'application/json',
@@ -407,12 +414,12 @@ function logOut() {
 }
 
 function rejectUnauthorized() {
-	if (!localStorage.getItem('token')) {
+	if (!token) {
 		window.location.href = './index.html'
 	}
 }
 
-getCaseData(renderCases);
+getUserCaseData(renderCases);
 goToCase();
 goToClient();
 toggleListView();

@@ -9,7 +9,11 @@ const ClientSchema = mongoose.Schema({
 	caseIds: [{ 
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Case'
-	}]
+	}],
+	userId: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'User'
+	}
 });
 
 module.exports = mongoose.model('Client', ClientSchema);

@@ -1,22 +1,38 @@
-function getClientData(callback) {
-	$.getJSON(`/clients/all/${localStorage.getItem('token')}`, callback);
+'use strict';
+
+const token = localStorage.getItem('token');
+const userId = localStorage.getItem('userId');
+
+function getUserClientData(callback) {
+	$.getJSON(`/clients/${userId}/${token}`, callback);
 }
 
-function renderClients(CLIENTS) {
-	console.log(CLIENTS);
-	CLIENTS.forEach((item, i) => {
-		$('#clients').append(`
-		<div class="client-item client-card">
-		<div class="client-name-div">
-		<textarea class="client-name" id="client-name-input" data-id="${item._id}">${item.name}</textarea>
-		</div>
-		<div class="client-address-div">
-		<textarea class="client-address" id="client-address-input" value="" data-id="${item._id}">${item.address}</textarea>
-		</div>
-		<button class="go-to-client" value="${item._id}">Client profile</button>
-		<button class="delete-client" data-id="${item._id}">Delete client</button>
-		</div>`);
-	});
+function renderClients() {
+	console.log('renderClients');
+	$.ajax({
+		url: `/clients/user/${userId}/${token}`,
+		type: 'GET',
+		contentType: 'application/json',
+		success: (data) => {
+			console.log(data);
+			data.forEach((item, i) => {
+				$('#clients').append(`
+				<div class="client-item client-card">
+				<div class="client-name-div">
+				<textarea class="client-name" id="client-name-input" data-id="${item._id}">${item.name}</textarea>
+				</div>
+				<div class="client-address-div">
+				<textarea class="client-address" id="client-address-input" value="" data-id="${item._id}">${item.address}</textarea>
+				</div>
+				<button class="go-to-client" value="${item._id}">Client profile</button>
+				<button class="delete-client" data-id="${item._id}">Delete client</button>
+				</div>`);
+			});
+		}
+
+	})
+	
+	
 }
 
 function goToClient(CLIENTS) {
@@ -126,7 +142,8 @@ function postNewClient() {
 		e.preventDefault();
 		let clientObj = {
 			name: $('.client-name').val(),
-			address: $('.client-address').val()
+			address: $('.client-address').val(),
+			userId: userId
 		};
 		if (!validateClient(clientObj)) {
 			return;
@@ -263,7 +280,8 @@ function rejectUnauthorized() {
 
 $("#clients").sortable();
 $("#clients").disableSelection();
-getClientData(renderClients); 
+
+renderClients();
 goToClient();
 deleteClient();
 toggleListView();

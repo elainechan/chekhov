@@ -5,26 +5,30 @@ const mongoose = require("mongoose");
 const Task = require("../task/task.model");
 const Case = require("./case.model");
 const caseController = require('./case.controller');
-const common = require('../common/token.verification');
+const auth = require('../auth/token.verification');
 
-router.get('/all/:token', common.verifyToken, caseController.getAllCases);
+router.get('/all/:token', auth.verifyToken, caseController.getAllCases);
 
-router.get('/count/:token', common.verifyToken, caseController.getCaseCount);
+router.get('/count/:token', auth.verifyToken, caseController.getCaseCount);
 
-router.get('/:id/:token', common.verifyToken, caseController.getCaseById);
+router.get('/user/:userId/:token', auth.verifyToken, caseController.getUserCases);
 
-router.get('/:name/:token', common.verifyToken, caseController.getCaseByName);
+router.get('/:id/:token', auth.verifyToken, caseController.getCaseById);
 
-router.get('/:id/tasks/:token', common.verifyToken, caseController.getCaseTasksById);
+router.get('/:name/:token', auth.verifyToken, caseController.getCaseByName);
 
-router.get('/client/:clientId/:token', common.verifyToken, caseController.getCaseByClient);
+router.get('/:userId/:token', auth.verifyToken, caseController.getUserCases);
 
-router.post('/:token', common.verifyToken, caseController.postNewCase);
+router.get('/:id/tasks/:token', auth.verifyToken, caseController.getCaseTasksById);
 
-router.delete('/delete/:id/:token', common.verifyToken, caseController.deleteCaseById);
+router.get('/client/:clientId/:token', auth.verifyToken, caseController.getCaseByClient);
 
-router.put('/edit/:id/client/:token', common.verifyToken, caseController.putClientByCaseId);
+router.post('/:token', auth.verifyToken, caseController.postNewCase);
 
-router.patch('/edit/:id/name/:token', common.verifyToken, caseController.patchCaseName);
+router.delete('/delete/:id/:token', auth.verifyToken, caseController.deleteCaseById);
+
+router.put('/edit/:id/client/:token', auth.verifyToken, caseController.putClientByCaseId);
+
+router.patch('/edit/:id/name/:token', auth.verifyToken, caseController.patchCaseName);
 
 module.exports = router;
