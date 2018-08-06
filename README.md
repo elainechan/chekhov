@@ -47,7 +47,7 @@ The objective of Chekhov is to automate task scheduling. The goal is to achieve 
 ## Phase 3: Explore Algorithms
 - Optimization: 
 	- linear programming (OR Tools, SCIP, pyscipopt)
-	- greedy algorithms, heuristics, metaheuristics
+	- greedy algorithms, [heuristics](https://reactjs.org/docs/reconciliation.html), metaheuristics
 - Scheduling pipeline:
 	- priority queue
 - Task grouping:
