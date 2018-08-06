@@ -1,8 +1,5 @@
-[logo]: https://github.com/elainechan/chekhov/blob/master/assets/logo.png "Logo"
-
-![alt text][logo]
-# Chekhov
-## [Go to application](https://chekhov.herokuapp.com/)
+![Logo image][logo]
+# [Chekhov](https://chekhov.herokuapp.com/)
 
 The objective of Chekhov is to optimize the arrangement of tasks in a schedule. When given a list of tasks, Chekhov should automatically build a schedule based on a finite set of constraints, by minimizing one or more cost function(s). The goal is to achieve a simplified version of [Optaplanner](https://www.optaplanner.org/). 
 
@@ -61,7 +58,7 @@ Possible use cases can be any situations in which tasks with competing prioritie
 	- linked list
 
 ## Data Schema
-![Data schema image](https://github.com/elainechan/chekhov/blob/master/assets/schema2.png)
+![Data schema image][schema]
 - [x] **Task** _object_
 	- [x] ID: _string_
 	- [ ] Deadline: _date_
@@ -273,3 +270,6 @@ task4 = ["A1"]
 A = "4A1" => 16
 B = "" => 14
 ```
+
+[logo]: https://github.com/elainechan/chekhov/blob/master/assets/logo.png "Logo image"
+[schema]: https://github.com/elainechan/chekhov/blob/master/assets/schema2.png "Data schema image"
