@@ -1,9 +1,7 @@
 ![Logo image][logo]
 # [Chekhov](https://chekhov.herokuapp.com/)
 
-The objective of Chekhov is to automate task scheduling. The goal is to achieve a simplified version of [Optaplanner](https://www.optaplanner.org/). 
-
-While the scheduling algorithm is under development, the frontend acts as a project management tool, like a simplified version of Asana.
+The objective of Chekhov is to automate task scheduling. The goal is to achieve a simplified version of [Optaplanner](https://www.optaplanner.org/). While the scheduling algorithm is under development, the frontend acts as a project management tool, like a simplified version of Asana.
 
 ## Tech Stack
 - Frontend: JavaScript, jQuery, HTML, CSS
