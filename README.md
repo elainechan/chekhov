@@ -1,3 +1,6 @@
+[logo]: https://github.com/elainechan/chekhov/blob/master/assets/logo.png "Logo"
+
+![alt text][logo]
 # Chekhov
 ## [Go to application](https://chekhov.herokuapp.com/)
 
