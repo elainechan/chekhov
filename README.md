@@ -1,3 +1,6 @@
+[logo]: https://github.com/elainechan/chekhov/blob/master/assets/logo.png "Logo"
+
+![alt text][logo]
 # Chekhov
 ## [Go to application](https://chekhov.herokuapp.com/)
 
@@ -15,7 +18,7 @@ Possible use cases can be any situations in which tasks with competing prioritie
 - Testing: Mocha, Chai
 - Continuous Integration: Travis CI
 
-## Phase 1: Basic Working Application
+## Phase 1: Working Application
 - Frontend
 	- [x] Working components: Tasks, Cases, Clients
 	- [x] Responsive layouts
@@ -35,21 +38,27 @@ Possible use cases can be any situations in which tasks with competing prioritie
 	- [x] Call-to-action: landing page, tutorial, demo
 	- [x] User input validation
 
-## Phase 2: Expand Features
+## Phase 2: Refactor and Expand Features
+- Refactor in React
 - Frontend Components
 	- [ ] Users
-	- [ ] Groups
+	- [ ] Task Groups
+	- [ ] Calendars
 	- [ ] Updates
 	- [ ] Records
-	- [ ] Calendar
 - Processes
 	- [ ] Schedule Task
 	- [ ] Populate Calendar with Task when scheduled
 	- [ ] Show schedule in components
 
-## Phase 3: Smart Scheduling
-- Linear Programming
-- Heuristics
+## Phase 3: Explore Algorithms
+- Optimization: 
+	- linear programming (OR Tools, SCIP, pyscipopt)
+	- greedy algorithms, heuristics, metaheuristics
+- Scheduling pipeline:
+	- priority queue
+- Task grouping:
+	- linked list
 
 ## Data Schema
 ![Data schema image](https://github.com/elainechan/chekhov/blob/master/assets/schema2.png)
