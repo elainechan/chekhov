@@ -7,25 +7,36 @@ While the smart scheduling algorithm is under development, the frontend acts as 
 
 Possible use cases can be any situations in which tasks with competing priorities need to be resolved. If the priorities are unclear, they should be clarified through an analytical process.
 
-## Phase 1: Basic
-- Components
-	- [x] Tasks
-	- [x] Cases
-	- [x] Clients
-- Backend
-	- [x] Database
-	- [x] Middleware
-- Processes
-	- [x] Create
-	- [x] Read
-	- [x] Update
-	- [x] Delete
-- Features
-	- [x] Patch on enter
-	- [x] Patch on blur
+## Tech Stack
+- Frontend: JavaScript, jQuery, HTML, CSS
+- Backend: Node.js, Express, Mongoose
+- Database: MongoDB
+- Authentication: bcrypt, JWT
+- Testing: Mocha, Chai
+- Continuous Integration: Travis CI
 
-## Phase 2: Expanded
-- Components
+## Phase 1: Basic Working Application
+- Frontend
+	- [x] Working components: Tasks, Cases, Clients
+	- [x] Responsive layouts
+	- [x] AJAX interaction with backend
+	- [x] Unintrusive UX: patch on enter, patch on blur
+- Backend
+	- [x] MongoDB database
+	- [x] Express middleware
+	- [x] Model-Controller-Router pattern
+- Authentication
+	- [x] Password encryption
+	- [x] Locally store access token and user profile
+	- [x] Reject unauthorized access
+- Features
+	- [x] Create, read, update, delete (CRUD)
+	- [x] Dashboard: overview of user data
+	- [x] Call-to-action: landing page, tutorial, demo
+	- [x] User input validation
+
+## Phase 2: Expand Features
+- Frontend Components
 	- [ ] Users
 	- [ ] Groups
 	- [ ] Updates
