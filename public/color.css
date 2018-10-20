@@ -1,0 +1,50 @@
+body {
+	margin: 40px;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 100px 100px 100px;
+	grid-gap: 10px;
+	margin-top: 160px;
+}
+
+.item {
+	border-radius: 100px;
+	padding: 20px;
+	font-size: 150%;
+	color: white;
+	text-align: center;
+	line-height: 56px;
+	height: 60px;
+}
+
+.a {
+	background: #304FFE;
+}
+.b {
+	background: #fec430;
+}
+.c {
+	background: #fe5c30;
+}
+.d {
+	background:#30fedf;
+}
+.e{
+	background:#8630fe;
+}
+.f {
+	background: #fe30a8;
+}
+.g{
+	background: #000000;
+}
+.h {
+	background: #BDBDBD;
+}
+.i {
+	background: #ffffff;
+	color: #000000;
+	border: 1px solid gray;
+}

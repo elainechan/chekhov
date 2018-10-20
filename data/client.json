@@ -1,0 +1,7 @@
+{
+	"id": "XYZ123456",
+	"name": "Claire Danes",
+	"address": "100 West 4th Street",
+	"phone": "2120398439",
+	"case_ids": ["ABC-1234", "XYZ9876"]
+}

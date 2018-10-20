@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: X2njbLGSn8REKXP6FhoMJz8lKZDdupSBfn0wG24EocAeEe5/lPYE28IeqZXl8yXg2amIxpiHzK8HfOfmR+VrCjF6gpEWyHi2SuuCPixuSKP/hPOn792Buwo/aTK0oCEnyw08NTl4kLJOFckb+wdiZBQ0PTxFqlXxmgJq1WIfz0FqzxNmGy2xX0FRnMNt79PR+eeDgRAxWZvyWumpkwniGIQMu4w2sdcngAutUL1Ow8VXuZ/oWrAy5W2XAx16wCgTzD41PJjSEfobyezGu/8VgwL50RQfgkCLefdNSiPo4Hf9kMrQeCG/b3FIorjA/85fOVZ6u4cGBhBKcJjj7g383hc5z2TD7blVlVZgS3Zl0anwNjfij1nC+tMz8H4749DsHeNM/uMhvfHAKiSGX0Amu63iAeV1VoL8g5ezsxZXfuD/xa1ZSGzWEgwxEVCAmRBs1jO5RNjE+MYTYNpAsaOr5ya+zH90T6hhPCnG+7KC/Voalks7dPekX+DLAKW3JCN6er3iZt+C8O3hVaC2Iv4klmtNWXrZstfeWn4R/HcBbvt+x6BSEMASzaTyUNZNo08HzXmf/qAYTOoNFWd2TWOGG/gn0c05DM94ZJiU3fE4A2a5UHMOx3FEhBDwhHWXKx0QmWZRlo8fQURDXO7STFBlmfprB7924tTvAmQCwV84CYo=
+  app: chekhov
+  on:
+    repo: elainechan/chekhov

@@ -1,0 +1,8 @@
+{
+	"id": "ABC-789",
+	"clientId": "1234",
+	"managerUserId": "CM",
+	"workerUserIds": ["A", "B", "C"],
+	"dateOpened": "1995-12-17T03:24:00",
+	"task_ids": ["A1234", "B2343", "SFA55"]
+}

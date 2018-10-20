@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chekhov</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="client-profile.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+        <div class="top-logo">
+            <h1><a href="./dashboard.html">Chekhov</a></h1>
+            <img class="logo-image" src="./assets/eyeglasses1.svg" alt="Eyeglasses">
+        </div>
+        <div class="username">
+            <h3 class="greeting"></h3>
+            <button class="logout">Log out</button>
+        </div>
+        <nav class="top-nav">
+          <ul>
+            <li><a href="./case.html">Cases</a></li>
+            <li><a href="./task.html">Tasks</a></li>
+            <li><a href="./client.html">Clients</a></li>
+          </ul>
+        </nav>
+        </div>
+        <div class="title">
+            <nav class="views-nav">
+              <i class="far fa-plus-square new-case-button tooltip">
+                <span class="tooltiptext">Add new case</span>
+                </i>
+                <i class="fas fa-list-ul list-button tooltip">
+                  <span class="tooltiptext">List view</span>
+                </i>
+                <i class="fas fa-th-large card-button tooltip">
+                  <span class="tooltiptext">Card view</span>
+                </i>
+              </nav>
+            </div>
+        </header>
+        <main>    
+  <section id="table-area">
+    <div id="cases" class="ui sortable"></div>
+  </section>
+</main>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./client-profile.js"></script>
+</body>
+</html>
