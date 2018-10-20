@@ -212,7 +212,7 @@ exports.getNumberOfTasksByCaseId = (req, res) => {
 exports.deleteTaskById = (req, res) => {
   Task.findByIdAndRemove(req.params.id, (err, data) => {
     if (err) {
-      console.log(err);
+      console.log(err); // catch
     }
     return res.status(200).json({
       message: "Task has been deleted.",
