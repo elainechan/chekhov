@@ -1,8 +1,9 @@
 'use strict';
-require('dotenv').config()
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const { DATABASE_URL, PORT } = require('./config');
+const DATABASE_URL = process.env.DATABASE_URL;
+const PORT = process.env.PORT;
 const bodyParser = require('body-parser');
 const app = express();
 
